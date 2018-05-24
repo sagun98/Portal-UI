@@ -1,0 +1,83 @@
+<clr-main-container>
+  <clr-header class="header-5">
+
+    <div class="branding">
+      <img class="clr-icon" src="http://logok.org/wp-content/uploads/2016/01/Pearson-logo-2016-350x350.png" alt="Pearson Developer Network">
+      <span class="title">Pearson Dev Portal</span>
+    </div>
+
+    <form class="search">
+      <label for="search_input">
+        <input id="search_input-a" placeholder="Search Developer Portal" type="text">
+      </label>
+    </form>
+
+    
+    <div class="header-nav" [clr-nav-level]="2">
+      <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
+        <span class="nav-text">Register</span>
+      </a>
+
+      <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
+        <span class="nav-text">Sign In</span>
+      </a>
+
+      <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
+        <span class="nav-text">Log Out</span>
+      </a>
+    </div> 
+
+  </clr-header>
+  <div class="content-container">
+    <main class="content-area">
+
+    </main>
+    <nav class="sidenav" [clr-nav-level]="1">
+
+      <section class="nav-group collapsible">
+        <input id="tab1" type="checkbox">
+        <label for="tab1">Products</label>
+        <ul class="nav-list">
+
+          <li>
+            <a class="nav-link" routerlinkactive="active" href="#/">
+              Content Services
+            </a>
+          </li>
+          
+          <li>
+            <a class="nav-link" routerlinkactive="active" href="#/">
+              Dictionary API
+            </a>
+          </li>
+          
+          <li>
+            <a class="nav-link" routerlinkactive="active" href="#/">
+              Enabling Services
+            </a>
+          </li>
+          
+          <li>
+            <a class="nav-link" routerlinkactive="active" href="#/">
+              Metadata Services API
+            </a>
+          </li>
+
+        </ul>
+      </section>
+
+      <section class="nav-group collapsible">
+        <input id="apis" type="checkbox">
+        <label for="apis">APIs</label>
+        <ul class="nav-list">
+          <li *ngFor="let api of [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7,8,9]">
+              <a class="nav-link" routerlinkactive="active" href="#/">
+                Content Services
+              </a>
+          </li>
+        </ul>
+      </section>
+
+    </nav>
+  </div>
+</clr-main-container>
