@@ -1,0 +1,32 @@
+<section class="sidenav-content">
+
+  <section class="nav-group collapsible">
+    <input id="tab1" type="checkbox">
+    <label for="tab1">Products</label>
+    <ul class="nav-list">
+
+      <li *ngFor="let product of products">
+        <a class="nav-link" routerlinkactive="active" href="#/docs/product/{{ product.id }}">
+          {{product.label}}
+        </a>
+      </li>
+
+    </ul>
+  </section>
+
+  <section class="nav-group collapsible">
+    <input id="apis" type="checkbox">
+    <label for="apis">APIs</label>
+    <ul class="nav-list">
+      <li style="margin-bottom:15px;">
+        <input id="api-search" [(ngModel)]="apiFilter" placeholder="Search APIs" type="text" style="width:100%;">
+      </li>
+      <li *ngFor="let api of apisFiltered">
+        <a class="nav-link" routerlinkactive="active" href="#/docs/api/{{ api.id }}">
+          {{ api.label }}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</section>

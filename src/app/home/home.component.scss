@@ -1,0 +1,9 @@
+:host{
+    width:100%;
+
+    /deep/ product-card {
+        .card-text {
+            height:85px;
+        }
+    }
+}

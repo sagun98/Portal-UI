@@ -1,50 +1,18 @@
 .main-container{
+    margin-top:60px;
 
-    @media screen and (max-width: 576px) {
-        .branding {
-            max-width: 10rem;
-        }
+    clr-header{
+        position: fixed;
+        width: 100%;
+        z-index: 1001;
+        top:0px;
     }
 
-    .branding {
-        img {
-            margin:0px;
-            margin-top:-9px;
-            height: 80px; 
-            width:auto
-        }
-
-        h3 {
-            line-height:60px;
-            color:white;
-            display:inline-block;
-            margin-left:20px;
-            margin:0px;
-        }
+    .sidenav {
+        min-width: 200px;
     }
 
-    .header-nav{
-        flex:1 0 auto;
-        justify-content: flex-end;
-    }
-
-    &.open-overflow-menu {
-        .header-nav {
-            flex:0 0 auto;
-            justify-content: flex-start;
-        }
-    }
-
-    &.open-hamburger-menu {
-        .branding { 
-            padding: 0px !important;
-            margin : 0px !important;
-            max-width: 11rem;
-
-            h3 {
-                color: #1a9ca5;
-                font-size:20px;
-            }
-        }
+    .nav-list{
+        padding: 0px;
     }
 }

@@ -1,0 +1,35 @@
+{
+    "products" : [
+        {"label" : "Content Services", "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in ullamcorper eros.", "id" : 10000},
+        {"label" : "Dictionary API", "description" : "Integer mollis mi interdum consequat tincidunt. Morbi semper vestibulum quam, id egestas libero sodales quis.", "id" : 10001},
+        {"label" : "Enabling Services", "description" : "Nullam vel mauris hendrerit, tempor leo sit amet, convallis sapien", "id" : 10002},
+        {"label" : "Metadata Services API", "description" : "Vivamus ac massa non libero viverra rhoncus. Pellentesque non scelerisque ante, sed tempus ante.", "id" : 10003},
+        {"label" : "Authentication Services", "description" : "Suspendisse varius a magna ut aliquam. Duis ornare arcu vitae erat ullamcorper, id feugiat nisi convallis.", "id" : 10004},
+        {"label" : "Authorization services", "description" : "Nam viverra consequat sagittis. Donec maximus dui nisi, at eleifend nisi imperdiet non.", "id" : 10005},
+        {"label" : "Courses", "description" : "Vivamus aliquam iaculis condimentum. Ut auctor massa at magna condimentum, consequat aliquam tortor finibus.", "id" : 10006},
+        {"label" : "Curriculum", "description" : "Integer convallis ultrices nunc vel facilisis.", "id" : 10007}
+    ],
+    "apis" : [
+        {"label" : "Access Codes API", "id" : 10000},
+        {"label" : "Course Sections API", "id" : 10002},
+        {"label" : "Courses API", "id" : 10003},
+        {"label" : "Dan Test API 1", "id" : 10004},
+        {"label" : "Enrollments API", "id" : 10005},
+        {"label" : "Entitlements API", "id" : 10006},
+        {"label" : "Escrow API", "id" : 10007},
+        {"label" : "GLP Course Composite API", "id" : 10008},
+        {"label" : "Identity Management API", "id" : 10009},
+        {"label" : "MDS Metadata Service API", "id" : 10010},
+        {"label" : "Org Association API", "id" : 10011},
+        {"label" : "Organizations API", "id" : 10012},
+        {"label" : "Registrations API", "id" : 10013},
+        {"label" : "Section Associations API", "id" : 10014},
+        {"label" : "Sections API", "id" : 10015},
+        {"label" : "Structured Content API (SCAPI)", "id" : 10016},
+        {"label" : "Structured Content API 5", "id" : 10017},
+        {"label" : "Test APIM 122", "id" : 10018},
+        {"label" : "User Associations API", "id" : 10019},
+        {"label" : "User Consents API", "id" : 10020},
+        {"label" : "Subscriptions Management API", "id" : 10021}
+    ]
+}

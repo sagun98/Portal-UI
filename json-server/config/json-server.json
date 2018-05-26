@@ -1,0 +1,6 @@
+{
+    "port" : 3080,
+    "routes" : "json-server/routes/routes.json",
+    "delay" : 500,
+    "watch" : true
+}
