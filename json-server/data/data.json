@@ -10,7 +10,7 @@
         {"label" : "Curriculum", "description" : "Integer convallis ultrices nunc vel facilisis.", "id" : 10007}
     ],
     "apis" : [
-        {"label" : "Access Codes API", "id" : 10000},
+        {"label" : "Access Codes API", "id" : "cjhnvyv8u0015mduvka7xp4rs"},
         {"label" : "Course Sections API", "id" : 10002},
         {"label" : "Courses API", "id" : 10003},
         {"label" : "Dan Test API 1", "id" : 10004},
@@ -25,7 +25,7 @@
         {"label" : "Registrations API", "id" : 10013},
         {"label" : "Section Associations API", "id" : 10014},
         {"label" : "Sections API", "id" : 10015},
-        {"label" : "Structured Content API (SCAPI)", "id" : 10016},
+        {"label" : "Structured Content API (SCAPI)", "id" : "cjhoa5aii000kj4uvso6u59fe"},
         {"label" : "Structured Content API 5", "id" : 10017},
         {"label" : "Test APIM 122", "id" : 10018},
         {"label" : "User Associations API", "id" : 10019},

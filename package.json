@@ -24,10 +24,14 @@
     "@clr/angular": "^0.11.15",
     "@clr/icons": "^0.11.15",
     "@clr/ui": "^0.11.15",
+    "@tinymce/tinymce-angular": "^2.0.0",
     "@webcomponents/custom-elements": "^1.0.0",
     "core-js": "^2.5.4",
+    "js-yaml": "^3.11.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",
+    "tinymce": "^4.7.13",
+    "yamljs": "^0.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -38,6 +42,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@types/tinymce": "^4.5.16",
     "apostrophe-headless": "^2.2.0",
     "codelyzer": "~4.2.1",
     "jasmine-core": "~2.99.1",

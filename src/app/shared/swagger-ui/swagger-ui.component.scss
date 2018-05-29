@@ -1,0 +1,87 @@
+$base-green: #318700;
+$base-orange: #ffb300;
+$base-red: #e62700;
+$base-blue: #007cbb;
+
+:host {
+    .path {
+        flex-wrap: wrap;
+
+        .alert-items{
+            padding: 0rem calc(.5rem - 1px);
+            cursor: pointer;
+            width: 100%;
+
+            .alert-item{
+                
+
+                .verb {
+                    width : 100px;
+                    min-width: 100px;
+                    height: auto;
+
+                    button {
+                        width : 85px;
+                        min-width: 85px;
+                    }
+
+                    .btn-warning{
+                        border-color: #e6a200;
+                        background-color: #ffb300;
+
+                        &:hover {
+                            background-color: #a97700;
+                        }
+
+                        &:active {
+                            box-shadow: inset 0 2px 0 0 #6f4e00;
+                        }
+                    }
+                }
+
+                .path{
+
+                    @media screen and (max-width: 767px){
+                        max-width: 75%;
+                        width: 75%;
+                    }
+
+                    h5 {
+                        line-height: 49px;
+                        margin:0px;
+                    }
+                }
+            }
+        }
+
+        .swagger-definition{
+            width: 100%;
+            border-top: 1px solid green;
+            padding: 25px 10px 10px 10px;
+
+            > .row{
+                margin:0px;
+            }
+        }
+
+        &.alert-danger .swagger-definition {
+            background-color : lighten( $base-red, 54% );
+            border-top: 1px solid $base-red;
+        }
+
+        &.alert-primary .swagger-definition {
+            background-color : lighten( $base-blue, 63% );
+            border-top: 1px solid $base-blue;
+        }
+
+        &.alert-success .swagger-definition {
+            background-color : lighten( $base-green, 72% );
+            border-top: 1px solid $base-green;
+        }
+
+        &.alert-warning .swagger-definition {
+            background-color : lighten( $base-orange, 52% );
+            border-top: 1px solid $base-orange;
+        }
+    }
+}

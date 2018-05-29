@@ -1,0 +1,14 @@
+:host {
+    h2 {
+        position: relative;
+        button {
+            margin-left : 10px;
+        }
+    }
+
+    /deep/ .api-documentation-content{
+        p {
+            margin : 0px;
+        }
+    }
+}

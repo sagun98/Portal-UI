@@ -1,0 +1,39 @@
+<ng-container *ngFor="let path of paths">
+    <div class="alert alert-info path"
+    [ngClass]="{
+        'alert-danger' : path.verb === 'delete',
+        'alert-success' : path.verb === 'post',
+        'alert-primary': path.verb === 'get',
+        'alert-warning' : path.verb === 'put'
+        }"
+    >
+        <div class="alert-items">
+            <div class="alert-item static path-text">
+                <div class="alert-icon-wrapper verb">
+                    <button class="btn btn" [ngClass]="{
+                    'btn-danger' : path.verb === 'delete',
+                    'btn-success' : path.verb === 'post',
+                    'btn-primary': path.verb === 'get',
+                    'btn-warning' : path.verb === 'put'
+                    }">{{ path.verb | uppercase }}</button>
+                </div>
+                <span class="alert-text path"><h5>{{ path.path }}</h5></span>
+            </div>
+        </div>
+
+        <div class="swagger-definition">
+            <div class="row section">
+                <div class="col-sm-3">Parameters</div>
+                <div class="col-sm-9"></div>
+            </div>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-sm-3">Body</div>
+                <div class="col-sm-9"></div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

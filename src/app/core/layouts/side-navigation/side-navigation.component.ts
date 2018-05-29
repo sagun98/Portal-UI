@@ -11,12 +11,15 @@ export class SideNavigationComponent implements OnInit {
 
   @Input() products: any[] = [];
   @Input() apis: any[] = [];
+  @Input() selectedApiId: string = '';
+  @Input() selectedProductId: string = '';
 
   @Output() onItemSelected: EventEmitter<any>  = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   public get apisFiltered () {

@@ -15,4 +15,14 @@
     .nav-list{
         padding: 0px;
     }
+
+    /deep/ .container { 
+        margin-bottom : 20px;
+    }
+
+    @media screen and (min-width: 576px){
+        /deep/ .container {
+            width : auto;
+        }
+    }
 }
