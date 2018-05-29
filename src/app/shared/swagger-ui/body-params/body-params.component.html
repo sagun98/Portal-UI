@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-3"><label [class.required]="path.bodyParam.required"><b>Body</b></label></div>
+    <div class="col-sm-9">
+
+        <div class="bottom-spacer-10"><b>{{ path.bodyParam.description }}</b></div>
+
+        <div class="bottom-spacer-10">
+            <div class="btn-group btn-sm">
+                <div class="radio btn">
+                    <input type="radio" [attr.name]=" 'bodyView-' + id " [attr.id]=" 'bodyViewExample-' + id " [(ngModel)]="path.bodyView" value="example">
+                    <label [attr.for]=" 'bodyViewExample-' + id ">Example Value</label>
+                </div>
+                <div class="radio btn">
+                    <input type="radio" [attr.name]=" 'bodyView-' + id " [attr.id]=" 'bodyViewModel-' + id " [(ngModel)]="path.bodyView" value="model">
+                    <label [attr.for]=" 'bodyViewModel-' + id ">Model</label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <pre *ngIf=" path.bodyView === 'model' ">{{ path.bodyObject | json }}</pre>
+            <textarea *ngIf=" path.bodyView === 'example' " style="min-height: 125px" [readonly]="true">{{ path.bodyObject | json }}</textarea>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-<ng-container *ngFor="let path of paths">
+<ng-container *ngFor="let path of paths; let i = index">
     <div class="alert alert-info path"
     [ngClass]="{
         'alert-danger' : path.verb === 'delete',
@@ -7,7 +7,7 @@
         'alert-warning' : path.verb === 'put'
         }"
     >
-        <div class="alert-items">
+        <div class="alert-items" (click)="path.open = !path.open">
             <div class="alert-item static path-text">
                 <div class="alert-icon-wrapper verb">
                     <button class="btn btn" [ngClass]="{
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="swagger-definition">
+        <div class="swagger-definition" [@slideInOut]="path.open">
             <div class="row section">
                 <div class="col-sm-3">Parameters</div>
                 <div class="col-sm-9"></div>
@@ -29,9 +29,50 @@
 
             <hr/>
 
-            <div class="row">
-                <div class="col-sm-3">Body</div>
-                <div class="col-sm-9"></div>
+            <body-params *ngIf="path.bodyParam" [path]="path"></body-params>
+
+            <div class="row bottom-spacer-10" *ngFor="let pathParam of path.pathParams">
+
+                <div class="col-sm-3">
+                    <label [class.required]="pathParam.required">
+                        <b>{{ pathParam.name }}</b>
+                    </label>
+                    <div>{{ pathParam.type }}</div>
+                    <div>(path)</div>
+                </div>
+                <div class="col-sm-9">
+                    {{ pathParam.description }}
+
+                    <section class="form-block">
+                        <div class="form-group">
+                            <input type="text" [attr.placeholder]="pathParam.name">
+                        </div>
+                    </section>
+
+                </div>
+
+            </div>
+
+            <div class="row bottom-spacer-10" *ngFor="let queryParam of path.queryParams">
+
+                <div class="col-sm-3">
+                    <label [class.required]="queryParam.required">
+                        <b>{{ queryParam.name }}</b>
+                    </label>
+                    <div>{{ queryParam.type }}</div>
+                    <div>(query)</div>
+                </div>
+                <div class="col-sm-9">
+                    {{ queryParam.description }}
+
+                    <section class="form-block">
+                        <div class="form-group">
+                            <input type="text" [attr.placeholder]="queryParam.name">
+                        </div>
+                    </section>
+
+                </div>
+
             </div>
 
         </div>
