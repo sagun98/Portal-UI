@@ -6,20 +6,20 @@
 
         <div class="bottom-spacer-10">
             <div class="btn-group btn-sm">
-                <div class="radio btn">
-                    <input type="radio" [attr.name]=" 'bodyView-' + id " [attr.id]=" 'bodyViewExample-' + id " [(ngModel)]="path.bodyView" value="example">
-                    <label [attr.for]=" 'bodyViewExample-' + id ">Example Value</label>
+                <div class="radio btn"><!-- ngModel usage was causing issues -->
+                    <input type="radio" [attr.name]=" id "  [attr.id]=" 'e' + id " [checked]="path.bodyView === 'example'" (click)=" path.bodyView = 'example' " value="example">
+                    <label [attr.for]=" 'e' + id ">Example Value</label>
                 </div>
-                <div class="radio btn">
-                    <input type="radio" [attr.name]=" 'bodyView-' + id " [attr.id]=" 'bodyViewModel-' + id " [(ngModel)]="path.bodyView" value="model">
-                    <label [attr.for]=" 'bodyViewModel-' + id ">Model</label>
+                <div class="radio btn"><!-- ngMOdel usage was causing issues -->
+                    <input type="radio" [attr.name]="  id " [attr.id]=" 'm' + id " [checked]="path.bodyView === 'model'" (click)=" path.bodyView = 'model' "  value="model">
+                    <label [attr.for]=" 'm' + id ">Model</label>
                 </div>
             </div>
         </div>
 
         <div>
-            <pre *ngIf=" path.bodyView === 'model' ">{{ path.bodyObject | json }}</pre>
-            <textarea *ngIf=" path.bodyView === 'example' " style="min-height: 125px" [readonly]="true">{{ path.bodyObject | json }}</textarea>
+            <pre *ngIf=" path.bodyView === 'model' ">{{ path.bodyModel | json }}</pre>
+            <textarea *ngIf=" path.bodyView === 'example' " style="min-height: 150px" [disabled]="! edit">{{ path.bodyObject | json }}</textarea>
         </div>
     </div>
 </div>

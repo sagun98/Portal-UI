@@ -29,9 +29,9 @@
               "src/app/core/styles/utils.scss"
             ],
             "scripts": [
+              "node_modules/tinymce/tinymce.js",
               "node_modules/@clr/icons/clr-icons.min.js",
               "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-              "node_modules/tinymce/tinymce.js",
               "node_modules/tinymce/themes/modern/theme.js"
             ]
           },

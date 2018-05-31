@@ -14,6 +14,7 @@ $base-blue: #007cbb;
 
             .alert-item{
                 
+                
 
                 .verb {
                     width : 100px;
@@ -54,9 +55,10 @@ $base-blue: #007cbb;
             }
         }
 
+
         .swagger-definition{
             width: 100%;
-            border-top: 1px solid green;
+            background-color:white;
             padding: 25px 10px 10px 10px;
 
             > .row{
@@ -65,6 +67,13 @@ $base-blue: #007cbb;
                 pre {
                     background-color: white;
                     margin:0px;
+                }
+            }
+
+            .parameter-row {
+                .try-it-out {
+                    min-width: 5rem;
+                    margin-top: -12px;
                 }
             }
 
@@ -81,22 +90,22 @@ $base-blue: #007cbb;
         }
 
         &.alert-danger .swagger-definition {
-            background-color : lighten( $base-red, 54% );
+            //background-color : lighten( $base-red, 54% );
             border-top: 1px solid $base-red;
         }
 
         &.alert-primary .swagger-definition {
-            background-color : lighten( $base-blue, 62% );
+            //background-color : lighten( $base-blue, 62% );
             border-top: 1px solid $base-blue;
         }
 
         &.alert-success .swagger-definition {
-            background-color : lighten( $base-green, 72% );
+            //background-color : lighten( $base-green, 72% );
             border-top: 1px solid $base-green;
         }
 
         &.alert-warning .swagger-definition {
-            background-color : lighten( $base-orange, 48% );
+            //background-color : lighten( $base-orange, 48% );
             border-top: 1px solid $base-orange;
         }
     }

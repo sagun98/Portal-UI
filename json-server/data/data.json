@@ -1,4 +1,13 @@
 {
+    "users" : [
+        {"userName" : "UCARTD4", "firstName" : "Derek", "lastName" : "Carter", "age" : 31, "roles" : 
+            {
+                "ADMIN" : {
+
+                }
+            }
+        }
+    ],
     "products" : [
         {"label" : "Content Services", "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in ullamcorper eros.", "id" : 10000},
         {"label" : "Dictionary API", "description" : "Integer mollis mi interdum consequat tincidunt. Morbi semper vestibulum quam, id egestas libero sodales quis.", "id" : 10001},

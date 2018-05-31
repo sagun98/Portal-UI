@@ -1,5 +1,6 @@
 :host {
     overflow : scroll;
+    height: calc(100vh - 60px);
 
     .nav-list{
         padding: 0px;

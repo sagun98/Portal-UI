@@ -1,6 +1,10 @@
 :host{
     width:100%;
 
+    .container {
+        margin-bottom : 45px;
+    }
+
     /deep/ product-card {
         .card-text {
             height:85px;

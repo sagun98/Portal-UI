@@ -1,7 +1,30 @@
 $spacing: 5 10 15 20 25 30 35 40;
+$directions: left right;
 
 @each $space in $spacing {
     .bottom-spacer-#{$space}{
         margin-bottom: #{$space}px !important;
     }
+
+    .mr#{$space}{
+        margin-right: #{$space}px !important;
+    }
+
+    .ml#{$space}{
+        margin-left: #{$space}px !important;
+    }
+
+    .padding-#{$space}{
+        padding: #{$space}px !important;
+    }
+}
+
+@each $direction in $directions {
+    .pull-#{$direction}{
+        float: $direction !important;
+    }
+}
+
+body {
+    overflow: hidden;
 }
