@@ -1,10 +1,10 @@
-import { CoreModule } from './core.module';
+import { DevPortalCoreModule } from './core.module';
 
-describe('CoreModule', () => {
-  let coreModule: CoreModule;
+describe('DevPortalCoreModule', () => {
+  let coreModule: DevPortalCoreModule;
 
   beforeEach(() => {
-    coreModule = new CoreModule();
+    coreModule = new DevPortalCoreModule();
   });
 
   it('should create an instance', () => {

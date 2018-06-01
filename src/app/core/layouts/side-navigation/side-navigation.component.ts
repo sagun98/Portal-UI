@@ -35,4 +35,14 @@ export class SideNavigationComponent implements OnInit {
       });
   }
 
+  public addApi($event){
+    $event.preventDefault();
+    $event.stopPropagation();
+  }
+
+  public addProduct($event){
+    $event.preventDefault();
+    $event.stopPropagation();
+  }
+
 }

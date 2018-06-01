@@ -1,6 +1,7 @@
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SideNavigationComponent } from './side-navigation.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('SideNavigationComponent', () => {
   let component: SideNavigationComponent;
@@ -8,7 +9,14 @@ describe('SideNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SideNavigationComponent ]
+      imports : [
+        FormsModule
+      ],
+      declarations: [ 
+        SideNavigationComponent
+
+      ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

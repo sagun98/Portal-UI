@@ -1,5 +1,5 @@
 import { ClarityModule } from '@clr/angular';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SwaggerUiComponent } from './swagger-ui.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,9 +14,18 @@ import { QueryParamsComponent } from './query-params/query-params.component';
     ReactiveFormsModule,
     ClarityModule
   ],
-  declarations: [SwaggerUiComponent, BodyParamsComponent, PathParamsComponent, QueryParamsComponent],
+  declarations: [
+    SwaggerUiComponent, 
+    BodyParamsComponent, 
+    PathParamsComponent, 
+    QueryParamsComponent
+  ],
   exports : [
-    SwaggerUiComponent
-  ]
+    SwaggerUiComponent,
+    BodyParamsComponent, 
+    PathParamsComponent, 
+    QueryParamsComponent
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SwaggerUiModule { }

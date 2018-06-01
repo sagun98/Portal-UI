@@ -42,7 +42,8 @@ export class ApiComponent implements OnInit {
 
   // shorthand to get yaml -> json
   public get swaggerJson () {
-    const swaggerJson = jsyaml.load(this.proxyDefinition.swagger);
+    // used window global object to pass testing
+    const swaggerJson = window['jsyaml'].load(this.proxyDefinition.swagger);
     return swaggerJson;
   }
 

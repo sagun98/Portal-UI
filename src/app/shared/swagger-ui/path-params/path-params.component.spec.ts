@@ -16,6 +16,14 @@ describe('PathParamsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PathParamsComponent);
     component = fixture.componentInstance;
+
+    component.params = [{
+      name : 'TEST',
+      type : 'string',
+      desciprtion : 'THIS IS A TEST',
+      edit : false
+    }];
+
     fixture.detectChanges();
   });
 

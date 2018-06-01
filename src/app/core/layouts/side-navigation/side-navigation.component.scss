@@ -5,5 +5,18 @@
     .nav-list{
         padding: 0px;
     }
+
+    label > button{
+        
+        margin: 0px 10px 0px 0px;
+        
+        > clr-icon{
+            margin:0px;
+            padding:0px;
+            width: 30px;
+            min-width: 30px;
+            height: 20px;
+        }   
+    }
 }
 

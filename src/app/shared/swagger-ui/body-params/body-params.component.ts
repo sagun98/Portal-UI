@@ -10,11 +10,11 @@ export class BodyParamsComponent implements OnInit {
   @Input() path: any = {};
   @Input() edit: boolean = false;
 
-  public id: string = '';
+  public id: number = 0;
 
   constructor() { }
 
   ngOnInit() {
-    this.id = (this.path.path + this.path.verb).replace(/\//gi, '');
+    this.id = new Date().getTime();
   }
 }

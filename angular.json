@@ -82,7 +82,13 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/tinymce/tinymce.js",
+              "node_modules/@clr/icons/clr-icons.min.js",
+              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
+              "node_modules/tinymce/themes/modern/theme.js",
+              "node_modules/js-yaml/dist/js-yaml.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

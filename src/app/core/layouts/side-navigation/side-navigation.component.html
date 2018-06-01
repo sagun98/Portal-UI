@@ -2,21 +2,32 @@
 
   <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">
-    <label for="tab1">Products</label>
-    <ul class="nav-list">
 
+    <label for="tab1">Products 
+      <button class="btn btn-sm btn-link pull-right" (click)="addProduct($event)">
+          Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
+        </button>
+    </label>
+
+    <ul class="nav-list">
       <li *ngFor="let product of products">
         <a class="nav-link" routerlinkactive="active" href="#/docs/product/{{ product.id }}" [ngClass]="{'active' : selectedProductId === product.id }">
           {{product.label}}
         </a>
       </li>
-
     </ul>
   </section>
 
   <section class="nav-group collapsible">
     <input id="apis" type="checkbox">
-    <label for="apis">APIs</label>
+    
+    <label for="apis">
+      APIs 
+      <button class="btn btn-sm btn-link pull-right" (click)="addApi($event)">
+        Add <clr-icon shape="plus-circle" title="Add API"></clr-icon>
+      </button>
+    </label>
+
     <ul class="nav-list">
       <li style="margin-bottom:15px;">
         <input id="api-search" [(ngModel)]="apiFilter" placeholder="Search APIs" type="text" style="width:100%;">

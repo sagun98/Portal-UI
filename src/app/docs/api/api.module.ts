@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { ApiComponent } from './api.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
-
 @NgModule({
   imports: [
     CommonModule,
