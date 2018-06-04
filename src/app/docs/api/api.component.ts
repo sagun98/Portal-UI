@@ -4,9 +4,11 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
 import { ProxyService } from './proxy.service';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import tinymce from 'tinymce/tinymce';
 import jsyaml from 'js-yaml/dist/js-yaml.js';
+import { Subject } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DevPortalAPI } from './api.model';
 
 @Component({
   selector: 'app-api',
@@ -15,21 +17,22 @@ import jsyaml from 'js-yaml/dist/js-yaml.js';
 })
 export class ApiComponent implements OnInit {
 
+  public form: FormGroup;
   public tinymceConfig = TINYCMCE_CONFIG;
-  public proxyDefinition:any;
-
+  public proxyDefinition: DevPortalAPI;
   public isUploadOpen: boolean = false;
-  
   public activeEditor = {
     overview : false,
     gettingStarted : false,
-    reference : false
+    reference : false,
+    title : false
   }
 
   constructor(
     private proxyService: ProxyService,
     private activatedRoute : ActivatedRoute,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private formBuilder : FormBuilder
   ) { }
 
   ngOnInit() {
@@ -38,6 +41,49 @@ export class ApiComponent implements OnInit {
     });
 
     this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, {save_onsavecallback : () => {}});
+
+    this.buildForm();
+
+    this.setFormListeners();
+  }
+
+  private buildForm() {
+    this.form = this.formBuilder.group({
+      id : [this.proxyDefinition.id],
+      title : [this.proxyDefinition.title, [Validators.required]],
+      overview : [this.overview],
+      gettingStarted : [this.gettingStarted],
+      reference : [this.reference]
+    })
+  }
+
+  private setFormListeners(){
+    // this.form.get('title').valueChanges.subscribe(title => {
+    //   console.log(title);
+    // });
+
+    // this.form.get('overview').valueChanges.subscribe(overview => {
+    //   console.log(overview);
+    // })
+  }
+
+  public saveTitle(){
+    // TODO: uncomment this
+    // if (! this.activeEditor.title ){
+    //   const data = this.form.getRawValue();
+
+    //   this.proxyService.setProxyDefinition(data.id, data);
+    // }
+
+    this.activeEditor.title = ! this.activeEditor.title;
+
+    if (! this.activeEditor.title ){
+      this.proxyDefinition.title = this.form.get('title').value;
+
+      this.proxyService.setProxyDefinition(this.proxyDefinition['_id'], this.proxyDefinition).subscribe( (updatedProxyDefinition: DevPortalAPI) => {
+        this.proxyDefinition = updatedProxyDefinition;
+      });
+    }
   }
 
   // shorthand to get yaml -> json
@@ -136,7 +182,8 @@ export class ApiComponent implements OnInit {
     if(this.activeEditor[editor.editor.id] || override){
       this[editor.editor.id] = editor.editor.getBody().innerHTML;
 
-      this.proxyService.setProxyDefinition(this.proxyDefinition['_id'], this.proxyDefinition).subscribe(updatedProxyDefinition => {
+      // TODO: Fully switch over to Michaels impl when ready
+      this.proxyService.setProxyDefinition(this.proxyDefinition['_id'], this.proxyDefinition).subscribe( (updatedProxyDefinition: DevPortalAPI) => {
         this.proxyDefinition = updatedProxyDefinition;
       });
     }

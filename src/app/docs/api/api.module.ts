@@ -4,13 +4,16 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiComponent } from './api.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     EditorModule,
     ClarityModule,
-    SwaggerUiModule
+    SwaggerUiModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [ApiComponent],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]

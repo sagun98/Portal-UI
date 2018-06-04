@@ -1,6 +1,17 @@
 <div class="container">
 
-  <h1>{{ proxyDefinition.title }}</h1>
+  <form [formGroup]="form">
+
+  <h1>
+    <ng-container *ngIf="!activeEditor.title">{{ proxyDefinition.title }}</ng-container>
+    
+    <input  *ngIf="activeEditor.title" type="text" name="title" formControlName="title"/>
+
+    <button type="button" class="btn btn-icon ml20" [class.btn-success-outline]="activeEditor.title" (click)="saveTitle()">
+      <ng-container *ngIf="! activeEditor.title"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
+      <ng-container *ngIf="activeEditor.title"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
+    </button>
+  </h1>
 
   <h2>
     Overview
@@ -13,7 +24,7 @@
   <hr/>
 
   <ng-container *ngIf="activeEditor.overview">
-    <editor apiKey="test" id="overview" [initialValue]="overview" [init]="tinymceConfig" (onSaveContent)="handleSave($event)">
+    <editor apiKey="test" id="overview" [initialValue]="overview" [init]="tinymceConfig" (onSaveContent)="handleSave($event)" formControlName="overview" >
     </editor>
   </ng-container>
 
@@ -64,6 +75,9 @@
   </ng-container>
 
   <div class="api-documentation-content" *ngIf="!activeEditor.reference" [innerHtml]="reference"></div>
+
+  </form>
+
 
   <clr-modal [(clrModalOpen)]="isUploadOpen" [clrModalClosable]="false">
       <!-- Move to component-->
