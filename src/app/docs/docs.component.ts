@@ -22,9 +22,7 @@ export class DocsComponent implements OnInit {
   ngOnInit(){
     this.apis = this.activatedRoute.snapshot.data.apisData;
     this.products = this.activatedRoute.snapshot.data.productData;
-
-    debugger;
-
+    
     // The the selected API / Product ID if they exist
     if(this.activatedRoute.snapshot.children.length){
 
