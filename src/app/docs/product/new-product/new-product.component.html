@@ -1,0 +1,70 @@
+<div class="container">
+
+  <form [formGroup]="form" (ngSubmit)="saveProduct()">
+
+    <section class="form-block">
+      <!-- Product Name -->
+      <div class="form-group">
+        <label for="productName" class="required">Product Name</label>
+
+        <label [className]=" ( form.get('title').invalid && ( submitted || form.get('title').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="productName" type="text" name="title" placeholder="Enter Product Name" formControlName="title"/>
+          <span *ngIf="form.get('title').errors && form.get('title').errors.required && (submitted || form.get('title').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+
+      </div>
+
+      <!-- Product Description -->
+      <div class="form-group">
+        <label for="productDescription" class="required">Product Description</label>
+        <label for="productDescription" [className]=" (form.get('description').invalid && (submitted || form.get('description').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+          <textarea id="productDescription" rows="3" formControlName="description" placeholder="Enter Description"></textarea>
+          <span *ngIf="form.get('description').errors && form.get('description').errors.required && (submitted || form.get('description').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+      <!-- Product Overview Toggle -->
+      <div class="form-group">
+        <label>Provide Overview?</label>
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle_4" [(ngModel)]="showOverview" [ngModelOptions]="{standalone : true}">
+          <label for="toggle_4"></label>
+        </div>
+      </div>
+
+      <!-- Product Overview -->
+      <div [hidden]="! showOverview" class="bottom-spacer-40">
+        <editor id="productOverview" placeholder="Select APIs" [initialValue]="product.overview" [init]="tinymceConfig" formControlName="overview">
+        </editor>
+      </div>
+
+      <!-- Product Description -->
+      <div class="form-group">
+        <label for="productApis" class="required">APIs</label>
+        <label for="productApis" [className]=" (form.get('apis').invalid && (submitted || form.get('apis').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+          <ng-select 
+            id="productApis" 
+            class="bottom-spacer-20" 
+            [searchable]="true" 
+            formControlName="apis" 
+            bindValue="id" 
+            bindLabel="label"
+            [items]="apis" 
+            [multiple]="true" 
+            [closeOnSelect]="false"
+            style="width: 100%"
+          >
+          </ng-select>
+          <span *ngIf="form.get('apis').errors && form.get('apis').errors.required && (submitted || form.get('apis').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+    </section>
+
+
+    <button type="submit" class="btn btn-primary">
+      <clr-icon shape="check"></clr-icon> Save Product</button>
+
+  </form>
+
+</div>

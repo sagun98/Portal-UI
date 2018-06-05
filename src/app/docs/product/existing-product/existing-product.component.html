@@ -1,0 +1,41 @@
+<div class="container">
+
+    <form [formGroup]="form">
+  
+    <h1>
+      <!-- <input type="text" name="title" placeholder="Enter Product Name" formControlName="title"/> -->
+      {{ product.title }}
+    </h1>
+  
+    <h4 class="bottom-spacer-20">
+      <!-- <textarea formControlName="description" placeholder="Enter Description"></textarea> -->
+      {{ product.description }}
+    </h4>
+  
+    <h2>Overview</h2>
+    <hr/>
+
+    <!-- <div class="bottom-spacer-20">
+      <editor id="overview" placeholder="Select APIs" [initialValue]="product.overview" [init]="tinymceConfig" (onSaveContent)="handleEditorSave($event)" formControlName="overview" >
+      </editor>
+    </div> -->
+
+    <div class="bottom-spacer-20" [innerHtml]="product.overview"></div>
+    
+    <h2>APIs</h2>
+  
+    <!-- <ng-select 
+      class="bottom-spacer-20"
+      [searchable]="true" 
+      formControlName="apis"
+      bindValue="id"
+      bindLabel="label"
+      [items]="apis"
+      [multiple]="true"
+      [closeOnSelect]="false"
+    >
+       
+    </ng-select> -->  
+  </form>
+  
+  </div>

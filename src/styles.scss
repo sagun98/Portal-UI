@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+h1, h2, h3, h4, p {
+    margin-top:0px !important;
+}
+
+// Tooltip overrides / fixes
+
+.tooltip-validation {
+    height : auto !important;
+}
+
+.tooltip.tooltip-validation.invalid.textarea:before {
+    top : -16px !important;
+}
+
+.tooltip.tooltip-validation.invalid.textarea{
+
+    > textarea:focus+.tooltip-content {
+        background-color:#c92100;
+        visibility: visible;
+        opacity: 1;
+        top: auto !important;
+    }
+
+    > textarea {
+        box-shadow: none;
+        border: 1px solid #c92100;
+    }
+
+    ng-select {
+        &.ng-select-focused+.tooltip-content {
+            background-color:#c92100;
+            visibility: visible;
+            opacity: 1;
+            top: auto !important;
+        }
+
+        .ng-select-container{
+            border: 1px solid #c92100;
+        }
+    
+    }
+}

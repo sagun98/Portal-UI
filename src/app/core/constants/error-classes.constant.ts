@@ -1,0 +1,1 @@
+export const ERROR_CLASSES = 'tooltip tooltip-validation invalid tooltip-md';

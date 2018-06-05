@@ -1,33 +1,30 @@
+import { SharedModule } from './../shared/shared.module';
 import { ApisResolve } from './../resolves/apis.resolve';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { ProductResolve } from '../resolves/products.resolve';
+import { ProductsResolve } from '../resolves/products.resolve';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '', 
         component : HomeComponent,
         resolve : {
-          productData : ProductResolve
+          productData : ProductsResolve
         }
       }
     ])
   ],
   
-  declarations: [HomeComponent, ProductCardComponent],
-  
-  providers : [
-    ProductResolve
-  ],
+  declarations: [HomeComponent],
   
   exports : [
-    HomeComponent
+    HomeComponent 
   ],
   
   schemas : [CUSTOM_ELEMENTS_SCHEMA]

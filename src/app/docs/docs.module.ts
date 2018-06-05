@@ -6,11 +6,17 @@ import { DocsComponent } from './docs.component';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { LayoutsModule } from '../core';
-import { ProductResolve } from '../resolves/products.resolve';
+
 import { ApiComponent } from './api/api.component';
 import { ProxyDefinitionReolsve } from './api/resolves/proxy-definition.resolve';
 import { ProxyService } from './api/proxy.service';
 import { SwaggerUiModule } from '../shared/swagger-ui/swagger-ui.module';
+import { documentationRoutes } from './docs.routes';
+import { ProductPageComponent } from './product-page/product-page.component';
+import { SharedModule } from '../shared/shared.module';
+import { ProductModule } from './product/product.module';
+import { ProductResolve } from '../resolves/product.resolve';
+import { ProductsResolve } from '../resolves/products.resolve';
 
 @NgModule({
   imports: [
@@ -18,31 +24,14 @@ import { SwaggerUiModule } from '../shared/swagger-ui/swagger-ui.module';
     ClarityModule,
     LayoutsModule,
     ApiModule,
+    ProductModule,
     SwaggerUiModule,
-    // TODO: Move to a separate routes file
-    RouterModule.forChild([
-      {
-        path : '', component : DocsComponent, 
-        resolve : {
-          apisData : ApisResolve,
-          productData : ProductResolve
-        },
-        children : [
-          {
-            path : 'api/:apiId', component : ApiComponent, 
-            resolve : {
-              proxyDefinition : ProxyDefinitionReolsve
-            }
-          }
-        ]
-      },
-      
-    ])
+    SharedModule,
+    RouterModule.forChild(documentationRoutes)
   ],
-  declarations: [DocsComponent],
+  declarations: [DocsComponent, ProductPageComponent],
   providers : [
     ApisResolve,
-    ProductResolve,
     ProxyService,
     ProxyDefinitionReolsve
   ],

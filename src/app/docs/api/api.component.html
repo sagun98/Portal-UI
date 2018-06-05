@@ -2,7 +2,7 @@
 
   <form [formGroup]="form">
 
-  <h1>
+  <h1 class="bottom-spacer-20">
     <ng-container *ngIf="!activeEditor.title">{{ proxyDefinition.title }}</ng-container>
     
     <input  *ngIf="activeEditor.title" type="text" name="title" formControlName="title"/>

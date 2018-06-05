@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'side-navigation',
@@ -16,10 +17,11 @@ export class SideNavigationComponent implements OnInit {
 
   @Output() onItemSelected: EventEmitter<any>  = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(
+    private router : Router
+  ) { }
 
   ngOnInit() {
-
   }
 
   public get apisFiltered () {
@@ -43,6 +45,8 @@ export class SideNavigationComponent implements OnInit {
   public addProduct($event){
     $event.preventDefault();
     $event.stopPropagation();
+
+    this.router.navigate([`/docs/product/new`]);
   }
 
 }

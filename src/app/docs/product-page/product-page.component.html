@@ -1,0 +1,17 @@
+<div class="container text-center">
+
+    <h2>Products</h2>
+  
+    <hr/>
+  
+    <div class="row">
+  
+      <div class="col-sm-6 col-lg-4" *ngFor="let product of products">
+  
+        <product-card [product]="product"></product-card>
+  
+      </div>
+  
+    </div>
+  
+  </div>

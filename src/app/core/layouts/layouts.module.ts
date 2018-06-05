@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ActiveLinkDirective } from './sub-navigation/active-link.directive';
 import { ClarityModule } from '@clr/angular';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ import { SubNavigationComponent } from './sub-navigation/sub-navigation.componen
   imports: [
     CommonModule,
     FormsModule,
-    ClarityModule
+    ClarityModule,
+    RouterModule
   ],
   declarations: [
     SideNavigationComponent, 

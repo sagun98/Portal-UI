@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 
@@ -16,7 +16,8 @@ export class DocsComponent implements OnInit {
 
   constructor(
     public appService : AppService,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private router: Router
   ){ }
 
   ngOnInit(){
@@ -26,18 +27,26 @@ export class DocsComponent implements OnInit {
     // The the selected API / Product ID if they exist
     if(this.activatedRoute.snapshot.children.length){
 
-      // Watch for changes in the route and update the sideNave
+      // Watch for changes in the route and update the sideNav
       this.activatedRoute.children[0].params.subscribe( params => {
         this.setParams(params);
       });
 
       this.setParams(this.activatedRoute.snapshot.children[0].params);
     }
+
+    this.router.events.subscribe( (event:NavigationEnd) => {
+      if( this.router['lastSuccessfulId'] === this.router['navigationId'] ){
+        if( this.activatedRoute.snapshot.children.length ){
+          this.setParams(this.activatedRoute.snapshot.children[0].params);
+        }
+      }
+    });
   }
 
   private setParams(params){
-    this.selectedApiId = this.activatedRoute.snapshot.children[0].params.apiId;
-    this.selectedProductId = this.activatedRoute.snapshot.children[0].params.productId;
+    this.selectedApiId = params.apiId;
+    this.selectedProductId = params.productId;
   }
 
 }

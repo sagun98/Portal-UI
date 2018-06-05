@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, useHash : true} // <-- debugging purposes only
+      { enableTracing: false, useHash : true}
     )
   ],
   providers: [

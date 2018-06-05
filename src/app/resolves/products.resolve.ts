@@ -2,8 +2,10 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/r
 import { Injectable } from '@angular/core';
 import { AppService } from "../app.service";
 
-@Injectable()
-export class ProductResolve implements Resolve<any> {
+@Injectable({
+    providedIn: 'root'
+})
+export class ProductsResolve implements Resolve<any> {
     
     constructor(private appService : AppService){  }
 

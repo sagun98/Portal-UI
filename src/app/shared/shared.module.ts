@@ -1,15 +1,22 @@
+import { ClarityModule } from '@clr/angular';
 import { SwaggerUiModule } from './swagger-ui/swagger-ui.module';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    SwaggerUiModule
+    SwaggerUiModule,
+    ClarityModule
   ],
-  declarations: [],
+  declarations: [
+    ProductCardComponent
+  ],
   exports : [
-    SwaggerUiModule
-  ]
+    SwaggerUiModule,
+    ProductCardComponent
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

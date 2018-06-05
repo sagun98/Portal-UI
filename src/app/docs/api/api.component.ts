@@ -38,11 +38,11 @@ export class ApiComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.proxyDefinition = data.proxyDefinition;
+
+      this.buildForm();
     });
 
     this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, {save_onsavecallback : () => {}});
-
-    this.buildForm();
 
     this.setFormListeners();
   }
