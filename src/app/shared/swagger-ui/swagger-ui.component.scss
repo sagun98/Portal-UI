@@ -4,6 +4,10 @@ $base-red: #e62700;
 $base-blue: #007cbb;
 
 :host {
+
+    display: inline-block;
+    width: 100%;
+    
     .path {
         flex-wrap: wrap;
 

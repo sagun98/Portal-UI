@@ -1,6 +1,6 @@
 import { ProxyDefinitionReolsve } from './resolves/proxy-definition.resolve';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input } from '@angular/core';
 import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
 import { ProxyService } from './proxy.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,15 +11,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DevPortalAPI } from './api.model';
 
 @Component({
-  selector: 'app-api',
+  selector: 'api',
   templateUrl: './api.component.html',
   styleUrls: ['./api.component.scss']
 })
 export class ApiComponent implements OnInit {
 
+  @Input() proxyDefinition: DevPortalAPI = null;
   public form: FormGroup;
   public tinymceConfig = TINYCMCE_CONFIG;
-  public proxyDefinition: DevPortalAPI;
+  //public proxyDefinition: DevPortalAPI;
   public isUploadOpen: boolean = false;
   public activeEditor = {
     overview : false,
@@ -37,8 +38,7 @@ export class ApiComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
-      this.proxyDefinition = data.proxyDefinition;
-
+      this.proxyDefinition = data.proxyDefinition || this.proxyDefinition;
       this.buildForm();
     });
 

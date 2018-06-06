@@ -9,8 +9,8 @@
         }
     ],
     "products" : [
-        {"label" : "Content Services", "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in ullamcorper eros.", "id" : 10000},
-        {"label" : "Dictionary API", "description" : "Integer mollis mi interdum consequat tincidunt. Morbi semper vestibulum quam, id egestas libero sodales quis.", "id" : 10001},
+        {"label" : "Content Services", "description" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in ullamcorper eros.", "id" : "cji2l4uqs00dooruvy524vho7"},
+        {"label" : "Dictionary API", "description" : "Integer mollis mi interdum consequat tincidunt. Morbi semper vestibulum quam, id egestas libero sodales quis.", "id" : "cji2nbpa200iboruvovrb04n4"},
         {"label" : "Enabling Services", "description" : "Nullam vel mauris hendrerit, tempor leo sit amet, convallis sapien", "id" : 10002},
         {"label" : "Metadata Services API", "description" : "Vivamus ac massa non libero viverra rhoncus. Pellentesque non scelerisque ante, sed tempus ante.", "id" : 10003},
         {"label" : "Authentication Services", "description" : "Suspendisse varius a magna ut aliquam. Duis ornare arcu vitae erat ullamcorper, id feugiat nisi convallis.", "id" : 10004},

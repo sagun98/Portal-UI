@@ -44,7 +44,6 @@
         <label for="productApis" [className]=" (form.get('apis').invalid && (submitted || form.get('apis').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
           <ng-select 
             id="productApis" 
-            class="bottom-spacer-20" 
             [searchable]="true" 
             formControlName="apis" 
             bindValue="id" 
@@ -58,12 +57,13 @@
           <span *ngIf="form.get('apis').errors && form.get('apis').errors.required && (submitted || form.get('apis').dirty)" class="tooltip-content">This field cannot be empty!</span>
         </label>
       </div>
-
     </section>
 
+    <hr/>
 
     <button type="submit" class="btn btn-primary">
-      <clr-icon shape="check"></clr-icon> Save Product</button>
+      <clr-icon shape="check"></clr-icon> Save Product
+    </button>
 
   </form>
 

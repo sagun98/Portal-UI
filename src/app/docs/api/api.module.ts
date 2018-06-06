@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   declarations: [ApiComponent],
+  exports : [
+    ApiComponent
+  ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ApiModule { }

@@ -1,3 +1,4 @@
+import { ClarityModule } from '@clr/angular';
 import { NewProductComponent } from './new-product/new-product.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ExistingProductComponent } from './existing-product/existing-product.component';
+import { ApiModule } from '../api/api.module';
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import { ExistingProductComponent } from './existing-product/existing-product.co
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
-    NgSelectModule
+    NgSelectModule,
+    ClarityModule,
+    ApiModule
   ],
   declarations: [
     NewProductComponent,

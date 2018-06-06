@@ -1,0 +1,7 @@
+:host {
+    /deep/ clr-stack-block.api-content {
+        > dt.stack-block-label {
+            display: none !important;
+        }
+    }
+}
