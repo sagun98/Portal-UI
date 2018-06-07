@@ -50,7 +50,7 @@ export class ExistingProductComponent extends ProductComponentBase implements On
     this.activeEditor[editor] = ! this.activeEditor[editor];
 
     if(! this.activeEditor[editor])
-      this.updateProduct();
+      this.updateProduct(editor);
   }
 
   public saveContent(editor) {
@@ -64,11 +64,12 @@ export class ExistingProductComponent extends ProductComponentBase implements On
       this.updateProduct();
   }
 
-  public updateProduct() {
+  public updateProduct(editor?:string) {
     setTimeout(t => {
       this.submitted = true;
 
       if (this.form.invalid) {
+        this.activeEditor[editor] = true;
         return;
       }
 
@@ -78,7 +79,6 @@ export class ExistingProductComponent extends ProductComponentBase implements On
         this.product = product;
         //TODO: remove this
         this.product.id = product['_id'];
-        // this.buildForm();
       });
     })
   }

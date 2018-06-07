@@ -1,71 +1,24 @@
 <div class="container">
 
-  <button class="btn btn-sm" style="position: absolute;right: 0px; top: 60px;">
+  <a class="btn btn-sm edit-page-btn" routerLink="edit">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
-  </button>
+  </a>
 
   <form [formGroup]="form">
 
-    <h1 class="bottom-spacer-10">
-     
-      <span *ngIf="! activeEditor.title">{{ product.title }}</span>
+    <h1 class="bottom-spacer-10">{{ product.title }}</h1>
 
-      <input *ngIf="activeEditor.title" type="text" name="title" placeholder="Enter Product Name" formControlName="title"/>
+    <h4 class="bottom-spacer-20">{{ product.description }}</h4>
 
-      <button type="button" class="btn btn-icon ml20" [class.btn-success-outline]="activeEditor.title" (click)="save('title')">
-        <ng-container *ngIf="! activeEditor.title"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-        <ng-container *ngIf="activeEditor.title"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-      </button>
-    </h1>
+    <ng-container *ngIf="product.overview.length">
+      <h2>Overview</h2>
 
-    <button type="button" class="btn btn-icon" [class.btn-success-outline]="activeEditor.description" (click)="save('description')" style="margin-top:20px;">
-      <ng-container *ngIf="! activeEditor.description"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-      <ng-container *ngIf="activeEditor.description"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-    </button>
-
-    <h4 class="bottom-spacer-20">
-      <span *ngIf="! activeEditor.description">{{ product.description }}</span>
-      <textarea *ngIf="activeEditor.description" formControlName="description" rows="3" placeholder="Enter Description"></textarea>
-    </h4>
-
-    <h2>
-      Overview
-      <button type="button" class="btn btn-icon ml20" [class.btn-success-outline]="activeEditor.overview" (click)="save('overview')">
-        <ng-container *ngIf="! activeEditor.overview"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-        <ng-container *ngIf="activeEditor.overview"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-      </button>
-    </h2>
-
-    <hr/>
-
-    <ng-container *ngIf="activeEditor.overview">
-      <editor apiKey="test" id="overview" [init]="tinymceConfig" formControlName="overview" (onSaveContent)="saveContent($event)">
-      </editor>
+      <hr/>
+    
+      <div class="bottom-spacer-20" [innerHtml]="product.overview"></div>
     </ng-container>
-  
-    <div class="bottom-spacer-20" *ngIf="!activeEditor.overview" [innerHtml]="form.get('overview').value"></div>
 
-    <h2 class="bottom-spacer-20">
-      APIs
-      <button type="button" class="btn btn-icon ml20" [class.btn-success-outline]="activeEditor.apis" (click)="save('apis')">
-        <ng-container *ngIf="! activeEditor.apis"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-        <ng-container *ngIf="activeEditor.apis"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-      </button>
-    </h2>
-
-    <ng-select 
-      *ngIf="activeEditor.apis"
-      class="bottom-spacer-10"
-      id="productApis" 
-      [searchable]="true" 
-      formControlName="apis" 
-      bindLabel="label"
-      [items]="apis" 
-      [multiple]="true" 
-      [closeOnSelect]="false"
-      style="width: 100%"
-    >
-    </ng-select>
+    <h2 class="bottom-spacer-20">APIs</h2>
 
     <clr-stack-view>
       <clr-stack-block [clrSbExpandable]="true" *ngFor="let api of product.apis" [clrSbExpanded]="(activeApi && activeApi.id === api.id)" (clrSbExpandedChange)="getApiDefinition(api, $event)">

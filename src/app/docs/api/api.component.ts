@@ -41,49 +41,16 @@ export class ApiComponent implements OnInit {
       this.proxyDefinition = data.proxyDefinition || this.proxyDefinition;
       this.buildForm();
     });
-
-    this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, {save_onsavecallback : () => {}});
-
-    this.setFormListeners();
   }
 
   private buildForm() {
     this.form = this.formBuilder.group({
       id : [this.proxyDefinition.id],
       title : [this.proxyDefinition.title, [Validators.required]],
-      overview : [this.overview],
-      gettingStarted : [this.gettingStarted],
-      reference : [this.reference]
+      overview : [this.proxyDefinition.overview],
+      gettingStarted : [this.proxyDefinition.gettingStarted],
+      reference : [this.proxyDefinition.reference]
     })
-  }
-
-  private setFormListeners(){
-    // this.form.get('title').valueChanges.subscribe(title => {
-    //   console.log(title);
-    // });
-
-    // this.form.get('overview').valueChanges.subscribe(overview => {
-    //   console.log(overview);
-    // })
-  }
-
-  public saveTitle(){
-    // TODO: uncomment this
-    // if (! this.activeEditor.title ){
-    //   const data = this.form.getRawValue();
-
-    //   this.proxyService.setProxyDefinition(data.id, data);
-    // }
-
-    this.activeEditor.title = ! this.activeEditor.title;
-
-    if (! this.activeEditor.title ){
-      this.proxyDefinition.title = this.form.get('title').value;
-
-      this.proxyService.setProxyDefinition(this.proxyDefinition['_id'], this.proxyDefinition).subscribe( (updatedProxyDefinition: DevPortalAPI) => {
-        this.proxyDefinition = updatedProxyDefinition;
-      });
-    }
   }
 
   // shorthand to get yaml -> json
@@ -101,92 +68,17 @@ export class ApiComponent implements OnInit {
   }
 
   // shorthand to get overview
-  public get overview (){
-    if(this.proxyDefinition.overview.items[0]){
-        return this.proxyDefinition.overview.items[0].content;
-    }
-    return null;
-  }
-
-  // shorthand to get overview
   public get overviewSafe (){
-    if(this.proxyDefinition.overview.items[0]){
-        return this.domSanitizer.bypassSecurityTrustHtml( this.proxyDefinition.overview.items[0].content );
-    }
-    return null;
-  }
-
-  // shorthand to set overview
-  public set overview (content) {
-    if(this.proxyDefinition.overview.items[0])
-      this.proxyDefinition.overview.items[0].content = content;
-    else
-      this.proxyDefinition.overview.items.push({
-        content : content,
-        type : 'apostrophe-rich-text'
-      });
-  }
-
-  // shorthand to get gettingStarted
-  public get gettingStarted (){
-    if(this.proxyDefinition.gettingStarted.items[0])
-      return this.proxyDefinition.gettingStarted.items[0].content;
-
-    return null;
+    return this.domSanitizer.bypassSecurityTrustHtml( this.proxyDefinition.overview );
   }
 
   // shorthand to get gettingStarted safe
   public get gettingStartedSafe (){
-    if(this.proxyDefinition.gettingStarted.items[0])
-      return this.domSanitizer.bypassSecurityTrustHtml( this.proxyDefinition.gettingStarted.items[0].content );
-
-    return null;
+    return this.domSanitizer.bypassSecurityTrustHtml( this.proxyDefinition.gettingStarted );
   }
 
-  // shorthand to set overview
-  public set gettingStarted (content) {
-    if(this.proxyDefinition.gettingStarted.items[0])
-      this.proxyDefinition.gettingStarted.items[0].content = content;
-    else
-      this.proxyDefinition.gettingStarted.items.push({
-        content : content,
-        type : 'apostrophe-rich-text'
-      })
+  // shorthand to get reference safe
+  public get referenceSafe (){
+    return this.domSanitizer.bypassSecurityTrustHtml( this.proxyDefinition.reference );
   }
-
-  // shorthand to get overview
-  public get reference (){
-    if(this.proxyDefinition.reference.items[0])
-      return this.proxyDefinition.reference.items[0].content;
-    
-    return null;
-  }
-
-  // shorthand to set overview
-  public set reference (content) {
-    if(this.proxyDefinition.reference.items[0])
-      this.proxyDefinition.reference.items[0].content = content;
-    else
-      this.proxyDefinition.reference.items.push({
-        content : content,
-        type : 'apostrophe-rich-text'
-      })
-  }
-
-  public handleSave(editor) {
-    let override = false;
-
-    if(! this.activeEditor[editor.editor.id] && ! editor.editor.isNotDirty )
-      override = confirm("You have unsaved changes.  Do you want to save your changes before you close the editor?");
-
-    if(this.activeEditor[editor.editor.id] || override){
-      this[editor.editor.id] = editor.editor.getBody().innerHTML;
-
-      // TODO: Fully switch over to Michaels impl when ready
-      this.proxyService.setProxyDefinition(this.proxyDefinition['_id'], this.proxyDefinition).subscribe( (updatedProxyDefinition: DevPortalAPI) => {
-        this.proxyDefinition = updatedProxyDefinition;
-      });
-    }
-  }
-
 }

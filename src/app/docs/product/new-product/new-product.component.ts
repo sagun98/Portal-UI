@@ -14,12 +14,13 @@ import { Product } from '../product.interface';
 export class NewProductComponent extends ProductComponentBase implements OnInit{
 
   // These exist in the ProductComponentBase class (this is just for reference)
+  // public activeApi: any = null;
   // public product: Product;
   // public apis: any[];
   // public form: FormGroup;
   // public tinymceConfig = TINYCMCE_CONFIG;
-
-  public showOverview: boolean = false;
+  // public errorClasses = ERROR_CLASSES;
+  // public submitted: boolean = false;
 
   constructor(
     protected activatedRoute : ActivatedRoute,

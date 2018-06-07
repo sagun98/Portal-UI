@@ -1,26 +1,24 @@
-import { ClarityModule } from '@clr/angular';
-import { SwaggerUiModule } from './../../shared/swagger-ui/swagger-ui.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiComponent } from './api.component';
+import { ManageApiComponent } from './manage-api.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
-    EditorModule,
-    ClarityModule,
-    SwaggerUiModule,
     FormsModule,
     ReactiveFormsModule,
+    EditorModule,
     RouterModule
   ],
-  declarations: [ApiComponent],
+  declarations: [
+    ManageApiComponent
+  ],
   exports : [
-    ApiComponent
+    ManageApiComponent
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ApiModule { }
+export class ManageApiModule { }

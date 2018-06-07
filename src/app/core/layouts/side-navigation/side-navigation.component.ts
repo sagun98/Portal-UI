@@ -40,6 +40,8 @@ export class SideNavigationComponent implements OnInit {
   public addApi($event){
     $event.preventDefault();
     $event.stopPropagation();
+
+    this.router.navigate([`/docs/api/new`]);
   }
 
   public addProduct($event){

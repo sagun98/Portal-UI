@@ -1,3 +1,4 @@
+import { ManageApiComponent } from './manage-api/manage-api.component';
 import { ExistingProductComponent } from './product/existing-product/existing-product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductsResolve } from "../resolves/products.resolve";
@@ -29,6 +30,9 @@ export const documentationRoutes: Routes = [
                 component: NewProductComponent,
                 resolve: {
                     apiData: ApisResolve
+                },
+                data : {
+                    saveMethod : 'addProduct'
                 }
             },
             {
@@ -40,11 +44,37 @@ export const documentationRoutes: Routes = [
                 }
             },
             {
+                path: 'product/:productId/edit',
+                component: NewProductComponent,
+                resolve: {
+                    apiData: ApisResolve,
+                    product: ProductResolve
+                },
+                data : {
+                    saveMethod : 'updateProduct'
+                }
+            },
+            {
+                path : 'api/new', component : ManageApiComponent,
+                data : {
+                    saveMethod : 'addApi'
+                }
+            },
+            {
                 path: 'api/:apiId', component: ApiComponent,
                 resolve: {
                     proxyDefinition: ProxyDefinitionReolsve
                 }
-            }
+            },
+            {
+                path : 'api/:apiId/edit', component : ManageApiComponent,
+                resolve: {
+                    api: ProxyDefinitionReolsve
+                },
+                data : {
+                    saveMethod : 'updateApi'
+                }
+            },
         ]
     },
 ];

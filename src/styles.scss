@@ -52,3 +52,28 @@ form > section {
 .ng-value-container > .ng-input > input {
     width : calc(100% - 15px) !important;
 }
+
+// Form overrides
+
+.container { 
+    form.has-fixed-footer {
+        margin-bottom: 50px;
+
+        .fixed-footer {
+            position: fixed;
+            bottom: 0px;
+            background-color: white;
+            width: calc(100% - 215px);
+            margin-left: -16px;
+            padding: 0px 20px;
+            border-top: 1px solid #ccc;
+        }
+
+        @media screen and (max-width:768px){
+            .fixed-footer {
+                width: 100%;
+            }
+        }
+
+    }
+}

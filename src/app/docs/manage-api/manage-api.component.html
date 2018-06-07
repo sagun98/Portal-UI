@@ -1,0 +1,78 @@
+<div class="container">
+
+  <h3>Create New API</h3>
+
+  <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveApi()">
+
+    <section class="form-block">
+
+      <div class="form-group">
+        <label for="productName" class="required">Name</label>
+
+        <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="apiName" type="text" name="title" placeholder="Enter API Name" formControlName="name" />
+          <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="productName" class="required">Description</label>
+
+        <label for="productDescription" [className]=" (form.get('description').invalid && (submitted || form.get('description').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+            <textarea id="description" rows="3" formControlName="description" placeholder="Enter API Description"></textarea>
+            <span *ngIf="form.get('description').errors && form.get('description').errors.required && (submitted || form.get('description').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+      <div class="bottom-spacer-30">
+        <label for="overview">Overview:</label>
+        <div for="overview">
+          <editor id="overview" placeholder="Overview" [initialValue]="api.overview" [init]="tinymceConfig" formControlName="overview">
+          </editor>
+        </div>
+      </div>
+
+      <div class="bottom-spacer-30 inline full">
+        <label for="productName">Getting Started:</label>
+        <div for="overview">
+          <editor id="gettingStarted" placeholder="Getting Started" [initialValue]="api.gettingStarted" [init]="tinymceConfig" formControlName="gettingStarted">
+          </editor>
+        </div>
+      </div>
+
+      <div class="bottom-spacer-30 inline full">
+        <label for="reference">Reference:</label>
+        <div for="reference">
+          <editor id="reference" placeholder="Reference" [initialValue]="api.reference" [init]="tinymceConfig" formControlName="reference">
+          </editor>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="productName" class="required">Swagger Document</label>
+        
+        <label for="productDescription" [className]=" (form.get('swagger').invalid && (submitted || form.get('swagger').dirty)) ? errorClasses + ' textarea' : '' "
+          style="flex-grow: 1;">
+          <textarea id="swagger" rows="10" formControlName="swagger" placeholder="Add Swagger Definition"></textarea>
+          <span *ngIf="form.get('swagger').errors && form.get('swagger').errors.required && (submitted || form.get('swagger').dirty)"
+            class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+    </section>
+
+    <div class="fixed-footer">
+    
+      <a type="submit" class="btn btn-danger-outline pull-right" routerLink="../">
+        <clr-icon shape="times"></clr-icon>
+        Cancel
+      </a>
+    
+      <button type="submit" class="btn btn-success-outline">
+        <clr-icon shape="check"></clr-icon> Save API
+      </button>
+    </div>
+
+  </form>
+
+</div>

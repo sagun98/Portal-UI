@@ -33,9 +33,14 @@ export class SwaggerUiService {
         // - query
         // - path
 
+        pathData.parameters = this.getReferenceParams(pathData, swaggerJson);
+
         Object.defineProperties(pathData, {
           bodyParam : {
             get(){
+              if(! pathData.parameters)
+                return;
+
               return pathData.parameters.filter(param => {
                 return param.in === 'body'
               })[0];
@@ -44,6 +49,9 @@ export class SwaggerUiService {
           
           pathParams : {
             get() {
+              if(! pathData.parameters)
+                return;
+
               return pathData.parameters.filter(param => {
                 return /(path)/.test(param.in);
               });
@@ -52,6 +60,9 @@ export class SwaggerUiService {
 
           queryParams : {
             get() {
+              if(! pathData.parameters)
+                return;
+
               return pathData.parameters.filter(param => {
                 return /(query)/.test(param.in);
               });
@@ -109,6 +120,30 @@ export class SwaggerUiService {
     });
 
     return paths;
+  }
+
+  private getReferenceParams(pathData, swaggerJson){
+    if(! pathData.parameters)
+      return;
+
+    return pathData.parameters.map(param => {
+      if(! param['$ref'])
+        return param;
+
+      let baseObj = Object.assign({}, swaggerJson);
+      let returnObj = {};
+      const jPath: string[] = param['$ref'].replace('#/', '').split('/');
+
+      for(let i=0; i < jPath.length; i++){
+        const pathPart = jPath[i];
+        baseObj = baseObj[pathPart];
+
+        if(! baseObj)
+          break;
+      }
+      
+      return baseObj;
+    });
   }
 
   private formatModelObject(object){

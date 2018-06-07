@@ -16,6 +16,8 @@ export class ProductComponentBase implements OnInit {
     public tinymceConfig = TINYCMCE_CONFIG;
     public errorClasses = ERROR_CLASSES;
     public submitted: boolean = false;
+    public showOverview: boolean = false;
+    public saveMethod: string = 'addProduct';
 
     protected $onProductSaved: Subject<Product> = new Subject<Product>();
 
@@ -28,14 +30,16 @@ export class ProductComponentBase implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe(data => {
             this.apis = data.apiData;
+            this.saveMethod = data.saveMethod;
             this.product = <Product> data.product || <Product>{
                 overview: ''
             };
             // TODO: remove this
             this.product.id = this.product['_id'];
             this.activeApi = {};
+            this.showOverview = (this.product.overview && this.product.overview.length) ? true : false;
         });
-        this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 100, save_onsavecallback: () => { } });
+        this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 200, save_onsavecallback: () => { } });
         this.buildForm();
     }
 
@@ -56,9 +60,12 @@ export class ProductComponentBase implements OnInit {
             return;
         }
 
+        if(! this.showOverview)
+            this.form.get('overview').setValue('');
+
         const productData = this.form.getRawValue();
 
-        this.productService.addProduct(productData).subscribe(  (product: Product) => {
+        this.productService[this.saveMethod](productData).subscribe(  (product: Product) => {
             this.$onProductSaved.next(product);
         });
     }

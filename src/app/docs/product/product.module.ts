@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { NewProductComponent } from './new-product/new-product.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -18,7 +19,8 @@ import { ApiModule } from '../api/api.module';
     EditorModule,
     NgSelectModule,
     ClarityModule,
-    ApiModule
+    ApiModule,
+    RouterModule
   ],
   declarations: [
     NewProductComponent,

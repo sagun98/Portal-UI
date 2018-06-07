@@ -6,7 +6,6 @@ import { DocsComponent } from './docs.component';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { LayoutsModule } from '../core';
-
 import { ApiComponent } from './api/api.component';
 import { ProxyDefinitionReolsve } from './api/resolves/proxy-definition.resolve';
 import { ProxyService } from './api/proxy.service';
@@ -17,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductModule } from './product/product.module';
 import { ProductResolve } from '../resolves/product.resolve';
 import { ProductsResolve } from '../resolves/products.resolve';
+import { ManageApiModule } from './manage-api/manage-api.module';
 
 @NgModule({
   imports: [
@@ -24,6 +24,7 @@ import { ProductsResolve } from '../resolves/products.resolve';
     ClarityModule,
     LayoutsModule,
     ApiModule,
+    ManageApiModule,
     ProductModule,
     SwaggerUiModule,
     SharedModule,

@@ -1,111 +1,35 @@
 <div class="container">
 
-  <form [formGroup]="form">
+  <a class="btn btn-sm edit-page-btn" routerLink="edit">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
+  </a>
 
-  <h1 class="bottom-spacer-20">
-    <ng-container *ngIf="!activeEditor.title">{{ proxyDefinition.title }}</ng-container>
-    
-    <input  *ngIf="activeEditor.title" type="text" name="title" formControlName="title"/>
+  <h1>{{ proxyDefinition.name }}</h1>
 
-    <button type="button" class="btn btn-icon ml20" [class.btn-success-outline]="activeEditor.title" (click)="saveTitle()">
-      <ng-container *ngIf="! activeEditor.title"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-      <ng-container *ngIf="activeEditor.title"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-    </button>
-  </h1>
+  <p class="bottom-spacer-20">{{ proxyDefinition.description }}</p>
 
-  <h2>
-    Overview
-    <button type="button" class="btn btn-icon" [class.btn-success-outline]="activeEditor.overview" (click)="activeEditor.overview = ! activeEditor.overview">
-      <ng-container *ngIf="! activeEditor.overview"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-      <ng-container *ngIf="activeEditor.overview"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-    </button>
-  </h2>
+  <h2>Overview</h2>
 
   <hr/>
 
-  <ng-container *ngIf="activeEditor.overview">
-    <editor apiKey="test" id="overview" [initialValue]="overview" [init]="tinymceConfig" (onSaveContent)="handleSave($event)" formControlName="overview" >
-    </editor>
-  </ng-container>
+  <div class="api-documentation-content" [innerHtml]="overviewSafe"></div>
 
-  <div class="api-documentation-content" *ngIf="!activeEditor.overview" [innerHtml]="overviewSafe"></div>
-
-  <h2>
-    Getting Started
-    <button type="button" class="btn btn-icon" [class.btn-success-outline]="activeEditor.gettingStarted" (click)="activeEditor.gettingStarted = ! activeEditor.gettingStarted">
-      <ng-container *ngIf="! activeEditor.gettingStarted"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-      <ng-container *ngIf="activeEditor.gettingStarted"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-    </button>
-  </h2>
+  <h2>Getting Started</h2>
 
   <hr/>
 
-  <ng-container *ngIf="activeEditor.gettingStarted">
-    <editor apiKey="test" id="gettingStarted" [initialValue]="gettingStarted" [init]="tinymceConfig" (onSaveContent)="handleSave($event)">
-    </editor>
-  </ng-container>
+  <div class="api-documentation-content" [innerHtml]="gettingStartedSafe"></div>
 
-  <div class="api-documentation-content" *ngIf="!activeEditor.gettingStarted" [innerHtml]="gettingStartedSafe"></div>
-
-  <h2 id="api-documentation">
-      API Documentation
-    <button class="btn btn-icon" (click)="isUploadOpen = ! isUploadOpen">
-      <clr-icon shape="upload"></clr-icon>
-      Upload
-    </button>
-  </h2>
+  <h2 id="api-documentation">API Documentation</h2>
 
   <hr class="bottom-spacer-20"/>
 
   <swagger-ui class="bottom-spacer-40" [swaggerJson]="swaggerJson"></swagger-ui>
 
-  <h2 id="api-reference">
-    Reference
-    <button type="button" class="btn btn-icon" [class.btn-success-outline]="activeEditor.reference" (click)="activeEditor.reference = ! activeEditor.reference">
-      <ng-container *ngIf="! activeEditor.reference"><clr-icon shape="pencil" class="is-solid"></clr-icon> Edit</ng-container>
-      <ng-container *ngIf="activeEditor.reference"><clr-icon shape="check" class="is-solid"></clr-icon> Done</ng-container>
-    </button>
-  </h2>
-
+  <h2 id="api-reference">Reference</h2>
+  
   <hr/>
+  
+  <div class="api-documentation-content" [innerHtml]="referenceSafe"></div>
 
-  <ng-container *ngIf="activeEditor.reference">
-    <editor apiKey="test" id="reference" [initialValue]="reference" [init]="tinymceConfig" (onSaveContent)="handleSave($event)">
-    </editor>
-  </ng-container>
-
-  <div class="api-documentation-content" *ngIf="!activeEditor.reference" [innerHtml]="reference"></div>
-
-  </form>
-
-
-  <clr-modal [(clrModalOpen)]="isUploadOpen" [clrModalClosable]="false">
-      <!-- Move to component-->
-      <h3 class="modal-title">Upload Swagger Document</h3>
-      <div class="modal-body">
-         
-          <clr-tabs>
-              <clr-tab>
-                  <button clrTabLink>Upload File</button>
-                  <clr-tab-content *clrIfActive>
-                      File Upload
-                  </clr-tab-content>
-              </clr-tab>
-          
-              <clr-tab>
-                  <button clrTabLink>URL</button>
-                  <clr-tab-content *clrIfActive>
-                      Provide URL
-                  </clr-tab-content>
-              </clr-tab>
-          </clr-tabs>
-
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="isUploadOpen = false">
-              <clr-icon shape="times"></clr-icon>
-              Close
-          </button>
-      </div>
-  </clr-modal>
 </div>

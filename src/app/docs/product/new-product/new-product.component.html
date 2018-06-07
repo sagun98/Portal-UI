@@ -1,6 +1,6 @@
 <div class="container">
 
-  <form [formGroup]="form" (ngSubmit)="saveProduct()">
+  <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveProduct()">
 
     <section class="form-block">
       <!-- Product Name -->
@@ -46,7 +46,6 @@
             id="productApis" 
             [searchable]="true" 
             formControlName="apis" 
-            bindValue="id" 
             bindLabel="label"
             [items]="apis" 
             [multiple]="true" 
@@ -59,11 +58,17 @@
       </div>
     </section>
 
-    <hr/>
+    <div class="fixed-footer">
 
-    <button type="submit" class="btn btn-primary">
-      <clr-icon shape="check"></clr-icon> Save Product
-    </button>
+      <a type="submit" class="btn btn-danger-outline pull-right" routerLink="../">
+          <clr-icon shape="times"></clr-icon>
+          Cancel
+      </a>
+
+      <button type="submit" class="btn btn-success-outline">
+        <clr-icon shape="check"></clr-icon> Save Product
+      </button>
+    </div>
 
   </form>
 

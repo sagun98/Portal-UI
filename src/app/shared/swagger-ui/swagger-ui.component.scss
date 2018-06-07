@@ -18,8 +18,13 @@ $base-blue: #007cbb;
 
             .alert-item{
                 
+                @media screen and (max-width: 768px){
+                    .alert-text {
+                        width: calc(100% - 100px);
+                        max-width: calc(100% - 100px);
+                    }
+                }
                 
-
                 .verb {
                     width : 100px;
                     min-width: 100px;
