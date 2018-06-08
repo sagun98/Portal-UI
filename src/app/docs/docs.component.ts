@@ -1,6 +1,5 @@
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-docs',
@@ -15,7 +14,6 @@ export class DocsComponent implements OnInit {
   public selectedProductId: string = '';
 
   constructor(
-    public appService : AppService,
     private activatedRoute : ActivatedRoute,
     private router: Router
   ){ }

@@ -2,16 +2,18 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/r
 import { Observable } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 import { Injectable } from '@angular/core';
-import { AppService } from "../app.service";
+import { ProxyService } from "../docs/api/proxy.service";
 
 @Injectable()
 export class ApisResolve implements Resolve<any> {
     
-    constructor(private appService : AppService){
+    constructor(
+        private apiService : ProxyService
+    ){
 
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.appService.getAPIs();
+        return this.apiService.getApiList();
     }
 }

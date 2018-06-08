@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ManageApiComponent } from './manage-api.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { RouterModule } from '@angular/router';
+import { FileDropModule } from 'ngx-file-drop';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -11,13 +13,18 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
-    RouterModule
+    RouterModule,
+    FileDropModule,
+    FileUploadModule
   ],
   declarations: [
     ManageApiComponent
   ],
   exports : [
     ManageApiComponent
+  ],
+  providers : [
+
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

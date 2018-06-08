@@ -11,15 +11,19 @@ export class ProductService {
     private http: HttpClient
   ) { }
 
+  public getProducts() {
+    return this.http.get('http://localhost:8080/products');
+  }
+
   public addProduct( product : Product ) {
-    return this.http.post(`http://localhost:3000/api/v1/product?apikey=12345`, product);
+    return this.http.post(`http://localhost:8080/products`, product);
   }
 
   public updateProduct ( product : Product ) {
-    return this.http.put(`http://localhost:3000/api/v1/product/${product.id}?apikey=12345`, product);
+    return this.http.put(`http://localhost:8080/products/${product.id}`, product);
   }
 
   public getProduct ( productId : string ) {
-    return this.http.get(`http://localhost:3000/api/v1/product/${productId}?apikey=12345`);
+    return this.http.get(`http://localhost:8080/products/${productId}`);
   }
 }

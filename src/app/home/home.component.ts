@@ -1,6 +1,6 @@
-import { AppService } from './../app.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from '../docs/product/product.interface';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   // TODO: Add type
-  public products: any[] = []
+  public products: Product[] = []
 
   constructor(
-    public appService : AppService,
     private activatedRoute: ActivatedRoute
   ) { }
 

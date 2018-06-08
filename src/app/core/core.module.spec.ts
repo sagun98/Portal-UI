@@ -8,6 +8,6 @@ describe('DevPortalCoreModule', () => {
   });
 
   it('should create an instance', () => {
-    expect(coreModule).toBeTruthy();
+    expect(coreModule).toBeTruthy();   
   });
 });

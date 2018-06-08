@@ -41,7 +41,6 @@ export class ExistingProductComponent extends ProductComponentBase implements On
     }
 
     this.proxyService.getProxyDefinition(api.id).subscribe(_api => {
-      _api['id'] = _api['_id'];
       this.activeApi = _api;
     });
   }
@@ -77,8 +76,6 @@ export class ExistingProductComponent extends ProductComponentBase implements On
 
       this.productService.updateProduct(productData).subscribe((product: Product) => {
         this.product = product;
-        //TODO: remove this
-        this.product.id = product['_id'];
       });
     })
   }

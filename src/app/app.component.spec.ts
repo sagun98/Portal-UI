@@ -1,3 +1,4 @@
+import { ActiveLinkDirective } from './core/layouts/sub-navigation/active-link.directive';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
@@ -7,6 +8,7 @@ import { AppComponent } from './app.component';
 import { SideNavigationComponent } from './core';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
+import { SubNavigationComponent } from './core/layouts/sub-navigation/sub-navigation.component';
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -26,7 +28,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         SideNavigationComponent,
-        HeaderComponent
+        SubNavigationComponent,
+        HeaderComponent,
+        ActiveLinkDirective
       ],
     }).compileComponents();
   }));

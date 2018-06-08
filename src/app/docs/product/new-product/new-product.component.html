@@ -7,9 +7,9 @@
       <div class="form-group">
         <label for="productName" class="required">Product Name</label>
 
-        <label [className]=" ( form.get('title').invalid && ( submitted || form.get('title').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
-          <input id="productName" type="text" name="title" placeholder="Enter Product Name" formControlName="title"/>
-          <span *ngIf="form.get('title').errors && form.get('title').errors.required && (submitted || form.get('title').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="productName" type="text" name="name" placeholder="Enter Product Name" formControlName="name"/>
+          <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
         </label>
 
       </div>
@@ -38,7 +38,7 @@
         </editor>
       </div>
 
-      <!-- Product Description -->
+      <!-- Associated APIs -->
       <div class="form-group">
         <label for="productApis" class="required">APIs</label>
         <label for="productApis" [className]=" (form.get('apis').invalid && (submitted || form.get('apis').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
@@ -46,7 +46,7 @@
             id="productApis" 
             [searchable]="true" 
             formControlName="apis" 
-            bindLabel="label"
+            bindLabel="name"
             [items]="apis" 
             [multiple]="true" 
             [closeOnSelect]="false"

@@ -27,4 +27,10 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a default title', () => {
+    const title = component.title;
+
+    expect(title).toEqual("Pearson Developer Title");
+  })
 });

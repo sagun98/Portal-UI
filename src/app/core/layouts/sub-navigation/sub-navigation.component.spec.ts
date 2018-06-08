@@ -1,6 +1,7 @@
+import { ActiveLinkDirective } from './active-link.directive';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SubNavigationComponent } from './sub-navigation.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SubNavigationComponent', () => {
   let component: SubNavigationComponent;
@@ -8,7 +9,13 @@ describe('SubNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubNavigationComponent ]
+      imports : [
+        RouterTestingModule
+      ],
+      declarations: [
+        SubNavigationComponent,
+        ActiveLinkDirective 
+      ]
     })
     .compileComponents();
   }));

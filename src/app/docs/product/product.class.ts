@@ -34,8 +34,7 @@ export class ProductComponentBase implements OnInit {
             this.product = <Product> data.product || <Product>{
                 overview: ''
             };
-            // TODO: remove this
-            this.product.id = this.product['_id'];
+            
             this.activeApi = {};
             this.showOverview = (this.product.overview && this.product.overview.length) ? true : false;
         });
@@ -46,7 +45,8 @@ export class ProductComponentBase implements OnInit {
     protected buildForm() {
         this.form = this.formBuilder.group({
             id: [this.product.id],
-            title: [this.product.title, [Validators.required]],
+            version : [this.product.version, []],
+            name: [this.product.name, [Validators.required]],
             description: [this.product.description, [Validators.required]],
             overview: [this.product.overview],
             apis: [ this.product.apis , [Validators.required]]

@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DevPortalCoreModule } from './core/core.module';
-import { AppService } from './app.service';
 import { appRoutes } from './app.routes';
 import { RouterModule } from '@angular/router';
 
@@ -28,9 +27,7 @@ import { RouterModule } from '@angular/router';
       { enableTracing: false, useHash : true}
     )
   ],
-  providers: [
-    AppService
-  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

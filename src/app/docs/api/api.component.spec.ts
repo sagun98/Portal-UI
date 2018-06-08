@@ -7,6 +7,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { of } from 'rxjs/observable/of';
+import { FormBuilder } from '@angular/forms';
 
 describe('ApiComponent', () => {
   let component: ApiComponent;
@@ -244,6 +245,7 @@ describe('ApiComponent', () => {
       ],
       providers : [
         HttpClient,
+        FormBuilder,
         {
           provide : ActivatedRoute, useValue : {
             data : of({

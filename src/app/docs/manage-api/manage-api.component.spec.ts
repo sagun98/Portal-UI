@@ -1,6 +1,10 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ManageApiComponent } from './manage-api.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ManageApiComponent', () => {
   let component: ManageApiComponent;
@@ -8,7 +12,18 @@ describe('ManageApiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageApiComponent ]
+      imports : [
+        FormsModule,
+        ReactiveFormsModule,
+        EditorModule,
+        RouterTestingModule,
+        HttpClientModule
+      ],
+      providers : [
+        HttpClient
+      ],
+      declarations: [ ManageApiComponent ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

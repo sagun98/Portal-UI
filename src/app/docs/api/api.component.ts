@@ -19,38 +19,16 @@ export class ApiComponent implements OnInit {
 
   @Input() proxyDefinition: DevPortalAPI = null;
   public form: FormGroup;
-  public tinymceConfig = TINYCMCE_CONFIG;
-  //public proxyDefinition: DevPortalAPI;
-  public isUploadOpen: boolean = false;
-  public activeEditor = {
-    overview : false,
-    gettingStarted : false,
-    reference : false,
-    title : false
-  }
 
   constructor(
-    private proxyService: ProxyService,
     private activatedRoute : ActivatedRoute,
     private domSanitizer: DomSanitizer,
-    private formBuilder : FormBuilder
   ) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.proxyDefinition = data.proxyDefinition || this.proxyDefinition;
-      this.buildForm();
     });
-  }
-
-  private buildForm() {
-    this.form = this.formBuilder.group({
-      id : [this.proxyDefinition.id],
-      title : [this.proxyDefinition.title, [Validators.required]],
-      overview : [this.proxyDefinition.overview],
-      gettingStarted : [this.proxyDefinition.gettingStarted],
-      reference : [this.proxyDefinition.reference]
-    })
   }
 
   // shorthand to get yaml -> json

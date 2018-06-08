@@ -34,10 +34,7 @@ export class NewProductComponent extends ProductComponentBase implements OnInit{
   ngOnInit () {
     super.ngOnInit();
 
-    this.$onProductSaved.subscribe( (product: Product) => {
-      // TODO: remove this hack
-      product.id = product['_id'];
-      
+    this.$onProductSaved.subscribe( (product: Product) => {      
       this.router.navigate([`/docs/product/${product.id}`]);
     });
   }

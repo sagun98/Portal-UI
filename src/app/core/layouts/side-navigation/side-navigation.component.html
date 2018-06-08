@@ -12,7 +12,7 @@
     <ul class="nav-list">
       <li *ngFor="let product of products">
         <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/product/' +  product.id " [ngClass]="{'active' : selectedProductId === product.id }">
-          {{product.label}}
+          {{product.name}}
         </a>
       </li>
     </ul>
@@ -34,7 +34,7 @@
       </li>
       <li *ngFor="let api of apisFiltered">
         <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/api/' +  api.id " [ngClass]="{'active' : (selectedApiId == api.id) }">
-          {{ api.label }}
+          {{ api.name }}
         </a>
       </li>
     </ul>

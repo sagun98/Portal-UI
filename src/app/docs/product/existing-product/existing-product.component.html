@@ -6,11 +6,11 @@
 
   <form [formGroup]="form">
 
-    <h1 class="bottom-spacer-10">{{ product.title }}</h1>
+    <h1 class="bottom-spacer-10">{{ product.name }}</h1>
 
     <h4 class="bottom-spacer-20">{{ product.description }}</h4>
 
-    <ng-container *ngIf="product.overview.length">
+    <ng-container *ngIf="product.overview && product.overview.length">
       <h2>Overview</h2>
 
       <hr/>
@@ -22,7 +22,7 @@
 
     <clr-stack-view>
       <clr-stack-block [clrSbExpandable]="true" *ngFor="let api of product.apis" [clrSbExpanded]="(activeApi && activeApi.id === api.id)" (clrSbExpandedChange)="getApiDefinition(api, $event)">
-        <clr-stack-label>{{ api.label }}</clr-stack-label>
+        <clr-stack-label>{{ api.name }}</clr-stack-label>
         <clr-stack-content>{{ api.description }}</clr-stack-content>
         
         <clr-stack-block *ngIf="! activeApi || (activeApi && activeApi.id !== api.id)">

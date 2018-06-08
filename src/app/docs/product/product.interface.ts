@@ -1,7 +1,8 @@
 export interface Product {
     id ? : string,
-    title : string,
+    version? : number,
+    name : string,
     description : string,
-    overview : string,
+    overview? : string,
     apis : string[]
 }
