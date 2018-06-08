@@ -1,3 +1,4 @@
+import { ProductService, ProductListChange } from './../../../docs/product/product.service';
 import { DevPortalAPI } from './../../../docs/api/api.model';
 import { Product } from './../../../docs/product/product.interface';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -22,7 +23,8 @@ export class SideNavigationComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private proxyService: ProxyService
+    private proxyService: ProxyService,
+    private productService : ProductService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,20 @@ export class SideNavigationComponent implements OnInit {
       }
 
     });
+
+    this.productService.$onProductListChanged.subscribe( (productListChange : ProductListChange) => {
+
+      if(productListChange.action === CRUD.CREATE)
+        this.products.push(productListChange.product);
+
+      if(productListChange.action === CRUD.UPDATE)
+        this.products = this.products.map( product => {
+          if(product.id === productListChange.product.id)
+            return productListChange.product;
+          return product;
+        });
+
+    })
   }
 
   public get apisFiltered () {
