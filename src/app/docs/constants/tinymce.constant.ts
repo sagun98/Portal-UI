@@ -25,7 +25,7 @@ import 'tinymce/plugins/code';
 
 export const TINYCMCE_CONFIG = {
     skin_url: 'assets/skins/lightgray',
-    plugins: 'save colorpicker print preview fullpage searchreplace autolink directionality fullscreen link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    plugins: 'save colorpicker print preview searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
     toolbar1: 'save | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
     height: 350
 }

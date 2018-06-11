@@ -152,7 +152,7 @@ export class SwaggerUiService {
       const type = object[key].type;
       const nestedObj = object[key].properties;
 
-      if(type === 'object')
+      if(type === 'object' && nestedObj)
         obj[key] = this.formatModelObject(nestedObj);
       
       else

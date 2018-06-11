@@ -5,7 +5,6 @@ import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
 import { ProxyService } from './proxy.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import tinymce from 'tinymce/tinymce';
-import jsyaml from 'js-yaml/dist/js-yaml.js';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DevPortalAPI } from './api.model';
@@ -33,16 +32,7 @@ export class ApiComponent implements OnInit {
 
   // shorthand to get yaml -> json
   public get swaggerJson () {
-    // used window global object to pass testing
-    let swaggerJson = {};
-    
-    try {
-      swaggerJson = jsyaml.load(this.proxyDefinition.swagger);
-    } catch( e ) {
-      swaggerJson = window['jsyaml'].load(this.proxyDefinition.swagger);
-    }
-    
-    return swaggerJson;
+    return this.proxyDefinition.swagger;
   }
 
   // shorthand to get overview

@@ -49,24 +49,25 @@
       </div>
 
       <div class="form-group">
-        <label for="productName" class="required">Swagger Document</label>
-        
-        <!-- <label for="productDescription" [className]=" (form.get('swagger').invalid && (submitted || form.get('swagger').dirty)) ? errorClasses + ' textarea' : '' "
-          style="flex-grow: 1;">
-          <textarea id="swagger" rows="10" formControlName="swagger" placeholder="Add Swagger Definition"></textarea>
-          <span *ngIf="form.get('swagger').errors && form.get('swagger').errors.required && (submitted || form.get('swagger').dirty)"
-            class="tooltip-content">This field cannot be empty!</span>
-        </label> -->
+          <label>Swagger Document OR URL</label>
+          <div class="radio-inline">
+              <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" />
+              <label for="upload-swagger-file">Upload Swagger File</label>
+          </div>
+          <div class="radio-inline">
+              <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" />
+              <label for="reference-swagger-url">Reference Swagger via URL</label>
+          </div>
+      </div>
 
-        <!-- <file-drop 
-          headertext="Drop files here" 
-          (onFileDrop)="dropped($event)" 
-          (onFileOver)="fileOver($event)" 
-          (onFileLeave)="fileLeave($event)">
-          <span>optional content (don't set headertext then)</span>
-        </file-drop> -->
+      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
+        <label for="productName">Swagger Document</label>
+        <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)"/>
+      </div>
 
-        <!-- <input type="file" ng2FileSelect (change)="handleUpload($event)" [uploader]="uploader"/> -->
+      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">
+        <label for="productName">Swagger URL</label>
+        <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
       </div>
 
     </section>
