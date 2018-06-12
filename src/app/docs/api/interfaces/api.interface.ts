@@ -1,4 +1,4 @@
-export interface DevPortalAPI {
+export interface API {
     id? : string,
     version? : number,
     title? : string,

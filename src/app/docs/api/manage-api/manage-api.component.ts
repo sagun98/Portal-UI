@@ -1,15 +1,13 @@
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SubNavigationComponent } from './../../core/layouts/sub-navigation/sub-navigation.component';
+import { ApiService } from './../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { ProxyService } from '../api/proxy.service';
-import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
-import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
-import { DevPortalAPI } from '../api/api.model';
+import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
+import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
+import { API } from '../interfaces/api.interface';
 
-// TODO: Move this to another file
-export enum SWAGGER_UPLOAD_OPTION {
+// TODO: possibly export this and move to another file
+enum SWAGGER_UPLOAD_OPTION {
   FILE = 'file',
   URL = 'url'
 }
@@ -21,7 +19,7 @@ export enum SWAGGER_UPLOAD_OPTION {
 })
 export class ManageApiComponent implements OnInit {
 
-  @Input() api: DevPortalAPI = {name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null};
+  @Input() api: API = {name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null};
   public errorClasses = ERROR_CLASSES;
   public form: FormGroup;
   public submitted: boolean = false;
@@ -32,14 +30,14 @@ export class ManageApiComponent implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
-    private proxyService : ProxyService,
+    private apiService : ApiService,
     private activatedRoute: ActivatedRoute,
     private router : Router
   ) { }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
-      this.api = <DevPortalAPI> data.api || this.api;
+      this.api = <API> data.api || this.api;
       this.saveMethod = data.saveMethod || this.saveMethod;
     });
 
@@ -73,7 +71,7 @@ export class ManageApiComponent implements OnInit {
 
     const apiData = this.form.getRawValue();
 
-    this.proxyService[this.saveMethod](apiData).subscribe( (api: DevPortalAPI) => {
+    this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
       this.router.navigate([`/docs/api/${api.id}`]);
     })
   }
@@ -83,5 +81,4 @@ export class ManageApiComponent implements OnInit {
 
     this.form.get('file').setValue(file);
   }
-
 }

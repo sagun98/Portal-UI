@@ -4,7 +4,6 @@
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
   </a>
 
-  <form [formGroup]="form">
 
     <h1 class="bottom-spacer-10">{{ product.name }}</h1>
 
@@ -31,12 +30,11 @@
 
         <clr-stack-block class="api-content" *ngIf="activeApi && (activeApi.id === api.id)">
           <clr-stack-content>
-            <api [proxyDefinition]="activeApi"></api>
+            <api [api]="activeApi"></api>
           </clr-stack-content>
         </clr-stack-block>
 
       </clr-stack-block>
     </clr-stack-view>
-  </form>
 
 </div>

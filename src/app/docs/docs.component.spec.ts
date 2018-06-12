@@ -1,5 +1,4 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { DevPortalAPI } from './api/api.model';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
@@ -9,7 +8,8 @@ import { SideNavigationComponent } from '../core/layouts/side-navigation/side-na
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { Product } from './product/product.interface';
+import { Product } from './product/interfaces/product.interface';
+import { API } from './api/interfaces/api.interface';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;
@@ -22,7 +22,7 @@ describe('DocsComponent', () => {
     apis : []
   };
 
-  const mockApi: DevPortalAPI = {
+  const mockApi: API = {
     id : "poiu7654",
     name : "Mock API",
     description : "Mock API Description",

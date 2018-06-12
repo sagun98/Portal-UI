@@ -1,44 +1,29 @@
-import { DevPortalAPI } from './api.model';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, of, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { isNull } from 'util';
-
-
-// TODO: Move this into a separate file
-export interface APIListChange {
-  action : string,
-  api : DevPortalAPI
-}
-
-// TODO: Move to separate file
-export enum CRUD {
-  CREATE = 'create',
-  READ = 'read',
-  UPDATE = 'update',
-  DELETE = 'delete'
-}
+import { CRUD } from '../../core/enums/crud.enum';
+import { APIListChange } from './interfaces/apiListChange.interface';
+import { API } from './interfaces/api.interface';
 
 // TODO:
-// Refactor this to be ApiService
-// Move to Application level service folder
 // Refactor out REST_BASE to be environmentally set
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProxyService {
+export class ApiService {
 
   public $onApiListChanged: Subject<APIListChange> = new Subject<APIListChange>()
 
   constructor(private http: HttpClient) { }
 
-  public getProxyDefinition (proxyId) {
-    return this.http.get(`http://localhost:8080/apis/${proxyId}`);
+  public getApi (apiId) {
+    return this.http.get(`http://localhost:8080/apis/${apiId}`);
   }
 
-  public addApi (api: DevPortalAPI) {
+  public addApi (api: API) {
 
     if(!api.id || ! api.id.length)
       delete api.id;
@@ -48,7 +33,7 @@ export class ProxyService {
 
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
-    const request = this.http.post(`http://localhost:8080/apis`, apiFormData).pipe(tap( (addedApi : DevPortalAPI) => {
+    const request = this.http.post(`http://localhost:8080/apis`, apiFormData).pipe(tap( (addedApi : API) => {
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.CREATE,
@@ -59,13 +44,13 @@ export class ProxyService {
     return request;
   }
 
-  public updateApi (api: DevPortalAPI) {
+  public updateApi (api: API) {
     if(api.swagger)
       api.swagger = JSON.stringify( api.swagger );
 
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
-    const request = this.http.put(`http://localhost:8080/apis/${api.id}`, apiFormData).pipe(tap( (addedApi : DevPortalAPI) => {
+    const request = this.http.put(`http://localhost:8080/apis/${api.id}`, apiFormData).pipe(tap( (addedApi : API) => {
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.UPDATE,

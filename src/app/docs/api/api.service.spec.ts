@@ -1,7 +1,6 @@
+import { ApiService } from './api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
-
-import { ProxyService } from './proxy.service';
 
 describe('ProxyService', () => {
   beforeEach(() => {
@@ -10,13 +9,13 @@ describe('ProxyService', () => {
         HttpClientModule
       ],
       providers: [
-        ProxyService,
+        ApiService,
         HttpClient
       ]
     });
   });
 
-  it('should be created', inject([ProxyService], (service: ProxyService) => {
+  it('should be created', inject([ApiService], (service: ApiService) => {
     expect(service).toBeTruthy();
   }));
 });

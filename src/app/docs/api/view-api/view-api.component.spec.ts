@@ -1,17 +1,17 @@
+import { ViewApiComponent } from './view-api.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApiComponent } from './api.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { of } from 'rxjs/observable/of';
 import { FormBuilder } from '@angular/forms';
 
-describe('ApiComponent', () => {
-  let component: ApiComponent;
-  let fixture: ComponentFixture<ApiComponent>;
+describe('ViewApiComponent', () => {
+  let component: ViewApiComponent;
+  let fixture: ComponentFixture<ViewApiComponent>;
 
   const swaggerJson = {
     "swagger": "2.0",
@@ -249,7 +249,7 @@ describe('ApiComponent', () => {
         {
           provide : ActivatedRoute, useValue : {
             data : of({
-              proxyDefinition : {
+              api : {
                 swagger : swaggerJson,
                 overview : {items : []},
                 gettingStarted : {items : []},
@@ -259,14 +259,14 @@ describe('ApiComponent', () => {
           }
         }
       ],
-      declarations: [ ApiComponent ],
+      declarations: [ ViewApiComponent ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApiComponent);
+    fixture = TestBed.createComponent(ViewApiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

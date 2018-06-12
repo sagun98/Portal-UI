@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../docs/product/product.interface';
+import { Product } from '../docs/product/interfaces/product.interface';
+
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,6 @@ import { Product } from '../docs/product/product.interface';
 })
 export class HomeComponent implements OnInit {
 
-  // TODO: Add type
   public products: Product[] = []
 
   constructor(

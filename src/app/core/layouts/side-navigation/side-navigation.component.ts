@@ -1,9 +1,13 @@
-import { ProductService, ProductListChange } from './../../../docs/product/product.service';
-import { DevPortalAPI } from './../../../docs/api/api.model';
-import { Product } from './../../../docs/product/product.interface';
+import { ApiService } from './../../../docs/api/api.service';
+import { ProductService, } from './../../../docs/product/product.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProxyService, APIListChange, CRUD } from '../../../docs/api/proxy.service';
+import { API } from '../../../docs/api/interfaces/api.interface';
+import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interface';
+import { CRUD } from '../../enums/crud.enum';
+import { Product } from '../../../docs/product/interfaces/product.interface';
+import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
+
 
 @Component({
   selector: 'side-navigation',
@@ -15,7 +19,7 @@ export class SideNavigationComponent implements OnInit {
   public apiFilter:string = '';
 
   @Input() products: Product[] = [];
-  @Input() apis: DevPortalAPI[] = [];
+  @Input() apis: API[] = [];
   @Input() selectedApiId: string = '';
   @Input() selectedProductId: string = '';
 
@@ -23,12 +27,12 @@ export class SideNavigationComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private proxyService: ProxyService,
+    private apiService: ApiService,
     private productService : ProductService
   ) { }
 
   ngOnInit() {
-    this.proxyService.$onApiListChanged.subscribe( (apiListChange : APIListChange) => {
+    this.apiService.$onApiListChanged.subscribe( (apiListChange : APIListChange) => {
       // Add to the list
       if(apiListChange.action === CRUD.CREATE){
         this.apis.push(apiListChange.api);
@@ -47,9 +51,11 @@ export class SideNavigationComponent implements OnInit {
 
     this.productService.$onProductListChanged.subscribe( (productListChange : ProductListChange) => {
 
+      // Add new product to the list without HTTP request
       if(productListChange.action === CRUD.CREATE)
         this.products.push(productListChange.product);
 
+      // Update product in the list without HTTP request
       if(productListChange.action === CRUD.UPDATE)
         this.products = this.products.map( product => {
           if(product.id === productListChange.product.id)

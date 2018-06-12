@@ -1,14 +1,14 @@
-import { ManageApiComponent } from './manage-api/manage-api.component';
-import { ExistingProductComponent } from './product/existing-product/existing-product.component';
+import { ViewProductComponent } from './product/view-product/view-product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductsResolve } from "../resolves/products.resolve";
-import { ApiComponent } from "./api/api.component";
-import { ProxyDefinitionReolsve } from "./api/resolves/proxy-definition.resolve";
 import { Routes } from "@angular/router";
 import { DocsComponent } from "./docs.component";
 import { ApisResolve } from '../resolves/apis.resolve';
-import { NewProductComponent } from './product/new-product/new-product.component';
 import { ProductResolve } from '../resolves/product.resolve';
+import { ManageApiComponent } from './api/manage-api/manage-api.component';
+import { ViewApiComponent } from './api/view-api/view-api.component';
+import { ManageProductComponent } from './product/manage-product/manage-product.component';
+import { ApiResolve } from './api/resolves/api.resolve';
 
 export const documentationRoutes: Routes = [
     {
@@ -27,7 +27,7 @@ export const documentationRoutes: Routes = [
             },
             {
                 path: 'product/new',
-                component: NewProductComponent,
+                component: ManageProductComponent,
                 resolve: {
                     apiData: ApisResolve
                 },
@@ -37,15 +37,14 @@ export const documentationRoutes: Routes = [
             },
             {
                 path: 'product/:productId',
-                component: ExistingProductComponent,
+                component: ViewProductComponent,
                 resolve: {
-                    apiData: ApisResolve,
                     product: ProductResolve
                 }
             },
             {
                 path: 'product/:productId/edit',
-                component: NewProductComponent,
+                component: ManageProductComponent,
                 resolve: {
                     apiData: ApisResolve,
                     product: ProductResolve
@@ -61,15 +60,15 @@ export const documentationRoutes: Routes = [
                 }
             },
             {
-                path: 'api/:apiId', component: ApiComponent,
+                path: 'api/:apiId', component: ViewApiComponent,
                 resolve: {
-                    proxyDefinition: ProxyDefinitionReolsve
+                    api: ApiResolve
                 }
             },
             {
                 path : 'api/:apiId/edit', component : ManageApiComponent,
                 resolve: {
-                    api: ProxyDefinitionReolsve
+                    api: ApiResolve
                 },
                 data : {
                     saveMethod : 'updateApi'

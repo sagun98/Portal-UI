@@ -1,5 +1,7 @@
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Product } from './product/interfaces/product.interface';
+import { API } from './api/interfaces/api.interface';
 
 @Component({
   selector: 'app-docs',
@@ -8,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocsComponent implements OnInit {
 
-  public apis: any[] = [];
-  public products: any[] = [];
+  public apis: API[] = [];
+  public products: Product[] = [];
   public selectedApiId: string = '';
   public selectedProductId: string = '';
 

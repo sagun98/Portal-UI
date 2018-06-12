@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { ProductService } from './product.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Product } from './product.interface';
+
 import { Subject } from 'rxjs';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
+import { Product } from './interfaces/product.interface';
 
 export class ProductComponentBase implements OnInit {
 

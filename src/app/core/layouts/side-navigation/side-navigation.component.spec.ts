@@ -1,3 +1,4 @@
+import { ProductListChange } from './../../../docs/product/product.service';
 import { APIListChange, CRUD } from './../../../docs/api/proxy.service';
 import { DevPortalAPI } from './../../../docs/api/api.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -36,6 +37,26 @@ describe('SideNavigationComponent', () => {
       id : '1234asdf',
       name : "New Testing API",
       description : "Some new description"
+    }
+  }
+
+  const mockProductListChangeAdd: ProductListChange = {
+    action : CRUD.CREATE,
+    product : <Product> {
+      id : 'asdf0987',
+      name : 'Some New Product',
+      description : 'Some product description',
+      overview : 'this is an overview'
+    }
+  }
+
+  const mockProductListChangeUpdate: ProductListChange = {
+    action : CRUD.UPDATE,
+    product : <Product> {
+      id : '4321fdsa',
+      name : 'Some New Product',
+      description : 'Some product description',
+      overview : 'this is an overview'
     }
   }
 
@@ -87,6 +108,22 @@ describe('SideNavigationComponent', () => {
     fixture.detectChanges();
 
     expect(component.apisFiltered[0].description).toEqual(mockApiListChangeUpdate.api.description);
+  });
+
+  it('should add a new product to the list', fakeAsync(() => {
+    component['productService'].$onProductListChanged.next(mockProductListChangeAdd);
+
+    fixture.detectChanges();
+
+    expect(component.products.length).toEqual(2);
+  }));
+
+  it('should update an product', () => {
+    component['productService'].$onProductListChanged.next(mockProductListChangeUpdate);
+
+    fixture.detectChanges();
+
+    expect(component.products[0].id).toEqual(mockProductListChangeUpdate.product.id);
   });
 
   it('should create', () => {

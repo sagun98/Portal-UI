@@ -1,23 +1,26 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { DevPortalAPI } from './../../api/api.model';
-import { ActivatedRoute } from '@angular/router';
-import { ApiComponent } from './../../api/api.component';
-import { ClarityModule } from '@clr/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExistingProductComponent } from './existing-product.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Product } from '../product.interface';
-import { of } from 'rxjs/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClarityModule } from '@clr/angular';
+import { HttpClientModule } from '@angular/common/http';
+
+import { ActivatedRoute } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs/observable/of';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { Product } from '../interfaces/product.interface';
+import { ManageProductComponent } from './manage-product.component';
+import { API } from '../../api/interfaces/api.interface';
+import { ViewApiComponent } from '../../api/view-api/view-api.component';
 
-describe('ExistingProductComponent', () => {
-  let component: ExistingProductComponent;
-  let fixture: ComponentFixture<ExistingProductComponent>;
 
-  const saveMethod = 'updateProduct';
+describe('NewProductComponent', () => {
+  let component: ManageProductComponent;
+  let fixture: ComponentFixture<ManageProductComponent>;
+
+  const saveMethod = 'saveProduct';
 
   const mockProduct: Product = {
     id : 'asdf1234',
@@ -26,11 +29,12 @@ describe('ExistingProductComponent', () => {
     apis : []
   }
 
-  const mockApis: DevPortalAPI[] = [{
+  const mockApis: API[] = [{
     id : 'qwers12345',
     name : 'Mock API',
     description : 'Mock API Description',
   }];
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,8 +48,8 @@ describe('ExistingProductComponent', () => {
         EditorModule
       ],
       declarations: [
-        ExistingProductComponent,
-        ApiComponent
+        ManageProductComponent,
+        ViewApiComponent
       ],
       providers : [
         {
@@ -70,8 +74,9 @@ describe('ExistingProductComponent', () => {
     .compileComponents();
   }));
 
+
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExistingProductComponent);
+    fixture = TestBed.createComponent(ManageProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
