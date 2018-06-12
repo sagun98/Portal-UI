@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { ProductListChange } from './interfaces/product-list-change.interface';
 import { CRUD } from '../../core/enums/crud.enum';
 import { Product } from './interfaces/product.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,11 @@ export class ProductService {
   ) { }
 
   public getProducts() {
-    return this.http.get('http://localhost:8080/products');
+    return this.http.get(`${environment.restBase}/products`);
   }
 
   public addProduct( product : Product ) {
-    return this.http.post(`http://localhost:8080/products`, product).pipe(tap( (newProduct : Product) => {
+    return this.http.post(`${environment.restBase}/products`, product).pipe(tap( (newProduct : Product) => {
       this.$onProductListChanged.next( <ProductListChange>{
         action : CRUD.CREATE,
         product : newProduct
@@ -32,7 +33,7 @@ export class ProductService {
   }
 
   public updateProduct ( product : Product ) {
-    return this.http.put(`http://localhost:8080/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
+    return this.http.put(`${environment.restBase}/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
       this.$onProductListChanged.next( <ProductListChange>{
         action : CRUD.UPDATE,
         product : updatedProduct
@@ -41,6 +42,6 @@ export class ProductService {
   }
 
   public getProduct ( productId : string ) {
-    return this.http.get(`http://localhost:8080/products/${productId}`);
+    return this.http.get(`${environment.restBase}/products/${productId}`);
   }
 }

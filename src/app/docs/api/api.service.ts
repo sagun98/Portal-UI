@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, of, Observable } from 'rxjs';
@@ -20,7 +21,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   public getApi (apiId) {
-    return this.http.get(`http://localhost:8080/apis/${apiId}`);
+    return this.http.get(`${environment.restBase}/apis/${apiId}`);
   }
 
   public addApi (api: API) {
@@ -33,7 +34,7 @@ export class ApiService {
 
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
-    const request = this.http.post(`http://localhost:8080/apis`, apiFormData).pipe(tap( (addedApi : API) => {
+    const request = this.http.post(`${environment.restBase}/apis`, apiFormData).pipe(tap( (addedApi : API) => {
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.CREATE,
@@ -50,7 +51,7 @@ export class ApiService {
 
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
-    const request = this.http.put(`http://localhost:8080/apis/${api.id}`, apiFormData).pipe(tap( (addedApi : API) => {
+    const request = this.http.put(`${environment.restBase}/apis/${api.id}`, apiFormData).pipe(tap( (addedApi : API) => {
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.UPDATE,
@@ -62,7 +63,7 @@ export class ApiService {
   }
 
   public getApiList(){
-    return this.http.get('http://localhost:8080/apis');
+    return this.http.get(`${environment.restBase}/apis`);
   } 
 
   // Convert object to form data
