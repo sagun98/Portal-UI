@@ -7,5 +7,7 @@ export interface API {
     overview ? : any,
     gettingStarted ?: any,
     reference ? : any,
-    swagger? : string
+    swagger? : string,
+    file? : File,
+    swaggerUrl? : string
 }

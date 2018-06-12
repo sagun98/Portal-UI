@@ -1,3 +1,4 @@
+import { ViewApiComponent } from './../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
 import { ApiService } from './../../api/api.service';
 import { API } from './../../api/interfaces/api.interface';
@@ -34,7 +35,7 @@ class MockApiService extends ApiService {
   }
 }
 
-describe('ExistingProductComponent', () => {
+describe('ViewProductComponent', () => {
   let component: ViewProductComponent;
   let fixture: ComponentFixture<ViewProductComponent>;
 
@@ -49,16 +50,13 @@ describe('ExistingProductComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports : [
-        FormsModule,
-        ReactiveFormsModule,
         ClarityModule,
         HttpClientModule,
         RouterTestingModule,
-        NgSelectModule,
-        EditorModule
       ],
       declarations: [
-        ViewProductComponent,
+        ViewApiComponent,
+        ViewProductComponent
       ],
       providers : [
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },

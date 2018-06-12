@@ -24,7 +24,7 @@ export class ManageApiComponent implements OnInit {
   public form: FormGroup;
   public submitted: boolean = false;
   public tinymceConfig = TINYCMCE_CONFIG;
-  public saveMethod: string = 'saveApi';
+  public saveMethod: string = 'addApi';
   public swaggerUploadOptions = SWAGGER_UPLOAD_OPTION;
   public swaggerOption: SWAGGER_UPLOAD_OPTION = SWAGGER_UPLOAD_OPTION.FILE
 
@@ -58,7 +58,7 @@ export class ManageApiComponent implements OnInit {
       reference : [this.api.reference, []],
       swagger : [this.api.swagger, [/* Validators.required */]],
       file : [],
-      swaggerUrl : []
+      swaggerUrl : [this.api.swaggerUrl]
     });
   }
 

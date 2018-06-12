@@ -1,6 +1,3 @@
-import { ProductListChange } from './../../../docs/product/product.service';
-import { APIListChange, CRUD } from './../../../docs/api/proxy.service';
-import { DevPortalAPI } from './../../../docs/api/api.model';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +5,11 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 import { SideNavigationComponent } from './side-navigation.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Product } from '../../../docs/product/product.interface';
+import { Product } from '../../../docs/product/interfaces/product.interface';
+import { API } from '../../../docs/api/interfaces/api.interface';
+import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interface';
+import { CRUD } from '../../enums/crud.enum';
+import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
 
 
 class RouterStub {
@@ -20,11 +21,11 @@ describe('SideNavigationComponent', () => {
   let fixture: ComponentFixture<SideNavigationComponent>;
   
   const products: Product[] = [ <Product> {name : "Product Group", id : "4321fdsa", description : "Description"}];
-  const apis: DevPortalAPI[] =  [ <DevPortalAPI> {name : "Product API", id : "1234asdf", description : "Description"}];
+  const apis: API[] =  [ <API> {name : "Product API", id : "1234asdf", description : "Description"}];
 
   const mockApiListChangeAdd: APIListChange = {
     action : CRUD.CREATE,
-    api : <DevPortalAPI> {
+    api : <API> {
       id : ';laksdfjafd',
       name : "New Testing API",
       description : "Some new description"
@@ -33,7 +34,7 @@ describe('SideNavigationComponent', () => {
 
   const mockApiListChangeUpdate: APIListChange = {
     action : CRUD.UPDATE,
-    api : <DevPortalAPI> {
+    api : <API> {
       id : '1234asdf',
       name : "New Testing API",
       description : "Some new description"
@@ -95,7 +96,7 @@ describe('SideNavigationComponent', () => {
   });
 
   it('should add a new api to the list', fakeAsync(() => {
-    component['proxyService'].$onApiListChanged.next(mockApiListChangeAdd);
+    component['apiService'].$onApiListChanged.next(mockApiListChangeAdd);
 
     fixture.detectChanges();
 
@@ -103,7 +104,7 @@ describe('SideNavigationComponent', () => {
   }));
 
   it('should update an existing api', () => {
-    component['proxyService'].$onApiListChanged.next(mockApiListChangeUpdate);
+    component['apiService'].$onApiListChanged.next(mockApiListChangeUpdate);
 
     fixture.detectChanges();
 

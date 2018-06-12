@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { API } from '../interfaces/api.interface';
@@ -12,7 +11,6 @@ import { API } from '../interfaces/api.interface';
 export class ViewApiComponent implements OnInit {
 
   @Input() api: API = null;
-  public form: FormGroup;
 
   constructor(
     private activatedRoute : ActivatedRoute,

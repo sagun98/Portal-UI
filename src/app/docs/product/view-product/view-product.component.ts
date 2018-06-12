@@ -2,7 +2,6 @@ import { ApiService } from './../../api/api.service';
 import { Component } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { Subject } from 'rxjs/internal/Subject';
@@ -24,7 +23,6 @@ export class ViewProductComponent {
     protected activatedRoute: ActivatedRoute,
     protected productService: ProductService,
     protected apiService : ApiService,
-    protected formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
