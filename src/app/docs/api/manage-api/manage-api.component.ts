@@ -35,6 +35,11 @@ export class ManageApiComponent implements OnInit {
     private router : Router
   ) { }
 
+  public get title () {
+    const title = (this.api.id) ? `Edit ${this.api.name}` : "Create New API";
+    return title;
+  }
+
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.api = <API> data.api || this.api;

@@ -6,6 +6,11 @@ import { LoadingInterceptorComponent } from './loading-interceptor.component';
   imports: [
     CommonModule
   ],
-  declarations: [LoadingInterceptorComponent]
+  declarations: [
+    LoadingInterceptorComponent
+  ],
+  exports : [
+    LoadingInterceptorComponent
+  ]
 })
 export class LoadingInterceptorModule { }

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { DevPortalCoreModule } from './core/core.module';
 import { appRoutes } from './app.routes';
 import { RouterModule } from '@angular/router';
+import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-intercptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,10 @@ import { RouterModule } from '@angular/router';
     )
   ],
   
+  providers : [
+    LoadingInterceptorProvider
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

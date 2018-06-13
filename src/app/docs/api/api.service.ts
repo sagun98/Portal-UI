@@ -71,10 +71,14 @@ export class ApiService {
     let formData:FormData = new FormData();
 
     Object.keys( obj ).forEach(key => {
+      const htmlKeyTest = new RegExp('(reference|overview|gettingStarted)');
       let value = obj[key];
-
+      
       if( isNull( value ) )
         value = '';
+
+      if(htmlKeyTest.test(key) && value === '')
+        value = '<p>&nbsp;</p>';
 
       formData.append(key, value);
     });

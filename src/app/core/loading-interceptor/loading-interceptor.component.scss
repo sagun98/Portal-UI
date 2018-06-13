@@ -1,0 +1,26 @@
+:host {
+    display: none;
+
+    .spinner.spinner-lg {
+        position: absolute;
+        top: calc(50% - 100px);
+        left: calc(50% - 10px);
+        z-index: 1101;
+    }
+
+    #loading-indicator {
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        background-color: black;
+        left: 0px;
+        right: 0px;
+        background-color: #000000;
+        opacity: 0.5;
+        z-index: 1100;
+    }
+
+    &.activeRequest {
+        display: inline !important;
+    }
+}

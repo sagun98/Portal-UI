@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class SwaggerUiService {
 
+  private swaggerJson : any = {};
+
   constructor() {
 
   }
@@ -16,6 +18,8 @@ export class SwaggerUiService {
     
     if(! swaggerJson || ! swaggerJson.paths)
       return paths;
+
+    this.swaggerJson = swaggerJson;
 
     Object.keys( swaggerJson.paths ).forEach(_path => {
       Object.keys( swaggerJson.paths[_path] ).forEach(verb => {
@@ -161,18 +165,53 @@ export class SwaggerUiService {
     return obj;
   }
 
+  private getObjectReference (pathString) {
+    let obj = Object.assign({}, this.swaggerJson);
+
+    pathString = pathString.replace('#/', '');
+
+    const pathArray = pathString.split('/');
+
+    for(let i=0; i < pathArray.length; i++){
+      const pathChunk = pathArray[i];
+      obj = obj[pathChunk];
+      console.log(obj);
+
+      if(!obj)
+        break;
+    }
+
+    if(obj.properties)
+      obj = obj.properties;
+
+    return obj;
+  }
+
   private formatObject(object){
     let obj = {};
     Object.keys(object).forEach(key => {
       const type = object[key].type;
       const nestedObj = object[key].properties;
+      const arrayItems = object[key].items
 
-      if(type === 'object')
+      if(type === 'object' && nestedObj)
         obj[key] = this.formatObject(nestedObj);
+      if(type === 'object' && ! nestedObj)
+        obj[key] = {};
       else if(type === 'integer')
         obj[key] = 0;
       else if(type === 'boolean')
         obj[key] = true;
+
+      else if(type === 'array' && arrayItems && arrayItems.type && arrayItems.type === 'string')
+        obj[key] = [ 'string' ];
+      else if(type === 'array' && arrayItems && arrayItems.type && arrayItems.type === 'integer')
+        obj[key] = [ 0 ];
+      else if(type === 'array' && arrayItems && arrayItems.type && arrayItems.type === 'boolean')
+        obj[key] = [ true ];
+      else if(type === 'array' && arrayItems && arrayItems['$ref'])
+        obj[key] = [  this.formatObject( this.getObjectReference(arrayItems['$ref']) )];
+        
       else
         obj[key] = object[key].type;
     });

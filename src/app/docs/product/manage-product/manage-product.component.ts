@@ -50,6 +50,11 @@ export class ManageProductComponent implements OnInit{
     this.buildForm();
   }
 
+  public get title () {
+    const title = (this.product.id) ? `Edit ${this.product.name}` : "Create New Product";
+    return title;
+  }
+
   protected buildForm() {
     this.form = this.formBuilder.group({
       id: [this.product.id],
