@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "json-server": "json-server -c json-server/config/json-server.json json-server/data/data.json",
-    "set-env" : "node_modules/ts-node/dist/bin.js scripts/set-env.ts"
+    "set-env": "node_modules/ts-node/dist/bin.js scripts/set-env.ts"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "js-yaml": "^3.11.0",
     "ng2-file-upload": "^1.3.0",
     "ngx-file-drop": "^4.0.4",
+    "ngx-toastr": "^8.8.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",
     "tinymce": "^4.7.13",

@@ -9,7 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { DevPortalCoreModule } from './core/core.module';
 import { appRoutes } from './app.routes';
 import { RouterModule } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-intercptor.interceptor';
+import { ErrorInterceptorInterceptor } from './core/interceptors/errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-i
     CommonModule,
     ClarityModule,
     FormsModule,
+    ToastrModule.forRoot(),
     DevPortalCoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -30,7 +33,9 @@ import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-i
   ],
   
   providers : [
-    LoadingInterceptorProvider
+    LoadingInterceptorProvider,
+    ErrorInterceptorInterceptor,
+    ToastrService
   ],
 
   bootstrap: [AppComponent]
