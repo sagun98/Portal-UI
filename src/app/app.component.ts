@@ -14,14 +14,18 @@ export class AppComponent implements OnInit{
   constructor(
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService
-  ){
-    
-  }
+  ){}
 
   ngOnInit(){
     this.httpErrorsServices.$onError.subscribe( (errors: HttpErrorMessage[]) => {
       errors.forEach( (error: HttpErrorMessage) => {
-        this.toastrService[error.type ](error.title, error.message);
+        setTimeout(t => {
+          if(! this.httpErrorsServices.override)
+            this.toastrService[error.type ](error.title, error.message);
+          
+          else
+            this.httpErrorsServices.override = false;
+        })
       });
     });
   }

@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { catchError } from 'rxjs/operators';
 import { ApiService } from './../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -5,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { API } from '../interfaces/api.interface';
+import { HttpErrorsService } from '../../../core/services/http-errors/http-errors.service';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -32,7 +35,8 @@ export class ManageApiComponent implements OnInit {
     private formBuilder : FormBuilder,
     private apiService : ApiService,
     private activatedRoute: ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private toastrService: ToastrService
   ) { }
 
   public get title () {

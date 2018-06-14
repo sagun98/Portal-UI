@@ -7,6 +7,7 @@ import { HttpErrorMessage } from '../../interfaces/http-error.interface';
 })
 export class HttpErrorsService {
 
+  public override: boolean = false;
   public $onError: Subject<HttpErrorMessage[]> = new Subject<HttpErrorMessage[]>();
 
   constructor() { }
