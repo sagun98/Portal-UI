@@ -15,10 +15,16 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY *.json /app/
+COPY nginx.conf /app/
 COPY scripts /app/scripts
 COPY src /app/src
 COPY nodejs_8.11.2-1nodesource1_amd64.deb /app/
 
-RUN apt-get update && dpkg -i nodejs_8.11.2-1nodesource1_amd64.deb; exit 0 && apt-get install -f
+RUN apt-get update && dpkg -i nodejs_8.11.2-1nodesource1_amd64.deb; exit 0 
+RUN apt-get install -f -y
+
+RUN apt install nginx -y
+
+EXPOSE 80
 
 ENTRYPOINT [ "/bin/bash", "/app/scripts/launch.sh" ]
