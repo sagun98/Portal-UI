@@ -1,6 +1,8 @@
 
 #!/bin/bash
 
+sudo node -v
+sudo npm -v
 sudo mkdir -p /app
 sudo cp -rf scripts /app
 sudo cp -rf src /app
