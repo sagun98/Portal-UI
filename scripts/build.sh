@@ -10,6 +10,4 @@ sudo cp -rf src /app/src
 sudo cp *.json /app/
 sudo cp nginx.conf /app/
 
-cd /app && ls -al
-
 sudo /usr/local/bin/fpm -s dir -n dev-portal-ui -v 0.1.0 --iteration $(date "+%Y%m%d%H%M%S") -t deb /app
