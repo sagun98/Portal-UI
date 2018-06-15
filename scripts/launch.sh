@@ -9,6 +9,10 @@ apt-get install -f -y
 
 node -v
 npm -v
+
+pwd
+ls -al
+
 npm install
 npm run build
 nginx -c /app/nginx.conf -g 'daemon off;'
