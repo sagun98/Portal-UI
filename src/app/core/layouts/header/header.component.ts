@@ -1,4 +1,7 @@
+import { PortalUser } from './../../classes/fr-user.class';
 import { Component, OnInit, Input } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'dev-portal-header',
@@ -8,10 +11,23 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input() title: string = 'Pearson Developer Title';
+  public loggedIn: boolean = false;
+  public user: PortalUser;
 
-  constructor() { }
+  constructor(
+    private userService : UserService
+  ) { }
 
   ngOnInit() {
+    this.userService.$retrievedUser.subscribe( (user:PortalUser) => {
+      this.user = user;
+      this.loggedIn = (user) ? true : false; 
+    });
+  }
+
+  public showLoginModal() {
+    this.userService.$doUserLogin.next( false );
+    setTimeout(t => {this.userService.$doUserLogin.next( true  );})
   }
 
 }

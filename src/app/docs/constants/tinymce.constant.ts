@@ -19,13 +19,12 @@ import 'tinymce/plugins/contextmenu';
 import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/textpattern';
 import 'tinymce/plugins/help';
-import 'tinymce/plugins/save';
 import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/code';
 
 export const TINYCMCE_CONFIG = {
     skin_url: 'assets/skins/lightgray',
-    plugins: 'save colorpicker print preview searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
-    toolbar1: 'save | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+    plugins: 'colorpicker print preview searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
     height: 350
 }

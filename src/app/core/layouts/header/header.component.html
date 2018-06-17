@@ -13,15 +13,25 @@
 
 
 <div class="header-nav" [clr-nav-level]="2">
-  <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
-    <span class="nav-text">Register</span>
-  </a>
 
-  <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
+  <a *ngIf="! loggedIn" (click)="showLoginModal()" class="nav-link" id="sign-in" href="javascript:void(0)">
     <span class="nav-text">Sign In</span>
   </a>
 
-  <a class="nav-link" id="home-link" routerlink="/" routerlinkactive="active" href="/clarity/">
-    <span class="nav-text">Log Out</span>
+  <clr-dropdown>
+
+  <a *ngIf="loggedIn" class="nav-link" id="log-out" href="javascript:void(0)" clrDropdownTrigger>
+      <clr-icon *ngIf="user?.fullName"  shape="user"></clr-icon>
+      <span class="nav-text">{{ user?.fullName }}</span>
   </a>
+
+  <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+
+    <user-card [user]="user"></user-card>
+      
+
+  </clr-dropdown-menu>
+
+  </clr-dropdown>
+
 </div>

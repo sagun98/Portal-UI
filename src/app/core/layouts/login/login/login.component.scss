@@ -1,0 +1,19 @@
+:host {
+
+    @media screen and (min-width: 577px){
+        form .form-group{
+            padding-left: 6rem;
+    
+            input {
+                flex: 1 1 auto;
+            }
+        }
+    }
+    
+    clr-icon.user {
+        height: 20px;
+        width: 20px;
+        margin-top: -5px;
+        margin-right: 10px;
+    }
+}

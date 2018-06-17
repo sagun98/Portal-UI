@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~tinymce/plugins/codesample/css/prism.css";
 
 h1, h2, h3, h4, p {
     margin-top:0px !important;
@@ -54,7 +55,6 @@ form > section {
 }
 
 // Form overrides
-
 .container { 
     form.has-fixed-footer {
         margin-bottom: 50px;
@@ -77,3 +77,14 @@ form > section {
 
     }
 }
+
+// modal overrides
+.modal-header {
+    padding: 0px !important;
+}
+
+// router-outlet ~ * {
+//     position: absolute;
+//     height: 100%;
+//     width: 100%;
+// }

@@ -1,14 +1,19 @@
 import { LoadingInterceptorService } from './loading-interceptor.service';
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { FadeInOutAnimation } from '../animations/animations';
 
 @Component({
   selector: 'loading-interceptor',
   templateUrl: './loading-interceptor.component.html',
-  styleUrls: ['./loading-interceptor.component.scss']
+  styleUrls: ['./loading-interceptor.component.scss'],
+  animations : [FadeInOutAnimation]
+
 })
 export class LoadingInterceptorComponent implements OnInit {
   
-  @HostBinding('class.activeRequest') activeRequestClass: boolean = false;
+  //@HostBinding('class.activeRequest') activeRequestClass: boolean = false;
+  public activeRequestClass: boolean = true;
+  // @HostBinding('@fadeInOut') activeRequestClass:boolean = false;
 
   private startTimeout;
 

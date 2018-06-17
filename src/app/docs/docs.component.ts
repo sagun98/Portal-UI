@@ -2,11 +2,13 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
+// import { FadeInOutRuterAnimation } from '../core/animations/animations';
 
 @Component({
   selector: 'app-docs',
   templateUrl: './docs.component.html',
-  styleUrls: ['./docs.component.scss']
+  styleUrls: ['./docs.component.scss'],
+  // animations: [FadeInOutRuterAnimation]
 })
 export class DocsComponent implements OnInit {
 
@@ -14,6 +16,7 @@ export class DocsComponent implements OnInit {
   public products: Product[] = [];
   public selectedApiId: string = '';
   public selectedProductId: string = '';
+  public routeChange: boolean = true;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -37,11 +40,17 @@ export class DocsComponent implements OnInit {
 
     this.router.events.subscribe( (event:NavigationEnd) => {
       if( this.router['lastSuccessfulId'] === this.router['navigationId'] ){
+        // this.routeChange = false;
+        // setTimeout(t => {this.routeChange = true;}, 500);
         if( this.activatedRoute.snapshot.children.length ){
           this.setParams(this.activatedRoute.snapshot.children[0].params);
         }
       }
     });
+  }
+
+  public getState(outlet) {
+    return outlet.activatedRouteData.api;
   }
 
   private setParams(params){

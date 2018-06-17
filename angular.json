@@ -27,7 +27,8 @@
               "node_modules/@clr/ui/clr-ui.min.css",
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/ngx-toastr/toastr.css",
-              "src/app/core/styles/utils.scss"
+              "src/app/core/styles/utils.scss",
+              "node_modules/tinymce/plugins/codesample/css/prism.css"
             ],
             "scripts": [
               "node_modules/tinymce/tinymce.js",

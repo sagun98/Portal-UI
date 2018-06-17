@@ -1,0 +1,28 @@
+<clr-modal [(clrModalOpen)]="opened"	>
+  <h3 class="modal-title"><clr-icon shape="user" class="user is-solid"></clr-icon> User Login</h3>
+  <div class="modal-body">
+
+    <form [formGroup]="form" (submit)="authenticate()">
+      <section class="form-block">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" placeholder="Username" formControlName="username" >
+        </div>
+      </section>
+
+      <section class="form-block">
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" placeholder="Password" formControlName="password" >
+        </div>
+      </section>
+
+      <button type="submit" style="display:none"></button>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline" (click)="authenticate()" ><clr-icon shape="check"></clr-icon> Login</button>
+    <button type="button" class="btn btn-danger-outline" (click)="closeModal()"><clr-icon shape="times"></clr-icon> Cancel</button>
+  </div>
+</clr-modal>

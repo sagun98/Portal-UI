@@ -31,7 +31,7 @@ export class LoadingInterceptor implements HttpInterceptor {
                 const status = errorResponse.status;
                 const body = errorResponse.error;
 
-                if(body && status){
+                if(body && status >= 0){
                     this.loadingInterceptorService.closeOpenRequest(requestId)
                 } 
                 

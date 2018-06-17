@@ -1,6 +1,6 @@
 <div>
-  <span class="spinner spinner-lg">
+  <span class="spinner spinner-lg" [@fadeInOut]="activeRequestClass">
   </span>
-  <div id="loading-indicator">
+  <div id="loading-indicator" [@fadeInOut]="activeRequestClass">|{{ activeRequestClass }}|
   </div>
 </div>

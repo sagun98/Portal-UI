@@ -80,6 +80,10 @@ export class ManageApiComponent implements OnInit {
 
     const apiData = this.form.getRawValue();
 
+    ['overview', 'gettingStarted', 'reference'].forEach(id => {
+      apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+    });
+
     this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
       this.router.navigate([`/docs/api/${api.id}`]);
     })
