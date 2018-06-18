@@ -1,3 +1,5 @@
+import { FRUser } from './../../interfaces/fr-user.interface';
+import { PortalUser } from './../../classes/fr-user.class';
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,14 +23,18 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
 
   private confirmIsLoggedIn () : Observable<boolean> {
     return  new Observable(observer => {
-      this.userService.$loggedIn.subscribe(loggedIn => {
-        observer.next(loggedIn);
-        observer.complete();
+      const loggedIn = this.userService.$loggedIn.getValue()
 
-        if(! loggedIn)
-          this.userService.$onUnAuthenticatedNavigationAttempt.next(true);
-      });
+      if( loggedIn ){
+        this.userService.user.subscribe( (user : PortalUser) =>  {
+          observer.next( loggedIn );
+          observer.complete();
+        })
+      }
+      else{
+        observer.next( loggedIn );
+        observer.complete();
+      }
     });
   }
-  
 }

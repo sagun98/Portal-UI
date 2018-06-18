@@ -27,8 +27,8 @@ export class AppComponent implements OnInit{
   ngOnInit(){
 
     this.userService.$loggedIn.subscribe(loggedIn => {
-      if(loggedIn && ! this.userService.user){
-        this.userService.getUser().subscribe(user => { });
+      if(loggedIn && ! this.userService.staticUser){
+        this.userService.user.subscribe(user => { });
       }
     });
 
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit{
             
             else
               this.httpErrorsServices.override = false;
-          })
+          });
         });
       });
 

@@ -1,0 +1,72 @@
+<main class="content-container content-center">
+
+  <form [formGroup]="form" class="has-fixed-footer">
+
+    <h2 class="bottom-spacer-10">Add Article</h2>
+
+    <section class="form-block">
+
+      <div class="form-group">
+        <label for="title" class="required">Title</label>
+        <label>
+          <input id="title" type="text" name="title" placeholder="Enter a title" formControlName="title"/>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="author" class="required">Author</label>
+        <label>
+          <input id="author" type="text" name="author"  class="input-sm" placeholder="Enter an author" formControlName="author"/>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="summary" class="required">Summary</label>
+        <label>
+          <input id="summary" type="text" name="summary" placeholder="Enter a summary blurb" formControlName="summary"/>
+        </label>
+      </div>
+
+      <div class="bottom-spacer-30 inline full">
+        <label for="productName">Article Content:</label>
+        <div for="content">
+          <editor id="content" placeholder="Artcle Content" [initialValue]="article.content" [init]="tinymceConfig" formControlName="content">
+          </editor>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category" class="required">Category</label>
+        <label>
+          <input id="category" type="text" name="category" placeholder="Enter a summary blurb" formControlName="category"/>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="tags" class="required">Tags</label>
+        <label>
+          <input id="tags" type="text" name="tags" placeholder="Enter a summary blurb" formControlName="category"/>
+        </label>
+      </div>
+
+    </section>
+
+    <div class="fixed-footer">
+
+      <div class="fixed-footer-wrapper">
+        <a type="submit" class="btn btn-danger-outline pull-right" routerLink="../">
+          <clr-icon shape="times"></clr-icon>
+          Cancel
+        </a>
+      
+        <button type="submit" class="btn btn-success-outline">
+          <clr-icon shape="check"></clr-icon> Save Blog Post
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+
+
+</main>

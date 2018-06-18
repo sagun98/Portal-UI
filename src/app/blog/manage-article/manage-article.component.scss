@@ -1,0 +1,38 @@
+:host { 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+
+    main {
+
+        padding: .5rem .5rem 0 .5rem !important;
+
+
+        form{
+            width: 100%;
+        
+            .form-group {
+
+                @media screen and (min-width : 768px){
+                    padding-left: 5.5rem;
+                }
+
+                label {
+
+                    input {
+                        min-width: 20rem;
+
+                        &.input-md {
+                            min-width: 15rem;
+                        }
+
+                        &.input-sm {
+                            min-width: 10rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

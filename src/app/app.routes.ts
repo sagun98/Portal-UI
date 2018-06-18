@@ -8,6 +8,7 @@ export const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
     { path : 'home', loadChildren: './home/home.module#HomeModule'},
     { path : 'docs', loadChildren : './docs/docs.module#DocsModule', canActivateChild : [LoggedInGuard]},
+    { path : 'blog', loadChildren : './blog/blog.module#BlogModule', canActivateChild : [LoggedInGuard]},
     { path: '**', component: PageNotFoundComponent }
   ];
   
