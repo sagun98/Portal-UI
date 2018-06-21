@@ -18,7 +18,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
         this.loadingInterceptorService.addOpenRequest(requestId)
 
-        return next.handle(request).pipe(
+        return <any> next.handle(request).pipe(
             tap( (response: HttpResponse<any>) => {
                 const status = response.status;
                 const body = response.body;

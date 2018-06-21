@@ -1,15 +1,21 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
+import { LoggedInGuard } from './logged-in.guard';
 
-import { LoggedInService } from './logged-in.service';
-
-describe('LoggedInService', () => {
+describe('LoggedInGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoggedInService]
+      imports : [
+        HttpClientModule
+      ],
+      providers: [
+        HttpClient,
+        LoggedInGuard
+      ]
     });
   });
 
-  it('should be created', inject([LoggedInService], (service: LoggedInService) => {
+  it('should be created', inject([LoggedInGuard], (service: LoggedInGuard) => {
     expect(service).toBeTruthy();
   }));
 });

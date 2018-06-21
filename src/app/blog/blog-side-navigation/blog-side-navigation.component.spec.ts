@@ -1,20 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { BlogListComponent } from './blog-list.component';
+import { BlogSideNavigationComponent } from './blog-side-navigation.component';
 
 describe('BlogListComponent', () => {
-  let component: BlogListComponent;
-  let fixture: ComponentFixture<BlogListComponent>;
+  let component: BlogSideNavigationComponent;
+  let fixture: ComponentFixture<BlogSideNavigationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogListComponent ]
+      declarations: [ BlogSideNavigationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BlogListComponent);
+    fixture = TestBed.createComponent(BlogSideNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

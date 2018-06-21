@@ -1,6 +1,23 @@
-<main class="content-area">
+<main class="content-container content-center">
+  <div class="inline full">
 
-    this is a test
-   
+    <a class="btn btn-sm edit-page-btn" routerLink="new">
+        <clr-icon shape="plus"></clr-icon> Add Blog
+    </a>
+
+    <h2>Developer Portal Topics</h2>
+
+    <hr/>
+
+    <div class="row">
+
+      <div class="col-sm-6 col-lg-4" *ngFor="let blog of blogs">
+
+        <blog-card [blog]="blog" (onClick)="openBlogPost($event)"></blog-card>
+        
+      </div>
+    </div>
+
+  </div>
 
 </main>

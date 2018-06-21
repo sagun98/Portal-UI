@@ -33,7 +33,6 @@ export class LoadingInterceptorService {
   public addOpenRequest (requestId : number) {
     this.activeRequestMap[requestId] = true;
     const openRequestCount = Object.keys(this.activeRequestMap).length;
-    console.log("Number of open requests: ", openRequestCount );
     this.$onRequest.next(openRequestCount);
   }
 
@@ -41,8 +40,6 @@ export class LoadingInterceptorService {
     delete this.activeRequestMap[requestId];
 
     const openRequestCount = Object.keys(this.activeRequestMap).length;
-
-    console.log("Number of open requests: ",  openRequestCount);
 
     this.$onResponse.next(openRequestCount);
 

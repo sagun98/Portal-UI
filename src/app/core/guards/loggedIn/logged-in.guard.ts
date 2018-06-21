@@ -1,3 +1,4 @@
+import { FailedNavigation, FAILED_NAVIGATION_TYPE } from './../../services/user/user.service';
 import { FRUser } from './../../interfaces/fr-user.interface';
 import { PortalUser } from './../../classes/fr-user.class';
 import { Injectable } from '@angular/core';
@@ -15,13 +16,13 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    return this.confirmIsLoggedIn();
+    return this.confirmIsLoggedIn(route, state);
   }
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    return this.confirmIsLoggedIn();
+    return this.confirmIsLoggedIn(childRoute, state);
   }
 
-  private confirmIsLoggedIn () : Observable<boolean> {
+  private confirmIsLoggedIn (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
     return  new Observable(observer => {
       const loggedIn = this.userService.$loggedIn.getValue()
 
@@ -34,6 +35,10 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
       else{
         observer.next( loggedIn );
         observer.complete();
+        this.userService.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
+          type : FAILED_NAVIGATION_TYPE.NAVIGATION,
+          attemptedUrl : state.url
+        });
       }
     });
   }

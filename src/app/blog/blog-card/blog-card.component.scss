@@ -1,0 +1,19 @@
+.card {
+
+    cursor: pointer;
+
+    .card-text {
+        position: relative;
+        max-height: 100px;
+        min-height: 100px;
+        overflow: hidden;
+
+        .ellipsis {
+            background-color: white;
+            position: absolute;
+            bottom: 5px;
+            right: 0px;
+            width: 13px;
+        }
+    }
+}

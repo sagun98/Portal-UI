@@ -1,13 +1,23 @@
 import { PortalUser } from './../../classes/fr-user.class';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, map, share } from 'rxjs/operators';
+import { tap, map, share, catchError } from 'rxjs/operators';
 import { FRUser } from '../../interfaces/fr-user.interface';
 
 export interface FRCredentials {
   username?: string,
   password?: string
+}
+
+export enum FAILED_NAVIGATION_TYPE {
+  LOGOUT = 'logout',
+  NAVIGATION = 'navigation'
+}
+
+export interface FailedNavigation {
+  type : FAILED_NAVIGATION_TYPE,
+  attemptedUrl : string
 }
 
 @Injectable({
@@ -18,7 +28,8 @@ export class UserService {
   public $loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public $retrievedUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
   public $doUserLogin: Subject<boolean> = new Subject<boolean>();
-  public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
+  public attemptedUrl: string = '';
   
   private username: string;
   private _user: PortalUser;
@@ -85,6 +96,12 @@ export class UserService {
       map((user: FRUser) => {
         return this.tapUser(user);
       }),
+      catchError( (err: any, caught: Observable<PortalUser> ) => {
+        this.username = '';
+        this.authToken = '';
+        this.$loggedIn.next(false);
+        return caught;
+      }),
       share()
     );
   }
@@ -98,6 +115,11 @@ export class UserService {
         this.username = '';
         this.authToken = '';
         this.$loggedIn.next(false);
+        this.$retrievedUser.next(null);
+        this.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
+          type : FAILED_NAVIGATION_TYPE.LOGOUT,
+          attemptedUrl : window.location.hash.replace('#', '')
+        });
       })
     );
   }
@@ -105,6 +127,7 @@ export class UserService {
   private tapUser (user: FRUser) : PortalUser {
     this._user = new PortalUser(user);
     this.$loggedIn.next(true);
+    this.$retrievedUser.next(this._user);
     return this._user;
   }
 }

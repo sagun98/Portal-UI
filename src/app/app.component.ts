@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { UserService } from './core/services/user/user.service';
+import { UserService, FailedNavigation, FAILED_NAVIGATION_TYPE } from './core/services/user/user.service';
 import { HttpErrorMessage } from './core/interfaces/http-error.interface';
 import { Component, OnInit } from '@angular/core';
 import { ErrorInterceptor } from './core/interceptors/errors.interceptor';
@@ -36,8 +36,18 @@ export class AppComponent implements OnInit{
 
       this.userService.setLoggedInState();
 
-      this.userService.$onUnAuthenticatedNavigationAttempt.subscribe(t => {
-        if( ! isNull(t) ){
+      this.userService.$onUnAuthenticatedNavigationAttempt.subscribe( (failedNav : FailedNavigation) => {
+        if(! failedNav)
+          return;
+
+        const type = failedNav.type
+
+        this.userService.attemptedUrl = failedNav.attemptedUrl;
+
+        if(type === FAILED_NAVIGATION_TYPE.LOGOUT)
+          this.router.navigate([`/home`]);
+
+        if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ){
           
           this.router.navigate([`/home`]).then(navigated => {
             if( isNull(navigated) ){

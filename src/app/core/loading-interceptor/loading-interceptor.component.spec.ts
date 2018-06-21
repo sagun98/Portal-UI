@@ -1,6 +1,8 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LoadingInterceptorComponent } from './loading-interceptor.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('LoadingInterceptorComponent', () => {
   let component: LoadingInterceptorComponent;
@@ -8,7 +10,15 @@ describe('LoadingInterceptorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoadingInterceptorComponent ]
+      imports : [
+        HttpClientModule,
+        BrowserAnimationsModule
+      ],
+      providers : [
+        HttpClient
+      ],
+      declarations: [ LoadingInterceptorComponent ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

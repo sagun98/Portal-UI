@@ -1,3 +1,4 @@
+import { BlogModule } from './blog/blog.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,7 @@ import { ErrorInterceptorInterceptor } from './core/interceptors/errors.intercep
     DevPortalCoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    BlogModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false, useHash : true}

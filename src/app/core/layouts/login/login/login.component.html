@@ -19,6 +19,10 @@
 
       <button type="submit" style="display:none"></button>
 
+      <section class="form-block" *ngIf="authFailed">
+        <label class="error">Authentication Failed.  Please verify the Username and Password you provide are correct and try again</label>
+      </section>
+
     </form>
   </div>
   <div class="modal-footer">

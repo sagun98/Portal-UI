@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.user.subscribe( (user:PortalUser) => {
+    this.userService.$retrievedUser.subscribe( (user:PortalUser) => {
       this.user = user;
       this.loggedIn = (user) ? true : false; 
     });

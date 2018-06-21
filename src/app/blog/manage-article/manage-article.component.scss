@@ -20,6 +20,12 @@
 
                 label {
 
+                clr-tooltip {
+                    position: absolute !important;
+                    margin-top: -5px;
+                    margin-left: 2px;
+                }
+
                     input {
                         min-width: 20rem;
 
@@ -29,6 +35,10 @@
 
                         &.input-sm {
                             min-width: 10rem;
+                        }
+
+                        &.input-xs {
+                            min-width: 5rem;
                         }
                     }
                 }

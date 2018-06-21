@@ -2,7 +2,7 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~tinymce/plugins/codesample/css/prism.css";
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4, h5, p {
     margin-top:0px !important;
 }
 
@@ -12,6 +12,10 @@ form {
     > section {
         margin : .5rem !important;
     }
+}
+
+form .form-block>label.error {
+    color : #c92100;
 }
 
 // Tooltip overrides / fixes
@@ -92,7 +96,7 @@ form {
             justify-content: center;
             position: fixed;
             bottom: 0px;
-            left: 15px;
+            left: 16px;
             right: 0px;
             background-color: white;
             width: 100%;
@@ -152,4 +156,11 @@ main.content-center {
     @media screen and (min-width : 1200px){
         max-width: 1150px;
     }
+}
+
+/* Edit Button */
+.edit-page-btn {
+    position: absolute;
+    right: 0px; 
+    top: 60px;
 }

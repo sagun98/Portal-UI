@@ -1,0 +1,19 @@
+<div class="card" (click)="emitEvent()">
+    <div class="card-header">
+      {{ blog.title }}
+    </div>
+    <div class="card-block">
+      <div class="card-title">
+
+      </div>
+      <div class="card-text">
+        <span #text>{{ blog.summary }}</span>
+
+        <div *ngIf="showEllipsis" class="ellipsis">...</div>
+      </div>
+    </div>
+    <div class="card-footer inline full">
+      <span class="pull-left">{{ blog.author }}</span>
+      <span class="pull-right">{{ blog.publicationDate | date : 'MMMM dd, yyyy'}}</span>
+    </div>
+  </div>
