@@ -13,7 +13,7 @@ npm -v
 cd /app && npm install
 cd /app && npm run build:dev
 
-echo RESTBASE
-echo ANGULAR_PRODUCTION_BUILD
+echo $RESTBASE
+echo $ANGULAR_PRODUCTION_BUILD
 
 nginx -c /app/nginx.conf -g 'daemon off;'
