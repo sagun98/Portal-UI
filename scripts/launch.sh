@@ -11,7 +11,7 @@ node -v
 npm -v
 
 cd /app && npm install
-cd /app && npm run build:dev
+cd /app && npm run build:$ANGULAR_BUILD_TYPE
 
 echo $RESTBASE
 echo $ANGULAR_PRODUCTION_BUILD
