@@ -44,6 +44,7 @@ export class ManageArticleComponent implements OnInit {
   public submitted: boolean = false;
   public saveMethod: string = 'saveBlogPost';
   public publicationDateString: string = '';
+  public mode:string ;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -55,7 +56,8 @@ export class ManageArticleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 200 });
+    this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 500 });
+    this.mode = this.activatedRoute.snapshot.url[ (this.activatedRoute.snapshot.url.length - 1) ].path;
 
     this.activatedRoute.data.subscribe(data => {
       if(data.BlogPost)
@@ -125,6 +127,15 @@ export class ManageArticleComponent implements OnInit {
       // this.router.navigate([`../${savedBlogPost.id}`]);
       this.router.navigate([`../`], {relativeTo : this.activatedRoute});
     });
+  }
+
+  public handleDelete () {
+    var doDelete = confirm("Are you sure you want to delete this Blog Post?");
+
+    if(doDelete)
+      this.blogService.deleteBlogPost(this.article.id).subscribe(response => {
+        this.router.navigate([`../../`], {relativeTo : this.activatedRoute});
+      });
   }
 
   private setDate(date: string) : Date{

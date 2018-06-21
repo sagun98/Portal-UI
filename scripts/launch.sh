@@ -11,6 +11,6 @@ node -v
 npm -v
 
 cd /app && npm install
-cd /app && npm run build
+cd /app && npm run build:dev
 
 nginx -c /app/nginx.conf -g 'daemon off;'

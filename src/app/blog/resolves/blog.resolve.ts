@@ -10,6 +10,6 @@ export class BlogResolve implements Resolve<any> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const blogId = route.params.blogId || '';
 
-        return this.blogService.getBlog(blogId);
+        return this.blogService.getBlogPost(blogId);
     }
 }

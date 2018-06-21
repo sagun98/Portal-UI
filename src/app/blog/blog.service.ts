@@ -12,8 +12,12 @@ export class BlogService {
     private http : HttpClient
   ) { }
 
-  public getBlog (blogId : string) {
+  public getBlogPost (blogId : string) {
     return <Observable<BlogPost>> this.http.get(`http://localhost:3080/api/blog/${blogId}`);
+  }
+
+  public deleteBlogPost(blogId : string) {
+    return <Observable<BlogPost>> this.http.delete(`http://localhost:3080/api/blog/${blogId}`);
   }
 
   public getBlogs (_params) {

@@ -23,7 +23,8 @@
       <div class="form-group">
         <label for="publicationDate" class="required">Publication Date</label>
         <label>
-          <input type="date" id="publicationDate" name="publicationDate" class="input-xs"  [ngModel] ="article.publicationDate | date:'yyyy-MM-dd'" formControlName="publicationDate"/> 
+          <input type="date" id="publicationDate" name="publicationDate" class="input-xs" [ngModel]="article.publicationDate | date:'yyyy-MM-dd'"
+            formControlName="publicationDate" />
         </label>
       </div>
 
@@ -90,17 +91,27 @@
     <div class="fixed-footer">
 
       <div class="fixed-footer-wrapper">
-        <a type="submit" class="btn btn-danger-outline pull-right" routerLink="../">
-          <clr-icon shape="times"></clr-icon>
-          Cancel
-        </a>
 
-        <button type="submit" class="btn btn-success-outline">
-          <clr-icon shape="check"></clr-icon> Save Blog Post
-        </button>
+        <div class="row">
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-success-outline pull-left">
+              <clr-icon shape="check"></clr-icon> Save Blog Post
+            </button>
+          </div>
+
+          <div class="col-sm-4 text-center">
+            <button type="button" class="btn btn-danger-outline" *ngIf="mode === 'edit'" (click)="handleDelete()">
+              <clr-icon shape="times-circle"></clr-icon> Delete Blog Post
+            </button>
+          </div>
+          <div class="col-sm-4">
+            <a type="submit" class="btn btn-danger-outline pull-right" routerLink="../">
+              <clr-icon shape="times"></clr-icon>
+              Cancel
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-
   </form>
-
 </main>

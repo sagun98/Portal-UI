@@ -36,22 +36,6 @@
       "allowComments": true
     },
     {
-      "id": 3,
-      "title": "Customizing your portal",
-      "author": "Derek Carter",
-      "publicationDate": "2018-06-20T04:00:00.000Z",
-      "summary": "You can customize the appearance of the developer portal to match your company theme, to add new content areas to the portal, or to change the layout of any page on the portal. Much of this configuration requires a working knowledge of Drupal. However, there is documentation that describes some of the basic tasks that you might want to perform to customize your portal. View more information about customizing your developer portals at www.apigee.com.",
-      "content": "<div class=\"row node-body\" style=\"box-sizing: border-box; margin-right: -15px; margin-left: -15px; color: #484848; font-family: Helvetica, Arial, sans-serif; font-size: 13px;\">\n<div class=\"col-sm-11\" style=\"box-sizing: border-box; position: relative; min-height: 1px; padding-right: 15px; padding-left: 15px; float: left; width: 804.375px;\">\n<div class=\"field field-name-body field-type-text-with-summary field-label-hidden\" style=\"box-sizing: border-box;\">\n<div class=\"field-items\" style=\"box-sizing: border-box;\">\n<div class=\"field-item even\" style=\"box-sizing: border-box;\">You can customize the appearance of the developer portal to match your company theme, to add new content areas to the portal, or to change the layout of any page on the portal. Much of this configuration requires a working knowledge of&nbsp;<a style=\"box-sizing: border-box; background: transparent; color: #137aaa; text-decoration-line: none; outline: none;\" href=\"https://drupal.org/\" rel=\"nofollow\">Drupal</a>. However, there is documentation that describes some of the basic tasks that you might want to perform to customize your portal. View more information about customizing your developer portals at&nbsp;<a style=\"box-sizing: border-box; background: transparent; color: #137aaa; text-decoration-line: none; outline: none;\" href=\"http://apigee.com/docs/developer-channel/content/customize-appearance\" rel=\"nofollow\">www.apigee.com</a>.</div>\n<p>&nbsp;</p>\n</div>\n</div>\n</div>\n</div>",
-      "tags": [
-        {
-          "name": "tutorials"
-        }
-      ],
-      "category": "Announcement",
-      "subCategory": null,
-      "allowComments": true
-    },
-    {
       "id": 4,
       "title": "Version 6 of Angular Now Available",
       "author": "Derek Carter",
@@ -96,6 +80,47 @@
       ],
       "category": "Documentation",
       "subCategory": "Creating APIs",
+      "allowComments": true
+    },
+    {
+      "id": 6,
+      "title": "Customizing your portal",
+      "author": "Derek Carter",
+      "publicationDate": "2018-06-20T04:00:00.000Z",
+      "summary": "You can customize the appearance of the developer portal to match your company theme, to add new content areas to the portal, or to change the layout of any page on the portal. Much of this configuration requires a working knowledge of Drupal. However, there is documentation that describes some of the basic tasks that you might want to perform to customize your portal. View more information about customizing your developer portals at www.apigee.com.",
+      "content": "<p>&nbsp;</p>\n<p>&nbsp;</p>",
+      "tags": [
+        {
+          "name": "portal"
+        },
+        {
+          "name": "customization"
+        }
+      ],
+      "category": "Announcement",
+      "subCategory": null,
+      "allowComments": true
+    },
+    {
+      "id": 7,
+      "title": "Portal Start Up Guide",
+      "author": "Derek Carter",
+      "publicationDate": "2018-06-20T04:00:00.000Z",
+      "summary": "The developer portal is a template portal, designed as a base that you can easily customize to meet your specific requirementsYour customized developer portal should educate developers about your API—what it is and how it’s used. It should also enable you to manage developer use of your API. This could include authorizing developers to use your API, giving developers an easy way to create apps that use your API products, assigning developers specific roles and permissions related to the API, or revoking developer access to the API as necessary. Beyond that, your developer portal can serve as the focal point for community activity, where developers can contribute API-related content to social media repositories such as blogs and forums. View more information about developer portals at apigee.com",
+      "content": "<p>&nbsp;</p>\n<p>&nbsp;</p>",
+      "tags": [
+        {
+          "name": "getting started"
+        },
+        {
+          "name": "starting"
+        },
+        {
+          "name": "api development"
+        }
+      ],
+      "category": "Announcement",
+      "subCategory": null,
       "allowComments": true
     }
   ]

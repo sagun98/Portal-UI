@@ -1,5 +1,5 @@
   
 export const environment = {
     production: false,
-    restBase : 'http://localhost:8080'
+    restBase : 'http://rest-dev-portal-us1-dev.bite.pearsondev.tech'
 };
