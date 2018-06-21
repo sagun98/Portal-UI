@@ -1,10 +1,9 @@
 import { FailedNavigation, FAILED_NAVIGATION_TYPE } from './../../services/user/user.service';
-import { FRUser } from './../../interfaces/fr-user.interface';
-import { PortalUser } from './../../classes/fr-user.class';
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 
 @Injectable({
   providedIn: 'root'

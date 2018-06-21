@@ -1,34 +1,49 @@
-export interface FRUser {
-    _id ? :  string ,
-    _rev ? :  string ,
-    username ? :  string ,
-    realm ? :  string ,
-    telephoneNumber ? :  string[] ,
-    mail ? :  string[] ,
-    displayName ? :  string[] ,
-    distinguishedName ? :  string[] ,
-    dn ? :  string[] ,
-    employeeID ? :  string[] ,
-    objectGUID ? :  string[] ,
-    sn ? :  string[] ,
-    memberOf ? :  string[] ,
-    department ? :  string[] ,
-    userAccountControl ? :  string[] ,
-    userPrincipalName ? :  string[] ,
-    extensionAttribute14 ? :  string[] ,
-    c ? :  string[] ,
-    sAMAccountName ? :  string[] ,
-    extensionAttribute4 ? :  string[] ,
-    givenName ? :  string[] ,
-    objectClass ? :  string[] ,
-    createTimeStamp ? :  string[] ,
-    cn ? :  string[] ,
-    modifyTimeStamp ? :  string[] ,
-    co ? :  string[] ,
-    universalid ? :  string[] ,
-    businessCategory ? :  string[] ,
-    name ? :  string[] ,
-    inetUserStatus ? :  string[] ,
-    pwdLastSet ? :  string[] ,
-    roles ? :  string[]
+export interface IPortalUser {
+    id? : string,
+    email?: string,
+    username? : string,
+    name? : string,
+    firstName? : string,
+    lastName? : string,
+    roles? : UserRole[],
+    token?: string
+}
+
+export class PortalUser {
+
+    private user: IPortalUser
+
+    constructor (user: IPortalUser) {
+        this.user = user;
+    }
+
+    public get id () {
+        return this.user.id;
+    }
+
+    public get token () {
+        return this.user.token;
+    }
+
+    public get email () {
+        return this.user.email;
+    }
+
+    public get roles () {
+        return this.user.roles;
+    }
+
+    public get username () {
+        return this.user.username;
+    }
+
+    public get fullName () {
+        return this.user.firstName + ' ' + this.user.lastName;
+    }
+
+}
+
+export interface UserRole {
+    name?: string,
+    id? : string
 }

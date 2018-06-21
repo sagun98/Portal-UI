@@ -2,11 +2,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/internal/operators/tap';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { ProductListChange } from './interfaces/product-list-change.interface';
 import { CRUD } from '../../core/enums/crud.enum';
 import { Product } from './interfaces/product.interface';
 import { environment } from '../../../environments/environment';
+
+interface CachedProducts {
+  product?: boolean,
+  products?: boolean
+}
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +19,32 @@ import { environment } from '../../../environments/environment';
 export class ProductService {
 
   public $onProductListChanged: Subject<ProductListChange> = new Subject<ProductListChange>();
+  public _products_cache_: Product[] = [];
+  public _product_cache_: Product;
+  public provideCachedVersion:CachedProducts = {
+    product : false,
+    products : false
+  }
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public getProducts() {
-    return this.http.get(`${environment.restBase}/products`);
+  public getProducts(getCache? : boolean) {
+    if(getCache)
+      return of(this._products_cache_);
+      
+    return this.http.get(`${environment.restBase}/products`).pipe(
+      tap( (products : Product[]) =>  {
+        this._products_cache_ = products;
+      })
+    );
   }
 
   public addProduct( product : Product ) {
     return this.http.post(`${environment.restBase}/products`, product).pipe(tap( (newProduct : Product) => {
+      this._product_cache_ = newProduct;
+
       this.$onProductListChanged.next( <ProductListChange>{
         action : CRUD.CREATE,
         product : newProduct
@@ -34,6 +54,8 @@ export class ProductService {
 
   public updateProduct ( product : Product ) {
     return this.http.put(`${environment.restBase}/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
+      this._product_cache_ = updatedProduct;
+
       this.$onProductListChanged.next( <ProductListChange>{
         action : CRUD.UPDATE,
         product : updatedProduct
@@ -41,7 +63,16 @@ export class ProductService {
     }));
   }
 
-  public getProduct ( productId : string ) {
-    return this.http.get(`${environment.restBase}/products/${productId}`);
+  public getProduct ( productId : string, getCache? : boolean ) {
+    if(getCache || this.provideCachedVersion.product){
+      this.provideCachedVersion.product = false;
+      return of(this._product_cache_);
+    }
+
+    return this.http.get(`${environment.restBase}/products/${productId}`).pipe(
+      tap( (product : Product) =>  {
+        this._product_cache_ = product;
+      })
+    );
   }
 }

@@ -13,10 +13,7 @@ import { ProductsResolve } from '../resolves/products.resolve';
     RouterModule.forChild([
       {
         path: '', 
-        component : HomeComponent,
-        resolve : {
-          productData : ProductsResolve
-        }
+        component : HomeComponent
       }
     ])
   ],

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ApisResolve implements Resolve<any> {
     
     constructor( private apiService : ApiService ){ }

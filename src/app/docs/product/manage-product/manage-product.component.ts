@@ -10,6 +10,7 @@ import { API } from '../../api/interfaces/api.interface';
 import { ApiService } from '../../api/api.service';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 
+
 @Component({
   selector: 'app-product',
   templateUrl: './manage-product.component.html',
@@ -79,6 +80,7 @@ export class ManageProductComponent implements OnInit{
     const productData = this.form.getRawValue();
 
     this.productService[this.saveMethod](productData).subscribe((product: Product) => {
+      this.cacheProduct();
       this.router.navigate([`/docs/product/${product.id}`]);
     });
   }
@@ -92,5 +94,10 @@ export class ManageProductComponent implements OnInit{
     this.apiService.getApi(api.id).subscribe((activeApi: API) => {
       this.activeApi = activeApi;
     });
+  }
+
+  public cacheProduct () {
+    if(this.productService._product_cache_)
+      this.productService.provideCachedVersion.product = true;
   }
 }

@@ -1,9 +1,10 @@
-import { PortalUser } from './../../classes/fr-user.class';
+import { IPortalUser } from './../../interfaces/fr-user.interface';
+import { environment } from './../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share, catchError } from 'rxjs/operators';
-import { FRUser } from '../../interfaces/fr-user.interface';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 
 export interface FRCredentials {
   username?: string,
@@ -39,7 +40,7 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  private get authToken() {
+  public get authToken() {
     return localStorage.getItem('pearson.devportal.authToken') || '';
   }
 
@@ -64,9 +65,8 @@ export class UserService {
     return this._user;
   }
 
-  private set authToken(authToken: string) {
+  public set authToken(authToken: string) {
     localStorage.setItem('pearson.devportal.authToken', authToken);
-    localStorage.setItem('pearson.devportal.userId', this.username);
   }
 
   public setLoggedInState() {
@@ -82,9 +82,9 @@ export class UserService {
       .append('X-OpenAM-Username', credentials.username)
       .append('X-OpenAM-Password', credentials.password);
 
-    return this.http.post(`https://identity-internal.pearson.com/auth/json/pearson/authenticate`, {}, { headers }).pipe(tap((authResponse: any) => {
+    return this.http.post(`${environment.restBase}/auth/authenticate`, {}, { headers }).pipe(tap((authResponse: any) => {
       this.username = credentials.username;
-      this.authToken = authResponse.tokenId;
+      this.authToken = authResponse.token;
     }));
   }
 
@@ -92,15 +92,9 @@ export class UserService {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
 
-    return this.http.get<PortalUser>(`https://identity-internal.pearson.com/auth/json/pearson/users/${this.userId}`, { headers: headers }).pipe(
-      map((user: FRUser) => {
+    return this.http.get<PortalUser>(`${environment.restBase}/user`, { headers: headers }).pipe(
+      map((user: IPortalUser) => {
         return this.tapUser(user);
-      }),
-      catchError( (err: any, caught: Observable<PortalUser> ) => {
-        this.username = '';
-        this.authToken = '';
-        this.$loggedIn.next(false);
-        return caught;
       }),
       share()
     );
@@ -110,9 +104,8 @@ export class UserService {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
 
-    return this.http.post(`https://identity-internal.pearson.com/auth/json/pearson/sessions/?_action=logout`, null, { headers: headers }).pipe(
-      tap((user: FRUser) => {
-        this.username = '';
+    return this.http.post(`${environment.restBase}/auth/logout`, null, { headers: headers }).pipe(
+      tap((user: IPortalUser) => {
         this.authToken = '';
         this.$loggedIn.next(false);
         this.$retrievedUser.next(null);
@@ -124,7 +117,7 @@ export class UserService {
     );
   }
 
-  private tapUser (user: FRUser) : PortalUser {
+  private tapUser (user: IPortalUser) : PortalUser {
     this._user = new PortalUser(user);
     this.$loggedIn.next(true);
     this.$retrievedUser.next(this._user);

@@ -8,15 +8,24 @@ import { Injectable } from '@angular/core';
 })
 export class ProductResolve implements Resolve<any> {
 
-    constructor(
-        private productService: ProductService
-    ) {
+    constructor(private productService: ProductService) {}
 
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const productId = route.params.productId || '';
+        return this.productService.getProduct(productId);
     }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ProductResolveCache implements Resolve<any> {
+
+    constructor(private productService: ProductService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const productId = route.params.productId || '';
 
-        return this.productService.getProduct(productId);
+        return this.productService.getProduct(productId, true);
     }
 }

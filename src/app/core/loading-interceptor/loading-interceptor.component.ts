@@ -10,12 +10,9 @@ import { FadeInOutAnimation } from '../animations/animations';
 
 })
 export class LoadingInterceptorComponent implements OnInit {
-  
-  //@HostBinding('class.activeRequest') activeRequestClass: boolean = false;
-  public activeRequestClass: boolean = true;
-  // @HostBinding('@fadeInOut') activeRequestClass:boolean = false;
-
+  public activeRequestClass: boolean = false;
   private startTimeout;
+  private closeTimeout;
 
   constructor(
     private loadingInterceptorService : LoadingInterceptorService
@@ -23,6 +20,8 @@ export class LoadingInterceptorComponent implements OnInit {
 
   ngOnInit() {
     this.loadingInterceptorService.$onRequest.subscribe( (openRequestCount : number) => {
+      clearTimeout(this.closeTimeout);
+
       // Only show the loading overlay if the request(s) haven't returned in this.loadingInterceptorService.startTimeout miliseconds
       if(openRequestCount === 1)
         this.startTimeout = setTimeout( t => {this.activeRequestClass = true;}, this.loadingInterceptorService.startTimeout);
@@ -32,9 +31,7 @@ export class LoadingInterceptorComponent implements OnInit {
       // clear the start timeout
       clearTimeout(this.startTimeout);
 
-      setTimeout(t => {
-        this.activeRequestClass = false;
-      }, this.loadingInterceptorService.closeTimeout);
+      this.closeTimeout = setTimeout(t => { this.activeRequestClass = false; }, this.loadingInterceptorService.closeTimeout);
     })
   }
 

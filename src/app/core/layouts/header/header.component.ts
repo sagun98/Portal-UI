@@ -1,7 +1,7 @@
-import { PortalUser } from './../../classes/fr-user.class';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Subject } from 'rxjs';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 
 @Component({
   selector: 'dev-portal-header',

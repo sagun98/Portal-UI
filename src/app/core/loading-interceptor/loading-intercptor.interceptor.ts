@@ -2,7 +2,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS
 import { Loading } from '@clr/angular';
 import { tap, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { LoadingInterceptorService } from './loading-interceptor.service';
 
 @Injectable()
@@ -16,18 +16,19 @@ export class LoadingInterceptor implements HttpInterceptor {
 
         const requestId = new Date().getTime();
 
-        this.loadingInterceptorService.addOpenRequest(requestId)
+        this.loadingInterceptorService.addOpenRequest(requestId);
 
         return <any> next.handle(request).pipe(
             tap( (response: HttpResponse<any>) => {
                 const status = response.status;
                 const body = response.body;
+                const statusText = response.statusText;
 
-                if(body && status){
+                if((body || statusText) && status){
                     this.loadingInterceptorService.closeOpenRequest(requestId)
                 } 
             }),
-            catchError( (errorResponse: HttpErrorResponse) => {
+            catchError( (errorResponse: any, caught: Observable<HttpResponse<any>>) => {
                 const status = errorResponse.status;
                 const body = errorResponse.error;
 
@@ -35,7 +36,7 @@ export class LoadingInterceptor implements HttpInterceptor {
                     this.loadingInterceptorService.closeOpenRequest(requestId)
                 } 
                 
-                throw errorResponse
+                return of(errorResponse)
             })
         )
     }

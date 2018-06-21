@@ -1,4 +1,4 @@
-import { PortalUser } from './../../core/classes/fr-user.class';
+import { IPortalUser } from './../../core/interfaces/fr-user.interface';
 import { UserService } from './../../core/services/user/user.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -9,6 +9,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ManageArticleComponent } from './manage-article.component';
 import { of } from 'rxjs/observable/of';
+import { PortalUser } from '../../core/interfaces/fr-user.interface';
 
 class UserServiceMock extends UserService {
   constructor (private _http : HttpClient) {
@@ -16,11 +17,11 @@ class UserServiceMock extends UserService {
   }
 
   public get user () {
-    return of( <PortalUser> {
-      firstName : 'firstname',
-      lastName : 'lastname',
-      fullName : 'test'
-    })
+    return of( new PortalUser(<IPortalUser>{
+      id : 'asdf1234',
+      firstName : 'Derek',
+      lastName : 'Carter'
+    }))
   }
 }
 

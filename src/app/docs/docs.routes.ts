@@ -1,6 +1,6 @@
 import { ViewProductComponent } from './product/view-product/view-product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
-import { ProductsResolve } from "../resolves/products.resolve";
+import { ProductsResolve, ProductsResolveCached } from "../resolves/products.resolve";
 import { Routes } from "@angular/router";
 import { DocsComponent } from "./docs.component";
 import { ApisResolve } from '../resolves/apis.resolve';
@@ -22,7 +22,7 @@ export const documentationRoutes: Routes = [
                 path: 'product',
                 component: ProductPageComponent,
                 resolve: {
-                    productData: ProductsResolve
+                    productData: ProductsResolveCached
                 }
             },
             {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PortalUser } from '../../classes/fr-user.class';
 import { UserService } from '../../services/user/user.service';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 
 @Component({
   selector: 'user-card',

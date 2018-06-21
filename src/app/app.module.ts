@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-intercptor.interceptor';
 import { ErrorInterceptorInterceptor } from './core/interceptors/errors.interceptor';
+import { AuthTokenInterceptorProivder } from './core/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ErrorInterceptorInterceptor } from './core/interceptors/errors.intercep
   providers : [
     LoadingInterceptorProvider,
     ErrorInterceptorInterceptor,
+    AuthTokenInterceptorProivder,
     ToastrService
   ],
 

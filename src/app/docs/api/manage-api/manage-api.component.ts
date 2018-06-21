@@ -85,10 +85,16 @@ export class ManageApiComponent implements OnInit {
     });
 
     this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+      this.cacheApi();
       this.router.navigate([`/docs/api/${api.id}`]);
     })
   }
   
+  public cacheApi () {
+    if(this.apiService._api_cache_)
+      this.apiService.provideCachedVersion.api = true;
+  }
+
   public handleUpload (event) {
     const file = event.target.files[0];
 

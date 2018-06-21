@@ -1,13 +1,13 @@
 import { BlogComponent } from './../blog.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { PortalUser } from "../../core/classes/fr-user.class";
 import { TINYCMCE_CONFIG } from "../../docs/constants/tinymce.constant";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../core/services/user/user.service";
 import { BlogPost } from "../interfaces/blog-post.interface";
 import { BlogService } from "../blog.service";
 import { DatePipe } from '@angular/common';
+import { PortalUser } from '../../core/interfaces/fr-user.interface';
 
 export enum BLOG_CATEGORIES  {
   DOCUMENTATION = 'documentation',

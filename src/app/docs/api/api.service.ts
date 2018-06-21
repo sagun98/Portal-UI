@@ -8,8 +8,10 @@ import { CRUD } from '../../core/enums/crud.enum';
 import { APIListChange } from './interfaces/apiListChange.interface';
 import { API } from './interfaces/api.interface';
 
-// TODO:
-// Refactor out REST_BASE to be environmentally set
+interface CachedAPIs {
+  api?: boolean,
+  apis?: boolean
+}
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +19,26 @@ import { API } from './interfaces/api.interface';
 export class ApiService {
 
   public $onApiListChanged: Subject<APIListChange> = new Subject<APIListChange>()
+  public _api_cache_ : API;
+  public _apis_cache_ : API[] = [];
+  public provideCachedVersion:CachedAPIs = {
+    api : false,
+    apis : false
+  }
 
   constructor(private http: HttpClient) { }
 
   public getApi (apiId) {
-    return this.http.get(`${environment.restBase}/apis/${apiId}`);
+    if(this.provideCachedVersion.api){
+      this.provideCachedVersion.api = false;
+      return of(this._api_cache_);
+    }
+
+    return this.http.get(`${environment.restBase}/apis/${apiId}`).pipe(
+      tap ( (api : API) => {
+        this._api_cache_ = api;
+      })
+    );
   }
 
   public addApi (api: API) {
@@ -35,6 +52,8 @@ export class ApiService {
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
     const request = this.http.post(`${environment.restBase}/apis`, apiFormData).pipe(tap( (addedApi : API) => {
+      this._api_cache_ = addedApi;
+
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.CREATE,
@@ -52,6 +71,8 @@ export class ApiService {
     let apiFormData:FormData = this.getFormDataFromObject(api);
 
     const request = this.http.put(`${environment.restBase}/apis/${api.id}`, apiFormData).pipe(tap( (addedApi : API) => {
+      this._api_cache_ = addedApi;
+
       // Emit ApiListChanged event
       this.$onApiListChanged.next({
         action : CRUD.UPDATE,

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.products = this.activatedRoute.snapshot.data.productData;
+    //this.products = this.activatedRoute.snapshot.data.productData;
   }
 
 }
