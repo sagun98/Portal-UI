@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot",
-    "build:dev": "npm run set-env && ng build",
+    "build:dev": "npm run set-env && ng build --aot",
     "build:prod": "npm run set-env && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
