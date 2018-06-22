@@ -10,6 +10,11 @@ apt-get install -f -y
 node -v
 npm -v
 
+echo "-------------------------"
+echo $ANGULAR_PRODUCTION_BUILD
+echo $RESTBASE
+echo $ANGULAR_BUILD_TYPE
+echo "-------------------------"
 
 cd /app && npm install
 cd /app && npm run build:dev
