@@ -10,10 +10,11 @@ apt-get install -f -y
 node -v
 npm -v
 
-cd /app && npm install
-cd /app && npm run build:$ANGULAR_BUILD_TYPE
-
 echo $RESTBASE
 echo $ANGULAR_PRODUCTION_BUILD
+echo $ANGULAR_BUILD_TYPE
+
+cd /app && npm install
+cd /app && npm run build:$ANGULAR_BUILD_TYPE
 
 nginx -c /app/nginx.conf -g 'daemon off;'
