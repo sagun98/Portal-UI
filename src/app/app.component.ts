@@ -66,7 +66,11 @@ export class AppComponent implements OnInit{
       this.httpErrorsServices.$onError.subscribe( (errors: HttpErrorMessage[]) => {
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
-            if(! this.httpErrorsServices.override)
+            if(/\/user$/.test( error.response.url) && error.response.status === 403){
+              this.userService.staticLogout();
+            }
+
+            else if(! this.httpErrorsServices.override)
               this.toastrService[error.type ](error.title, error.message);
             
             else

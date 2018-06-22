@@ -1,6 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { HttpErrorsService } from './../../../services/http-errors/http-errors.service';
 import { UserService, FRCredentials } from './../../../services/user/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';

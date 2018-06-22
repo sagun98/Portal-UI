@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share, catchError } from 'rxjs/operators';
 import { PortalUser } from '../../interfaces/fr-user.interface';
+import { Router } from '@angular/router';
 
 export interface FRCredentials {
   username?: string,
@@ -34,10 +35,11 @@ export class UserService {
   
   private username: string;
   private _user: PortalUser;
-  private userRequest: Observable<PortalUser>;
+  private userRequest: Observable<{} | PortalUser>;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   public get authToken() {
@@ -92,7 +94,7 @@ export class UserService {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
 
-    return this.http.get<PortalUser>(`${environment.restBase}/user`, { headers: headers }).pipe(
+    return this.http.get<any>(`${environment.restBase}/user`, { headers: headers }).pipe(
       map((user: IPortalUser) => {
         return this.tapUser(user);
       }),
@@ -106,15 +108,20 @@ export class UserService {
 
     return this.http.post(`${environment.restBase}/auth/logout`, null, { headers: headers }).pipe(
       tap((user: IPortalUser) => {
-        this.authToken = '';
-        this.$loggedIn.next(false);
-        this.$retrievedUser.next(null);
-        this.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
-          type : FAILED_NAVIGATION_TYPE.LOGOUT,
-          attemptedUrl : window.location.hash.replace('#', '')
-        });
+        this.staticLogout();
       })
     );
+  }
+
+  public staticLogout () {
+    this.userRequest = null;
+    this.authToken = '';
+    this.$loggedIn.next(false);
+    this.$retrievedUser.next(null);
+    this.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
+      type : FAILED_NAVIGATION_TYPE.LOGOUT,
+      attemptedUrl : window.location.hash.replace('#', '')
+    });
   }
 
   private tapUser (user: IPortalUser) : PortalUser {

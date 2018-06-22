@@ -4,6 +4,7 @@ import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnaps
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
 import { PortalUser } from '../../interfaces/fr-user.interface';
+import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +27,8 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
       const loggedIn = this.userService.$loggedIn.getValue()
 
       if( loggedIn ){
-        this.userService.user.subscribe( (user : PortalUser) =>  {
-          observer.next( loggedIn );
-          observer.complete();
-        })
+        this.userService.user.subscribe(user => {observer.next(loggedIn);observer.complete();});
+        this.userService.$loggedIn.subscribe(loggedIn => { observer.next(loggedIn); observer.complete();  });
       }
       else{
         observer.next( loggedIn );

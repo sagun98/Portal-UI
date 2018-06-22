@@ -1,5 +1,4 @@
 import { ToastrService } from 'ngx-toastr';
-import { catchError } from 'rxjs/operators';
 import { ApiService } from './../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
