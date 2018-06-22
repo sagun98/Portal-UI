@@ -22,5 +22,11 @@ writeFile(environmentFile, envFileContents, (err) => {
         return;
     }
 
+    console.log("envRestBase: ", envRestBase);
+    console.log("environmentFile: ", environmentFile);
+    console.log("prodPostfix: ", prodPostfix)
+    console.log("isProd: ", isProd);
+    console.log("RESTBASE: ", env.RESTBASE);
+    console.log("ANGULAR_PRODUCTION_BUILD: ", env.ANGULAR_PRODUCTION_BUILD)
     console.log("Sucessfully wrote environment file");
 });
