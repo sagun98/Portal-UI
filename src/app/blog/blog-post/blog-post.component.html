@@ -1,0 +1,7 @@
+<main class="content-area">
+  <router-outlet></router-outlet>
+</main>
+
+<nav class="sidenav" [clr-nav-level]="1">
+    <blog-side-navigation [blogPosts]="announcementBlogs" (blogClick)="gotToBlog($event)"></blog-side-navigation>
+</nav>

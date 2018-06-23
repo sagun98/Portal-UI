@@ -1,0 +1,30 @@
+<section id="documentation-side-nav" class="sidenav-content">
+
+  <section class="nav-group collapsible">
+    <input id="tab1" type="checkbox">
+
+    <label for="tab1">Creating APIs</label>
+
+    <ul class="nav-list">
+      <li *ngFor="let creatingBlog of creatingApiBlogs">
+        <a class="nav-link" routerlinkactive="active" [routerLink]="creatingBlog.id ">
+          {{creatingBlog.title}}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="nav-group collapsible">
+    <input id="tab2" type="checkbox">
+
+    <label for="tab2">Consuming APIs</label>
+
+    <ul class="nav-list">
+      <li *ngFor="let consumeApiBlog of consumeApiBlogs">
+        <a class="nav-link" routerlinkactive="active" [routerLink]="consumeApiBlog.id ">
+          {{consumeApiBlog.title}}
+        </a>
+      </li>
+    </ul>
+  </section>
+</section>

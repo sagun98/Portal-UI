@@ -1,0 +1,14 @@
+:host {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    main.content-area {
+        padding: .1rem 1rem 1rem 1rem;
+    }
+
+    nav {
+        min-width: 13rem;
+        max-width: 13rem;
+    }
+}

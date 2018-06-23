@@ -11,6 +11,11 @@ import { RouterModule } from '@angular/router';
 import { BlogSideNavigationComponent } from './blog-side-navigation/blog-side-navigation.component';
 import { ViewBlogComponent } from './view-blog/view-blog.component';
 import { BlogCardComponent } from './blog-card/blog-card.component';
+import { DocumentationComponent } from './documentation/documentation.component';
+import { DocumentationLandingPageResolve } from './documentation/resolves/landing-page.resolve';
+import { DocumentationSideNavigationComponent } from './documentation-side-navigation/documentation-side-navigation.component';
+import { DocumentationLandingComponent } from './documentation/documentation-landing/documentation-landing.component';
+import { BlogPostComponent } from './blog-post/blog-post.component';
 
 @NgModule({
   imports: [
@@ -21,11 +26,16 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
   ],
   declarations: [
     BlogComponent, 
-    BlogSideNavigationComponent, ViewBlogComponent, BlogCardComponent
+    BlogSideNavigationComponent, 
+    ViewBlogComponent, 
+    BlogCardComponent, 
+    DocumentationComponent, 
+    DocumentationSideNavigationComponent, DocumentationLandingComponent, BlogPostComponent
   ],
   providers : [
     BlogResolve,
-    BlogsResolve
+    BlogsResolve,
+    DocumentationLandingPageResolve
   ],
   exports : [
     ManageArticleModule,

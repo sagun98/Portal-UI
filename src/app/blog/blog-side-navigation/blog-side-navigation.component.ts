@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { BlogPost } from './../interfaces/blog-post.interface';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'blog-side-navigation',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogSideNavigationComponent implements OnInit {
 
+  @Input() blogPosts: BlogPost[];
+  @Output() blogClick: EventEmitter<BlogPost> = new EventEmitter<BlogPost>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public onBlogClick (blog : BlogPost) {
+    this.blogClick.emit(blog);
   }
 
 }

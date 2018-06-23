@@ -102,8 +102,10 @@ export class ManageArticleComponent implements OnInit {
     switch( value.toLowerCase() ){
       case BLOG_CATEGORIES.ANNOUNCEMENT :
         subCategory.clearValidators()
+        break;
       case BLOG_CATEGORIES.DOCUMENTATION :
         subCategory.setValidators(Validators.required)
+        break;
     }
    
     this.form.updateValueAndValidity({

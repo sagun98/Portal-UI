@@ -1,0 +1,35 @@
+<main class="content-area">
+
+    <router-outlet #o="outlet"></router-outlet>
+
+    <!-- <div class="container">
+        <a class="btn btn-sm edit-page-btn" routerLink="new">
+            <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Documentation
+        </a>
+
+        <h1>Welcome to the Pearson Developer Portal</h1>
+
+        <hr/>
+        
+
+        <div class="text-center">
+            <h2 class="bottom-spacer-10">{{ blogPost.title }}</h2>
+            <h5 class="bottom-spacer-10">
+                <i>{{ blogPost.summary }}</i>
+            </h5>
+            <p>
+                <span class="mr20">{{ blogPost.author }}</span>
+                <span>{{ blogPost.publicationDate | date : 'MMMM dd, yyyy' }}</span>
+            </p>
+        </div>
+
+        <hr class="bottom-spacer-20" /> 
+
+        <div [innerHTML]="safeBlogPost"></div>
+
+    </div> -->
+</main>
+
+<nav class="sidenav" [clr-nav-level]="1">
+    <documentation-side-navigation [documentationBlogs]="documentationBlogs"></documentation-side-navigation>
+</nav>

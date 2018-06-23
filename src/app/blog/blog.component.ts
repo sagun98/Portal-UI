@@ -25,7 +25,7 @@ export class BlogComponent implements OnInit {
   }
 
   public openBlogPost (blog: BlogPost) {
-    this.router.navigate([`${blog.id}`], {relativeTo: this.activatedRoute})
+    this.router.navigate([`../post/${blog.id}`], {relativeTo: this.activatedRoute})
   }
 
 }
