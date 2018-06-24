@@ -7,7 +7,7 @@
 
     <ul class="nav-list">
       <li *ngFor="let creatingBlog of creatingApiBlogs">
-        <a class="nav-link" routerlinkactive="active" [routerLink]="creatingBlog.id ">
+        <a class="nav-link" routerlinkactive="active" [class.active]="creatingBlog.id == currentId" (click)="goToBlog(creatingBlog)">
           {{creatingBlog.title}}
         </a>
       </li>
@@ -20,8 +20,8 @@
     <label for="tab2">Consuming APIs</label>
 
     <ul class="nav-list">
-      <li *ngFor="let consumeApiBlog of consumeApiBlogs">
-        <a class="nav-link" routerlinkactive="active" [routerLink]="consumeApiBlog.id ">
+      <li *ngFor="let consumeApiBlog of consumeApiBlogs"> 
+        <a class="nav-link" routerlinkactive="active"  [class.active]="consumeApiBlog.id == currentId"  (click)="goToBlog(consumeApiBlog)">
           {{consumeApiBlog.title}}
         </a>
       </li>

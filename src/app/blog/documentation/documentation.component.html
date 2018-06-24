@@ -31,5 +31,5 @@
 </main>
 
 <nav class="sidenav" [clr-nav-level]="1">
-    <documentation-side-navigation [documentationBlogs]="documentationBlogs"></documentation-side-navigation>
+    <documentation-side-navigation [currentId]="currentId" (blogClick)="goToBlog($event)" [documentationBlogs]="documentationBlogs"></documentation-side-navigation>
 </nav>

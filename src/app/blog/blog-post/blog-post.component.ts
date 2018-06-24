@@ -10,6 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BlogPostComponent implements OnInit {
 
   @Input() announcementBlogs : BlogPost[];
+  public currentId: string;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -17,15 +18,20 @@ export class BlogPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.activatedRoute.params.subscribe(params => {
+      console.log("params: ", params);
+    });
+
     this.activatedRoute.data.subscribe(data => {
-      console.log("Blogs: ", data.Blogs);
       this.announcementBlogs = data.Blogs || this.announcementBlogs;
     });
   }
 
   public gotToBlog (blog : BlogPost) {
-    console.log("blog: ", blog);
-    this.router.navigate([`/blog/post/${blog.id}`]);
+    this.router.navigate([`/blog/post/${blog.id}`]).then(navigated => {
+      this.currentId = blog.id
+    })
   }
 
 }

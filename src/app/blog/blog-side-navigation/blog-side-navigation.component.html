@@ -6,7 +6,7 @@
 
     <ul class="nav-list">
       <li *ngFor="let blog of blogPosts" (click)="onBlogClick(blog)">
-        <a class="nav-link">
+        <a class="nav-link" [class.active]="blog.id == currentId">
           <h4 class="bottom-spacer-5">{{ blog.title }}</h4>
           <p class="summary">
             {{ blog.summary }}
