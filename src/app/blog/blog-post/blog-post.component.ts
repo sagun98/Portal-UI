@@ -20,7 +20,7 @@ export class BlogPostComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.params.subscribe(params => {
-      console.log("params: ", params);
+
     });
 
     this.activatedRoute.data.subscribe(data => {
