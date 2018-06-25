@@ -1,6 +1,9 @@
+import { dummyBlog } from './../blog-card/blog-card.component.spec';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ViewBlogComponent } from './view-blog.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ViewBlogComponent', () => {
   let component: ViewBlogComponent;
@@ -8,7 +11,11 @@ describe('ViewBlogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewBlogComponent ]
+      imports : [
+        RouterTestingModule
+      ],
+      declarations: [ ViewBlogComponent ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -16,6 +23,8 @@ describe('ViewBlogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewBlogComponent);
     component = fixture.componentInstance;
+
+    component.blogPost = dummyBlog;
     fixture.detectChanges();
   });
 

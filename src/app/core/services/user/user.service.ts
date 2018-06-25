@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share, catchError } from 'rxjs/operators';
 import { PortalUser } from '../../interfaces/fr-user.interface';
-import { Router } from '@angular/router';
 
 export interface FRCredentials {
   username?: string,
@@ -39,7 +38,6 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
   ) { }
 
   public get authToken() {

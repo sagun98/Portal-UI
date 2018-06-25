@@ -1,6 +1,10 @@
+import { BlogSideNavigationComponent } from './../blog-side-navigation/blog-side-navigation.component';
+import { ClarityModule } from '@clr/angular';
+import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlogPostComponent } from './blog-post.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('BlogPostComponent', () => {
   let component: BlogPostComponent;
@@ -8,7 +12,15 @@ describe('BlogPostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BlogPostComponent ]
+      imports : [
+        RouterTestingModule,
+        ClarityModule
+      ],
+      declarations: [ 
+        BlogPostComponent,
+        BlogSideNavigationComponent
+      ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

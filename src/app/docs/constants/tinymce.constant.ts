@@ -21,10 +21,12 @@ import 'tinymce/plugins/textpattern';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/code';
+import 'tinymce/plugins/imagetools';
+import 'tinymce/plugins/image';
 
 export const TINYCMCE_CONFIG = {
     skin_url: 'assets/skins/lightgray',
-    plugins: 'colorpicker print preview searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
-    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+    plugins: 'colorpicker print preview image searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image',
     height: 350
 }

@@ -1,3 +1,4 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { BlogService } from './blog.service';
@@ -5,7 +6,10 @@ import { BlogService } from './blog.service';
 describe('BlogService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BlogService]
+      imports : [
+        HttpClientModule
+      ],
+      providers: [BlogService, HttpClient]
     });
   });
 

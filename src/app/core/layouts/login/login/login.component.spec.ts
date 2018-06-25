@@ -5,6 +5,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -17,10 +18,11 @@ describe('LoginComponent', () => {
         ReactiveFormsModule,
         ClarityModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        ToastrModule.forRoot()
       ],
       providers : [
-        HttpClient
+        HttpClient, ToastrService
       ],
       declarations: [ LoginComponent ]
     })

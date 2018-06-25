@@ -9,6 +9,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { API } from '../interfaces/api.interface';
 import { of } from 'rxjs';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 const mockApi = <API> {
   id : 'asdf1234',
@@ -44,11 +45,13 @@ describe('ManageApiComponent', () => {
         ReactiveFormsModule,
         EditorModule,
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        ToastrModule.forRoot()
       ],
       providers : [
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
-        HttpClient
+        HttpClient,
+        ToastrService
       ],
       declarations: [ ManageApiComponent ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
