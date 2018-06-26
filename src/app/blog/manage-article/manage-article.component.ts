@@ -156,10 +156,14 @@ export class ManageArticleComponent implements OnInit {
       const category = blogData.category;
       const subCategory = blogData.subCategory;
 
-      if(category === 'Documentation' && subCategory === 'Documentation Landing Page')
-        this.router.navigate([`../main`], {relativeTo : this.activatedRoute});
+      if(savedBlogPost.category === 'Documentation' && savedBlogPost.subCategory === 'Documentation Landing Page')
+        this.router.navigate([`/blog/documentation/main`]);
+
+      else if(savedBlogPost.category === 'Documentation' && savedBlogPost.subCategory !== 'Documentation Landing Page')
+        this.router.navigate([`/blog/documentation/${savedBlogPost.id}`]);
+        
       else
-        this.router.navigate([`../`], {relativeTo : this.activatedRoute});
+        this.router.navigate([`/blog/post/${savedBlogPost.id}`]);
     });
   }
 

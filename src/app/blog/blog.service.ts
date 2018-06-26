@@ -30,7 +30,7 @@ export class BlogService {
 
     return <Observable<BlogPost>> this.http.get(`${environment.restBase}/blogs`, {params}).pipe(
       map( (blogs: PageableResponse) => {
-        return (blogs.content.length) ? <BlogPost> blogs.content[0] : {}
+        return (blogs.content && blogs.content.length) ? <BlogPost> blogs.content[0] : {}
       })
     );
   }
