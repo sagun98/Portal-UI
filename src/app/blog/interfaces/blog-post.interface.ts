@@ -11,5 +11,6 @@ export interface BlogPost {
     tags? : string[],
     category? : string,
     subCategory? : string,
-    comments? : Comment[]
+    comments? : Comment[],
+    version?: number
 }

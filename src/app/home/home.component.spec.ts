@@ -39,13 +39,6 @@ describe('HomeComponents', () => {
     fixture.detectChanges();
   });
 
-  // it('should have a product', () => {
-  //   const productCards = document.querySelectorAll("product-card");
-
-  //   expect( component.products.length ).toEqual(1);
-  //   expect( productCards.length ).toEqual(1);
-  // })
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

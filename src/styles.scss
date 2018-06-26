@@ -57,6 +57,26 @@ form .form-block>label.error {
     }
 }
 
+.tooltip.tooltip-validation.invalid.select:before {
+    right: -0.75rem;
+}
+
+.tooltip.tooltip-validation.invalid.select{
+
+    > select:focus+.tooltip-content {
+        background-color:#c92100;
+        visibility: visible;
+        opacity: 1;
+        top: auto !important;
+        left: 100% !important;
+    }
+
+    > select {
+        box-shadow: none;
+        border: 1px solid #c92100;
+    }
+}
+
 // ng-select overrides
 .ng-value-container > .ng-input > input {
     width : calc(100% - 15px) !important;

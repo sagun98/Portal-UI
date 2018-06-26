@@ -5,9 +5,10 @@
     margin-bottom: 50px;
 
     main {
-
+        
+        height: 190vh;
         padding: .5rem .5rem 0 .5rem !important;
-
+        overflow-y: inherit;
 
         form{
             width: 100%;

@@ -29,5 +29,5 @@ body {
     overflow: hidden;
 }
 
-.inline { display: inline-block; }
-.full { width: 100%; }
+.inline { display: inline-block !important; }
+.full { width: 100% !important; }

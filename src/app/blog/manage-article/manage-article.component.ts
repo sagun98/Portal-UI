@@ -1,3 +1,4 @@
+import { ERROR_CLASSES } from './../../core/constants/error-classes.constant';
 import { BlogComponent } from './../blog.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
@@ -45,6 +46,7 @@ export class ManageArticleComponent implements OnInit {
   public saveMethod: string = 'saveBlogPost';
   public publicationDateString: string = '';
   public mode:string ;
+  public errorClasses:string = ERROR_CLASSES;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -62,8 +64,15 @@ export class ManageArticleComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       if(data.BlogPost)
         this.article = data.BlogPost;
-      else
-        this.article.author = this.userService.$retrievedUser.getValue().fullName;
+      
+      this.article.author = this.article.author || this.userService.$retrievedUser.getValue().fullName;
+
+      if(this.activatedRoute.snapshot.url[0].path === 'documentation')
+        this.categories.splice(0,1);
+      else if(this.activatedRoute.snapshot.url[0].path === 'list')
+        this.categories.splice(1,1);
+
+      this.article.category =  this.article.category || this.categories[0];
 
       this.saveMethod = data.saveMethod || this.saveMethod;
     });
@@ -71,15 +80,31 @@ export class ManageArticleComponent implements OnInit {
     this.buildForm();
   }
 
+  public get UIFormattedTags () {
+    if(! this.article.tags)
+      return [];
+
+    return this.article.tags.map(tag => {
+      return { label : tag };
+    });
+  }
+
+  private getServerFormattedTags (tags: any[]) {
+    return tags.map(tag => {
+      return tag.label;
+    })
+  }
+
   private buildForm () {
     this.form = this.formBuilder.group({
       id : [this.article.id, []],
-      title : [this.article.title, [Validators.required]],
+      version : [this.article.version, []],
+      title : [this.article.title, [Validators.required, Validators.maxLength(100)]],
       author : [this.article.author, [Validators.required]],
       publicationDate : [this.publicationDateString, [Validators.required]],
-      summary : [this.article.summary, [Validators.required]],
+      summary : [this.article.summary, [Validators.required, Validators.maxLength(400)]],
       content : [this.article.content, [Validators.required]],
-      tags : [this.article.tags, []],
+      tags : [ this.UIFormattedTags, []],
       category : [this.article.category, [Validators.required]],
       subCategory : [this.article.subCategory, []],
       allowComments : [this.article.allowComments, [Validators.required]]
@@ -125,9 +150,17 @@ export class ManageArticleComponent implements OnInit {
 
     blogData.publicationDate = this.setDate( blogData.publicationDate );
 
+    blogData.tags = this.getServerFormattedTags( blogData.tags );
+
     this.blogService[this.saveMethod](blogData).subscribe( (savedBlogPost : BlogPost) => {
       // this.router.navigate([`../${savedBlogPost.id}`]);
-      this.router.navigate([`../`], {relativeTo : this.activatedRoute});
+      const category = blogData.category;
+      const subCategory = blogData.subCategory;
+
+      if(subCategory === this.subCategories[1] && category === this.categories[1] && ! blogData.id)
+        this.router.navigate([`../main`], {relativeTo : this.activatedRoute});
+      else
+        this.router.navigate([`../`], {relativeTo : this.activatedRoute});
     });
   }
 
@@ -136,7 +169,12 @@ export class ManageArticleComponent implements OnInit {
 
     if(doDelete)
       this.blogService.deleteBlogPost(this.article.id).subscribe(response => {
-        this.router.navigate([`../../`], {relativeTo : this.activatedRoute});
+        const category = this.form.get('category').value;
+
+        if(category === this.categories[1])
+          this.router.navigate([`/blog/documentation/main`]);
+        else
+          this.router.navigate([`/blog/list`]);
       });
   }
 

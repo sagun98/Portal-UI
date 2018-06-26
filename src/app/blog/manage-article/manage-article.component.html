@@ -7,8 +7,12 @@
 
       <div class="form-group">
         <label for="title" class="required">Title</label>
-        <label>
-          <input id="title" type="text" name="title" placeholder="Enter a title" formControlName="title" />
+        <label [className]=" ( form.get('title').invalid && ( submitted || form.get('title').dirty) ) ? errorClasses + ' tooltip-top-right' : '' ">
+          <input id="title" type="text" name="title" placeholder="Enter a title" formControlName="title" maxlength="100"/>
+          <ng-container *ngIf="( form.get('title').invalid && ( submitted || form.get('title').dirty))">
+              <span *ngIf="form.get('title').errors.required" class="tooltip-content">This field cannot be empty!</span>
+              <span *ngIf="form.get('title').errors.maxlength" class="tooltip-content">Title cannot exceed 100 characters: Currently using {{ form.get('title').value.length }}</span>
+          </ng-container>
         </label>
       </div>
 
@@ -22,16 +26,24 @@
 
       <div class="form-group">
         <label for="publicationDate" class="required">Publication Date</label>
-        <label>
+        <label [className]=" ( form.get('publicationDate').invalid && ( submitted || form.get('publicationDate').dirty) ) ? errorClasses + ' tooltip-top-right' : '' ">
           <input type="date" id="publicationDate" name="publicationDate" class="input-xs" [ngModel]="article.publicationDate | date:'yyyy-MM-dd'"
             formControlName="publicationDate" />
+          <ng-container *ngIf="( form.get('publicationDate').invalid && ( submitted || form.get('publicationDate').dirty))">
+              <span *ngIf="form.get('publicationDate').errors.required" class="tooltip-content">This field cannot be empty!</span>
+          </ng-container>
         </label>
       </div>
 
       <div class="form-group">
         <label for="summary" class="required">Summary</label>
-        <label>
-          <input id="summary" type="text" name="summary" placeholder="Enter a summary blurb" formControlName="summary" />
+        <label for="summary" [className]=" (form.get('summary').invalid && (submitted || form.get('summary').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+          <textarea id="summary" rows="3" type="text" name="summary" placeholder="Enter a summary blurb" formControlName="summary">
+          </textarea>
+          <ng-container *ngIf="( form.get('summary').invalid && ( submitted || form.get('summary').dirty))">
+              <span *ngIf="form.get('summary').errors.required" class="tooltip-content">This field cannot be empty!</span>
+              <span *ngIf="form.get('summary').errors.maxlength" class="tooltip-content">Summary cannot exceed 400 characters: Currently using {{ form.get('summary').value.length }}</span>
+          </ng-container>
         </label>
       </div>
 
@@ -52,21 +64,28 @@
 
       <div class="form-group">
         <label for="category">Category</label>
-        <label>
+        <label [className]=" ( form.get('category').invalid && ( submitted || form.get('category').dirty) ) ? errorClasses + ' tooltip-top-right select' : '' ">
           <select name="category" formControlName="category">
             <option value="">Select a Category</option>
             <option [value]="category" *ngFor="let category of categories">{{ category }}</option>
           </select>
+
+          <ng-container *ngIf="( form.get('category').invalid && ( submitted || form.get('category').dirty))">
+            <span *ngIf="form.get('category').errors.required" class="tooltip-content">A category must be selected</span>
+          </ng-container>
         </label>
       </div>
 
       <div *ngIf=" form.get('category').value === 'Documentation' " class="form-group">
         <label for="subCategory">Sub Category</label>
-        <label>
-          <select name="subCategory" formControlName="subCategory">
+        <label [className]=" ( form.get('subCategory').invalid && ( submitted || form.get('subCategory').dirty) ) ? errorClasses + ' tooltip-top-right select' : '' ">
+            <select name="subCategory" formControlName="subCategory">
             <option value="">Select a Sub Category</option>
             <option [value]="subCategory" *ngFor="let subCategory of subCategories">{{ subCategory }}</option>
           </select>
+          <ng-container *ngIf="( form.get('subCategory').invalid && ( submitted || form.get('subCategory').dirty))">
+            <span *ngIf="form.get('subCategory').errors.required" class="tooltip-content">A category must be selected</span>
+          </ng-container>
         </label>
       </div>
 
@@ -81,7 +100,7 @@
           </clr-tooltip>
         </label>
         <label style="flex: 1 1 auto;">
-          <ng-select [items]="form.get('tags').value" [addTag]="true" [hideSelected]="true" multiple="true" bindLabel="name" formControlName="tags">
+          <ng-select [items]="form.get('tags').value" [addTag]="true" [hideSelected]="true" multiple="true" bindLabel="label" formControlName="tags">
           </ng-select>
         </label>
       </div>
