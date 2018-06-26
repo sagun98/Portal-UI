@@ -153,11 +153,10 @@ export class ManageArticleComponent implements OnInit {
     blogData.tags = this.getServerFormattedTags( blogData.tags );
 
     this.blogService[this.saveMethod](blogData).subscribe( (savedBlogPost : BlogPost) => {
-      // this.router.navigate([`../${savedBlogPost.id}`]);
       const category = blogData.category;
       const subCategory = blogData.subCategory;
 
-      if(subCategory === this.subCategories[1] && category === this.categories[1] && ! blogData.id)
+      if(category === 'Documentation' && subCategory === 'Documentation Landing Page')
         this.router.navigate([`../main`], {relativeTo : this.activatedRoute});
       else
         this.router.navigate([`../`], {relativeTo : this.activatedRoute});
@@ -171,7 +170,7 @@ export class ManageArticleComponent implements OnInit {
       this.blogService.deleteBlogPost(this.article.id).subscribe(response => {
         const category = this.form.get('category').value;
 
-        if(category === this.categories[1])
+        if(category === 'Documentation')
           this.router.navigate([`/blog/documentation/main`]);
         else
           this.router.navigate([`/blog/list`]);
