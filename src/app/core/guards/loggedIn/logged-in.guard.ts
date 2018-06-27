@@ -27,8 +27,13 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
       const loggedIn = this.userService.$loggedIn.getValue()
 
       if( loggedIn ){
-        this.userService.user.subscribe(user => {observer.next(loggedIn);observer.complete();});
-        // this.userService.$loggedIn.subscribe(loggedIn => { observer.next(loggedIn); observer.complete();  });
+        this.userService.user.subscribe(
+          user => {observer.next(loggedIn);observer.complete();},
+          errorResponse => {
+            this.userService.staticLogout();
+          }
+        );
+
       }
       else{
         observer.next( loggedIn );

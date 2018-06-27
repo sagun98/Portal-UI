@@ -31,4 +31,12 @@ describe('ViewBlogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should take a blog as an input', () => {
+    expect(component.blogPost.id).toEqual(dummyBlog.id);
+    expect(component.blogPost.content).toEqual(dummyBlog.content);
+    expect(component.blogPost.summary).toEqual(dummyBlog.summary);
+    expect(component.blogPost.author).toEqual(dummyBlog.author);
+    expect(component.blogPost.category).toEqual(dummyBlog.category);
+  })
 });

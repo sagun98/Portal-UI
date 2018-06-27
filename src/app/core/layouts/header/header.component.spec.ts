@@ -35,7 +35,6 @@ describe('HeaderComponent', () => {
 
   it('should have a default title', () => {
     const title = component.title;
-
     expect(title).toEqual("Pearson Developer Title");
   })
 });

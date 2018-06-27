@@ -30,4 +30,12 @@ describe('DocumentationLandingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should take a blog as an input', () => {
+    expect(component.landingPage.id).toEqual(dummyBlog.id);
+    expect(component.landingPage.content).toEqual(dummyBlog.content);
+    expect(component.landingPage.summary).toEqual(dummyBlog.summary);
+    expect(component.landingPage.author).toEqual(dummyBlog.author);
+    expect(component.landingPage.category).toEqual(dummyBlog.category);
+  });
 });

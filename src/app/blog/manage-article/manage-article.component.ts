@@ -131,6 +131,9 @@ export class ManageArticleComponent implements OnInit {
       case BLOG_CATEGORIES.DOCUMENTATION :
         subCategory.setValidators(Validators.required)
         break;
+      default :
+        subCategory.clearValidators()
+        break;
     }
    
     this.form.updateValueAndValidity({
