@@ -138,6 +138,12 @@ form .form-block>label.error {
                 @media screen and (min-width: 990px) and (max-width : 1199px){
                     max-width: 850px;
                 }
+
+                @media screen and (max-width: 767px) {
+                    .btn {
+                        margin: .25rem 0;
+                    }
+                }
             }
         }
 
@@ -187,4 +193,28 @@ main.content-center {
     position: absolute;
     right: 0px; 
     top: 60px;
+    background-color : white !important;
+    z-index : 1050;
+}
+
+/* hidden sizes */
+@media screen and (max-width : 767px) {
+    .edit-page-btn {top: 95px;}
+    .hidden-xs { display: none !important;}
+    .visible-xs {display: inline-block !important}
+}
+
+@media screen and (min-width : 768px) and (max-width : 989px) {
+    .hidden-sm { display: none !important;}
+    .visible-sm {display: inline-block !important}
+}
+
+@media screen and (min-width : 990px) and (max-width : 1199px) {
+    .hidden-md { display: none !important;}
+    .visible-md {display: inline-block !important}
+}
+
+@media screen and (min-width : 1200px) {
+    .hidden-lg { display: none !important;}
+    .visible-lg {display: inline-block !important}
 }

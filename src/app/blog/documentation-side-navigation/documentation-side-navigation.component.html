@@ -3,7 +3,12 @@
   <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">
 
-    <label for="tab1">Creating APIs</label>
+    <label for="tab1">
+      Creating APIs
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Creating APIs')">
+        Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
+      </button>
+    </label>
 
     <ul class="nav-list">
       <li *ngFor="let creatingBlog of creatingApiBlogs">
@@ -17,7 +22,12 @@
   <section class="nav-group collapsible">
     <input id="tab2" type="checkbox">
 
-    <label for="tab2">Consuming APIs</label>
+    <label for="tab2">
+      Consuming APIs
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Consuming APIs')">
+        Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
+      </button>
+    </label>
 
     <ul class="nav-list">
       <li *ngFor="let consumeApiBlog of consumeApiBlogs"> 

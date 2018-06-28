@@ -94,6 +94,15 @@ export class ManageApiComponent implements OnInit {
       this.apiService.provideCachedVersion.api = true;
   }
 
+  public handleDelete () {
+    const doDelete = confirm('Are you sure you want to delete this api?');
+
+    if( doDelete )
+      this.apiService.deleteApi(this.api).subscribe(api => {
+        this.router.navigate([`/docs/product`]);
+      });
+  }
+
   public handleUpload (event) {
     const file = event.target.files[0];
 

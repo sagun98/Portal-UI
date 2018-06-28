@@ -96,6 +96,15 @@ export class ManageProductComponent implements OnInit{
     });
   }
 
+  public handleDelete () {
+    const doDelete = confirm('Are you sure you want to delete this product?');
+
+    if( doDelete )
+      this.productService.deleteProduct(this.product).subscribe(product => {
+        this.router.navigate([`/docs/product`]);
+      });
+  }
+
   public cacheProduct () {
     if(this.productService._product_cache_)
       this.productService.provideCachedVersion.product = true;

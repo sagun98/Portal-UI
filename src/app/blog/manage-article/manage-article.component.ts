@@ -3,7 +3,7 @@ import { BlogComponent } from './../blog.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { TINYCMCE_CONFIG } from "../../docs/constants/tinymce.constant";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { UserService } from "../../core/services/user/user.service";
 import { BlogPost } from "../interfaces/blog-post.interface";
 import { BlogService } from "../blog.service";
@@ -67,6 +67,8 @@ export class ManageArticleComponent implements OnInit {
       
       this.article.author = this.article.author || this.userService.$retrievedUser.getValue().fullName;
 
+      // Restrict the category based on whether the user is entering from
+      // the documentation side, or the announcement side
       if(this.activatedRoute.snapshot.url[0].path === 'documentation')
         this.categories.splice(0,1);
       else if(this.activatedRoute.snapshot.url[0].path === 'list')
@@ -75,6 +77,13 @@ export class ManageArticleComponent implements OnInit {
       this.article.category =  this.article.category || this.categories[0];
 
       this.saveMethod = data.saveMethod || this.saveMethod;
+    });
+
+    // override article with values preset by params map
+    this.activatedRoute.paramMap.subscribe( (params : any) => {
+      Object.keys( params.params ).forEach(key => {
+        this.article[key] = params.params[key];
+      })
     });
 
     this.buildForm();
@@ -110,7 +119,12 @@ export class ManageArticleComponent implements OnInit {
       allowComments : [this.article.allowComments, [Validators.required]]
     });
 
+    // Disabled the category form field if its preset
+    if(this.form.get('category').value.length)
+      this.form.get('category').disable();
+
     this.manageDynamiceValidations();
+
     this.toggleSubCategoryRequired( this.form.get('category').value );
   }
 

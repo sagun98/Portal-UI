@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogPost } from './../interfaces/blog-post.interface';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { debug } from 'util';
@@ -10,33 +10,40 @@ import { debug } from 'util';
 })
 export class DocumentationSideNavigationComponent implements OnInit {
 
-  @Input() documentationBlogs : BlogPost[];
-  @Input() currentId : string;
+  @Input() documentationBlogs: BlogPost[];
+  @Input() currentId: string;
   @Output() blogClick: EventEmitter<BlogPost> = new EventEmitter<BlogPost>();
 
-  public consumeApiBlogs : BlogPost[];
-  public creatingApiBlogs: BlogPost[];
+  public consumeApiBlogs: BlogPost[] = [];
+  public creatingApiBlogs: BlogPost[] = [];
 
   constructor(
-    private activatedRoute : ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    if(this.activatedRoute.children.length)
+    if (this.activatedRoute.children.length)
       this.activatedRoute.children[0].params.subscribe(params => {
         this.currentId = params.blogId || this.currentId;
       });
 
-    this.consumeApiBlogs = this.documentationBlogs.filter( (documentationBlog : BlogPost) => {
-      return documentationBlog.subCategory === "Consuming APIs";
-    });
+    if (this.documentationBlogs && this.documentationBlogs.length) {
+      this.consumeApiBlogs = this.documentationBlogs.filter((documentationBlog: BlogPost) => {
+        return documentationBlog.subCategory === "Consuming APIs";
+      });
 
-    this.creatingApiBlogs = this.documentationBlogs.filter( (documentationBlog : BlogPost) => {
-      return documentationBlog.subCategory === "Creating APIs";
-    });
+      this.creatingApiBlogs = this.documentationBlogs.filter((documentationBlog: BlogPost) => {
+        return documentationBlog.subCategory === "Creating APIs";
+      });
+    }
   }
 
-  public goToBlog (blog) {
+  public addDocumentation (subCategory: string) {
+    this.router.navigate([`/blog/documentation/new`, {subCategory : subCategory}])
+  }
+
+  public goToBlog(blog) {
     this.blogClick.emit(blog);
   }
 }

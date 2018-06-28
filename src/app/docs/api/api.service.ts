@@ -64,6 +64,17 @@ export class ApiService {
     return request;
   }
 
+  public deleteApi (api : API) {
+    return this.http.delete(`${environment.restBase}/apis/${api.id}`).pipe(
+      tap(_api => {
+        this.$onApiListChanged.next({
+          action : CRUD.DELETE,
+          api : api
+        })
+      })
+    );
+  }
+
   public updateApi (api: API) {
     if(api.swagger)
       api.swagger = JSON.stringify( api.swagger );

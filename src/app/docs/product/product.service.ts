@@ -52,6 +52,19 @@ export class ProductService {
     }));
   }
 
+  public deleteProduct ( product : Product ) {
+    return this.http.delete(`${environment.restBase}/products/${product.id}`).pipe(      
+      tap(_product => {
+        this._products_cache_ = this._products_cache_.filter(_product => { return _product.id !== product.id });
+
+        this.$onProductListChanged.next( <ProductListChange>{
+          action : CRUD.DELETE,
+          product : product
+        });
+      })
+    )
+  }
+
   public updateProduct ( product : Product ) {
     return this.http.put(`${environment.restBase}/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
       this._product_cache_ = updatedProduct;

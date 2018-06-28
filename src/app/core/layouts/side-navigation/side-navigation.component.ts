@@ -47,6 +47,12 @@ export class SideNavigationComponent implements OnInit {
         });
       }
 
+      // Delete an API
+      if(apiListChange.action === CRUD.DELETE){
+        this.apis = this.apis.filter(api => {
+          return api.id !== apiListChange.api.id
+        });
+      }
     });
 
     this.productService.$onProductListChanged.subscribe( (productListChange : ProductListChange) => {
@@ -63,6 +69,12 @@ export class SideNavigationComponent implements OnInit {
           return product;
         });
 
+      // Delete an API
+      if(productListChange.action === CRUD.DELETE){
+        this.products = this.products.filter(product => {
+          return product.id !== productListChange.product.id
+        });
+      }
     })
   }
 

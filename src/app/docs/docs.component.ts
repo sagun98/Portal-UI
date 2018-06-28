@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
 // import { FadeInOutRuterAnimation } from '../core/animations/animations';
@@ -17,6 +17,7 @@ export class DocsComponent implements OnInit {
   public selectedApiId: string = '';
   public selectedProductId: string = '';
   public routeChange: boolean = true;
+  @ViewChild('main') mainElementRef: ElementRef;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -33,6 +34,7 @@ export class DocsComponent implements OnInit {
       // Watch for changes in the route and update the sideNav
       this.activatedRoute.children[0].params.subscribe( params => {
         this.setParams(params);
+        this.scrollTop();
       });
 
       this.setParams(this.activatedRoute.snapshot.children[0].params);
@@ -44,6 +46,7 @@ export class DocsComponent implements OnInit {
         // setTimeout(t => {this.routeChange = true;}, 500);
         if( this.activatedRoute.snapshot.children.length ){
           this.setParams(this.activatedRoute.snapshot.children[0].params);
+          this.scrollTop();
         }
       }
     });
@@ -56,6 +59,11 @@ export class DocsComponent implements OnInit {
   private setParams(params){
     this.selectedApiId = params.apiId;
     this.selectedProductId = params.productId;
+  }
+
+  private scrollTop () {
+    const mainElement: HTMLElement = <HTMLElement> this.mainElementRef.nativeElement;
+    mainElement.scrollTop = 0;
   }
 
 }

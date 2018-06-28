@@ -73,17 +73,27 @@
     </section>
 
     <div class="fixed-footer">
-    
-      <a type="submit" class="btn btn-danger-outline pull-right" (click)="cacheApi()" routerLink="../">
-        <clr-icon shape="times"></clr-icon>
-        Cancel
-      </a>
-    
-      <button type="submit" class="btn btn-success-outline">
-        <clr-icon shape="check"></clr-icon> Save API
-      </button>
+
+      <div class="row">
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-success-outline pull-left">
+            <clr-icon shape="check"></clr-icon>
+            <span class="hidden-xs">Save API</span>
+          </button>
+        </div>
+        <div class="col-xs-4 text-center">
+          <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline">
+            <clr-icon shape="times-circle"></clr-icon>
+            <span class="hidden-xs">Delete API</span>
+          </button>
+        </div>
+        <div class="col-xs-4">
+          <a type="submit" class="btn btn-danger-outline pull-right" (click)="cacheApi()" routerLink="../">
+            <clr-icon shape="times"></clr-icon>
+            <span class="hidden-xs">Cancel</span>
+          </a>
+        </div>
+      </div>    
     </div>
-
   </form>
-
 </div>

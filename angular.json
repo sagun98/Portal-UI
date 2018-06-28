@@ -28,7 +28,8 @@
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/app/core/styles/utils.scss",
-              "node_modules/tinymce/plugins/codesample/css/prism.css"
+              "node_modules/tinymce/plugins/codesample/css/prism.css",
+              "node_modules/swagger-ui-dist/swagger-ui.css"
             ],
             "scripts": [
               "node_modules/tinymce/tinymce.js",
