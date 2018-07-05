@@ -102,7 +102,8 @@ export class UserService {
 
   public logout() {
     let headers = new HttpHeaders()
-      .append('PearsonSSOSession', this.authToken);
+      .append('PearsonSSOSession', this.authToken)
+      .append('Content-Type', 'application/json');
 
     return this.http.post(`${environment.restBase}/auth/logout`, null, { headers: headers }).pipe(
       tap((user: IPortalUser) => {
