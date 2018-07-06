@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { API } from '../interfaces/api.interface';
-import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
+//import {SwaggerUIBundle, SwaggerUIStandalonePreset} from 'swagger-ui-dist';
+import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 
 export const swaggerUIBundle = SwaggerUIBundle;
 export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
