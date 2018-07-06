@@ -1,13 +1,23 @@
 :host{
     width:100%;
 
-    .container {
-        margin-bottom : 45px;
-    }
+    main {
+        padding: 0px !important;
+        margin: 0px !important;
 
-    /deep/ product-card {
-        .card-text {
-            height:85px;
+        .container {
+            padding-top: 0px !important;
+            margin-bottom : 45px;
+            background: #eeeeee; /* Old browsers */
+            background: -moz-linear-gradient(left, #eeeeee 0%, #f0f0f0 15%, #ffffff 30%, #ffffff 70%, #f0f0f0 85%, #eeeeee 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */
+            border-bottom: 1px solid #ccc;
+
+            .padding {
+                padding: 1rem;
+            }
         }
     }
 }
