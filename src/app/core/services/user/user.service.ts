@@ -92,7 +92,7 @@ export class UserService {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
 
-    return this.http.get<any>(`${environment.restBase}/user`, { headers: headers }).pipe(
+    return this.http.get<any>(`${environment.restBase}/user`, { headers: headers, withCredentials: true}).pipe(
       map((user: IPortalUser) => {
         return this.tapUser(user);
       }),

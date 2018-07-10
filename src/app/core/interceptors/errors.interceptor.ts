@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     errorMessages.push(errorMessage);
                 });
 
-            else
+            else if(errorResponse.error)
                 errorMessages.push(
                     <HttpErrorMessage> {
                         id: new Date().getTime(),

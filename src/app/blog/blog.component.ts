@@ -1,7 +1,8 @@
 import { BlogPost } from './interfaces/blog-post.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-blog',
@@ -11,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class BlogComponent implements OnInit {
 
   @Input() blogs: BlogPost[];
+  
+  public forumURL:SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase );
 
   constructor(
     private activatedRoute : ActivatedRoute,
