@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DocumentationSideNavigationComponent } from './documentation-side-navigation.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DocumentationSideNavigationComponent', () => {
   let component: DocumentationSideNavigationComponent;
@@ -17,7 +18,9 @@ describe('DocumentationSideNavigationComponent', () => {
       providers : [
 
       ],
-      declarations: [ DocumentationSideNavigationComponent ]
+      declarations: [ DocumentationSideNavigationComponent ],
+
+      schemas : [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

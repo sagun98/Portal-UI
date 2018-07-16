@@ -31,7 +31,7 @@ import { AuthTokenInterceptorProivder } from './core/interceptors/auth.intercept
     BlogModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, useHash : true}
+      { enableTracing: false, useHash : false}
     )
   ],
   

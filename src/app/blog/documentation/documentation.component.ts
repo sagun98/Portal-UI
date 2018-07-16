@@ -45,6 +45,6 @@ export class DocumentationComponent implements OnInit {
 
   private scrollTop() {
     const mainElement: HTMLElement = <HTMLElement>this.mainElementRef.nativeElement;
-    mainElement.scrollTop = 0;
+    // mainElement.scrollTop = 0;
   }
 }

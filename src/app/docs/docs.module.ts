@@ -17,6 +17,7 @@ import { ProductResolve } from '../resolves/product.resolve';
 import { ProductsResolve } from '../resolves/products.resolve';
 import { ManageApiModule } from './api/manage-api/manage-api.module';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { ApiSearchModule } from './api-search/api-search.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
     ApiModule,
     ManageApiModule,
     ProductModule,
+    ApiSearchModule,
     SwaggerUiModule,
     SharedModule,
     RouterModule.forChild(documentationRoutes)

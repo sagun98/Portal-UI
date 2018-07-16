@@ -5,6 +5,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductPageComponent } from './product-page.component';
 import { ViewApiComponent } from '../api/view-api/view-api.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ProductPageComponent', () => {
   let component: ProductPageComponent;
@@ -18,7 +19,8 @@ describe('ProductPageComponent', () => {
       ],
       declarations: [ 
         ProductPageComponent
-      ]
+      ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

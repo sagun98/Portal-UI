@@ -15,7 +15,7 @@ export const BlogRoutes: Routes = [
         path : 'documentation/new', component : ManageArticleComponent, data : { saveMethod : 'saveBlogPost' }
     },
     {
-        path : 'documentation', component : DocumentationComponent, data : {category : 'documentation'}, resolve : {
+        path : 'documentation', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : {
             Blogs : BlogsResolve
         },
         children : [

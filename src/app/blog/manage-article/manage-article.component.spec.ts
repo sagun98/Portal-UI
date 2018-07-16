@@ -55,7 +55,12 @@ const mockActivatedRoute = {
     url : [
       {path : 'edit'}
     ]
-  }
+  },
+  paramMap : of({
+    params : {
+      key : 'value'
+    }
+  }) 
 }
 
 describe('ManageArticleComponent', () => {
@@ -123,30 +128,6 @@ describe('ManageArticleComponent', () => {
     });
   });
 
-  it('should require a category and sub category', () => {
-    expect(component.form.get('category').invalid).toBeFalsy()
-    expect(component.form.get('subCategory').invalid).toBeFalsy();
-    
-    component.form.get('category').setValue('');
-    component.form.get('subCategory').setValue('');
-    fixture.detectChanges();
-    
-    expect(component.form.get('category').invalid).toBeTruthy();
-    expect(component.form.get('subCategory').invalid).toBeFalsy();
-    
-    component.form.get('category').setValue('Announcement');
-    fixture.detectChanges();
-    
-    expect(component.form.get('category').invalid).toBeFalsy();
-    expect(component.form.get('subCategory').invalid).toBeFalsy();
-
-    component.form.get('category').setValue('Documentation');
-    fixture.detectChanges();
-
-    expect(component.form.get('category').invalid).toBeFalsy();
-    expect(component.form.get('subCategory').invalid).toBeTruthy();
-  });
-
   it('should update the date/time based on timezone', () => {
     const today = "09/14/2018"
     const newDate: Date = component['setDate'](today);
@@ -156,8 +137,6 @@ describe('ManageArticleComponent', () => {
 
   it('should only submit if the form is valid', () => {
     component.handleSubmit();
-
-    console.log(component.form.invalid);
     
     expect(component.submitted).toBeTruthy();
   })

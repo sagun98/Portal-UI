@@ -1,3 +1,4 @@
+import { ApiSearchComponent } from './api-search/api-search.component';
 import { ViewProductComponent } from './product/view-product/view-product.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductsResolve, ProductsResolveCached } from "../resolves/products.resolve";
@@ -58,6 +59,9 @@ export const documentationRoutes: Routes = [
                 data : {
                     saveMethod : 'addApi'
                 }
+            },
+            {
+                path : 'api/search', component : ApiSearchComponent
             },
             {
                 path: 'api/:apiId', component: ViewApiComponent,

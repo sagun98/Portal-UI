@@ -67,7 +67,7 @@ export class AppComponent implements OnInit{
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
             //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
-            if(error.response.status === 401){
+            if(error.response.status === 401 || error.response.status === 0){
               this.userService.staticLogout();
             }
 

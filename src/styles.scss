@@ -22,6 +22,8 @@ form .form-block>label.error {
 
 .tooltip-validation {
     height : auto !important;
+    
+    input { margin-top: .25rem !important; margin-bottom: .25rem !important; }
 }
 
 .tooltip.tooltip-validation.invalid.textarea:before {

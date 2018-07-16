@@ -1,0 +1,21 @@
+
+<ng-content></ng-content>
+
+<!-- <div class="row" style="height:calc(100vh - 360px);" ngxInfiniteScroller strategy="scrollingToBoth"> -->
+
+<div class="row">
+
+  <div class="col-xs-12" *ngFor="let api of apis">
+    <div class="card" (click)="emitApiSelected(api)">
+      <div class="card-header">
+        {{ api.title }}
+      </div>
+      <div class="card-block">
+          <div class="card-text">
+              {{ api.description }}
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
