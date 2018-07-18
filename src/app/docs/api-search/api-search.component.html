@@ -2,7 +2,7 @@
 
   <h1>API Search</h1>
 
-  <p>Enter the API Name, or a list of keywords to find the API you need.</p>
+  <!-- <p>Enter the API Name, or a list of keywords to find the API you need.</p> -->
 
   <form [formGroup]="form" class="clr-form bottom-spacer-40" (submit)="searchApis()">
     <section class="form-block">
@@ -11,7 +11,7 @@
           <label [className]=" ( form.get('keywords').invalid && ( submitted || form.get('keywords').dirty) ) ? errorClasses + ' tooltip-top-left' : '' ">
             <clr-icon shape="search"></clr-icon>
             
-            <input id="apiName" type="text" name="title" placeholder="Enter API Names or Keywords" formControlName="keywords" />
+            <input id="apiName" autocomplete="off" type="text" name="title" placeholder="Enter the API Name, or a list of keywords to find the API you need." formControlName="keywords" />
             
             <span *ngIf="form.get('keywords').errors && form.get('keywords').errors.required && (submitted || form.get('keywords').dirty)"
               class="tooltip-content">This field cannot be empty!</span>
@@ -32,7 +32,7 @@
 
   <ng-container *ngIf="ApiResults.length">
     <api-search-results [apis]="ApiResults" (apiSelected)="gotoApi($event)">
-        <h3><span class="mr10">Search Results</span> <span class="badge badge-info" style="margin-top:-25px;">{{ ApiResults.length }} Results Found</span></h3>
+        <h3><span class="mr10">Search Results:</span> <span class="badge badge-info" style="margin-top:-25px;">{{ ApiResults.length }} Results Found</span></h3>
     </api-search-results>
   </ng-container>
 </div>

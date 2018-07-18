@@ -6,17 +6,50 @@
         margin: 0px !important;
 
         .container {
-            padding-top: 0px !important;
-            margin-bottom : 45px;
-            background: #eeeeee; /* Old browsers */
-            background: -moz-linear-gradient(left, #eeeeee 0%, #f0f0f0 15%, #ffffff 30%, #ffffff 70%, #f0f0f0 85%, #eeeeee 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(left, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to right, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */
-            border-bottom: 1px solid #ccc;
+            &.banner {
+                padding-top: 0px !important;
+                margin-bottom : 45px;
+                background: #eeeeee; /* Old browsers */
+                background: -moz-linear-gradient(left, #eeeeee 0%, #f0f0f0 15%, #ffffff 30%, #ffffff 70%, #f0f0f0 85%, #eeeeee 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(left, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to right, #eeeeee 0%,#f0f0f0 15%,#ffffff 30%,#ffffff 70%,#f0f0f0 85%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=1 ); /* IE6-9 */
+                border-bottom: 1px solid #ccc;
 
-            .padding {
-                padding: 1rem;
+                .padding {
+                    padding: 1rem;
+
+                    a.pull-left {
+                        margin-left: 20%;
+                    }
+
+                    a.pull-right {
+                        margin-right: 20%;
+                    }
+
+                    @media screen and (max-width : 768px){
+                        a.pull-left {
+                            margin-left: 10%;
+                        }
+    
+                        a.pull-right {
+                            margin-right: 10%;
+                        }
+                    }
+
+                    @media screen and (max-width : 564px){
+                        a {
+                            float: none !important;
+                            margin : 0px !important;
+                            margin-bottom: 20px !important;
+                        }
+                    }
+                }
+            }
+
+            &.main {
+                margin-top: 0px;
+                padding-top: 0px;
             }
         }
     }

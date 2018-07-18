@@ -12,13 +12,78 @@
     }
 }
 
+@media screen and (max-width : 767px) {
+    :host.active-search {
+        .branding {
+            min-width: 0rem;
+            
+            > a {
+                display: none !important;
+            }
+
+            clr-icon {
+                cursor : pointer;
+                display: inline-block;
+                margin-top: 18px;
+                margin-left: 10px;
+            }
+        }
+
+        form.search {
+            position: static;
+
+            > label {
+                width: 100%;
+            }
+
+            .dropdown-menu {
+                position: fixed;
+                top: 58px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                max-height: 100vh;
+            }
+
+            input#portal-search {
+                display: inline-block !important;
+                width: 85%;
+            }
+        }
+    }
+}
+
 :host{
     display: flex;
-
     width: 100%;
-    
+
+    form.search {
+        flex: 1 0 auto;   
+        max-width: initial;
+        opacity: 1;
+
+        .dropdown-menu {
+            visibility: visible;
+            top:calc(100% - 2px);
+            max-width: unset;
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            max-height: calc(100vh - 75px);
+            overflow: scroll;
+            display: block;
+
+            button {
+                max-height: 50px;
+                white-space: normal;
+                line-height: 1rem;
+                height: unset;
+                margin-bottom: 20px;             
+            }
+        }
+    }
+
     .header-nav{
-        flex:1 0 auto;
+        flex:0 1 auto;
         justify-content: flex-end;
 
         clr-dropdown{
@@ -56,6 +121,10 @@
             display:inline-block;
             margin-left:20px;
             margin:0px;
+        }
+
+        clr-icon {
+            display: none;
         }
     }
 
@@ -97,6 +166,11 @@
         .header-nav{
             flex: 0 0 auto;
             justify-content: flex-start;
+
+            clr-dropdown > a {
+                width: 100%;
+                flex: 1 0 auto;
+            }
         }
     }
 }

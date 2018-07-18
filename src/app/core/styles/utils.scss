@@ -31,3 +31,28 @@ body {
 
 .inline { display: inline-block !important; }
 .full { width: 100% !important; }
+
+/* hidden sizes */
+@media screen and (max-width : 767px) {
+    .edit-page-btn {top: 95px;}
+    .hidden-xs { display: none !important;}
+    .visible-xs {display: inline-block !important}
+}
+
+@media screen and (min-width : 768px) and (max-width : 989px) {
+    .visible-xs {display: none !important}
+    .hidden-sm { display: none !important;}
+    .visible-sm {display: inline-block !important}
+}
+
+@media screen and (min-width : 990px) and (max-width : 1199px) {
+    .visible-xs {display: none !important}
+    .hidden-md { display: none !important;}
+    .visible-md {display: inline-block !important}
+}
+
+@media screen and (min-width : 1200px) {
+    .visible-xs {display: none !important}
+    .hidden-lg { display: none !important;}
+    .visible-lg {display: inline-block !important}
+}

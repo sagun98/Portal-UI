@@ -1,16 +1,24 @@
 <div class="branding">
-  <a href="#/home">
+  <a routerLink="/home">
     <img class="clr-icon" src="http://logok.org/wp-content/uploads/2016/01/Pearson-logo-2016-350x350.png" alt="Pearson Developer Network">
     <span class="title">{{ title }}</span>
   </a>
+
+  <clr-icon (click)="hostActiveSearchClass = false" size="25" shape="arrow" dir="left"></clr-icon>
 </div>
 
-<form class="search">
-  <label for="portal-search">
-    <input id="portal-search" placeholder="Search Developer Portal" type="text">
+<form class="search" (submit)="doSearch(form)" #form="ngForm">
+  <label for="portal-search" (click)="activateSearch()">
+    <input #portalSearch id="portal-search" name="keywords" ngModel autocomplete="off" placeholder="Search Developer Portal" type="text">
   </label>
-</form>
 
+  <div class="dropdown-menu" *ngIf="searchResults.length" #globalSearchResults>
+    <h4 class="dropdown-header bottom-spacer-10"><span class="mr10">Search Results:</span> <span class="badge badge-info">{{ searchResults.length }} Results Found</span></h4>
+    <button *ngFor="let searchResult of searchResults" (click)="gotoResult(searchResult)" type="button" class="dropdown-item"><b>{{ searchResult.title }}:</b> {{ searchResult.description }}</button>
+  </div>
+
+  <input type="submit" style="display: none;"/>
+</form>
 
 <div class="header-nav" [clr-nav-level]="2">
 
@@ -33,5 +41,9 @@
   </clr-dropdown-menu>
 
   </clr-dropdown>
+
+  <a *ngIf="loggedIn" class="visible-xs nav-link" id="logout" (click)="logout()" href="javascript:void(0)">
+    <span class="nav-text">Logout</span>
+  </a>
 
 </div>
