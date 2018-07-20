@@ -66,8 +66,15 @@ export class ManageApiComponent implements OnInit {
       reference : [this.api.reference, []],
       swagger : [this.api.swagger, [/* Validators.required */]],
       file : [],
+      tags : [this.UIFormattedTags, []],
       swaggerUrl : [this.api.swaggerUrl]
     });
+  }
+
+  private getServerFormattedTags (tags: any[]) {
+    return tags.map(tag => {
+      return tag.label;
+    })
   }
 
   public saveApi () {
@@ -79,6 +86,8 @@ export class ManageApiComponent implements OnInit {
 
     const apiData = this.form.getRawValue();
 
+    apiData.tags = this.getServerFormattedTags( apiData.tags );
+
     ['overview', 'gettingStarted', 'reference'].forEach(id => {
       apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
     });
@@ -89,6 +98,15 @@ export class ManageApiComponent implements OnInit {
     })
   }
   
+  public get UIFormattedTags () {
+    if(! this.api.tags)
+      return [];
+
+    return this.api.tags.map(tag => {
+      return { label : tag };
+    });
+  }
+
   public cacheApi () {
     if(this.apiService._api_cache_)
       this.apiService.provideCachedVersion.api = true;

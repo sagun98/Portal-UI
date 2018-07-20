@@ -9,5 +9,6 @@ export interface API {
     reference ? : any,
     swagger? : string,
     file? : File,
-    swaggerUrl? : string
+    swaggerUrl? : string,
+    tags? : string[]
 }

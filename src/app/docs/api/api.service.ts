@@ -3,7 +3,7 @@ import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpR
 import { Injectable } from '@angular/core';
 import { Subject, of, Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-import { isNull } from 'util';
+import { isNull, isArray } from 'util';
 import { CRUD } from '../../core/enums/crud.enum';
 import { APIListChange } from './interfaces/apiListChange.interface';
 import { API } from './interfaces/api.interface';
@@ -111,6 +111,9 @@ export class ApiService {
 
       if(htmlKeyTest.test(key) && value === '')
         value = '<p>&nbsp;</p>';
+
+      if(isArray(value))
+        value = JSON.stringify(value);
 
       formData.append(key, value);
     });
