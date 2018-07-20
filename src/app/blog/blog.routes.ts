@@ -23,25 +23,34 @@ export const BlogRoutes: Routes = [
             { path : ':blogId', component : ViewBlogComponent, resolve : { BlogPost : BlogResolve  } }
         ]
     },
+    
     {
         path : 'documentation/:blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost'}, resolve : { BlogPost : BlogResolve }
     },
 
     {
-        path : 'list', component : BlogComponent, data : {category : 'announcement'}, resolve : {Blogs : BlogsResolve}
-    },
-    {
-        path : 'list/new', component : ManageArticleComponent, data : { saveMethod : 'saveBlogPost' }
-    },
-    {
-        path : 'post', component : BlogPostComponent, data : {category : 'announcement'}, resolve : {
-            Blogs : BlogsResolve
-        },
+        path : 'list', component : BlogComponent, data : {category : 'announcement'}, resolve : {Blogs : BlogsResolve} ,
         children : [
-            { path : ':blogId', component : ViewBlogComponent, resolve : { BlogPost : BlogResolve } }
+            {
+                path : '**', component : BlogComponent, data : {category : 'announcement'}, resolve : {Blogs : BlogsResolve} ,
+            }
         ]
     },
-    {
-        path : 'post/:blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost'}, resolve : { BlogPost : BlogResolve }
-    }
+
+    
+    //,
+    // {
+    //     path : 'list/new', component : ManageArticleComponent, data : { saveMethod : 'saveBlogPost' }
+    // },
+    // {
+    //     path : 'post', component : BlogPostComponent, data : {category : 'announcement'}, resolve : {
+    //         Blogs : BlogsResolve
+    //     },
+    //     children : [
+    //         { path : ':blogId', component : ViewBlogComponent, resolve : { BlogPost : BlogResolve } }
+    //     ]
+    // },
+    // {
+    //     path : 'post/:blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost'}, resolve : { BlogPost : BlogResolve }
+    // }
 ]

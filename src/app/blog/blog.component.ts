@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
 export class BlogComponent implements OnInit {
 
   @Input() blogs: BlogPost[];
-  
   public forumURL:SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase );
 
   constructor(
@@ -22,9 +21,14 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(data => {
-      this.blogs = data.Blogs || this.blogs;
-    });
+    // this.activatedRoute.data.subscribe(data => {
+    //   this.blogs = data.Blogs || this.blogs;
+    // });
+
+    if(this.activatedRoute.children.length){
+      const extraPath = this.activatedRoute.children[0].url['value'].join('/');
+      this.forumURL = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase + '/' + extraPath );
+    }
   }
 
   public openBlogPost (blog: BlogPost) {
