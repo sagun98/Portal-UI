@@ -17,6 +17,30 @@
       </div>
 
       <div class="form-group">
+        <label for="title" class="required">Slug</label>
+        <label [className]=" ( form.get('slug').invalid && ( submitted || form.get('slug').dirty) ) ? errorClasses + ' tooltip-top-right' : '' ">
+          <input id="slug" (blur)="slugBlur(form.get('slug').value)" type="text" name="slug" placeholder="Documentation Slug" formControlName="slug" maxlength="100"/>
+          <ng-container *ngIf="( form.get('slug').invalid && ( submitted || form.get('slug').dirty))">
+              <span *ngIf="form.get('slug').errors.required" class="tooltip-content">This field cannot be empty!</span>
+          </ng-container>
+
+          <clr-tooltip *ngIf="form.get('slug').disabled">
+            <clr-icon clrTooltipTrigger class="ml5"  (click)="form.get('slug').enable()"  shape="lock" flip="horizontal"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+                <span>Click unlock to edit this field</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+
+          <clr-tooltip *ngIf="form.get('slug').enabled">
+            <clr-icon clrTooltipTrigger class="ml5" *ngIf="form.get('slug').enabled"  (click)="form.get('slug').disable();" shape="unlock"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+                <span>Click lock to reset the field value</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </label>
+      </div>
+
+      <div class="form-group">
         <label for="author" class="required">Author</label>
         <label>
           <input id="author" type="text" name="author" class="input-sm" placeholder="Enter an author" formControlName="author" disabled="disabled"

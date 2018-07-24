@@ -1,6 +1,7 @@
 export interface BlogPost {
     id? : string,
     title? : string,
+    slug? : string,
     author? : string,
     image? : File,
     allowComments? : boolean,

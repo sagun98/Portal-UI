@@ -1,5 +1,5 @@
+import { SlugUtilityService } from './../../docs/services/slug.service';
 import { ERROR_CLASSES } from './../../core/constants/error-classes.constant';
-import { BlogComponent } from './../blog.component';
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { TINYCMCE_CONFIG } from "../../docs/constants/tinymce.constant";
@@ -7,7 +7,6 @@ import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { UserService } from "../../core/services/user/user.service";
 import { BlogPost } from "../interfaces/blog-post.interface";
 import { BlogService } from "../blog.service";
-import { DatePipe } from '@angular/common';
 import { PortalUser } from '../../core/interfaces/fr-user.interface';
 
 export enum BLOG_CATEGORIES  {
@@ -54,7 +53,7 @@ export class ManageArticleComponent implements OnInit {
     private activatedRoute : ActivatedRoute,
     private userService : UserService,
     private blogService : BlogService,
-    private datePipe : DatePipe
+    private slugUtilityService: SlugUtilityService
   ) { }
 
   ngOnInit() {
@@ -109,6 +108,7 @@ export class ManageArticleComponent implements OnInit {
       id : [this.article.id, []],
       version : [this.article.version, []],
       title : [this.article.title, [Validators.required, Validators.maxLength(100)]],
+      slug : [this.article.slug, [Validators.required, Validators.maxLength(100)]],
       author : [this.article.author, [Validators.required]],
       publicationDate : [this.publicationDateString, [Validators.required]],
       summary : [this.article.summary, [Validators.required, Validators.maxLength(400)]],
@@ -119,6 +119,13 @@ export class ManageArticleComponent implements OnInit {
       allowComments : [this.article.allowComments, [Validators.required]]
     });
 
+    this.form.get('slug').disable();
+
+    this.form.get('title').valueChanges.subscribe(value => {
+      if(this.form.get('slug').disabled)
+        this.form.get('slug').setValue( this.slugUtilityService.formatSlug(value) );
+    });
+
     // Disabled the category form field if its preset
     if(this.form.get('category').value.length)
       this.form.get('category').disable();
@@ -126,6 +133,10 @@ export class ManageArticleComponent implements OnInit {
     this.manageDynamiceValidations();
 
     this.toggleSubCategoryRequired( this.form.get('category').value );
+  }
+
+  public slugBlur (value : string) {
+    this.form.get('slug').setValue( this.slugUtilityService.formatSlug(value) );
   }
 
   // Handle changing validators
