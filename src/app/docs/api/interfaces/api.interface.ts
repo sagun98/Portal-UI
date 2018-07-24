@@ -3,6 +3,7 @@ export interface API {
     version? : number,
     title? : string,
     name : string,
+    slug? : string,
     description : string,
     overview ? : any,
     gettingStarted ?: any,

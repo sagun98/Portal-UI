@@ -1,14 +1,13 @@
-import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
-import { ProductComponentBase } from '../product.class';
 import { Product } from '../interfaces/product.interface';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { API } from '../../api/interfaces/api.interface';
 import { ApiService } from '../../api/api.service';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
+import { SlugUtilityService } from '../../services/slug.service';
 
 
 @Component({
@@ -33,6 +32,7 @@ export class ManageProductComponent implements OnInit{
     protected productService: ProductService,
     protected apiService : ApiService,
     protected formBuilder: FormBuilder,
+    protected slugUtilService : SlugUtilityService,
     protected router : Router
   ) { }
 
@@ -61,9 +61,17 @@ export class ManageProductComponent implements OnInit{
       id: [this.product.id],
       version: [this.product.version, []],
       name: [this.product.name, [Validators.required]],
+      slug: [this.product.slug, [Validators.required]],
       description: [this.product.description, [Validators.required]],
       overview: [this.product.overview],
       apis: [this.product.apis, [Validators.required]]
+    });
+
+    this.form.get('slug').disable();
+
+    this.form.get('name').valueChanges.subscribe(value => {
+      if(this.form.get('slug').disabled)
+        this.form.get('slug').setValue( this.slugUtilService.formatSlug(value) );
     });
   }
 

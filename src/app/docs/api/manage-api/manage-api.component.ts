@@ -67,14 +67,33 @@ export class ManageApiComponent implements OnInit {
       swagger : [this.api.swagger, [/* Validators.required */]],
       file : [],
       tags : [this.UIFormattedTags, []],
+      slug : [this.api.slug, [Validators.required]],
       swaggerUrl : [this.api.swaggerUrl]
     });
+
+    this.form.get('slug').disable();
+
+    this.form.get('name').valueChanges.subscribe(name => {
+      if( this.form.get('slug').disabled )
+        this.setSlugValue(name);
+    })
   }
 
   private getServerFormattedTags (tags: any[]) {
     return tags.map(tag => {
       return tag.label;
     })
+  }
+
+  private setSlugValue (name?: string) {
+    name = name || this.form.get('name').value;
+    let slug = name.replace(/[^A-Za-z0-9\s]/gi, '').replace(/\s+/gi, "_").toLowerCase();
+    const lastCharacter = slug.substring(slug.length - 1, slug.length);
+
+    if(lastCharacter === '_')
+      slug = slug.substring(0, slug.length - 1);
+
+    this.form.get('slug').setValue(slug);
   }
 
   public saveApi () {

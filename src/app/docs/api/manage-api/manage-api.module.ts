@@ -1,3 +1,4 @@
+import { ClarityModule } from '@clr/angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -11,6 +12,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    ClarityModule,
     EditorModule,
     NgSelectModule,
     RouterModule

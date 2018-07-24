@@ -16,6 +16,31 @@
       </div>
 
       <div class="form-group">
+        <label for="productName" class="required">Slug</label>
+
+        <label [className]=" ( form.get('slug').invalid && ( submitted || form.get('slug').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="apiName" type="text" name="title" placeholder="Enter API Name" formControlName="slug" />
+          
+          <clr-tooltip *ngIf="form.get('slug').disabled">
+              <clr-icon clrTooltipTrigger class="ml5"  (click)="form.get('slug').enable()"  shape="lock" flip="horizontal"></clr-icon>
+              <clr-tooltip-content *clrIfOpen>
+                  <span>Click unlock to edit this field</span>
+              </clr-tooltip-content>
+          </clr-tooltip>
+
+          <clr-tooltip *ngIf="form.get('slug').enabled">
+            <clr-icon clrTooltipTrigger class="ml5" *ngIf="form.get('slug').enabled"  (click)="form.get('slug').disable();" shape="unlock"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+                <span>Click lock to reset the field value</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+
+          
+          <span *ngIf="form.get('slug').errors && form.get('slug').errors.required && (submitted || form.get('slug').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+      <div class="form-group">
         <label for="productName" class="required">Description</label>
 
         <label for="productDescription" [className]=" (form.get('description').invalid && (submitted || form.get('description').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
