@@ -1,5 +1,5 @@
-import { ApiService } from './../../../docs/api/api.service';
-import { ProductService, } from './../../../docs/product/product.service';
+import { ApiService } from '../../../docs/api/api.service';
+import { ProductService, } from '../../../docs/product/product.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { API } from '../../../docs/api/interfaces/api.interface';

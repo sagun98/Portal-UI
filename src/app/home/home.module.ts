@@ -1,5 +1,5 @@
-import { SharedModule } from './../shared/shared.module';
-import { ApisResolve } from './../resolves/apis.resolve';
+import { SharedModule } from '../shared/shared.module';
+import { ApisResolve } from '../resolves/apis.resolve';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
@@ -21,7 +21,7 @@ import { ProductsResolve } from '../resolves/products.resolve';
   declarations: [HomeComponent],
   
   exports : [
-    HomeComponent 
+    HomeComponent
   ],
   
   schemas : [CUSTOM_ELEMENTS_SCHEMA]

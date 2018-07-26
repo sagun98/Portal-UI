@@ -1,7 +1,7 @@
-import { ViewApiComponent } from './../../api/view-api/view-api.component';
+import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
-import { ApiService } from './../../api/api.service';
-import { API } from './../../api/interfaces/api.interface';
+import { ApiService } from '../../api/api.service';
+import { API } from '../../api/interfaces/api.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { ActivatedRoute } from '@angular/router';

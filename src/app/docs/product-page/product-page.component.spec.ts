@@ -1,6 +1,6 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { SharedModule } from './../../shared/shared.module';
-import { ProductCardComponent } from './../../shared/product-card/product-card.component';
+import { SharedModule } from '../../shared/shared.module';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductPageComponent } from './product-page.component';

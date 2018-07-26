@@ -31,8 +31,8 @@
     "@webcomponents/custom-elements": "^1.0.0",
     "core-js": "^2.5.4",
     "ngx-toastr": "^8.8.0",
-    "rxjs": "^6.0.0",
-    "rxjs-compat": "^6.1.0",
+    "rxjs": "^6.2.2",
+    "rxjs-compat": "^6.2.2",
     "swagger-ui-dist": "^3.17.1",
     "tinymce": "^4.7.13",
     "zone.js": "^0.8.26"

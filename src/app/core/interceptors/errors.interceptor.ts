@@ -1,6 +1,6 @@
-import { HttpErrorsService } from './../services/http-errors/http-errors.service';
+import { HttpErrorsService } from '../services/http-errors/http-errors.service';
 import { catchError } from 'rxjs/operators';
-import { HttpErrorMessage } from './../interfaces/http-error.interface';
+import { HttpErrorMessage } from '../interfaces/http-error.interface';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Observable, Subject, of, throwError } from "rxjs";
 import { Injectable } from "@angular/core";

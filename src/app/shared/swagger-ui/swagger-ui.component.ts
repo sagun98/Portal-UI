@@ -1,6 +1,6 @@
-import { SlideInOutAnimation } from './../../core/animations/animations';
+import { SlideInOutAnimation } from '../../core/animations/animations';
 import { ActivatedRoute } from '@angular/router';
-import { PageNotFoundComponent } from './../../core/layouts/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from '../../core/layouts/page-not-found/page-not-found.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { SwaggerUiService } from './swagger-ui.service';
 

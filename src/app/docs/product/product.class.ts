@@ -1,4 +1,4 @@
-import { TINYCMCE_CONFIG } from './../constants/tinymce.constant';
+import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
 import { ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { ProductService } from './product.service';

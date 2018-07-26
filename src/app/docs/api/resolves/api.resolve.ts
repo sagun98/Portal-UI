@@ -1,4 +1,4 @@
-import { ApiService } from './../api.service';
+import { ApiService } from '../api.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 export class ApiResolve implements Resolve<any> {

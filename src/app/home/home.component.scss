@@ -2,11 +2,15 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: calc(100vh - 96px);
+    overflow: auto;
 
     main {
         padding: 0px !important;
         margin: 0px !important;
+        overflow-y: visible !important;
+        min-height: 750px;
+        height: 100%;
 
         .container {
 
@@ -72,7 +76,6 @@
             &.main {
                 margin-top: 0px;
                 padding-top: 0px;
-                border-bottom: 1px solid #ccc;
 
                 a.goto {
                     position: absolute;

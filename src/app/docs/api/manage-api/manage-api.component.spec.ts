@@ -1,5 +1,5 @@
-import { SwaggerUiComponent } from './../../../shared/swagger-ui/swagger-ui.component';
-import { ApiService } from './../api.service';
+import { SwaggerUiComponent } from '../../../shared/swagger-ui/swagger-ui.component';
+import { ApiService } from '../api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

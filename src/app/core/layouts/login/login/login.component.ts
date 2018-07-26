@@ -1,7 +1,7 @@
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpErrorsService } from './../../../services/http-errors/http-errors.service';
-import { UserService, FRCredentials } from './../../../services/user/user.service';
+import { HttpErrorsService } from '../../../services/http-errors/http-errors.service';
+import { UserService, FRCredentials } from '../../../services/user/user.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';

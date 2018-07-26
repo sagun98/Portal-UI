@@ -1,5 +1,5 @@
 import { ApiModule } from './api/api.module';
-import { ApisResolve } from './../resolves/apis.resolve';
+import { ApisResolve } from '../resolves/apis.resolve';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocsComponent } from './docs.component';

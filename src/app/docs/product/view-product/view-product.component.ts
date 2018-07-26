@@ -1,4 +1,4 @@
-import { ApiService } from './../../api/api.service';
+import { ApiService } from '../../api/api.service';
 import { Component } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';

@@ -1,6 +1,6 @@
-import { UserCardComponent } from './../user-card/user-card.component';
+import { UserCardComponent } from '../user-card/user-card.component';
 import { Router } from '@angular/router';
-import { SearchService } from './../../../docs/api-search/search.service';
+import { SearchService } from '../../../docs/api-search/search.service';
 import { Component, OnInit, Input, HostBinding, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Subject, Observable, Subscription } from 'rxjs';
