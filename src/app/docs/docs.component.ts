@@ -16,6 +16,7 @@ export class DocsComponent implements OnInit {
   public products: Product[] = [];
   public selectedApiId: string = '';
   public selectedProductId: string = '';
+  public selectedSlug: string = '';
   public routeChange: boolean = true;
   @ViewChild('main') mainElementRef: ElementRef;
 
@@ -59,6 +60,7 @@ export class DocsComponent implements OnInit {
   private setParams(params){
     this.selectedApiId = params.apiId;
     this.selectedProductId = params.productId;
+    this.selectedSlug = params.apiId || params.productId
   }
 
   private scrollTop () {

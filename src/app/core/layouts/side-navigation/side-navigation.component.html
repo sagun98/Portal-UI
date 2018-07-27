@@ -11,7 +11,7 @@
 
     <ul class="nav-list">
       <li *ngFor="let product of products">
-        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/product/' +  product.id " [ngClass]="{'active' : selectedProductId === product.id }">
+        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/product/' +  product.slug " [ngClass]="{'active' : (selectedSlug === product.slug || selectedProductId === product.id) }">
           {{product.name}}
         </a>
       </li>
@@ -33,7 +33,7 @@
         <input id="api-search" [(ngModel)]="apiFilter" placeholder="Search APIs" type="text" style="width:100%;">
       </li>
       <li *ngFor="let api of apisFiltered">
-        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/api/' +  api.id " [ngClass]="{'active' : (selectedApiId == api.id) }">
+        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/api/' +  api.slug " [ngClass]="{'active' : (selectedSlug === api.slug || selectedApiId == api.id) }">
           {{ api.name }}
         </a>
       </li>

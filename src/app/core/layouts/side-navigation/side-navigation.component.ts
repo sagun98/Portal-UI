@@ -22,6 +22,7 @@ export class SideNavigationComponent implements OnInit {
   @Input() apis: API[] = [];
   @Input() selectedApiId: string = '';
   @Input() selectedProductId: string = '';
+  @Input() selectedSlug: string = '';
 
   @Output() onItemSelected: EventEmitter<any>  = new EventEmitter<any>();
 

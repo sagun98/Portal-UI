@@ -71,7 +71,7 @@
 
         <ul class="list-unstyled ml20 bottom-spacer-20">
           <li *ngFor="let blog of forumBlogs" class="bottom-spacer-10">
-            <a [routerLink]="'/blog/list/topic/' + blog.slug">{{ blog.title }}</a>
+            <a [routerLink]="'/forum/topic/' + blog.slug">{{ blog.title }}</a>
           </li>
         </ul>
       </div>
@@ -122,7 +122,7 @@
 
         <ul class="list-unstyled ml20 bottom-spacer-20">
           <li *ngFor="let blog of supportForums" class="bottom-spacer-10">
-            <a [routerLink]="'/blog/list/topic/' + blog.slug">{{ blog.title }}</a>
+            <a [routerLink]="'/forum/topic/' + blog.slug">{{ blog.title }}</a>
           </li>
         </ul>
       </div>
