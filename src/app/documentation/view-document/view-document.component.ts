@@ -18,7 +18,6 @@ export class ViewDocumentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.activatedRoute.data.subscribe(data => {
       this.blogPost = data.BlogPost || this.blogPost;
     })
@@ -28,5 +27,4 @@ export class ViewDocumentComponent implements OnInit {
   public get safeBlogPost () {
     return this.domSanitizer.bypassSecurityTrustHtml( this.blogPost.content );
   }
-
 }

@@ -7,7 +7,6 @@ import { ApiSearchComponent } from './api-search.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { SearchService } from './search.service';
 import { of } from 'rxjs/observable/of';
-import { ExpandOperator } from 'rxjs/internal/operators/expand';
 
 export const SearchResultsTest = [
   {itemId : 1234, title : 'test 1', description : 'testing 1234'},

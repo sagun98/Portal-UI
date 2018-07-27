@@ -6,7 +6,6 @@ import { SwaggerUiComponent } from './swagger-ui.component';
 import { BodyParamsComponent } from './body-params/body-params.component';
 import { PathParamsComponent } from './path-params/path-params.component';
 import { SwaggerUiService } from './swagger-ui.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/observable/of';
 
 describe('SwaggerUiComponent', () => {
