@@ -1,7 +1,6 @@
-
+import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/internal/operators/tap';
 import { Subject, of } from 'rxjs';
 import { ProductListChange } from './interfaces/product-list-change.interface';
 import { CRUD } from '../../core/enums/crud.enum';

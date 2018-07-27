@@ -99,7 +99,7 @@ export class HeaderComponent implements OnInit {
   public gotoResult (result : any) {
 
     const url = (result.type === 'PRODUCT') ? '/docs/product/' + result.itemId :
-                (result.type === 'BLOG') ? '/blog/documentation/' + result.itemId :
+                (result.type === 'BLOG') ? '/documentation/' + result.itemId :
                 (result.type === 'API') ? '/docs/api/' + result.itemId : '';
 
     console.log(url);

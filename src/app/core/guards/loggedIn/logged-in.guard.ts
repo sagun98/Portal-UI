@@ -1,10 +1,8 @@
+import { Observable } from 'rxjs/Observable';
 import { FailedNavigation, FAILED_NAVIGATION_TYPE } from '../../services/user/user.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { UserService } from '../../services/user/user.service';
-import { PortalUser } from '../../interfaces/fr-user.interface';
-import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

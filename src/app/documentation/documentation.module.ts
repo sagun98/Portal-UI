@@ -1,24 +1,24 @@
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocumentationComponent } from './documentation.component';
-import { DocumentationRoutes, DocumentationRoutingModule } from './documentation.routes';
+import { DocumentationRoutingModule } from './documentation.routes';
 import { DocumentationSideNavigationComponent } from './documentation-side-navigation/documentation-side-navigation.component';
 import { DocumentationLandingPageComponent } from './documentation-landing-page/documentation-landing-page.component';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { ManageArticleComponent } from './manage-article/manage-article.component';
 
+
 @NgModule({
   imports: [
+    DocumentationRoutingModule,
     CommonModule,
     ClarityModule,
     FormsModule,
     ReactiveFormsModule,
-    DocumentationRoutingModule,
     EditorModule,
     NgSelectModule
   ],
@@ -34,7 +34,9 @@ import { ManageArticleComponent } from './manage-article/manage-article.componen
   exports : [
     DocumentationComponent,
     DocumentationSideNavigationComponent,
-    DocumentationLandingPageComponent
+    DocumentationLandingPageComponent,
+    ViewDocumentComponent,
+    ManageArticleComponent
   ],
 
   schemas : [CUSTOM_ELEMENTS_SCHEMA]

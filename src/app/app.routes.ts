@@ -1,6 +1,5 @@
-// import { ManageArticleComponent } from './blog/manage-article/manage-article.component';
 import { PageNotFoundComponent } from "./core/layouts/page-not-found/page-not-found.component";
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoggedInGuard } from "./core/guards/loggedIn/logged-in.guard";
 import { NodeBBBlogsResolve } from './resolves/blogs.resolve';
 import { NgModule } from '@angular/core';
@@ -19,12 +18,11 @@ export const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-
 @NgModule({
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, useHash : false}
+      { enableTracing: false, preloadingStrategy : PreloadAllModules, useHash : false}
     )
   ],
   exports: [RouterModule],

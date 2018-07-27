@@ -4,7 +4,6 @@ import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
-import { Subject } from 'rxjs/internal/Subject';
 import { ProductService } from '../product.service';
 import { Product } from '../interfaces/product.interface';
 
