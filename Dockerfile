@@ -1,5 +1,5 @@
 # base image
-FROM debian
+FROM node:8.11.3
 
 # set working directory
 RUN mkdir /app
@@ -13,10 +13,6 @@ COPY *.json /app/
 COPY nginx.conf /app/
 COPY scripts /app/scripts
 COPY src /app/src
-#COPY nodejs_8.11.2-1nodesource1_amd64.deb /app/
-
-#RUN apt-get update && dpkg -i nodejs_8.11.2-1nodesource1_amd64.deb; exit 0 
-#RUN apt-get install -f -y
 
 RUN apt-get update
 RUN apt-get install nginx -y
