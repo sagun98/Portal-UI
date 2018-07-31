@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { SubNavigationComponent } from './sub-navigation/sub-navigation.component';
 import { LoginComponent } from './login/login/login.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { CoreSharedModule } from '../core-shared/core-shared.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     FormsModule,
     ReactiveFormsModule,
     ClarityModule,
-    RouterModule
+    RouterModule,
+    CoreSharedModule
   ],
   declarations: [
     SideNavigationComponent, 

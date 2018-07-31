@@ -16,7 +16,7 @@ import { AuthTokenInterceptorProivder } from './core/interceptors/auth.intercept
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   
   imports: [

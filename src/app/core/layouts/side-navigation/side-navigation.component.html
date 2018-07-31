@@ -4,7 +4,7 @@
     <input id="tab1" type="checkbox">
 
     <label for="tab1">Products 
-      <button class="btn btn-sm btn-link pull-right" (click)="addProduct($event)">
+      <button class="btn btn-sm btn-link pull-right" (click)="addProduct($event)" [hasPermission]="[permissions.PRODUCT.CREATE]">
           Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
         </button>
     </label>
@@ -23,7 +23,7 @@
     
     <label for="apis">
       APIs 
-      <button class="btn btn-sm btn-link pull-right" (click)="addApi($event)">
+      <button class="btn btn-sm btn-link pull-right" (click)="addApi($event)" [hasPermission]="[permissions.API.CREATE]">
         Add <clr-icon shape="plus-circle" title="Add API"></clr-icon>
       </button>
     </label>
