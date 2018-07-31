@@ -1,8 +1,8 @@
-import { SlugUtilityService } from './../../docs/services/slug.service';
-import { DocumentationService } from './../documentation.service';
-import { UserService } from './../../core/services/user/user.service';
+import { SlugUtilityService } from '../../docs/services/slug.service';
+import { DocumentationService } from '../documentation.service';
+import { UserService } from '../../core/services/user/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PortalUser } from './../../core/interfaces/fr-user.interface';
+import { PortalUser } from '../../core/interfaces/fr-user.interface';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';

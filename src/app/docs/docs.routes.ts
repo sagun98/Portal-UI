@@ -10,6 +10,7 @@ import { ManageApiComponent } from './api/manage-api/manage-api.component';
 import { ViewApiComponent } from './api/view-api/view-api.component';
 import { ManageProductComponent } from './product/manage-product/manage-product.component';
 import { ApiResolve } from './api/resolves/api.resolve';
+import { RoleCheckGuard } from '../core/guards/role-check/role-check.guard';
 
 export const documentationRoutes: Routes = [
     {
@@ -70,12 +71,13 @@ export const documentationRoutes: Routes = [
                 }
             },
             {
-                path : 'api/:apiId/edit', component : ManageApiComponent,
+                path : 'api/:apiId/edit', component : ManageApiComponent, canActivate : [RoleCheckGuard],
                 resolve: {
                     api: ApiResolve
                 },
                 data : {
-                    saveMethod : 'updateApi'
+                    saveMethod : 'updateApi',
+                    permissions : ['API_UPDATE']
                 }
             },
         ]

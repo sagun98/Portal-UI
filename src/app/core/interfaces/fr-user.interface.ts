@@ -6,7 +6,7 @@ export interface IPortalUser {
     firstName? : string,
     lastName? : string,
     roles? : UserRole[],
-    token?: string
+    token?: string,
 }
 
 export class PortalUser {
@@ -45,5 +45,12 @@ export class PortalUser {
 
 export interface UserRole {
     name?: string,
+    id? : string,
+    privileges : Privilege[]
+}
+
+export interface Privilege {
+    name? : string,
+    authority? : string,
     id? : string
 }

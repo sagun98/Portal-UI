@@ -1,3 +1,4 @@
+import { USER_PERMISSIONS } from '../../enums/user-permissions.enum';
 import { ApiService } from '../../../docs/api/api.service';
 import { ProductService, } from '../../../docs/product/product.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -7,7 +8,6 @@ import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interf
 import { CRUD } from '../../enums/crud.enum';
 import { Product } from '../../../docs/product/interfaces/product.interface';
 import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
-
 
 @Component({
   selector: 'side-navigation',
@@ -31,6 +31,10 @@ export class SideNavigationComponent implements OnInit {
     private apiService: ApiService,
     private productService : ProductService
   ) { }
+
+  public get permissions () : any {
+    return USER_PERMISSIONS;
+  }
 
   ngOnInit() {
     this.apiService.$onApiListChanged.subscribe( (apiListChange : APIListChange) => {

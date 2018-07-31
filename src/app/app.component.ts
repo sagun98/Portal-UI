@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { PermissionsService } from './core/services/permissions/permissions.service';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { UserService, FailedNavigation, FAILED_NAVIGATION_TYPE } from './core/services/user/user.service';
 import { HttpErrorMessage } from './core/interfaces/http-error.interface';
 import { Component, OnInit } from '@angular/core';
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit{
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService,
     private userService: UserService,
+    private permissionsService : PermissionsService,
     private router : Router
   ){}
 
@@ -35,6 +37,11 @@ export class AppComponent implements OnInit{
     setTimeout(t => {
 
       this.userService.setLoggedInState();
+
+      this.permissionsService.onForbiddenRouteAttempt.subscribe( (route : ActivatedRouteSnapshot) => {
+        alert('You have attempted to access a forbidden resource');
+        this.router.navigate([`/home`]);
+      });
 
       this.userService.$onUnAuthenticatedNavigationAttempt.subscribe( (failedNav : FailedNavigation) => {
         if(! failedNav)
