@@ -11,5 +11,12 @@ export interface API {
     swagger? : string,
     file? : File,
     swaggerUrl? : string,
-    tags? : string[]
+    tags? : string[],
+    userPrivileges? : FineGrainedPrivilege[]
+}
+
+export interface FineGrainedPrivilege {
+    id?: string,
+    username?: string,
+    permissions?: string[]
 }

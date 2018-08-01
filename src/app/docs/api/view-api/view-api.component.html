@@ -1,6 +1,6 @@
 <div class="container">
 
-  <a class="btn btn-sm edit-page-btn" routerLink="edit">
+  <a class="btn btn-sm edit-page-btn" routerLink="edit" [hasPermission]="[permissions.API.UPDATE]" *ngIf="canEditThisApi">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
   </a>
 

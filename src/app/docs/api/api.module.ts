@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewApiComponent } from './view-api/view-api.component';
 import { ApiResolve } from './resolves/api.resolve';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ApiResolve } from './resolves/api.resolve';
     SwaggerUiModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreSharedModule,
     RouterModule
   ],
   providers : [

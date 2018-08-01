@@ -1,7 +1,9 @@
+import { UserService } from './../../../core/services/user/user.service';
+import { USER_PERMISSIONS } from './../../../core/enums/user-permissions.enum';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { API } from '../interfaces/api.interface';
+import { API, FineGrainedPrivilege } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 
 export const swaggerUIBundle = SwaggerUIBundle;
@@ -18,8 +20,9 @@ export class ViewApiComponent implements OnInit {
 
   constructor(
     private activatedRoute : ActivatedRoute,
+    private userService : UserService,
     private domSanitizer: DomSanitizer,
-  ) { }
+  ){ }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
@@ -27,6 +30,24 @@ export class ViewApiComponent implements OnInit {
 
       this.setSwaggerUI();
     });
+  }
+
+  public get permissions () {
+    return USER_PERMISSIONS
+  }
+
+  public get canEditThisApi () {
+    let matches = false;
+
+    if(this.api.userPrivileges) {
+      this.api.userPrivileges.forEach( (fineGrainedPrivilege: FineGrainedPrivilege) =>  {
+        fineGrainedPrivilege.permissions.forEach(permission => {
+          if(permission === 'MODIFY' && (fineGrainedPrivilege.username === this.userService.staticUser.username) )
+            matches = true;
+        });
+      });
+    }
+    return matches;
   }
 
   private setSwaggerUI () {

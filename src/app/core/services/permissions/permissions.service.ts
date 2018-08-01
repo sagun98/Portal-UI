@@ -15,10 +15,7 @@ export class PermissionsService {
   public matchesAnyPermissions(permissionsToTest: string[], userRoles: UserRole[]) : boolean {
     let matches = false;
 
-    if (! userRoles || ! userRoles.length)
-      matches = false;
-
-    else
+    if(userRoles && userRoles.length)
       for (let i = 0; i < userRoles.length; i++) {
 
         const permissionsList = userRoles[i].privileges.map(p => { return p.authority; });
@@ -28,9 +25,6 @@ export class PermissionsService {
           matches = true;
           break;
         }
-        // console.log(this.hasPermission);
-        // console.log(permissionsList)
-        // console.log(intersection);
       }
 
     return matches
