@@ -1,5 +1,6 @@
-import { UserService } from './../../../core/services/user/user.service';
-import { USER_PERMISSIONS } from './../../../core/enums/user-permissions.enum';
+import { ENTITY_PERMISSIONS } from './../../../core/enums/user-permissions.enum';
+import { UserService } from '../../../core/services/user/user.service';
+import { USER_PERMISSIONS } from '../../../core/enums/user-permissions.enum';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -32,8 +33,12 @@ export class ViewApiComponent implements OnInit {
     });
   }
 
-  public get permissions () {
+  public get permissions () : any {
     return USER_PERMISSIONS
+  }
+
+  public get entityPermissions () {
+    return ENTITY_PERMISSIONS;
   }
 
   public get canEditThisApi () {

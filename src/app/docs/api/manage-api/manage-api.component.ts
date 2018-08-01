@@ -68,7 +68,8 @@ export class ManageApiComponent implements OnInit {
       file : [],
       tags : [this.UIFormattedTags, []],
       slug : [this.api.slug, [Validators.required]],
-      swaggerUrl : [this.api.swaggerUrl]
+      swaggerUrl : [this.api.swaggerUrl],
+      userPrivileges : [this.api.userPrivileges]
     });
 
     this.form.get('slug').disable();

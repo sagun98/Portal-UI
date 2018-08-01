@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs';
-import { UserRole } from './../../interfaces/fr-user.interface';
+import { UserRole } from '../../interfaces/fr-user.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({

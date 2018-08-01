@@ -1,5 +1,5 @@
-import { PermissionsService } from './../../services/permissions/permissions.service';
-import { PortalUser } from './../../interfaces/fr-user.interface';
+import { PermissionsService } from '../../services/permissions/permissions.service';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 import { Observable } from 'rxjs/Observable';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
