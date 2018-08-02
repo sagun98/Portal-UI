@@ -1,6 +1,6 @@
 <div class="container">
 
-    <a class="btn btn-sm edit-page-btn" routerLink="new">
+    <a class="btn btn-sm edit-page-btn" routerLink="new" [hasPermission]="[permissions?.PRODUCT?.DELETE]">
       <clr-icon shape="plus" class="is-solid"></clr-icon> Add Product
     </a>
 

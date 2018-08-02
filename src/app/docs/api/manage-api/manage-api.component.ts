@@ -1,3 +1,4 @@
+import { EntityComponent } from './../../../core/classes/EntityComponent';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,7 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { API } from '../interfaces/api.interface';
-import { HttpErrorsService } from '../../../core/services/http-errors/http-errors.service';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -19,9 +19,10 @@ enum SWAGGER_UPLOAD_OPTION {
   templateUrl: './manage-api.component.html',
   styleUrls: ['./manage-api.component.scss']
 })
-export class ManageApiComponent implements OnInit {
+export class ManageApiComponent extends EntityComponent implements OnInit {
 
-  @Input() api: API = {name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null};
+  @Input() api: API = {name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : []};
+  
   public errorClasses = ERROR_CLASSES;
   public form: FormGroup;
   public submitted: boolean = false;
@@ -36,7 +37,9 @@ export class ManageApiComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router : Router,
     private toastrService: ToastrService
-  ) { }
+  ) {
+    super();
+  }
 
   public get title () {
     const title = (this.api.id) ? `Edit ${this.api.name}` : "Create New API";
@@ -77,7 +80,10 @@ export class ManageApiComponent implements OnInit {
     this.form.get('name').valueChanges.subscribe(name => {
       if( this.form.get('slug').disabled )
         this.setSlugValue(name);
-    })
+    });
+
+    if ( this.api.id && (! this.api.userPrivileges || ! this.api.userPrivileges.length))
+      this.form.disable();
   }
 
   private getServerFormattedTags (tags: any[]) {
@@ -114,7 +120,7 @@ export class ManageApiComponent implements OnInit {
 
     this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
       this.cacheApi();
-      this.router.navigate([`/docs/api/${api.id}`]);
+      this.router.navigate([`/docs/api/${api.slug}`]);
     })
   }
   

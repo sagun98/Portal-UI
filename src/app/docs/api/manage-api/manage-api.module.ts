@@ -1,3 +1,4 @@
+import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
 import { ClarityModule } from '@clr/angular';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
     ClarityModule,
     EditorModule,
     NgSelectModule,
-    RouterModule
+    RouterModule,
+    CoreSharedModule
   ],
   declarations: [
     ManageApiComponent

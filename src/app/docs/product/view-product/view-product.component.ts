@@ -6,13 +6,15 @@ import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { ProductService } from '../product.service';
 import { Product } from '../interfaces/product.interface';
+import { USER_PERMISSIONS, ENTITY_PERMISSIONS } from '../../../core/enums/user-permissions.enum';
+import { EntityComponent } from '../../../core/classes/EntityComponent';
 
 @Component({
   selector: 'app-view-product',
   templateUrl: './view-product.component.html',
   styleUrls: ['./view-product.component.scss']
 })
-export class ViewProductComponent {
+export class ViewProductComponent extends EntityComponent {
 
   public activeApi: API;
   public product: Product;
@@ -22,7 +24,9 @@ export class ViewProductComponent {
     protected activatedRoute: ActivatedRoute,
     protected productService: ProductService,
     protected apiService : ApiService,
-  ) { }
+  ) { 
+    super(); 
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {

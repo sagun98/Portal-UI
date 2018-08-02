@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ApiModule } from '../api/api.module';
 import { ViewProductComponent } from './view-product/view-product.component';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ViewProductComponent } from './view-product/view-product.component';
     NgSelectModule,
     ClarityModule,
     ApiModule,
+    CoreSharedModule,
     RouterModule
   ],
   declarations: [

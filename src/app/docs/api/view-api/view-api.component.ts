@@ -1,11 +1,11 @@
-import { ENTITY_PERMISSIONS } from './../../../core/enums/user-permissions.enum';
 import { UserService } from '../../../core/services/user/user.service';
-import { USER_PERMISSIONS } from '../../../core/enums/user-permissions.enum';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { API, FineGrainedPrivilege } from '../interfaces/api.interface';
+import { API } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
+import { EntityComponent } from '../../../core/classes/EntityComponent';
+import { Privilege } from '../../../core/interfaces/permissible.interface';
 
 export const swaggerUIBundle = SwaggerUIBundle;
 export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
@@ -15,7 +15,7 @@ export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
   templateUrl: './view-api.component.html',
   styleUrls: ['./view-api.component.scss']
 })
-export class ViewApiComponent implements OnInit {
+export class ViewApiComponent extends EntityComponent implements OnInit {
 
   @Input() api: API = null;
 
@@ -23,7 +23,9 @@ export class ViewApiComponent implements OnInit {
     private activatedRoute : ActivatedRoute,
     private userService : UserService,
     private domSanitizer: DomSanitizer,
-  ){ }
+  ){
+    super(); 
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
@@ -33,19 +35,11 @@ export class ViewApiComponent implements OnInit {
     });
   }
 
-  public get permissions () : any {
-    return USER_PERMISSIONS
-  }
-
-  public get entityPermissions () {
-    return ENTITY_PERMISSIONS;
-  }
-
   public get canEditThisApi () {
     let matches = false;
 
     if(this.api.userPrivileges) {
-      this.api.userPrivileges.forEach( (fineGrainedPrivilege: FineGrainedPrivilege) =>  {
+      this.api.userPrivileges.forEach( (fineGrainedPrivilege: Privilege) =>  {
         fineGrainedPrivilege.permissions.forEach(permission => {
           if(permission === 'MODIFY' && (fineGrainedPrivilege.username === this.userService.staticUser.username) )
             matches = true;

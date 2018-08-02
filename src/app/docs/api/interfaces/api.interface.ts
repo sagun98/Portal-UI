@@ -1,4 +1,6 @@
-export interface API {
+import { PermissibleEntity } from "../../../core/interfaces/permissible.interface";
+
+export interface API extends PermissibleEntity{
     id? : string,
     version? : number,
     title? : string,
@@ -12,11 +14,4 @@ export interface API {
     file? : File,
     swaggerUrl? : string,
     tags? : string[],
-    userPrivileges? : FineGrainedPrivilege[]
-}
-
-export interface FineGrainedPrivilege {
-    id?: string,
-    username?: string,
-    permissions?: string[]
 }

@@ -1,6 +1,6 @@
 export interface PermissibleEntity {
     userPrivileges : Privilege[],
-    [propName: string]: any;
+    [propName: string] : any;
 }
 
 export interface Privilege {

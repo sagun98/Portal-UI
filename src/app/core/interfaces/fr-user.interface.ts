@@ -46,10 +46,10 @@ export class PortalUser {
 export interface UserRole {
     name?: string,
     id? : string,
-    privileges : Privilege[]
+    privileges : UserPrivilege[]
 }
 
-export interface Privilege {
+export interface UserPrivilege {
     name? : string,
     authority? : string,
     id? : string

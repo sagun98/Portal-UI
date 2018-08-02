@@ -1,3 +1,4 @@
+import { EntityComponent } from './../../../core/classes/EntityComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -15,7 +16,7 @@ import { SlugUtilityService } from '../../services/slug.service';
   templateUrl: './manage-product.component.html',
   styleUrls: ['./manage-product.component.scss']
 })
-export class ManageProductComponent implements OnInit{
+export class ManageProductComponent extends EntityComponent implements OnInit{
 
   public activeApi: API;
   public product: Product;
@@ -34,7 +35,9 @@ export class ManageProductComponent implements OnInit{
     protected formBuilder: FormBuilder,
     protected slugUtilService : SlugUtilityService,
     protected router : Router
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
@@ -73,6 +76,8 @@ export class ManageProductComponent implements OnInit{
       if(this.form.get('slug').disabled)
         this.form.get('slug').setValue( this.slugUtilService.formatSlug(value) );
     });
+
+    this.disableFormBasedOnPrivileges(this.form, this.product);
   }
 
   public saveProduct() {

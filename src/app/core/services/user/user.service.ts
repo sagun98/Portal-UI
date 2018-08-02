@@ -65,6 +65,10 @@ export class UserService {
     return this._user;
   }
 
+  public isAdmin () {
+    return this._user.roles.filter(role => {return role.name === "ADMIN"}).length > 0;
+  }
+
   public set authToken(authToken: string) {
     localStorage.setItem('pearson.devportal.authToken', authToken);
   }
