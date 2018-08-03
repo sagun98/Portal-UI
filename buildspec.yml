@@ -10,10 +10,14 @@ phases:
     commands:
       - echo Building the Docker image...          
       - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
   post_build:
     commands:
       - echo Pushing the Docker images...
       - $(aws ecr get-login --region us-east-2 --no-include-email)
       - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
+      - echo Writing image definitions file...
+      - printf '[{"name":"dev-portal-%s-ui","imageUri":"%s"}]' $ENVIRONMENT $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
