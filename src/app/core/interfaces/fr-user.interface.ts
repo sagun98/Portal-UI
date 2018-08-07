@@ -12,8 +12,17 @@ export interface IPortalUser {
 export class PortalUser {
 
     private user: IPortalUser
+  
+    public roleMap: any = {};
 
     constructor (user: IPortalUser) {
+        if(!user.roles)
+            user.roles = [];
+            
+        user.roles.forEach(role => {
+            this.roleMap[role.name] = true;
+        });
+
         this.user = user;
     }
 
@@ -39,6 +48,32 @@ export class PortalUser {
 
     public get fullName () {
         return this.user.firstName + ' ' + this.user.lastName;
+    }
+
+    public hasRole(role : string) {
+        return (this.user.roles.filter( (_role: UserRole) => { return _role.name === role}).length) ? true : false; 
+    }
+
+    public setRoelMap(roles : UserRole[]) {
+        roles.forEach(role => {
+            this.roleMap[role.name] = this.hasRole(role.name);
+        });
+    }
+
+    public addRole (role : UserRole) {
+        const exists = this.roles.filter(_role => { return _role.name === role.name }).length
+
+        if(exists)
+            return;
+
+        this.user.roles.push(role);
+    }
+
+    public removeRole(roleName: string) {
+        this.roles.forEach( (_role: UserRole, index : number) =>  {
+            if(_role.name === roleName)
+              this.roles.splice(index, 1);
+        });
     }
 
 }

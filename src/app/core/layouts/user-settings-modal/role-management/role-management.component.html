@@ -1,0 +1,58 @@
+<div>
+
+  <!-- <div id="new-user-form">
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+      <input type="text" name="username" placeholder="Enter a User Name to add" formControlName="username"/>
+      <button type="submit" class="btn btn-primary">
+        <clr-icon shape="plus" size="20"></clr-icon>
+      </button>
+    </form>
+  </div> -->
+
+  <user-search-form
+    [validateUser]="isUserValid"
+    (onValidationFailed)="handleFailedFormValidation($event)"
+    (onNoResults)="handleNoResults($event)"
+    (onResults)="handleResults($event)"
+  >
+
+  </user-search-form>
+
+  <div *ngIf="users.length">
+    <table class="table bottom-spacer-10">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th *ngFor="let header of headers">
+            <a (click)="addRemoveRoleToAllUsers(header.role.name, false)"><clr-icon shape="angle-double"></clr-icon></a>
+            <span class="ml10 mr10">{{ header.role.name }}</span>
+            <a (click)="addRemoveRoleToAllUsers(header.role.name, true)"><clr-icon shape="angle-double" flip="vertical"></clr-icon></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            
+              <clr-dropdown [clrCloseMenuOnItemClick]="false">
+                <button type="button" clrDropdownTrigger>
+                    <clr-icon shape="ellipsis-vertical" size="15"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen>
+                    <label class="dropdown-header">User Role Options</label>
+                    <button type="button" (click)="removeUser(user)" clrDropdownItem><clr-icon shape="trash"></clr-icon> Remove User</button>
+                    <button type="button" (click)="changeAllRoles(user, true)" clrDropdownItem><clr-icon shape="plus"></clr-icon> Add All Roles</button>
+                    <button type="button" (click)="changeAllRoles(user, false)" clrDropdownItem><clr-icon shape="minus"></clr-icon> Remove All Roles</button>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+
+            <span>{{ user.username }}</span>
+          </td>
+          <td *ngFor="let column of headers"><input type="checkbox" name="role" (change)="handleRoleChange(user, column.role.name)" [(ngModel)]="user.roleMap[column.role.name]"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button [disabled]="! modified" class="btn btn-success" (click)="handleSave()"><clr-icon shape="check"></clr-icon> Save</button>
+  </div>
+</div>

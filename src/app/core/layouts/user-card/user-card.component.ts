@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { PortalUser } from '../../interfaces/fr-user.interface';
 
@@ -9,6 +9,7 @@ import { PortalUser } from '../../interfaces/fr-user.interface';
 })
 export class UserCardComponent implements OnInit {
   @Input() user: PortalUser;
+  @Output() userSettingsClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private userService : UserService
@@ -28,4 +29,8 @@ export class UserCardComponent implements OnInit {
     }
   }
 
+
+  public openUserSettings () {
+    this.userSettingsClick.emit(true);
+  }
 }

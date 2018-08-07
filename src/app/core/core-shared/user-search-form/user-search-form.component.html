@@ -1,0 +1,8 @@
+<div id="new-user-form">
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <input type="text" name="username" placeholder="Enter a User Name to add" formControlName="username" />
+    <button type="submit" class="btn btn-primary">
+      <clr-icon shape="plus" size="20"></clr-icon>
+    </button>
+  </form>
+</div>

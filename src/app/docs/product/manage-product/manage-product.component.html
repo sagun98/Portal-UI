@@ -1,6 +1,27 @@
 <div class="container">
 
-  <h3>{{ title }}</h3>
+  <h3>
+    <span>{{ title }}</span>
+    <!-- Function defined in parent class -->
+    <a *ngIf="product.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="product">
+      <clr-tooltip>
+          <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
+          <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+              <span>Manage API User Privileges</span>
+          </clr-tooltip-content>
+      </clr-tooltip>
+    </a>
+  </h3>
+
+  <entity-permissions-modal
+    *ngIf="managePrivilegesModalOpened"
+    [userPrivileges]="userPrivileges" 
+    [opened]="managePrivilegesModalOpened"
+    [validateNewUser]="validateUserRoles"
+    (onSave)="saveApiFineGrainedPrivileges($event)"
+    >
+
+  </entity-permissions-modal>
 
   <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveProduct()">
 

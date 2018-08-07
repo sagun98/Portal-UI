@@ -1,0 +1,56 @@
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'xl'">
+
+  <h3 class="modal-title bottom-spacer-20">
+    <clr-icon size="23" shape="user"></clr-icon> Manage User Privileges
+  </h3>
+
+  <div class="modal-body">
+
+      <user-search-form
+      (onValidationFailed)="handleFailedFormValidation($event)"
+      (onNoResults)="handleNoResults($event)"
+      (onResults)="handleResults($event)"
+    >
+  
+    </user-search-form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>
+            <a (click)="addPrivilegeToUsers('MODIFY', false)"><clr-icon shape="angle-double"></clr-icon></a>
+            MODIFY
+            <a (click)="addPrivilegeToUsers('MODIFY', true)"><clr-icon shape="angle-double" flip="vertical"></clr-icon></a>
+          </th>
+          <th>
+            <a (click)="addPrivilegeToUsers('ADMIN', false)"><clr-icon shape="angle-double"></clr-icon></a>
+            ADMIN
+            <a (click)="addPrivilegeToUsers('ADMIN', true)"><clr-icon shape="angle-double" flip="vertical"></clr-icon></a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userPrivilege of userPrivileges">
+          <td> <a class="pull-left" (click)="removeUserPrivileges(userPrivilege)"><clr-icon shape="trash" size="20"></clr-icon></a> {{ userPrivilege.username }} </td>
+          <td> <input type="checkbox" name="modify" [(ngModel)]="userPrivilege.privilegeMap.MODIFY" (change)="handlePrivilegeChange('MODIFY', userPrivilege) "/> </td>
+          <td> <input type="checkbox" name="admin" [(ngModel)]="userPrivilege.privilegeMap.ADMIN" (change)="handlePrivilegeChange('ADMIN', userPrivilege)"/> </td>
+        </tr>
+        <tr *ngIf="! userPrivileges.length">
+          <td colspan="3">
+            No User Privileges assigned
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button [disabled]="! modified" class="btn btn-success" (click)="handleSave()"><clr-icon shape="check"></clr-icon> Save</button>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="opened = false">
+      <clr-icon shape="times"></clr-icon> Close
+    </button>
+  </div>
+
+</clr-modal>

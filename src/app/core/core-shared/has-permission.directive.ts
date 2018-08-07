@@ -18,11 +18,12 @@ export class HasPermissionDirective implements OnInit {
   ) { }
 
   public ngOnInit() {
+
     this.initialDisplay = this.initialDisplay || this.element.nativeElement.style.display;
     
     this.element.nativeElement.style.display = 'none';
 
-    this.userService.user.subscribe((user: PortalUser) => {
+    this.userService._lastUser.subscribe((user: PortalUser) => {
       
       const matches = this.permissionService.matchesAnyPermissions(this.hasPermission, user.roles);
 

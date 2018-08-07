@@ -1,4 +1,4 @@
-import { IPortalUser } from '../../interfaces/fr-user.interface';
+import { IPortalUser } from './../../interfaces/fr-user.interface';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -35,6 +35,7 @@ export class UserService {
   private username: string;
   private _user: PortalUser;
   private userRequest: Observable<{} | PortalUser>;
+  public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
 
   constructor(
     private http: HttpClient,
@@ -50,7 +51,8 @@ export class UserService {
 
   public get user() {
     if (this._user != null) {
-      return new BehaviorSubject<PortalUser>(this._user);
+      this._lastUser = new BehaviorSubject<PortalUser>(this._user);
+      return this._lastUser;
     }
     else if (this.userRequest) {
       return this.userRequest;
@@ -104,6 +106,18 @@ export class UserService {
     );
   }
 
+  public getUserById (userId) {
+    return this.http.get<any>(`${environment.restBase}/users/${userId}`).pipe(
+      map((user : IPortalUser) => {
+        return (user) ?  new PortalUser(user) : null;
+      })
+    );
+  }
+
+  public updateRoles (user : PortalUser) {
+    return this.http.put(`${environment.restBase}/users/${user.id}/roles`, user.roles);
+  }
+
   public logout() {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken)
@@ -131,6 +145,8 @@ export class UserService {
     this._user = new PortalUser(user);
     this.$loggedIn.next(true);
     this.$retrievedUser.next(this._user);
+    if(this._lastUser)
+      this._lastUser.next( this._user );
     return this._user;
   }
 }

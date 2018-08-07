@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ApiModule } from '../api/api.module';
 import { ViewProductComponent } from './view-product/view-product.component';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
+import { DocsSharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
     ClarityModule,
     ApiModule,
     CoreSharedModule,
+    DocsSharedModule,
     RouterModule
   ],
   declarations: [

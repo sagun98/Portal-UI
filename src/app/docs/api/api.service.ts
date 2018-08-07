@@ -1,3 +1,4 @@
+import { UserPrivilegeClass } from './../../core/classes/user-privilege';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,6 +8,7 @@ import { isNull, isArray } from 'util';
 import { CRUD } from '../../core/enums/crud.enum';
 import { APIListChange } from './interfaces/apiListChange.interface';
 import { API } from './interfaces/api.interface';
+import { Privilege } from '../../core/interfaces/permissible.interface';
 
 interface CachedAPIs {
   api?: boolean,
@@ -97,6 +99,18 @@ export class ApiService {
   public getApiList(){
     return this.http.get(`${environment.restBase}/apis`);
   } 
+
+  public getPrivileges (id) {
+    return this.http.get(`${environment.restBase}/apis/${id}/privileges`).pipe(
+      map( (privileges : Privilege[]) => {
+        return privileges.map(p => { return  new UserPrivilegeClass(p); })
+      })
+    )
+  }
+
+  public updateFineGrainedPrivileges (id: string, privileges : UserPrivilegeClass[]) {
+    return this.http.put(`${environment.restBase}/apis/${id}/privileges`, privileges);
+  }
 
   // Convert object to form data
   private getFormDataFromObject (obj: any) : FormData {

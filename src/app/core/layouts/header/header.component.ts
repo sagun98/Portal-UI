@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   public activeSearch: boolean = false;
   public searchResults: any[] = [];
   public form : NgForm;
+  public userSettingsOpened : boolean = false;
 
   public docmousedown: Observable<Event>;
   public subscriber: Subscription;
@@ -122,5 +123,10 @@ export class HeaderComponent implements OnInit {
 
       });
     }
+  }
+
+  public openUserSettingsModal (opened : boolean) {
+    this.userSettingsOpened = false;
+    setTimeout(t => { this.userSettingsOpened = opened; }); 
   }
 }

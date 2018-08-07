@@ -1,0 +1,42 @@
+:host {
+    #new-user-form {
+        text-align: left;
+        // TODO: Move this to the parent 
+        margin-top:25px;
+    
+        input {
+            width: 100%;
+            max-width: 200px;
+            text-transform: uppercase;
+            vertical-align: bottom;
+
+        }::placeholder {
+            text-transform: none;
+        }
+
+        button.btn {
+            margin: 0px 0px 0px 5px;
+            min-width: 2rem;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+        }   
+    }
+
+    table {
+        thead {
+            a {
+                cursor: pointer;
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    clr-dropdown {
+                        float: left;
+                    }
+                }
+            }
+        }
+    }
+}

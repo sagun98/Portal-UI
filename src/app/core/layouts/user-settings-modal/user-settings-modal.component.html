@@ -1,0 +1,42 @@
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'xl'">
+
+  <h3 class="modal-title bottom-spacer-20">
+    <clr-icon size="23" shape="user"></clr-icon> Manage User Settings
+  </h3>
+
+  <div class="modal-body">
+
+    |{{ activeTabs | json }}| test
+
+    <clr-tabs>
+      <clr-tab *ngIf="user.roleMap.ADMIN">
+        <button clrTabLink>
+          <h4>Manage User Roles</h4>
+        </button>
+        <ng-template [(clrIfActive)]="activeTabs.manageRoles">
+          <clr-tab-content>
+            <role-management [roles]="roles"></role-management>
+          </clr-tab-content>
+        </ng-template>
+      </clr-tab>
+
+      <clr-tab>
+        <button clrTabLink><h4>My Roles</h4></button>
+        <ng-template  [(clrIfActive)]="activeTabs.myRoles">
+          <clr-tab-content>
+            HERE
+          </clr-tab-content>
+        </ng-template>
+      </clr-tab>
+  
+    </clr-tabs>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="opened = false">
+      <clr-icon shape="times"></clr-icon> Close
+    </button>
+  </div>
+
+</clr-modal>

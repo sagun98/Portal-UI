@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { UserService } from './../../../core/services/user/user.service';
 import { EntityComponent } from './../../../core/classes/EntityComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +11,9 @@ import { API } from '../../api/interfaces/api.interface';
 import { ApiService } from '../../api/api.service';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { SlugUtilityService } from '../../services/slug.service';
+import { PortalUser } from '../../../core/interfaces/fr-user.interface';
+import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
+import { ToastrService } from '../../../../../node_modules/ngx-toastr';
 
 
 @Component({
@@ -34,6 +39,8 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
     protected apiService : ApiService,
     protected formBuilder: FormBuilder,
     protected slugUtilService : SlugUtilityService,
+    protected userService : UserService,
+    protected toastrService: ToastrService,
     protected router : Router
   ) {
     super();
@@ -77,7 +84,8 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
         this.form.get('slug').setValue( this.slugUtilService.formatSlug(value) );
     });
 
-    this.disableFormBasedOnPrivileges(this.form, this.product);
+    if( ! this.userService.isAdmin() )
+      this.disableFormBasedOnPrivileges(this.form, this.product);
   }
 
   public saveProduct() {
@@ -117,9 +125,24 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
         this.router.navigate([`/docs/product`]);
       });
   }
+  
 
   public cacheProduct () {
     if(this.productService._product_cache_)
       this.productService.provideCachedVersion.product = true;
+  }
+
+  public validateUserRoles = (user : PortalUser) => {
+    return (user.roleMap.ADMIN || user.roleMap["PRODUCT_OWNER"]);
+  }
+
+  public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
+    this.productService.updateFineGrainedPrivileges(this.product.id, privileges).subscribe(r => {
+      this.toastrService.success('API User Privileges successfully updated');
+    });
+  }
+
+  public getEntityPrivileges () : Observable<Object> {
+    return this.productService.getPrivileges(this.product.id);
   }
 }

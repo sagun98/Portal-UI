@@ -1,4 +1,4 @@
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, of } from 'rxjs';
@@ -6,6 +6,8 @@ import { ProductListChange } from './interfaces/product-list-change.interface';
 import { CRUD } from '../../core/enums/crud.enum';
 import { Product } from './interfaces/product.interface';
 import { environment } from '../../../environments/environment';
+import { UserPrivilegeClass } from '../../core/classes/user-privilege';
+import { Privilege } from '../../core/interfaces/permissible.interface';
 
 interface CachedProducts {
   product?: boolean,
@@ -64,6 +66,14 @@ export class ProductService {
     )
   }
 
+  public getPrivileges (id) {
+    return this.http.get(`${environment.restBase}/products/${id}/privileges`).pipe(
+      map( (privileges : Privilege[]) => {
+        return privileges.map(p => { return  new UserPrivilegeClass(p); })
+      })
+    );
+  }
+
   public updateProduct ( product : Product ) {
     return this.http.put(`${environment.restBase}/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
       this._product_cache_ = updatedProduct;
@@ -73,6 +83,10 @@ export class ProductService {
         product : updatedProduct
       });
     }));
+  }
+
+  public updateFineGrainedPrivileges (id: string, privileges : UserPrivilegeClass[]) {
+    return this.http.put(`${environment.restBase}/products/${id}/privileges`, privileges);
   }
 
   public getProduct ( productId : string, getCache? : boolean ) {

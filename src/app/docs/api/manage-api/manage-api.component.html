@@ -1,6 +1,27 @@
 <div class="container">
 
-  <h3>{{ title }}</h3>
+  <h3>
+    <span>{{ title }}</span>
+    <!-- Function defined in parent class -->
+    <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="api">
+      <clr-tooltip>
+          <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
+          <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+              <span>Manage API User Privileges</span>
+          </clr-tooltip-content>
+      </clr-tooltip>
+    </a>
+  </h3>
+
+  <entity-permissions-modal 
+    *ngIf="managePrivilegesModalOpened"
+    [userPrivileges]="userPrivileges" 
+    [opened]="managePrivilegesModalOpened"
+    [validateNewUser]="validateUserRoles"
+    (onSave)="saveApiFineGrainedPrivileges($event)"
+    >
+
+  </entity-permissions-modal>
 
   <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveApi()">
 
@@ -117,13 +138,13 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-success-outline pull-left" [hasPermissionTo]="permissions.MODIFY" [entity]="api">
+          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="api">
             <clr-icon shape="check"></clr-icon>
             <span class="ml5 hidden-xs">Save API</span>
           </button>
         </div>
         <div class="col-xs-4 text-center">
-          <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermissionTo]="permissions.ADMIN" [entity]="api">
+          <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.API.DELETE]" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="api">
             <clr-icon shape="times-circle"></clr-icon>
             <span class="ml5 hidden-xs">Delete API</span>
           </button>

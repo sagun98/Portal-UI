@@ -11,6 +11,9 @@ import { SubNavigationComponent } from './sub-navigation/sub-navigation.componen
 import { LoginComponent } from './login/login/login.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { CoreSharedModule } from '../core-shared/core-shared.module';
+import { UserSettingsModalComponent } from './user-settings-modal/user-settings-modal.component';
+import { RoleManagementComponent } from './user-settings-modal/role-management/role-management.component';
+import { NgSelectModule } from '../../../../node_modules/@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -19,6 +22,8 @@ import { CoreSharedModule } from '../core-shared/core-shared.module';
     ReactiveFormsModule,
     ClarityModule,
     RouterModule,
+    CoreSharedModule,
+    NgSelectModule,
     CoreSharedModule
   ],
   declarations: [
@@ -28,7 +33,9 @@ import { CoreSharedModule } from '../core-shared/core-shared.module';
     SubNavigationComponent,
     ActiveLinkDirective,
     LoginComponent,
-    UserCardComponent
+    UserCardComponent,
+    UserSettingsModalComponent,
+    RoleManagementComponent
   ],
   exports : [
     SideNavigationComponent,

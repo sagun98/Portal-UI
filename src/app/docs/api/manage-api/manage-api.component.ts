@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { PortalUser } from './../../../core/interfaces/fr-user.interface';
 import { EntityComponent } from './../../../core/classes/EntityComponent';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
@@ -7,6 +9,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { API } from '../interfaces/api.interface';
+import { UserService } from '../../../core/services/user/user.service';
+import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -29,13 +33,14 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public tinymceConfig = TINYCMCE_CONFIG;
   public saveMethod: string = 'addApi';
   public swaggerUploadOptions = SWAGGER_UPLOAD_OPTION;
-  public swaggerOption: SWAGGER_UPLOAD_OPTION = SWAGGER_UPLOAD_OPTION.FILE
+  public swaggerOption: SWAGGER_UPLOAD_OPTION = SWAGGER_UPLOAD_OPTION.FILE;
 
   constructor(
     private formBuilder : FormBuilder,
     private apiService : ApiService,
     private activatedRoute: ActivatedRoute,
     private router : Router,
+    private userService : UserService,
     private toastrService: ToastrService
   ) {
     super();
@@ -82,8 +87,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
         this.setSlugValue(name);
     });
 
-    if ( this.api.id && (! this.api.userPrivileges || ! this.api.userPrivileges.length))
-      this.form.disable();
+    if( ! this.userService.isAdmin() ) {
+      this.disableFormBasedOnPrivileges(this.form, this.api);
+    }
   }
 
   private getServerFormattedTags (tags: any[]) {
@@ -151,5 +157,19 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     const file = event.target.files[0];
 
     this.form.get('file').setValue(file);
+  }
+
+  public validateUserRoles = (user : PortalUser) => {
+    return (user.roleMap.ADMIN || user.roleMap.API_DEVELOPER);
+  }
+
+  public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
+    this.apiService.updateFineGrainedPrivileges(this.api.id, privileges).subscribe(r => {
+      this.toastrService.success('API User Privileges successfully updated');
+    });
+  }
+
+  public getEntityPrivileges () : Observable<Object> {
+    return this.apiService.getPrivileges(this.api.id);
   }
 }

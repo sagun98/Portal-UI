@@ -35,7 +35,7 @@
 
   <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
 
-    <user-card [user]="user"></user-card>
+    <user-card (userSettingsClick)="openUserSettingsModal($event)" [user]="user"></user-card>
       
 
   </clr-dropdown-menu>
@@ -47,3 +47,6 @@
   </a>
 
 </div>
+
+
+<user-settings-modal *ngIf="userSettingsOpened" [user]="user" [opened]="userSettingsOpened"> </user-settings-modal>
