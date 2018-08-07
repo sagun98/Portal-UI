@@ -8,7 +8,7 @@ env:
 phases:
   build:
     commands:
-      - echo Building the Docker image...          
+      - echo Building the Docker image...        
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
   post_build:
@@ -18,6 +18,8 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
       - echo Writing image definitions file...
-      - printf '[{"name":"dev-portal-%s-ui","imageUri":"%s"}]' $ENVIRONMENT $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions.json
+      - printf '[{"name":"dev-portal-develop-ui","imageUri":"%s"}]' $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions-develop.json
+      - printf '[{"name":"dev-portal-tst-ui","imageUri":"%s"}]' $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions-tst.json
+      - printf '[{"name":"dev-portal-prod-ui","imageUri":"%s"}]' $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions-prod.json
 artifacts:
-  files: imagedefinitions.json
+  files: imagedefinitions-*.json
