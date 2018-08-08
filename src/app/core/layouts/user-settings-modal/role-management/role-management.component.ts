@@ -110,7 +110,7 @@ export class RoleManagementComponent implements OnInit, OnChanges {
     if(user.roleMap[role])
       user.addRole( this.roles.filter(_role => {return _role.name === role})[0] );
     else{
-      const doDelete = (this.my.id === user.id) ? confirm("Are you sure you want to remove the ADMIN role?  Once this change is saved, You will no longer be able to perform ADMIN functions.") : true;
+      const doDelete = (this.my.id === user.id && role === 'ADMIN') ? confirm("Are you sure you want to remove the ADMIN role?  Once this change is saved, You will no longer be able to perform ADMIN functions.") : true;
       
       if(doDelete)
         user.removeRole( role );
@@ -123,7 +123,7 @@ export class RoleManagementComponent implements OnInit, OnChanges {
   }
 
   public isUserValid =  (username : string) => {
-    const matchCount = this.users.filter( (user : PortalUser) =>  { return user.username === username }).length;
+    const matchCount = this.users.filter( (user : PortalUser) =>  { return user.username.toLocaleLowerCase() === username.toLocaleLowerCase() }).length;
     return (matchCount === 0) ? true : false;
   }
 }

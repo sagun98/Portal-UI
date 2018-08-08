@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { PortalUser } from './../../interfaces/fr-user.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -10,10 +12,33 @@ import { API } from '../../../docs/api/interfaces/api.interface';
 import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interface';
 import { CRUD } from '../../enums/crud.enum';
 import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
+import { CoreSharedModule } from '../../core-shared/core-shared.module';
+import { UserService } from '../../services/user/user.service';
 
 
 class RouterStub {
   navigateByUrl = jasmine.createSpy('navigateByUrl');
+}
+
+export const mockUser = new PortalUser({
+  id : "test",
+  "email" : "test@test.com",
+  "firstName" : "test",
+  "lastName" : "testington",
+  "name" : "test testington",
+  "roles" : [  ],
+  "token" : "1234",
+  "username" : "UTESTT4"
+});
+
+export class MockUserService extends UserService {
+  constructor ( private _http : HttpClient ) {
+    super(_http);
+
+    this._user = mockUser;
+  }
+
+  public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(mockUser);
 }
 
 describe('SideNavigationComponent', () => {
@@ -66,10 +91,12 @@ describe('SideNavigationComponent', () => {
       imports : [
         FormsModule,
         HttpClientModule,
+        CoreSharedModule,
         RouterTestingModule.withRoutes([])
       ],
       providers : [
-        HttpClient
+        HttpClient,
+        { provide : UserService , useClass : MockUserService, deps : [HttpClient] }
       ],
       declarations: [ 
         SideNavigationComponent

@@ -7,7 +7,7 @@ import { RolesService } from '../../services/roles/roles.service';
   templateUrl: './user-settings-modal.component.html',
   styleUrls: ['./user-settings-modal.component.scss']
 })
-export class UserSettingsModalComponent implements OnInit, OnChanges {
+export class UserSettingsModalComponent implements OnChanges {
 
   @Input() opened : boolean = false;
   @Input() user: PortalUser;
@@ -20,9 +20,9 @@ export class UserSettingsModalComponent implements OnInit, OnChanges {
 
   constructor(
     private roleService : RolesService
-  ) { }
-
-  ngOnInit() {}
+  ) {
+    
+  }
 
   ngOnChanges (changes: SimpleChanges) {
     if(changes.opened && changes.opened.currentValue === true){

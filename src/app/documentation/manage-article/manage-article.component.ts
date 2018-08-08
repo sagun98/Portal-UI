@@ -14,12 +14,13 @@ export enum BLOG_CATEGORIES  {
   ANNOUNCEMENT = 'announcement'
 }
 
+
 @Component({
   selector: 'app-manage-article',
   templateUrl: './manage-article.component.html',
   styleUrls: ['./manage-article.component.scss']
 })
-export class ManageArticleComponent implements OnInit {
+export class ManageArticleComponent implements OnInit  {
 
   public today : Date = new Date();
 
@@ -44,7 +45,7 @@ export class ManageArticleComponent implements OnInit {
   public submitted: boolean = false;
   public saveMethod: string = 'saveBlogPost';
   public publicationDateString: string = '';
-  public mode:string ;
+  public mode:string;
   public errorClasses:string = ERROR_CLASSES;
 
   constructor(
@@ -218,5 +219,4 @@ export class ManageArticleComponent implements OnInit {
 
     return d;
   }
-
 }

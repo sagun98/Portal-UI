@@ -1,6 +1,8 @@
+import { MockUserService } from './../core/layouts/side-navigation/side-navigation.component.spec';
+import { CoreSharedModule } from './../core/core-shared/core-shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DocsComponent } from './docs.component';
@@ -10,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
+import { UserService } from '../core/services/user/user.service';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;
@@ -19,13 +22,17 @@ describe('DocsComponent', () => {
     id : "asdf1234",
     name : "Mock Product",
     description : "Mock Product Description",
-    apis : []
+    slug : 'mock-product',
+    apis : [],
+    userPrivileges : []
   };
 
   const mockApi: API = {
     id : "poiu7654",
     name : "Mock API",
+    slug : 'mock-api',
     description : "Mock API Description",
+    userPrivileges : []
   }
 
   const productId = 'asdf1324';
@@ -37,7 +44,8 @@ describe('DocsComponent', () => {
         ClarityModule,
         FormsModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
+        CoreSharedModule
       ],
       declarations: [ 
         DocsComponent,
@@ -45,6 +53,7 @@ describe('DocsComponent', () => {
         
       ],
       providers : [
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
         {
           provide : ActivatedRoute, useValue : {
             snapshot : {

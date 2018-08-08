@@ -12,6 +12,8 @@ describe('ProductCardComponent', () => {
     id : "asdf1234",
     name : "Mock Product",
     description : "Mock Product Description",
+    "userPrivileges" : [],
+    "slug" : "mock-product",
     apis : []
   }
 

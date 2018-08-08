@@ -13,7 +13,7 @@ export class RoleCheckGuard implements CanActivate, CanActivateChild {
   constructor(
     private userService : UserService,
     private permissionsService : PermissionsService
-  ) {}
+  ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     return this.checkRoles(route, state)

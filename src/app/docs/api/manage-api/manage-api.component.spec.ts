@@ -1,4 +1,6 @@
-import { SwaggerUiComponent } from '../../../shared/swagger-ui/swagger-ui.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { MockUserService } from './../../../core/layouts/side-navigation/side-navigation.component.spec';
+import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
 import { ApiService } from '../api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -10,6 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { API } from '../interfaces/api.interface';
 import { of } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { UserService } from '../../../core/services/user/user.service';
 
 const mockApi = <API> {
   id : 'asdf1234',
@@ -21,7 +24,14 @@ const mockApi = <API> {
   reference : 'this is a reference section',
   swagger : '',
   swaggerUrl : '',
-  file : null
+  file : null,
+  "slug" : "test-api",
+  "userPrivileges" : [
+    {
+      "username" : "UTESTT4",
+      "permissions" : ["ADMIN", "MODIFY"]
+    }
+  ]
 }
 
 class MockApiService extends ApiService {
@@ -46,10 +56,13 @@ describe('ManageApiComponent', () => {
         EditorModule,
         RouterTestingModule,
         HttpClientModule,
+        CoreSharedModule,
+        NgSelectModule,
         ToastrModule.forRoot()
       ],
       providers : [
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
         HttpClient,
         ToastrService
       ],
@@ -62,6 +75,7 @@ describe('ManageApiComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ManageApiComponent);
     component = fixture.componentInstance;
+    component.api = mockApi;
     fixture.detectChanges();
   });
 
@@ -71,7 +85,7 @@ describe('ManageApiComponent', () => {
 
   it('should build a form with the necessary form fields', () => {
     component['buildForm']();
-    
+
     expect(component.form.get('id')).not.toBeNull();
     expect(component.form.get('version')).not.toBeNull();
     expect(component.form.get('name')).not.toBeNull();
@@ -108,6 +122,11 @@ describe('ManageApiComponent', () => {
   });
 
   it('should set the form to invalid', () => {
+    component.api.title = '';
+    component.api.description = '';
+
+    component['buildForm']();
+
     component.saveApi();
 
     expect(component.form.invalid).toBeTruthy();

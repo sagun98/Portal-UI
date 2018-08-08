@@ -1,10 +1,10 @@
-import { SharedModule } from './shared.module';
+import { DocsSharedModule } from './shared.module';
 
 describe('SharedModule', () => {
-  let sharedModule: SharedModule;
+  let sharedModule: DocsSharedModule;
 
   beforeEach(() => {
-    sharedModule = new SharedModule();
+    sharedModule = new DocsSharedModule();
   });
 
   it('should create an instance', () => {

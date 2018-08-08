@@ -1,28 +1,26 @@
+import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
 import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
 import { ApiService } from '../../api/api.service';
 import { API } from '../../api/interfaces/api.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-
 import { ActivatedRoute } from '@angular/router';
-
 import { ClarityModule } from '@clr/angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
 import { of } from 'rxjs/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { Product } from '../interfaces/product.interface';
+import { UserService } from '../../../core/services/user/user.service';
+import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
 
 
 const mockApi: API = {
   id : 'qwers12345',
   name : 'Mock API',
   description : 'Mock API Description',
+  slug : 'test',
+  userPrivileges : [],
 };
 
 class MockApiService extends ApiService {
@@ -43,8 +41,15 @@ describe('ViewProductComponent', () => {
     id : 'asdf1234',
     name : "Mock Product",
     description : 'Mock Product Description',
+    slug : 'test',
     overview : null,
-    apis : []
+    apis : [],
+    "userPrivileges" : [
+      {
+        "username" : "UTESTT4",
+        "permissions" : ["ADMIN"]
+      }
+    ]
   }
 
   beforeEach(async(() => {
@@ -53,12 +58,15 @@ describe('ViewProductComponent', () => {
         ClarityModule,
         HttpClientModule,
         RouterTestingModule,
+        HttpClientModule,
+        CoreSharedModule
       ],
       declarations: [
         ViewApiComponent,
         ViewProductComponent
       ],
       providers : [
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
         {
           provide : ActivatedRoute, useValue : {

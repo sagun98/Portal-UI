@@ -1,8 +1,11 @@
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -12,10 +15,15 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports : [
         ClarityModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        RouterTestingModule
       ],
       providers : [
-        HttpClient
+        HttpClient,
+        ToastrService
       ],
       declarations: [ HeaderComponent ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]

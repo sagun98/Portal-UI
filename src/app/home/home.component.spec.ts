@@ -1,3 +1,5 @@
+import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
@@ -11,7 +13,8 @@ describe('HomeComponents', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports : [
-        HttpClientModule
+        HttpClientModule,
+        RouterTestingModule
       ],
       declarations: [ 
         HomeComponent
@@ -20,6 +23,16 @@ describe('HomeComponents', () => {
         HttpClient,
         {
           provide : ActivatedRoute, useValue : {
+            data : of({
+              NodeBBBlogs : {
+                blogs : {
+                  topics : []
+                },
+                generalSupport : {
+                  topics : []
+                }
+              }
+            }),
             snapshot : {
               data : {
                 productData : [{name : 'Product 1', description : "This is a description", id : '1234lkasdfa1234adf'}]

@@ -1,6 +1,11 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RoleManagementComponent } from './role-management.component';
+import { CoreSharedModule } from '../../../core-shared/core-shared.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '../../../../../../node_modules/@angular/forms';
+import { ToastrModule } from '../../../../../../node_modules/ngx-toastr';
 
 describe('RoleManagementComponent', () => {
   let component: RoleManagementComponent;
@@ -8,7 +13,15 @@ describe('RoleManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoleManagementComponent ]
+      imports : [
+        HttpClientModule,
+        CoreSharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot()
+      ],
+      declarations: [ RoleManagementComponent ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

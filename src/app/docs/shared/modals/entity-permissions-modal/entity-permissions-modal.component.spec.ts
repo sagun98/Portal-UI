@@ -1,6 +1,10 @@
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EntityPermissionsModalComponent } from './entity-permissions-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from '../../../../../../node_modules/ngx-toastr';
 
 describe('EntityPermissionsModalComponent', () => {
   let component: EntityPermissionsModalComponent;
@@ -8,7 +12,14 @@ describe('EntityPermissionsModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EntityPermissionsModalComponent ]
+      imports : [
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ToastrModule.forRoot()
+      ],
+      declarations: [ EntityPermissionsModalComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));

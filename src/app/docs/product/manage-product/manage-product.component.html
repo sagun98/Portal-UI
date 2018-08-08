@@ -110,7 +110,7 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.PRODUCT.UPDATE, permissions.PRODUCT.CREATE]" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="product">
+          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.PRODUCT.UPDATE, permissions.PRODUCT.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="product">
             <clr-icon shape="check"></clr-icon>
             <span class="ml5 hidden-xs">Save Product</span>
           </button>

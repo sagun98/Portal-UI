@@ -33,7 +33,7 @@ export class UserService {
   public attemptedUrl: string = '';
   
   private username: string;
-  private _user: PortalUser;
+  protected _user: PortalUser;
   private userRequest: Observable<{} | PortalUser>;
   public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
 

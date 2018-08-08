@@ -1,3 +1,4 @@
+import { MockUserService } from './../../../core/layouts/side-navigation/side-navigation.component.spec';
 import { ViewApiComponent } from './view-api.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -8,6 +9,8 @@ import { ClarityModule } from '@clr/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { of } from 'rxjs/observable/of';
 import { FormBuilder } from '@angular/forms';
+import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
+import { UserService } from '../../../core/services/user/user.service';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;
@@ -241,11 +244,13 @@ describe('ViewApiComponent', () => {
       imports : [
         EditorModule,
         ClarityModule,
+        CoreSharedModule,
         HttpClientModule
       ],
       providers : [
         HttpClient,
         FormBuilder,
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient]},
         {
           provide : ActivatedRoute, useValue : {
             data : of({

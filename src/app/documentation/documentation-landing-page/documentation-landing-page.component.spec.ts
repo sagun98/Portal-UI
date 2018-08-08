@@ -1,25 +1,40 @@
+// tslint:disble
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentationLandingPageComponent } from './documentation-landing-page.component';
+import {DocumentationLandingPageComponent} from './documentation-landing-page.component';
+import {ActivatedRoute} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
+import { RouterTestingModule } from '../../../../node_modules/@angular/router/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DocumentationLandingPageComponent', () => {
-  let component: DocumentationLandingPageComponent;
-  let fixture: ComponentFixture<DocumentationLandingPageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DocumentationLandingPageComponent ]
-    })
-    .compileComponents();
-  }));
+  let fixture;
+  let component;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports : [
+        RouterTestingModule
+      ],
+      declarations: [
+        DocumentationLandingPageComponent
+      ],
+      providers: [
+       
+    ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
+    }).compileComponents();
     fixture = TestBed.createComponent(DocumentationLandingPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = fixture.debugElement.componentInstance;
   });
 
-  it('should create', () => {
+  it('should create a component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
+  
+    
+  it('should run #ngOnInit()', async(() => {
+    // const result = component.ngOnInit();
+  }));
+        
 });
