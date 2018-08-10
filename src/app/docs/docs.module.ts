@@ -6,7 +6,6 @@ import { DocsComponent } from './docs.component';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { LayoutsModule } from '../core';
-import { SwaggerUiModule } from '../shared/swagger-ui/swagger-ui.module';
 import { documentationRoutes } from './docs.routes';
 import { SharedModule } from '../shared/shared.module';
 import { ProductModule } from './product/product.module';
@@ -24,7 +23,6 @@ import { CoreSharedModule } from '../core/core-shared/core-shared.module';
     ManageApiModule,
     ProductModule,
     ApiSearchModule,
-    SwaggerUiModule,
     SharedModule,
     CoreSharedModule,
     RouterModule.forChild(documentationRoutes)

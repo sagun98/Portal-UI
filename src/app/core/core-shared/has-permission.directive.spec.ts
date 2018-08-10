@@ -1,21 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
-// tslint:disable
+import { mockUser } from './../layouts/side-navigation/side-navigation.component.spec';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-
 import {HasPermissionDirective} from './has-permission.directive';
 import {Component, Directive, ElementRef} from '@angular/core';
 import {PermissionsService} from '../services/permissions/permissions.service';
 import {UserService} from '../services/user/user.service';
+import { MockUserService } from '../layouts/side-navigation/side-navigation.component.spec';
 
 class MockElementRef extends ElementRef {
   constructor() { super(undefined); }
   nativeElement = {}
-}
-class MockPermissionsService extends PermissionsService {
-}
-      
-class MockUserService extends UserService {
 }
       
 @Component({
@@ -32,7 +27,7 @@ describe('HasPermissionDirective', () => {
   let fixture: ComponentFixture<DirectiveTestComponent>;
   let component: DirectiveTestComponent;
   let directiveEl;
-  let directive;
+  let directive: HasPermissionDirective;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,9 +36,8 @@ describe('HasPermissionDirective', () => {
       ],
       declarations: [HasPermissionDirective, DirectiveTestComponent],
       providers: [
-        {provide: ElementRef, useClass: MockElementRef},
-        {provide: PermissionsService, useClass: MockPermissionsService},
-        {provide: UserService, useClass: MockUserService},
+        PermissionsService,
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient]},
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(DirectiveTestComponent);
@@ -60,6 +54,16 @@ describe('HasPermissionDirective', () => {
     
   it('should run #ngOnInit()', async(() => {
     // const result = directive.ngOnInit();
-  }));
-      
+    directive.ngOnInit();
+
+    expect(directive['element'].nativeElement.style.display).toEqual('');
+
+    let updatedMockUser = Object.assign({}, mockUser);
+    updatedMockUser.roles = [];
+
+    directive['userService']['_user'] = updatedMockUser;
+    directive['userService']._lastUser.next(updatedMockUser);
+
+    expect(directive['element'].nativeElement.style.display).toEqual('none');
+  }));      
 });

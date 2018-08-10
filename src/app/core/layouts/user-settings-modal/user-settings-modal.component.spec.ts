@@ -2,11 +2,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import {UserSettingsModalComponent} from './user-settings-modal.component';
-import {Component, Directive} from '@angular/core';
 import {RolesService} from '../../services/roles/roles.service';
-import { ToastrModule } from '../../../../../node_modules/ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 class MockRolesService extends RolesService {
 }

@@ -30,7 +30,7 @@ export class UserSearchFormComponent implements OnInit {
 
   private buildForm () {
     this.form = this.formBuilder.group({
-      username : ['', [Validators.required]]
+      username : [this.username, [Validators.required]]
     });
   }
 

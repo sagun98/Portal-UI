@@ -1,19 +1,15 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import {UserSearchFormComponent} from './user-search-form.component';
-import {Component, Directive} from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {UserService} from '../../services/user/user.service';
+import { MockUserService } from '../../layouts/side-navigation/side-navigation.component.spec';
 
-class MockUserService extends UserService {
-}
-      
 describe('UserSearchFormComponent', () => {
-  let fixture;
-  let component;
+  let fixture: ComponentFixture<UserSearchFormComponent>;
+  let component: UserSearchFormComponent;
+  const formFields = ['username'];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -26,13 +22,16 @@ describe('UserSearchFormComponent', () => {
         UserSearchFormComponent
       ],
       providers: [
-        FormBuilder,
-        {provide: UserService, useClass: MockUserService},
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient] },
       ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(UserSearchFormComponent);
     component = fixture.debugElement.componentInstance;
+  });
+
+  beforeEach(() => {
+    component.username = '';
   });
 
   it('should create a component', async(() => {
@@ -41,15 +40,22 @@ describe('UserSearchFormComponent', () => {
   
     
   it('should run #ngOnInit()', async(() => {
-    // const result = component.ngOnInit();
+    component.ngOnInit();
+
+    formFields.forEach(fieldName => {
+      expect(component.form.get(fieldName).value).toEqual("")
+    });
   }));
         
-  it('should run #buildForm()', async(() => {
-    // const result = component.buildForm();
-  }));
         
-  it('should run #handleSubmit()', async(() => {
-    // const result = component.handleSubmit();
+  it('should use input value username', async(() => {
+    component.username = 'derek';
+
+    fixture.detectChanges();
+
+    component.ngOnInit();
+
+    expect(component.form.get('username').value).toEqual("derek")
   }));
         
 });

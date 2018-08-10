@@ -54,8 +54,7 @@ export class AppComponent implements OnInit{
         if(type === FAILED_NAVIGATION_TYPE.LOGOUT)
           this.router.navigate([`/home`]);
 
-        if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ){
-          
+        if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ) {
           this.router.navigate([`/home`]).then(navigated => {
             if( isNull(navigated) ){
               alert('You need to be logged in to view this content.');

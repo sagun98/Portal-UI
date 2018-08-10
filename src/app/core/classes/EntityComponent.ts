@@ -7,6 +7,9 @@ import { of } from 'rxjs';
 import { UserPrivilegeClass } from './user-privilege';
 
 
+
+
+
 export class EntityComponent {
   public managePrivilegesModalOpened: boolean = false;
   public userPrivileges: UserPrivilegeClass[] = [];

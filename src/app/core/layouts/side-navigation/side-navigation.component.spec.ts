@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { PortalUser } from './../../interfaces/fr-user.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
@@ -26,7 +26,7 @@ export const mockUser = new PortalUser({
   "firstName" : "test",
   "lastName" : "testington",
   "name" : "test testington",
-  "roles" : [  ],
+  "roles" : [ {"name" : "ADMIN", "privileges" : [{}] } ],
   "token" : "1234",
   "username" : "UTESTT4"
 });
@@ -36,6 +36,12 @@ export class MockUserService extends UserService {
     super(_http);
 
     this._user = mockUser;
+  }
+
+  public getUser () {
+    this._user = mockUser;
+    this._lastUser.next(mockUser);
+    return of(mockUser);
   }
 
   public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(mockUser);

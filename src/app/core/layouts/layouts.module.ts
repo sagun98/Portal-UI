@@ -13,7 +13,7 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { CoreSharedModule } from '../core-shared/core-shared.module';
 import { UserSettingsModalComponent } from './user-settings-modal/user-settings-modal.component';
 import { RoleManagementComponent } from './user-settings-modal/role-management/role-management.component';
-import { NgSelectModule } from '../../../../node_modules/@ng-select/ng-select';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [

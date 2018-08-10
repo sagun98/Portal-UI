@@ -4,7 +4,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --aot` for a dev server. Navigate to `http://localhost:4200/`.
+
+## Required Running Containers
+
+* [dev-portal-rest](https://bitbucket.pearson.com/projects/ADP/repos/dev-portal-rest/browse)
+* [dev-portal-forum](https://bitbucket.pearson.com/projects/ADP/repos/dev-portal-forum/browse)
+
 
 ## Code scaffolding
 

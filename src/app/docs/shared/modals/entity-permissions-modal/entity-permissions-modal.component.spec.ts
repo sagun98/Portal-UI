@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EntityPermissionsModalComponent } from './entity-permissions-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from '../../../../../../node_modules/ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('EntityPermissionsModalComponent', () => {
   let component: EntityPermissionsModalComponent;

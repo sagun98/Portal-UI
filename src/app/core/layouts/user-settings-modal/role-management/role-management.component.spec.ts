@@ -4,8 +4,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RoleManagementComponent } from './role-management.component';
 import { CoreSharedModule } from '../../../core-shared/core-shared.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '../../../../../../node_modules/@angular/forms';
-import { ToastrModule } from '../../../../../../node_modules/ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('RoleManagementComponent', () => {
   let component: RoleManagementComponent;

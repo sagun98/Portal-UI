@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { UserRole, PortalUser } from '../../../interfaces/fr-user.interface';
 import { UserService } from '../../../services/user/user.service';
-import { ToastrService } from '../../../../../../node_modules/ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { forkJoin } from 'rxjs';
 
 interface RoleHeader {

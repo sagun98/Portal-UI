@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HasPermissionDirective } from './has-permission.directive';
 import { HasPermissionToDirective } from './has-permission-to.directive';
-import { FormsModule, ReactiveFormsModule } from '../../../../node_modules/@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const DIRECTIVES = [

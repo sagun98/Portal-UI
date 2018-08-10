@@ -1,3 +1,4 @@
+import { PermissibleEntity } from './../../../core/interfaces/permissible.interface';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MockUserService } from './../../../core/layouts/side-navigation/side-navigation.component.spec';
 import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
@@ -5,7 +6,7 @@ import { ApiService } from '../api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ManageApiComponent } from './manage-api.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -13,6 +14,7 @@ import { API } from '../interfaces/api.interface';
 import { of } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../core/services/user/user.service';
+import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 
 const mockApi = <API> {
   id : 'asdf1234',
@@ -41,6 +43,13 @@ class MockApiService extends ApiService {
 
   public addApi () {
     return of(mockApi);
+  }
+
+  getPrivileges () {
+    return of(<UserPrivilegeClass[]> [{
+      "username" : "TTESTT4",
+      "permissions" : []
+    }])
   }
 }
 
@@ -139,5 +148,27 @@ describe('ManageApiComponent', () => {
     component.saveApi();
 
     expect(component.form.invalid).toBeFalsy();
+  });
+
+  it('should open privileges modal', fakeAsync(() => {
+    component.openManageApiPrivilegesModal()
+
+    tick();
+
+    tick();
+
+    expect(component.managePrivilegesModalOpened).toBeTruthy();
+  }));
+
+  it('should disabled the form is user doesnt have permission', () => {
+    
+    component.disableFormBasedOnPrivileges(component.form, <PermissibleEntity> {
+      "userPrivileges" : [{
+        "permissions" : [],
+        "username" : "UTESTT4"
+      }]
+    });
+
+    expect( component.form.disabled ).toBeFalsy();
   });
 });

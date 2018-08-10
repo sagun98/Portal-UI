@@ -135,6 +135,8 @@ export class UserService {
     this.authToken = '';
     this.$loggedIn.next(false);
     this.$retrievedUser.next(null);
+    this._user = null;
+    this._lastUser.next(this._user);
     this.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
       type : FAILED_NAVIGATION_TYPE.LOGOUT,
       attemptedUrl : window.location.hash.replace('#', '')

@@ -42,6 +42,10 @@ export class PortalUser {
         return this.user.roles;
     }
 
+    public set roles (roles : UserRole[]) {
+        this.user.roles = roles;
+    }
+
     public get username () {
         return this.user.username;
     }

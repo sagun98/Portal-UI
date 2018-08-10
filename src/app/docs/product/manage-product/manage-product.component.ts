@@ -13,7 +13,7 @@ import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { SlugUtilityService } from '../../services/slug.service';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
-import { ToastrService } from '../../../../../node_modules/ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({

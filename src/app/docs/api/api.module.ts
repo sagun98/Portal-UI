@@ -1,5 +1,4 @@
 import { ClarityModule } from '@clr/angular';
-import { SwaggerUiModule } from '../../shared/swagger-ui/swagger-ui.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -14,7 +13,6 @@ import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
     CommonModule,
     EditorModule,
     ClarityModule,
-    SwaggerUiModule,
     FormsModule,
     ReactiveFormsModule,
     CoreSharedModule,

@@ -12,6 +12,10 @@
     "test.ts",
     "polyfills.ts"
   ],
+  "exclude": [
+    "src/assets/javascript/*.js",
+    "src/assets/javascript/**/*.js"
+  ],
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
