@@ -34,7 +34,7 @@ export class NodeBBBlogsResolve implements Resolve<any> {
                 requests.push(generalSupportRequest);
 
                 const feedbackRequest = (feedbackCategory.slug) ? this.http.get(`${environment.forumBase}/api/category/${feedbackCategory.slug}`) : of(3);
-                requests.push(generalSupportRequest);
+                requests.push(feedbackRequest);
 
                 if(requests.length)
                     forkJoin(requests).subscribe(responses => {                    
