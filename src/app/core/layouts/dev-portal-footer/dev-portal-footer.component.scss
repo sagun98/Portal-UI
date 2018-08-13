@@ -1,0 +1,23 @@
+:host {
+    background-color: #007bbb;
+    width: 100%;
+    color: white;
+    padding: 10px 10%;
+    display: inline-block;
+    flex: 0 0 auto;
+
+    @media screen and (max-width: 767px){
+        display: none !important;
+    }
+
+    
+    ul {
+        list-style-type: none;
+
+        li {
+            a {
+                color: white;
+            }
+        }
+    }
+}

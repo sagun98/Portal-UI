@@ -1,4 +1,4 @@
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ActiveLinkDirective } from './sub-navigation/active-link.directive';
 import { ClarityModule } from '@clr/angular';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -14,6 +14,7 @@ import { CoreSharedModule } from '../core-shared/core-shared.module';
 import { UserSettingsModalComponent } from './user-settings-modal/user-settings-modal.component';
 import { RoleManagementComponent } from './user-settings-modal/role-management/role-management.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     RouterModule,
     CoreSharedModule,
     NgSelectModule,
+    RouterModule,
     CoreSharedModule
   ],
   declarations: [
@@ -35,14 +37,16 @@ import { NgSelectModule } from '@ng-select/ng-select';
     LoginComponent,
     UserCardComponent,
     UserSettingsModalComponent,
-    RoleManagementComponent
+    RoleManagementComponent,
+    DevPortalFooterComponent
   ],
   exports : [
     SideNavigationComponent,
     PageNotFoundComponent,
     HeaderComponent,
     SubNavigationComponent,
-    LoginComponent
+    LoginComponent,
+    DevPortalFooterComponent
   ],
   schemas : [
     CUSTOM_ELEMENTS_SCHEMA

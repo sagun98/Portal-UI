@@ -1,4 +1,4 @@
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ToastrConfig } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorsService } from '../../../services/http-errors/http-errors.service';
 import { UserService, FRCredentials } from '../../../services/user/user.service';
@@ -53,7 +53,12 @@ export class LoginComponent implements OnInit, OnChanges {
           this.userService.getUser().subscribe(user => {
             this.authFailed = false;
             this.userService.$doUserLogin.next( false );
-            this.router.navigate([ this.userService.attemptedUrl ]);
+            this.toastrService.success(`Sucessfully logged in as:  ${creds.username}`, null, <ToastrConfig> {
+              "timeOut" : 1500
+            });
+
+            const where = (this.userService.attemptedUrl.length) ? this.userService.attemptedUrl : '/documentation/main';
+            this.router.navigate([ where ]);
           }
         )},
         errorResponse => {

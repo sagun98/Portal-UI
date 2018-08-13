@@ -5,9 +5,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin, of } from 'rxjs';
 
-enum FORUM_CATEGORIES {
+export enum FORUM_CATEGORIES {
     BLOGS = 'Blogs',
-    GENERAL_SUPPORT = 'General API Questions and Support Forum'
+    GENERAL_SUPPORT = 'General API Questions and Support Forum',
+    FEEDBACK = 'Feedback'
 }
 
 @Injectable({providedIn: 'root'})
@@ -17,11 +18,13 @@ export class NodeBBBlogsResolve implements Resolve<any> {
 
     }
     
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<object> {
         return Observable.create((observer) => {
             this.http.get(`${environment.forumBase}/api/categories`).subscribe( (results:any) => {
                 const blogCategory = results.categories.filter(category => { return category.name === FORUM_CATEGORIES.BLOGS; })[0] || {};
                 const generalSupportCategory = results.categories.filter(category => { return category.name === FORUM_CATEGORIES.GENERAL_SUPPORT; })[0] || {};
+                const feedbackCategory = results.categories.filter(category => { return category.name === FORUM_CATEGORIES.FEEDBACK; })[0] || {};
+
                 let requests: Observable<Object>[] = [];
 
                 const blogRequest = (blogCategory.slug) ? this.http.get(`${environment.forumBase}/api/category/${blogCategory.slug}`) : of(1) ;
@@ -30,11 +33,15 @@ export class NodeBBBlogsResolve implements Resolve<any> {
                 const generalSupportRequest = (generalSupportCategory.slug) ? this.http.get(`${environment.forumBase}/api/category/${generalSupportCategory.slug}`) : of(2);
                 requests.push(generalSupportRequest);
 
+                const feedbackRequest = (feedbackCategory.slug) ? this.http.get(`${environment.forumBase}/api/category/${feedbackCategory.slug}`) : of(3);
+                requests.push(generalSupportRequest);
+
                 if(requests.length)
                     forkJoin(requests).subscribe(responses => {                    
                         observer.next({
                             blogs : responses[0],
-                            generalSupport : responses[1]
+                            generalSupport : responses[1],
+                            feedback : responses[2]
                         });
                         observer.complete();
                     });

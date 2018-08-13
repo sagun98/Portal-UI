@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-sm-4">
+    <ul>
+      <li *ngFor="let link of columnLinks[0]"><a target="_blank" [href]="link.href">{{ link.text }}</a></li>
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+    <ul>
+      <li *ngFor="let link of columnLinks[1]"><a [routerLink]="link.href">{{ link.text }}</a></li>
+    </ul>
+  </div>
+
+  <div class="col-sm-4">
+      Copyright © 1996–{{year}}  Pearson All rights reserved.
+  </div>
+</div>

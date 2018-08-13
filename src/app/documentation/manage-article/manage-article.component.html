@@ -100,7 +100,7 @@
           </label>
         </div>
   
-        <div *ngIf=" form.get('category').value === 'Documentation' " class="form-group">
+        <div class="form-group">
           <label for="subCategory">Sub Category</label>
           <label [className]=" ( form.get('subCategory').invalid && ( submitted || form.get('subCategory').dirty) ) ? errorClasses + ' tooltip-top-right select' : '' ">
               <select name="subCategory" formControlName="subCategory">

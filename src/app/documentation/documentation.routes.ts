@@ -10,6 +10,9 @@ import { ManageArticleComponent } from './manage-article/manage-article.componen
 
 export const DocumentationRoutes: Routes = [
     {
+        path : 'new', component : ManageArticleComponent, data : {saveMethod : 'saveBlogPost'}
+    },
+    {
         path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : {
             Blogs : DocumentationResolve
         },

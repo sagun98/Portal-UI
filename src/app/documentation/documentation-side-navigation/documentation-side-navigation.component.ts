@@ -41,7 +41,7 @@ export class DocumentationSideNavigationComponent implements OnInit {
   }
 
   public addDocumentation (subCategory: string) {
-    this.router.navigate([`/blog/documentation/new`, {subCategory : subCategory}])
+    this.router.navigate([`/documentation/new`, {subCategory : subCategory}])
   }
 
   public goToBlog(blog) {
