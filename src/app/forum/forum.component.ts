@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { environment } from '../../environments/environment';
@@ -9,7 +9,6 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit {
-
   public forumURL:SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase );
 
   constructor(
@@ -19,11 +18,10 @@ export class ForumComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    if(this.activatedRoute.children.length){
-      const extraPath = this.activatedRoute.children[0].url['value'].join('/');
+    this.activatedRoute.url.subscribe( (urlSegments:UrlSegment[]) => {
+      const extraPath = urlSegments.map(segment => {return segment.path}).join('/');
       this.forumURL = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase + '/' + extraPath );
-    }
+    });
   }
 
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { ColumnLink } from './column-link.class';
 import { NodeBBBlogsResolve } from '../../../resolves/blogs.resolve';
 
@@ -9,16 +10,45 @@ import { NodeBBBlogsResolve } from '../../../resolves/blogs.resolve';
 })
 export class DevPortalFooterComponent implements OnInit {
 
+  @HostBinding('style.display') display: string;
+
   @Input() year: number = new Date().getFullYear();
   @Input() columnLinks: ColumnLink[][] = [[],[]];
+  @Input() editUrls: RegExp[] = [
+    new RegExp('/docs/api/new'),
+    new RegExp('/docs/api/.*/edit'),
+    new RegExp('/docs/product/new'),
+    new RegExp('/docs/product/.*/edit'),
+    new RegExp('/documentation/new'),
+    new RegExp('/documentation/.*/edit')
+  ];
 
   constructor(
-    private nodeBBBlogsResolve : NodeBBBlogsResolve
+    private nodeBBBlogsResolve : NodeBBBlogsResolve,
+    private router: Router
   ) { }
 
   ngOnInit() {
     if(! this.columnLinks[0].length)
       this.setDefaultColumnLinks();
+
+    this.router.events.forEach((event) => {
+      if(event instanceof NavigationEnd) {
+        let hideFooter: boolean = false;
+        this.editUrls.forEach( (pattern: RegExp) => {
+          const matches: boolean = pattern.test(window.location.pathname);
+
+          if(matches)
+            hideFooter = true;
+        });
+
+        this.display = (hideFooter) ? 'none' : '';
+      }
+      // NavigationEnd
+      // NavigationCancel
+      // NavigationError
+      // RoutesRecognized
+    });
   }
 
   private setDefaultColumnLinks () {

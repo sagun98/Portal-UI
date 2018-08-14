@@ -3,9 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 export const ForumRoutes: Routes = [
-    { path: '', component: ForumComponent, children : [
-         {path : '**', component : ForumComponent }
-    ]}
+    { path: '', component: ForumComponent },
+    { path: '**', component: ForumComponent },
 ];
 
 @NgModule({
