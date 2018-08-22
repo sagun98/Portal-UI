@@ -1,7 +1,7 @@
 import { SlugUtilityService } from '../../docs/services/slug.service';
 import { DocumentationService } from '../documentation.service';
 import { UserService } from '../../core/services/user/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { PortalUser } from '../../core/interfaces/fr-user.interface';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
@@ -67,7 +67,18 @@ export class ManageArticleComponent implements OnInit  {
       
       this.article.author = this.article.author || this.userService.$retrievedUser.getValue().fullName;
 
+<<<<<<< HEAD
       this.article.category = this.categories[0];
+=======
+      // Restrict the category based on whether the user is entering from
+      // the documentation side, or the announcement side
+      // TODO: Double check this - is it even necessary now that blogs are in the forum
+      let paths = this.router.url.substring(1).split('/');
+      if(paths[0] === 'documentation')
+        this.categories.splice(0,1);
+      else
+        this.categories.splice(1,1);
+>>>>>>> develop
 
       this.article.category =  this.article.category || this.categories[0];
 
