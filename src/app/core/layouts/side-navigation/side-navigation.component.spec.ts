@@ -1,5 +1,5 @@
 import { BehaviorSubject, of } from 'rxjs';
-import { PortalUser } from './../../interfaces/fr-user.interface';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';

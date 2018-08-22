@@ -1,4 +1,4 @@
-import { PortalUser } from './../../interfaces/fr-user.interface';
+import { PortalUser } from '../../interfaces/fr-user.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user/user.service';

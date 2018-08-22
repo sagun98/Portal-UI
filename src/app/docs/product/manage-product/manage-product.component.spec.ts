@@ -1,5 +1,5 @@
 import { ToastrModule } from 'ngx-toastr';
-import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
+import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 

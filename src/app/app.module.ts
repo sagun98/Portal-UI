@@ -13,6 +13,8 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-intercptor.interceptor';
 import { ErrorInterceptorInterceptor } from './core/interceptors/errors.interceptor';
 import { AuthTokenInterceptorProivder } from './core/interceptors/auth.interceptor';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AuthTokenInterceptorProivder } from './core/interceptors/auth.intercept
     DevPortalCoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DocumentationModule
+    DocumentationModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
   ],
   
   providers : [

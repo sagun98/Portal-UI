@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {HasPermissionToDirective} from './has-permission-to.directive';
 import {Component, Directive, ElementRef, OnInit} from '@angular/core';
-import {UserService} from './../services/user/user.service';
+import {UserService} from '../services/user/user.service';
 import { PermissibleEntity } from '../interfaces/permissible.interface';
 import { PermissionsService } from '../services/permissions/permissions.service';
 import { MockUserService } from '../layouts/side-navigation/side-navigation.component.spec';

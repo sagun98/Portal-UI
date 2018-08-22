@@ -1,6 +1,6 @@
-import { UserService } from './../services/user/user.service';
-import { ENTITY_PERMISSIONS } from './../enums/user-permissions.enum';
-import { PermissibleEntity, Privilege } from './../interfaces/permissible.interface';
+import { UserService } from '../services/user/user.service';
+import { ENTITY_PERMISSIONS } from '../enums/user-permissions.enum';
+import { PermissibleEntity, Privilege } from '../interfaces/permissible.interface';
 import { Directive, Input, ElementRef, OnInit, OnChanges } from '@angular/core';
 
 @Directive({

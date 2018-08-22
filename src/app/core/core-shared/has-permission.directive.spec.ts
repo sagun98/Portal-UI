@@ -1,4 +1,4 @@
-import { mockUser } from './../layouts/side-navigation/side-navigation.component.spec';
+import { mockUser } from '../layouts/side-navigation/side-navigation.component.spec';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';

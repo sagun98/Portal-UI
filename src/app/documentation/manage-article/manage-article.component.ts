@@ -35,7 +35,7 @@ export class ManageArticleComponent implements OnInit  {
     category : ''
   };
 
-  public categories = ['Announcement', 'Documentation'];
+  public categories = ['Documentation'];
 
   public subCategories = ['Documentation Landing Page', 'Creating APIs', 'Consuming APIs'];
 
@@ -67,12 +67,7 @@ export class ManageArticleComponent implements OnInit  {
       
       this.article.author = this.article.author || this.userService.$retrievedUser.getValue().fullName;
 
-      // Restrict the category based on whether the user is entering from
-      // the documentation side, or the announcement side
-      if(this.activatedRoute.snapshot.url[0].path === 'documentation')
-        this.categories.splice(0,1);
-      else if(this.activatedRoute.snapshot.url[0].path === 'list')
-        this.categories.splice(1,1);
+      this.article.category = this.categories[0];
 
       this.article.category =  this.article.category || this.categories[0];
 
@@ -192,7 +187,7 @@ export class ManageArticleComponent implements OnInit  {
         this.router.navigate([`/documentation/${savedBlogPost.id}`]);
         
       else
-        this.router.navigate([`/post/${savedBlogPost.id}`]);
+        this.router.navigate([`/documentation/${savedBlogPost.id}`]);
     });
   }
 
@@ -204,9 +199,9 @@ export class ManageArticleComponent implements OnInit  {
         const category = this.form.get('category').value;
 
         if(category === 'Documentation')
-          this.router.navigate([`/blog/documentation/main`]);
+          this.router.navigate([`/documentation/main`]);
         else
-          this.router.navigate([`/blog/list`]);
+          this.router.navigate([`/documentation`]);
       });
   }
 

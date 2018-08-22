@@ -1,7 +1,7 @@
-import { PermissibleEntity } from './../../../core/interfaces/permissible.interface';
+import { PermissibleEntity } from '../../../core/interfaces/permissible.interface';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { MockUserService } from './../../../core/layouts/side-navigation/side-navigation.component.spec';
-import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
+import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
+import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { ApiService } from '../api.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { EditorModule } from '@tinymce/tinymce-angular';

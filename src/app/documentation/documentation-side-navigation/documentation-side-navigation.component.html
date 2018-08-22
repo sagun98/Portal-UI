@@ -5,7 +5,7 @@
 
     <label for="tab1">
       Creating APIs
-      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Creating APIs')">
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Creating APIs')" [hasPermission]="['ADMIN']">
         Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
       </button>
     </label>
@@ -24,7 +24,7 @@
 
     <label for="tab2">
       Consuming APIs
-      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Consuming APIs')">
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation('Consuming APIs')" [hasPermission]="['ADMIN']">
         Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
       </button>
     </label>

@@ -10,7 +10,7 @@ import { DocumentationSideNavigationComponent } from './documentation-side-navig
 import { DocumentationLandingPageComponent } from './documentation-landing-page/documentation-landing-page.component';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { ManageArticleComponent } from './manage-article/manage-article.component';
-
+import { CoreSharedModule } from '../core/core-shared/core-shared.module';
 
 @NgModule({
   imports: [
@@ -20,6 +20,7 @@ import { ManageArticleComponent } from './manage-article/manage-article.componen
     FormsModule,
     ReactiveFormsModule,
     EditorModule,
+    CoreSharedModule,
     NgSelectModule
   ],
 

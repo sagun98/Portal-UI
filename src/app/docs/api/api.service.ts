@@ -1,4 +1,4 @@
-import { UserPrivilegeClass } from './../../core/classes/user-privilege';
+import { UserPrivilegeClass } from '../../core/classes/user-privilege';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';

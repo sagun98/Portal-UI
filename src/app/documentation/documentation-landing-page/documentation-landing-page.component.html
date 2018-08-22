@@ -1,10 +1,10 @@
 <div class="container">
-    <a class="btn btn-sm edit-page-btn" routerLink="../new">
+    <a *ngIf="isAdmin" class="btn btn-sm edit-page-btn" routerLink="../new">
       <clr-icon shape="plus" class="is-solid"></clr-icon> Add Documentation
     </a>
   
     <h1>Welcome to the Pearson Developer Portal</h1>
-    <a *ngIf="landingPage.content" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]=" '../' + landingPage.id + '/edit'">
+    <a  *ngIf="landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]=" '../' + landingPage.id + '/edit'">
       <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Page
     </a>
   

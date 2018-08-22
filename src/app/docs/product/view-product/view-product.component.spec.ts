@@ -1,4 +1,4 @@
-import { CoreSharedModule } from './../../../core/core-shared/core-shared.module';
+import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
 import { ApiService } from '../../api/api.service';

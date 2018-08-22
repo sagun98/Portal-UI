@@ -1,4 +1,4 @@
-import { Privilege } from './../interfaces/permissible.interface';
+import { Privilege } from '../interfaces/permissible.interface';
 
 export class UserPrivilegeClass {
     

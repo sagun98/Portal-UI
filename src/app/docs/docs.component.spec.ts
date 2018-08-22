@@ -1,5 +1,5 @@
-import { MockUserService } from './../core/layouts/side-navigation/side-navigation.component.spec';
-import { CoreSharedModule } from './../core/core-shared/core-shared.module';
+import { MockUserService } from '../core/layouts/side-navigation/side-navigation.component.spec';
+import { CoreSharedModule } from '../core/core-shared/core-shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';

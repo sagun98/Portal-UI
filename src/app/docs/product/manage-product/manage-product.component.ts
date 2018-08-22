@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { UserService } from './../../../core/services/user/user.service';
-import { EntityComponent } from './../../../core/classes/EntityComponent';
+import { UserService } from '../../../core/services/user/user.service';
+import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';

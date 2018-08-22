@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-import { PortalUser } from './../../../core/interfaces/fr-user.interface';
-import { EntityComponent } from './../../../core/classes/EntityComponent';
+import { PortalUser } from '../../../core/interfaces/fr-user.interface';
+import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';

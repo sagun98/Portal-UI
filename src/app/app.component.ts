@@ -1,12 +1,11 @@
+import { environment } from './../environments/environment';
 import { PermissionsService } from './core/services/permissions/permissions.service';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { UserService, FailedNavigation, FAILED_NAVIGATION_TYPE } from './core/services/user/user.service';
 import { HttpErrorMessage } from './core/interfaces/http-error.interface';
 import { Component, OnInit } from '@angular/core';
-import { ErrorInterceptor } from './core/interceptors/errors.interceptor';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
 import { ToastrService } from 'ngx-toastr';
-import { AsyncPipe } from '@angular/common';
 import { isNull } from 'util';
 
 @Component({
@@ -35,6 +34,16 @@ export class AppComponent implements OnInit{
     });
 
     setTimeout(t => {
+
+      window.addEventListener("message", (message) => {
+        if(message.origin.indexOf(environment.forumBase) >= 0){
+          const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
+          const path = message.data.replace(pattern, '');
+
+          if(path.indexOf('http') === -1)
+            this.router.navigate([`forum${path}`]);
+        }
+      }, false);
 
       this.userService.setLoggedInState();
 

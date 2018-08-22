@@ -1,4 +1,4 @@
-import { PortalUser, UserRole } from './../../interfaces/fr-user.interface';
+import { PortalUser, UserRole } from '../../interfaces/fr-user.interface';
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { RolesService } from '../../services/roles/roles.service';
 

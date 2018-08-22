@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 
 export const appRoutes: Routes = [
   {
-    path: 'home', loadChildren: './home/home.module#HomeModule',
+    path: '', loadChildren: './home/home.module#HomeModule',
     resolve: {
       NodeBBBlogs: NodeBBBlogsResolve
     }
@@ -14,7 +14,7 @@ export const appRoutes: Routes = [
   { path : 'docs', loadChildren : './docs/docs.module#DocsModule', canActivate : [LoggedInGuard] },
   { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule', canActivate : [LoggedInGuard] },
   { path: 'forum', loadChildren : './forum/forum.module#ForumModule' },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

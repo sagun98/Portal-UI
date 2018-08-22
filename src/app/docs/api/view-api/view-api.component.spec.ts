@@ -1,4 +1,4 @@
-import { MockUserService } from './../../../core/layouts/side-navigation/side-navigation.component.spec';
+import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
 import { ViewApiComponent } from './view-api.component';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';

@@ -21,6 +21,12 @@ export class ForumComponent implements OnInit {
     this.activatedRoute.url.subscribe( (urlSegments:UrlSegment[]) => {
       const extraPath = urlSegments.map(segment => {return segment.path}).join('/');
       this.forumURL = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase + '/' + extraPath );
+
+      var iframe = document.querySelector("iframe");
+
+      setTimeout(t => {
+        iframe.contentWindow.postMessage(window.location.origin, "*");
+      }, 1000);
     });
   }
 

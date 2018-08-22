@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
-import { PortalUser } from './../interfaces/fr-user.interface';
+import { PortalUser } from '../interfaces/fr-user.interface';
 import { FormGroup } from '@angular/forms';
-import { USER_PERMISSIONS, ENTITY_PERMISSIONS } from './../enums/user-permissions.enum';
+import { USER_PERMISSIONS, ENTITY_PERMISSIONS } from '../enums/user-permissions.enum';
 import { PermissibleEntity, Privilege } from '../interfaces/permissible.interface';
 import { of } from 'rxjs';
 import { UserPrivilegeClass } from './user-privilege';
