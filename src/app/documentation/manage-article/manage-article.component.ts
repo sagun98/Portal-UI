@@ -67,18 +67,7 @@ export class ManageArticleComponent implements OnInit  {
       
       this.article.author = this.article.author || this.userService.$retrievedUser.getValue().fullName;
 
-<<<<<<< HEAD
       this.article.category = this.categories[0];
-=======
-      // Restrict the category based on whether the user is entering from
-      // the documentation side, or the announcement side
-      // TODO: Double check this - is it even necessary now that blogs are in the forum
-      let paths = this.router.url.substring(1).split('/');
-      if(paths[0] === 'documentation')
-        this.categories.splice(0,1);
-      else
-        this.categories.splice(1,1);
->>>>>>> develop
 
       this.article.category =  this.article.category || this.categories[0];
 
