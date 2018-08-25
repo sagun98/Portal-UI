@@ -184,10 +184,10 @@ export class ManageArticleComponent implements OnInit  {
         this.router.navigate([`/documentation/main`]);
 
       else if(savedBlogPost.category === 'Documentation' && savedBlogPost.subCategory !== 'Documentation Landing Page')
-        this.router.navigate([`/documentation/${savedBlogPost.id}`]);
+        this.router.navigate([`/documentation/${savedBlogPost.slug}`]);
         
       else
-        this.router.navigate([`/documentation/${savedBlogPost.id}`]);
+        this.router.navigate([`/documentation/${savedBlogPost.slug}`]);
     });
   }
 

@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { CoreSharedModule } from './../../core/core-shared/core-shared.module';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -10,6 +12,8 @@ import { ApiSearchResultsComponent } from './api-search-results/api-search-resul
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CoreSharedModule,
+    RouterModule,
     ClarityModule
   ],
   declarations: [ApiSearchComponent, ApiSearchResultsComponent, ApiSearchResultsComponent],

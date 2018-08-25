@@ -33,17 +33,18 @@ export class ErrorInterceptor implements HttpInterceptor {
                     errorMessages.push(errorMessage);
                 });
 
-            else if(errorResponse.error)
+            else
                 errorMessages.push(
                     <HttpErrorMessage> {
                         id: new Date().getTime(),
                         type : errorResponse.error.type || HTTP_ERROR_TYPES.ERROR,
                         title : errorResponse.error.title || '',
-                        message : errorResponse.error.message,
+                        message : (errorResponse.error && errorResponse.error.message) ? errorResponse.error.message : '',
                         response : errorResponse
                     }
                 );
             
+          
 
             this.httpErrorsServices.$onError.next(errorMessages);
 

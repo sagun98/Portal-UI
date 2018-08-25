@@ -1,5 +1,5 @@
 <div class="container full">
-  <a class="btn btn-sm edit-page-btn" [routerLink]="'edit'">
+  <a class="btn btn-sm edit-page-btn" [routerLink]="'edit'" [hasPermission]="['ADMIN']">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
   </a>
 
@@ -16,6 +16,6 @@
 
   <hr class="bottom-spacer-20" />
 
-  <div [innerHTML]="safeBlogPost"></div>
+  <div class="documentation-body" [innerHTML]="safeBlogPost"></div>
 
 </div>

@@ -10,6 +10,8 @@ const environmentFile: string = `src/environments/environment${prodPostfix}.ts`;
 const envRestBase: string = env.RESTBASE || 'http://localhost:8080';
 const forumBase: string = env.FORUMBASE;
 
+console.log(env); 
+
 const envFileContents = `  
 export const environment = {
     production: ${isProd},

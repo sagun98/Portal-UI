@@ -11,4 +11,18 @@
         min-width: 12rem;
         max-width: 15rem;
     }
+
+
+    /deep/ .documentation-body{
+
+        h1, h2, h3 {
+            color: black;
+        }
+
+         p {
+            margin-top: .5rem;
+            font-size: .65rem;
+         }
+    }
+
 }

@@ -1,6 +1,10 @@
 <div class="container">
 
-  <h1>API Search</h1>
+  <h2>API Search</h2>
+
+  <a class="btn btn-sm edit-page-btn" routerLink="../new" [hasPermission]="[permissions?.API?.CREATE]">
+    <clr-icon shape="plus" class="is-solid"></clr-icon> Add API
+  </a>
 
   <!-- <p>Enter the API Name, or a list of keywords to find the API you need.</p> -->
 

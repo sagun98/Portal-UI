@@ -4,6 +4,7 @@ import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
 import { API } from '../api/interfaces/api.interface';
 import { SearchService, SEARCH_TYPES } from './search.service';
 import { Router } from '@angular/router';
+import { USER_PERMISSIONS } from '../../core/enums/user-permissions.enum';
 
 @Component({
   selector: 'app-api-search',
@@ -27,6 +28,10 @@ export class ApiSearchComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+  }
+
+  public get permissions () : any {
+    return USER_PERMISSIONS;
   }
 
   private buildForm() {

@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { DocumentResolve } from './resolves/document.resolve';
 import { ManageArticleComponent } from './manage-article/manage-article.component';
+import { RoleCheckGuard } from '../core/guards/role-check/role-check.guard';
 
 export const DocumentationRoutes: Routes = [
     {
@@ -22,7 +23,7 @@ export const DocumentationRoutes: Routes = [
         ]
     },
     {
-        path : ':blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost'}, resolve : { BlogPost : DocumentResolve }
+        path : ':blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost', permissions : ['ADMIN']}, resolve : { BlogPost : DocumentResolve }, canActivate : [RoleCheckGuard]
     }
 ]
 
