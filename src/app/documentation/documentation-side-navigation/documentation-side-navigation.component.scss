@@ -1,6 +1,13 @@
 :host {
     ul.nav-list {
         padding: 0rem;
+
+        li {
+
+            a {
+                padding: .3rem 0 .3rem .5rem;
+            }
+        }
     }
 
     section {
