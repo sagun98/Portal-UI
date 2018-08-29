@@ -1,3 +1,4 @@
+// import { NodebbModule } from '../domain/nodebb/nodebb.module';
 import { ApiModule } from './api/api.module';
 import { ApisResolve } from '../resolves/apis.resolve';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -25,6 +26,7 @@ import { CoreSharedModule } from '../core/core-shared/core-shared.module';
     ApiSearchModule,
     SharedModule,
     CoreSharedModule,
+    // NodebbModule,
     RouterModule.forChild(documentationRoutes)
   ],
   declarations: [

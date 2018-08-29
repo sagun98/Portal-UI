@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { forkJoin, of } from 'rxjs';
 
 export enum FORUM_CATEGORIES {
-    BLOGS = 'Blogs',
+    BLOGS = 'Announcements',
     GENERAL_SUPPORT = 'General API Questions and Support Forum',
     FEEDBACK = 'Feedback'
 }
@@ -41,7 +41,9 @@ export class NodeBBBlogsResolve implements Resolve<any> {
                         observer.next({
                             blogs : responses[0],
                             generalSupport : responses[1],
-                            feedback : responses[2]
+                            feedback : responses[2],
+                            supportCid : generalSupportCategory.cid,
+                            announcementsCid : blogCategory.cid
                         });
                         observer.complete();
                     });

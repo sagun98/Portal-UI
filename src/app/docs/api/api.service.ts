@@ -108,8 +108,8 @@ export class ApiService {
     )
   }
 
-  public updateFineGrainedPrivileges (id: string, privileges : UserPrivilegeClass[]) {
-    return this.http.put(`${environment.restBase}/apis/${id}/privileges`, privileges);
+  public updateFineGrainedPrivileges (id: string, privileges : UserPrivilegeClass[]) : Observable<API> {
+    return <Observable<API>>this.http.put(`${environment.restBase}/apis/${id}/privileges`, privileges);
   }
 
   // Convert object to form data

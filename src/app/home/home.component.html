@@ -62,7 +62,7 @@
           <clr-icon shape="talk-bubbles" size="30"></clr-icon> 
           <span class="ml10">Announcements</span>
 
-          <a title="See Annoucements from the API Team" routerLink="/blog/list" class="goto">
+          <a title="See Annoucements from the API Team" [routerLink]="'/forum/category/' + announcementsCid" class="goto">
             <clr-icon class="is-highlight" shape="circle-arrow" size="30" dir="right"></clr-icon>
           </a>
         </h3>
@@ -81,7 +81,7 @@
           <clr-icon shape="file-group" size="30"></clr-icon>
           <span class="ml10">Documentation</span>
 
-          <a title="Get started with Documentation" routerLink="/blog/documentation/main" class="goto">
+          <a title="Get started with Documentation" routerLink="/documentation/main" class="goto">
             <clr-icon class="is-highlight" shape="circle-arrow" size="30" dir="right"></clr-icon>
           </a>
         </h3>
@@ -113,7 +113,7 @@
           
           <span class="ml10">Support</span>
           
-          <a title="Go to the Support Forum" routerLink="/blog/list/category/7/general-api-questions-and-support-forum" class="goto">
+          <a title="Go to the Support Forum" [routerLink]="'/forum/category/' + supportCid" class="goto">
             <clr-icon class="is-highlight" shape="circle-arrow" size="30" dir="right"></clr-icon>
           </a>
         </h3>

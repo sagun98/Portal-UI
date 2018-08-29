@@ -164,8 +164,10 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   }
 
   public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
-    this.apiService.updateFineGrainedPrivileges(this.api.id, privileges).subscribe(r => {
+    this.apiService.updateFineGrainedPrivileges(this.api.id, privileges).subscribe(api => {
       this.toastrService.success('API User Privileges successfully updated');
+      this.api = api;
+      this.form.get('version').setValue(api.version);
     });
   }
 

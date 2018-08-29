@@ -10,7 +10,7 @@ export class AuthTokenInterceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const authToken = this.userService.authToken;
 
-        const ignorePattern = /.*\/auth\/.*/;
+        const ignorePattern = /(.*\/auth\/.*|.*\/v2\/.*)/;
 
         const tokenizedRequest = request.clone({
             headers: new HttpHeaders({

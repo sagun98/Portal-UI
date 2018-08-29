@@ -1,4 +1,4 @@
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment';
 import { PermissionsService } from './core/services/permissions/permissions.service';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { UserService, FailedNavigation, FAILED_NAVIGATION_TYPE } from './core/services/user/user.service';
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit{
           setTimeout(t => {
             //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
             if(error.response.status === 401 || error.response.status === 0){
-              this.userService.staticLogout();
+              //this.userService.staticLogout();
             }
 
             else if(! this.httpErrorsServices.override)

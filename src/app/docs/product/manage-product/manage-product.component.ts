@@ -137,8 +137,10 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   }
 
   public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
-    this.productService.updateFineGrainedPrivileges(this.product.id, privileges).subscribe(r => {
+    this.productService.updateFineGrainedPrivileges(this.product.id, privileges).subscribe( (product : Product) => {
       this.toastrService.success('API User Privileges successfully updated');
+      this.product = product;
+      this.form.get('version').setValue(product.version);
     });
   }
 

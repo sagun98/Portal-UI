@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../docs/product/interfaces/product.interface';
 
 
 @Component({
@@ -12,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   public forumBlogs: any[] = [];
   public supportForums : any[] = [];
+  public supportCid: number;
+  public announcementsCid: number;
 
   constructor(
     private activatedRoute: ActivatedRoute
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit {
         this.forumBlogs = data.NodeBBBlogs.blogs.topics.slice(0,5);
       if(data.NodeBBBlogs && data.NodeBBBlogs.generalSupport && data.NodeBBBlogs.generalSupport.topics && data.NodeBBBlogs.generalSupport.topics.length)
         this.supportForums = data.NodeBBBlogs.generalSupport.topics.slice(0,5);
-    })
+      if(data.NodeBBBlogs && data.NodeBBBlogs.supportCid)
+        this.supportCid = data.NodeBBBlogs.supportCid;
+      if(data.NodeBBBlogs && data.NodeBBBlogs.announcementsCid)
+        this.announcementsCid = data.NodeBBBlogs.announcementsCid;
+    });
   }
-
 }

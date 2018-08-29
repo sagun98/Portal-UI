@@ -1,5 +1,5 @@
 import { RouterModule } from '@angular/router';
-import { CoreSharedModule } from './../../core/core-shared/core-shared.module';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

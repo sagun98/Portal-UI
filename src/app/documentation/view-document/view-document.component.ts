@@ -1,4 +1,4 @@
-import { environment } from './../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
