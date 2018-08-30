@@ -1,4 +1,5 @@
-import { RouterModule, Router } from '@angular/router';
+import { Angulartics2Module } from 'angulartics2';
+import { RouterModule } from '@angular/router';
 import { ActiveLinkDirective } from './sub-navigation/active-link.directive';
 import { ClarityModule } from '@clr/angular';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -26,6 +27,7 @@ import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.
     CoreSharedModule,
     NgSelectModule,
     RouterModule,
+    Angulartics2Module,
     CoreSharedModule
   ],
   declarations: [
@@ -49,7 +51,7 @@ import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.
     DevPortalFooterComponent
   ],
   schemas : [
-    CUSTOM_ELEMENTS_SCHEMA
+    //CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class LayoutsModule { }

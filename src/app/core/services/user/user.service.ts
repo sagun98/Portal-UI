@@ -67,7 +67,10 @@ export class UserService {
     return this._user;
   }
 
-  public isAdmin () {
+  public isAdmin () : boolean {
+    if(! this._user || ! this._user.roles)
+      return false;
+
     return this._user.roles.filter(role => {return role.name === "ADMIN"}).length > 0;
   }
 

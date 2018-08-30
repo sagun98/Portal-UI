@@ -1,3 +1,4 @@
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { PortalUser } from '../../interfaces/fr-user.interface';
@@ -12,7 +13,8 @@ export class UserCardComponent implements OnInit {
   @Output() userSettingsClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private userService : UserService
+    private userService : UserService,
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag
   ) { }
 
   ngOnInit() {
@@ -24,7 +26,11 @@ export class UserCardComponent implements OnInit {
 
     if(doLogout){
       this.userService.logout().subscribe( response =>  {
-
+        this.angulartics2GoogleGlobalSiteTag.eventTrack('userLogout', {
+          category : 'userAction',
+          label : 'userLogout',
+          value : this.user
+        });
       });
     }
   }

@@ -30,8 +30,10 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.api = data.api || this.api;
-
       this.setSwaggerUI();
+      setTimeout(t => {
+        document['removeAllListeners']('focus');
+      })
     });
   }
 

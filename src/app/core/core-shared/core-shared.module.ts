@@ -6,10 +6,12 @@ import { HasPermissionDirective } from './has-permission.directive';
 import { HasPermissionToDirective } from './has-permission-to.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DynamicContentRoutingDirective } from './dynamic-content-routing.directive';
 
 const DIRECTIVES = [
   HasPermissionDirective,
-  HasPermissionToDirective
+  HasPermissionToDirective,
+  DynamicContentRoutingDirective
 ]
 
 const COMPONENTS = [

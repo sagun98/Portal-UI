@@ -1,3 +1,4 @@
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { ToastrService, ToastrConfig } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorsService } from '../../../services/http-errors/http-errors.service';
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit, OnChanges {
   public authFailed: boolean = false;
 
   constructor(
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
     private formBuilder: FormBuilder,
     private errorService: HttpErrorsService,
     private userService : UserService,
@@ -55,6 +57,12 @@ export class LoginComponent implements OnInit, OnChanges {
             this.userService.$doUserLogin.next( false );
             this.toastrService.success(`Sucessfully logged in as:  ${creds.username}`, null, <ToastrConfig> {
               "timeOut" : 1500
+            });
+
+            this.angulartics2GoogleGlobalSiteTag.eventTrack('userLogin', {
+              category : 'userAction',
+              label : 'userLogin',
+              value : user
             });
 
             const where = (this.userService.attemptedUrl.length) ? this.userService.attemptedUrl : '/documentation/main';

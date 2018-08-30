@@ -42,11 +42,14 @@
 
   </clr-dropdown>
 
-  <a *ngIf="loggedIn" class="visible-xs nav-link" id="logout" (click)="logout()" href="javascript:void(0)">
+  <a *ngIf="loggedIn" class="visible-xs nav-link" id="logout" (click)="logout()">
     <span class="nav-text">Logout</span>
   </a>
 
 </div>
 
 
-<user-settings-modal *ngIf="userSettingsOpened" [user]="user" [opened]="userSettingsOpened"> </user-settings-modal>
+<user-settings-modal *ngIf="userSettingsOpened" 
+  [user]="user" 
+  [opened]="userSettingsOpened"
+> </user-settings-modal>

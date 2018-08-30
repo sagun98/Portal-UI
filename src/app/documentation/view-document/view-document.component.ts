@@ -24,7 +24,7 @@ export class ViewDocumentComponent implements OnInit {
       this.blogPost = data.BlogPost || this.blogPost;
 
       setTimeout(t => {
-        this.fixInternalRouting();
+        //this.fixInternalRouting();
       }, 100);
     });
   }

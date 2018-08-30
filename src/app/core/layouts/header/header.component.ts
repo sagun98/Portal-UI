@@ -1,3 +1,4 @@
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../docs/api-search/search.service';
@@ -34,6 +35,7 @@ export class HeaderComponent implements OnInit {
   public subscriber: Subscription;
 
   constructor(
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
     private userService : UserService,
     private searchService : SearchService,
     private toastrService : ToastrService,
@@ -120,7 +122,11 @@ export class HeaderComponent implements OnInit {
 
     if(doLogout){
       this.userService.logout().subscribe( response =>  {
-
+        this.angulartics2GoogleGlobalSiteTag.eventTrack('userLogout', {
+          category : 'userAction',
+          label : 'userLogout',
+          value : this.user
+        });
       });
     }
   }

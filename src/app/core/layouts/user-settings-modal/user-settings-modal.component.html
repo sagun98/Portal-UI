@@ -9,7 +9,7 @@
     |{{ activeTabs | json }}| test
 
     <clr-tabs>
-      <clr-tab *ngIf="user.roleMap.ADMIN">
+      <clr-tab *ngIf="user?.roleMap?.ADMIN">
         <button clrTabLink>
           <h4>Manage User Roles</h4>
         </button>

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
 import { ToastrService } from 'ngx-toastr';
 import { isNull } from 'util';
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit{
   public showLogin: boolean = false;
 
   constructor(
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService,
     private userService: UserService,
@@ -83,7 +85,7 @@ export class AppComponent implements OnInit{
           setTimeout(t => {
             //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
             if(error.response.status === 401 || error.response.status === 0){
-              //this.userService.staticLogout();
+              this.userService.staticLogout();
             }
 
             else if(! this.httpErrorsServices.override)

@@ -14,11 +14,11 @@ import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-i
 import { ErrorInterceptorInterceptor } from './core/interceptors/errors.interceptor';
 import { AuthTokenInterceptorProivder } from './core/interceptors/auth.interceptor';
 import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga/angulartics2-ga';
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   
   imports: [
@@ -32,7 +32,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga/angulartics2-ga';
     HttpClientModule,
     BrowserAnimationsModule,
     DocumentationModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+    Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTag]),
   ],
   
   providers : [
