@@ -34,10 +34,12 @@
   
   <div class="api-documentation-content" dynamicContentRouting [innerHtml]="referenceSafe"></div>
 
+  <ng-container *ngIf="api.cid">
   <h2>API Forum</h2>
 
   <hr/>
 
-  <!-- <a routerLink="/blog/list">{{ api.name }} Forum</a>   -->
+  <a [routerLink]="'/forum/category/' + api.cid">{{ api.name }} Forum</a>  
+  </ng-container>
 
 </div>

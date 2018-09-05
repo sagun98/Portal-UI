@@ -28,7 +28,7 @@
     <input style="display:none" type="submit" name="submit"/>
   </form>
 
-  <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && ! ApiResults.length">
+  <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
       <div clr-alert-item class="alert-item">
           <span class="alert-text">
               No Search Results Found
@@ -36,7 +36,7 @@
       </div>
   </clr-alert>
 
-  <ng-container *ngIf="ApiResults.length">
+  <ng-container *ngIf="ApiResults && ApiResults.length">
     <api-search-results [apis]="ApiResults" (apiSelected)="gotoApi($event)">
         <h3><span class="mr10">Search Results:</span> <span class="badge badge-info" style="margin-top:-25px;">{{ ApiResults.length }} Results Found</span></h3>
     </api-search-results>

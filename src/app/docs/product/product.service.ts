@@ -90,10 +90,10 @@ export class ProductService {
   }
 
   public getProduct ( productId : string, getCache? : boolean ) {
-    if(getCache || this.provideCachedVersion.product){
-      this.provideCachedVersion.product = false;
-      return of(this._product_cache_);
-    }
+    // if(getCache || this.provideCachedVersion.product){
+    //   this.provideCachedVersion.product = false;
+    //   return of(this._product_cache_);
+    // }
 
     return this.http.get(`${environment.restBase}/products/${productId}`).pipe(
       tap( (product : Product) =>  {

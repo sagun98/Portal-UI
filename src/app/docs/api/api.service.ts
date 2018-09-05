@@ -31,10 +31,10 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   public getApi (apiId) {
-    if(this.provideCachedVersion.api){
-      this.provideCachedVersion.api = false;
-      return of(this._api_cache_);
-    }
+    // if(this.provideCachedVersion.api){
+    //   this.provideCachedVersion.api = false;
+    //   return of(this._api_cache_);
+    // }
 
     return this.http.get(`${environment.restBase}/apis/${apiId}`).pipe(
       tap ( (api : API) => {

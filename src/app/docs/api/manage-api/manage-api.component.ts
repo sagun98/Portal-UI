@@ -66,6 +66,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       id : [this.api.id, []],
+      cid : [this.api.cid, []],
       version : [this.api.version, []],
       name : [this.api.name, [Validators.required]],
       description : [this.api.description, [Validators.required]],

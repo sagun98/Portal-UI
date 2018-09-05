@@ -69,6 +69,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   protected buildForm() {
     this.form = this.formBuilder.group({
       id: [this.product.id],
+      // cid : [ this.product.cid, [] ],
       version: [this.product.version, []],
       name: [this.product.name, [Validators.required]],
       slug: [this.product.slug, [Validators.required]],

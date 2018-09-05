@@ -9,6 +9,7 @@ import { PortalUser } from '../../interfaces/fr-user.interface';
 import { FormGroup, NgForm } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ToastrService } from 'ngx-toastr';
+import { SearchTypes } from './search-types.enum';
 
 @Component({
   selector: 'dev-portal-header',
@@ -101,11 +102,10 @@ export class HeaderComponent implements OnInit {
 
   public gotoResult (result : any) {
 
-    const url = (result.type === 'PRODUCT') ? '/docs/product/' + result.itemId :
-                (result.type === 'BLOG') ? '/documentation/' + result.itemId :
-                (result.type === 'API') ? '/docs/api/' + result.itemId : '';
-
-    console.log(url);
+    const url = (result.type === SearchTypes.PRODUCT) ? '/docs/product/' + result.slug :
+                (result.type === SearchTypes.BLOGS) ? '/documentation/' + result.slug :
+                (result.type === SearchTypes.FORUM) ? '/forum/topic/' + result.slug :
+                (result.type === SearchTypes.API) ? '/docs/api/' + result.slug : '';
 
     this.router.navigate([`${url}`]).then(navigated => {
       if(navigated){

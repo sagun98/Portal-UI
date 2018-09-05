@@ -2,6 +2,7 @@ import { PermissibleEntity } from '../../../core/interfaces/permissible.interfac
 
 export interface Product extends PermissibleEntity{
     id ? : string,
+    cid? : number,
     version? : number,
     name : string,
     slug : string,
