@@ -37,23 +37,39 @@ export class NodeBBBlogsResolve implements Resolve<any> {
                 requests.push(feedbackRequest);
 
                 if(requests.length)
-                    forkJoin(requests).subscribe(responses => {                    
-                        observer.next({
-                            blogs : responses[0],
-                            generalSupport : responses[1],
-                            feedback : responses[2],
-                            supportCid : generalSupportCategory.cid,
-                            announcementsCid : blogCategory.cid
-                        });
-                        observer.complete();
-                    });
+                    forkJoin(requests)
+                    .subscribe(
+                        responses => {                    
+                            observer.next({
+                                blogs : responses[0],
+                                generalSupport : responses[1],
+                                feedback : responses[2],
+                                supportCid : generalSupportCategory.cid,
+                                announcementsCid : blogCategory.cid
+                            });
+                            observer.complete();
+                        },
+                        error => {
+                            console.log("error: ", error);
+                        }
+                    )
 
                 else {
                     observer.next({topics : []});
                     observer.complete();
                 }
                 
-            });
+            },
+            error => {
+                observer.next({
+                    topics : [],
+                    feedback : {url : ''},
+                    generalSupport : {url : ''},
+                    blogs : {url : ''}
+                });
+                observer.complete();
+            }
+            );
         });
     }
 }

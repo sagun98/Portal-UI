@@ -1,4 +1,3 @@
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { ToastrService, ToastrConfig } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpErrorsService } from '../../../services/http-errors/http-errors.service';
@@ -6,6 +5,7 @@ import { UserService, FRCredentials } from '../../../services/user/user.service'
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../../shared/angulartics-2-google-global-site-tag-override.service';
 
 @Component({
   selector: 'user-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit, OnChanges {
   public authFailed: boolean = false;
 
   constructor(
-    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride,
     private formBuilder: FormBuilder,
     private errorService: HttpErrorsService,
     private userService : UserService,
