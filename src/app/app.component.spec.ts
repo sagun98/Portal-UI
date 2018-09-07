@@ -1,3 +1,4 @@
+import { Angulartics2, Angulartics2Module } from 'angulartics2';
 import { HomeModule } from './home/home.module';
 import { HomeComponent } from './home/home.component';
 import { DevPortalCoreModule } from './core/core.module';
@@ -16,6 +17,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockUserService } from './core/layouts/side-navigation/side-navigation.component.spec';
 import { appRoutes } from './app.routes';
 import { Router } from '@angular/router';
+import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
 
 class MockHttpErrorsService extends HttpErrorsService {
   constructor () {
@@ -40,6 +42,7 @@ describe('AppComponent', () => {
         LoadingInterceptorModule,
         DevPortalCoreModule,
         HttpClientModule,
+        Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride]),
         HomeModule
       ],
       providers : [

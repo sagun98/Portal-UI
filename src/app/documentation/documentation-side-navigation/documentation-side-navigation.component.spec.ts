@@ -1,9 +1,11 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {DocumentationSideNavigationComponent} from './documentation-side-navigation.component';
 import {Component, Directive} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 
 describe('DocumentationSideNavigationComponent', () => {
   let fixture;
@@ -12,12 +14,15 @@ describe('DocumentationSideNavigationComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports : [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule,
+        CoreSharedModule
       ],
       declarations: [
         DocumentationSideNavigationComponent
       ],
       providers: [
+        HttpClient
       ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

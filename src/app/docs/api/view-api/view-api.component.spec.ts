@@ -11,6 +11,7 @@ import { of } from 'rxjs/observable/of';
 import { FormBuilder } from '@angular/forms';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
+import { RouterTestingModule } from '../../../../../node_modules/@angular/router/testing';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;
@@ -245,6 +246,7 @@ describe('ViewApiComponent', () => {
         EditorModule,
         ClarityModule,
         CoreSharedModule,
+        RouterTestingModule,
         HttpClientModule
       ],
       providers : [
@@ -260,7 +262,8 @@ describe('ViewApiComponent', () => {
                 gettingStarted : {items : []},
                 reference : {items : []},
               }
-            })
+            }),
+            snapshot : {}
           }
         }
       ],

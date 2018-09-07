@@ -6,21 +6,6 @@ import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share } from 'rxjs/operators';
 import { PortalUser } from '../../interfaces/fr-user.interface';
 
-export interface FRCredentials {
-  username?: string,
-  password?: string
-}
-
-export enum FAILED_NAVIGATION_TYPE {
-  LOGOUT = 'logout',
-  NAVIGATION = 'navigation'
-}
-
-export interface FailedNavigation {
-  type : FAILED_NAVIGATION_TYPE,
-  attemptedUrl : string
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,8 +26,8 @@ export class UserService {
   public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
 
   constructor(
-    private http: HttpClient,
-  ) {}
+    private http: HttpClient
+  ) { }
 
   public get authToken() {
     return localStorage.getItem('pearson.devportal.authToken') || '';
@@ -153,4 +138,19 @@ export class UserService {
       this._lastUser.next( this._user );
     return this._user;
   }
+}
+
+export interface FRCredentials {
+  username?: string,
+  password?: string
+}
+
+export enum FAILED_NAVIGATION_TYPE {
+  LOGOUT = 'logout',
+  NAVIGATION = 'navigation'
+}
+
+export interface FailedNavigation {
+  type : FAILED_NAVIGATION_TYPE,
+  attemptedUrl : string
 }
