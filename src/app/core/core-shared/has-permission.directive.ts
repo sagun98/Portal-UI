@@ -23,7 +23,8 @@ export class HasPermissionDirective implements OnInit {
     
     this.element.nativeElement.style.display = 'none';
 
-    this.userService._lastUser.subscribe((user: PortalUser) => {
+    //this.userService._lastUser.subscribe((user: PortalUser) => {
+    this.userService.getUser().subscribe( (user: PortalUser) => {
       
       const matches = (user) ? this.permissionService.matchesAnyPermissions(this.hasPermission, user.roles) : false;
 

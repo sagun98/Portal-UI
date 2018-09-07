@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, map, share, catchError } from 'rxjs/operators';
+import { tap, map, share } from 'rxjs/operators';
 import { PortalUser } from '../../interfaces/fr-user.interface';
 
 export interface FRCredentials {
@@ -32,23 +32,23 @@ export class UserService {
   public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
   public attemptedUrl: string = '';
   
-  private username: string;
-  protected _user: PortalUser;
   private userRequest: Observable<{} | PortalUser>;
+
+  // Class member to hold the portal user
+  protected _user: PortalUser;
+
+  // Subject that will allow subscribers to be aware of user changes
   public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {}
 
   public get authToken() {
     return localStorage.getItem('pearson.devportal.authToken') || '';
   }
 
-  private get userId() {
-    return localStorage.getItem('pearson.devportal.userId') || '';
-  }
-
+  // make sure the request for the user is only made once
   public get user() {
     if (this._user != null) {
       this._lastUser = new BehaviorSubject<PortalUser>(this._user);
@@ -92,7 +92,6 @@ export class UserService {
       .append('X-OpenAM-Password', credentials.password);
 
     return this.http.post(`${environment.restBase}/auth/authenticate`, {}, { headers }).pipe(tap((authResponse: any) => {
-      this.username = credentials.username;
       this.authToken = authResponse.token;
     }));
   }

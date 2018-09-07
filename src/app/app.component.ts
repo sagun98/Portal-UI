@@ -37,6 +37,7 @@ export class AppComponent implements OnInit{
 
     setTimeout(t => {
 
+      // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
         if(message.origin.indexOf(environment.forumBase) >= 0){
           const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
@@ -67,11 +68,11 @@ export class AppComponent implements OnInit{
 
         if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ) {
           this.router.navigate([`/`]).then(navigated => {
-            if( isNull(navigated) ){
+            // if( isNull(navigated) ){
               alert('You need to be logged in to view this content.');
               this.showLogin = false;
               setTimeout(t => { this.showLogin = true; })
-            }
+            // }
           });
         }
       });

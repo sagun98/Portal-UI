@@ -86,7 +86,7 @@ export class SideNavigationComponent implements OnInit {
   public get apisFiltered () {
     return this.apis
       .map(api => {
-        api.name = api.name.replace(/API.*/, '');
+        api.name = api.name.replace(/(.*)API$/gi, '$1');
         return api;
       })
       .filter(api => {
