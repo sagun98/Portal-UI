@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "584643220196.dkr.ecr.us-east-2.amazonaws.com/dev-portal-ui"
+    REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui"
     IMAGE_TAG: "0.1.0-SNAPSHOT"
 
 phases:
@@ -14,7 +14,7 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker images...
-      - $(aws ecr get-login --region us-east-2 --no-include-email)
+      - $(aws ecr get-login --region us-east-1 --no-include-email)
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
       - echo Writing image definitions file...

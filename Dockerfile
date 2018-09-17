@@ -1,5 +1,5 @@
 # base image
-FROM node:8.11.3
+FROM node:8.11.4
 
 # set working directory
 RUN mkdir /app
@@ -14,7 +14,7 @@ COPY nginx.conf /app/
 COPY scripts /app/scripts
 COPY src /app/src
 
-RUN apt-get update && apt-get install nginx -y
+RUN apt-get update && apt-get install nginx -y && npm install
 
 EXPOSE 80
 
