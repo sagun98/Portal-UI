@@ -14,6 +14,7 @@ import { SlugUtilityService } from '../../services/slug.service';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 import { ToastrService } from 'ngx-toastr';
+import { isNull } from 'util';
 
 
 @Component({
@@ -69,7 +70,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   protected buildForm() {
     this.form = this.formBuilder.group({
       id: [this.product.id],
-      // cid : [ this.product.cid, [] ],
+      cid : [ this.product.cid, [] ],
       version: [this.product.version, []],
       name: [this.product.name, [Validators.required]],
       slug: [this.product.slug, [Validators.required]],
@@ -101,9 +102,12 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
 
     const productData = this.form.getRawValue();
 
+    if(productData.apiManagementTool && (isNull(productData.apiManagementTool.name) || productData.apiManagementTool.name == 'null'))
+      delete productData.apiManagementTool;
+
     this.productService[this.saveMethod](productData).subscribe((product: Product) => {
       this.cacheProduct();
-      this.router.navigate([`/docs/product/${product.id}`]);
+      this.router.navigate([`/docs/product/${product.slug}`]);
     });
   }
 

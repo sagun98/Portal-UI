@@ -8,6 +8,7 @@ import { ManageApiComponent } from './manage-api.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { RouterModule } from '@angular/router';
 import { DocsSharedModule } from '../../shared/shared.module';
+import { ApiApiToolsModule } from './api-api-tools/api-api-tools.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { DocsSharedModule } from '../../shared/shared.module';
     NgSelectModule,
     RouterModule,
     DocsSharedModule,
+    ApiApiToolsModule,
     CoreSharedModule
   ],
   declarations: [

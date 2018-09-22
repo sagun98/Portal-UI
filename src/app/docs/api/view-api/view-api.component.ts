@@ -6,9 +6,12 @@ import { API } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { Privilege } from '../../../core/interfaces/permissible.interface';
+// import { SwaggerEditor, SwaggerEditorStandalonePreset } from 'swagger-editor-dist';
 
 export const swaggerUIBundle = SwaggerUIBundle;
 export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
+// export const swaggerEditor = SwaggerEditor;
+// export const swaggerEditorStandalonePreset = SwaggerEditorStandalonePreset;
 
 @Component({
   selector: 'api',
@@ -35,6 +38,15 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
         document['removeAllListeners']('focus');
       })
     });
+
+    // const editor = SwaggerEditorBundle({
+    //   dom_id: '#swagger-editor',
+    //   layout: 'StandaloneLayout',
+    //   spec : this.swaggerJson,
+    //   presets: [
+    //     SwaggerEditorStandalonePreset
+    //   ]
+    // })
   }
 
   public get canEditThisApi () {

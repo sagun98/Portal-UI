@@ -25,7 +25,7 @@ enum SWAGGER_UPLOAD_OPTION {
 })
 export class ManageApiComponent extends EntityComponent implements OnInit {
 
-  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : []};
+  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : [], apiManagementTool : null};
   
   public errorClasses = ERROR_CLASSES;
   public form: FormGroup;

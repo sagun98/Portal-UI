@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { ProductService } from '../docs/product/product.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { Injectable } from '@angular/core';
@@ -13,6 +14,19 @@ export class ProductsResolve implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.productService.getProducts();
+        // return  Observable.create( observer => {
+        //     this.productService.getProducts().subscribe(
+        //         products => {
+        //             observer.next(products);
+        //             observer.complete();
+        //         },
+
+        //         errors => {
+        //             observer.next([]);
+        //             observer.complete();
+        //         }
+        //     );
+        // });
     }
 }
 

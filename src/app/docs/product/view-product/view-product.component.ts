@@ -2,11 +2,8 @@ import { ApiService } from '../../api/api.service';
 import { Component } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
-import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
-import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { ProductService } from '../product.service';
 import { Product } from '../interfaces/product.interface';
-import { USER_PERMISSIONS, ENTITY_PERMISSIONS } from '../../../core/enums/user-permissions.enum';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 
 @Component({
@@ -32,8 +29,11 @@ export class ViewProductComponent extends EntityComponent {
     this.activatedRoute.data.subscribe(data => {
       this.apis = data.apiData;
       this.product = <Product>data.product;
-
       this.activeApi = null;
+
+      this.product.apis = this.product.apis.filter(api => {
+        return api !== null;
+      })
     });
   }
   
