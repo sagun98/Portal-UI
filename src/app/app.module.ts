@@ -14,7 +14,7 @@ import { LoadingInterceptorProvider } from './core/loading-interceptor/loading-i
 import { ErrorInterceptorInterceptor } from './core/interceptors/errors.interceptor';
 import { AuthTokenInterceptorProivder } from './core/interceptors/auth.interceptor';
 import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
+import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
     HttpClientModule,
     BrowserAnimationsModule,
     DocumentationModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTag]),
+    Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride]),
   ],
   
   providers : [

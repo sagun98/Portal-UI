@@ -27,7 +27,7 @@ export class HasPermissionDirective implements OnInit {
       
       const matches = (user) ? this.permissionService.matchesAnyPermissions(this.hasPermission, user.roles) : false;
 
-      if( this.userService.isAdmin() ){
+      if( this.userService.isAdmin() ){ 
         this.element.nativeElement.style.display = this.initialDisplay;
         return;
       }

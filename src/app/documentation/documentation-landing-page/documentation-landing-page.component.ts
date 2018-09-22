@@ -10,7 +10,7 @@ import { UserPrivilegesComponentHelper } from '../../core/classes/user-privilege
   templateUrl: './documentation-landing-page.component.html',
   styleUrls: ['./documentation-landing-page.component.scss']
 })
-export class DocumentationLandingPageComponent extends UserPrivilegesComponentHelper implements OnInit {
+export class DocumentationLandingPageComponent extends UserPrivilegesComponentHelper implements OnInit { 
 
   @Input() landingPage: BlogPost;
 

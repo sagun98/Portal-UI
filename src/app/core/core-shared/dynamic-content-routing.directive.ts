@@ -16,19 +16,24 @@ export class DynamicContentRoutingDirective {
 
   public ngOnInit() {
     this.element.nativeElement['onclick'] = (event:Event) => {
-      const target = <Element> event.target
+      const target = <Element> event.target;
+      const parentTarget = <Element> target.parentElement;
       const type = target.tagName.toLowerCase();
+      const parentType = parentTarget.tagName.toLocaleLowerCase();
 
-      if(type === 'a'){
+      if(type === 'a' || parentType === 'a'){
         let href = target['href'];
         let portalBase = window.location.protocol + '//' + window.location.host;
 
         if( href.indexOf(portalBase) != -1 || href.indexOf(environment.forumBase) != -1){
-          event.preventDefault();
-          event.stopPropagation();
-          
           href = href.replace(portalBase, '').replace(environment.forumBase, '');
-          this.router.navigate([href]);
+
+          if(href.indexOf('#') === -1){
+            this.router.navigate([href]);
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          
           return;
         }
         else {

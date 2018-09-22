@@ -4,10 +4,11 @@ import {By} from '@angular/platform-browser';
 
 import {DynamicContentRoutingDirective} from './dynamic-content-routing.directive';
 import {Component, Directive} from '@angular/core';
+import { RouterTestingModule } from '../../../../node_modules/@angular/router/testing';
 
 @Component({
   template: `
-    <DIRECTIVE-SELECTOR  ></DIRECTIVE-SELECTOR>
+    <div dynamicContentRouting></div>
   `
 })
 class DirectiveTestComponent {
@@ -23,6 +24,9 @@ describe('DynamicContentRoutingDirective', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports : [
+        RouterTestingModule
+      ],
       declarations: [DynamicContentRoutingDirective, DirectiveTestComponent],
       providers: [
       ]

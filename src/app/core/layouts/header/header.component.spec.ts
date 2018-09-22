@@ -1,3 +1,4 @@
+import { Angulartics2Module, Angulartics2 } from 'angulartics2';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -6,6 +7,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -19,11 +21,15 @@ describe('HeaderComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         ToastrModule.forRoot(),
+        Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride]),
         RouterTestingModule
       ],
       providers : [
         HttpClient,
-        ToastrService
+        ToastrService,
+        Angulartics2,
+        Angulartics2GoogleGlobalSiteTagOverride
+
       ],
       declarations: [ HeaderComponent ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]

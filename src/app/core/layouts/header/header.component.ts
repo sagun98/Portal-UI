@@ -1,15 +1,15 @@
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { UserCardComponent } from '../user-card/user-card.component';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../docs/api-search/search.service';
 import { Component, OnInit, Input, HostBinding, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-import { Subject, Observable, Subscription } from 'rxjs';
+import {  Observable, Subscription } from 'rxjs';
 import { PortalUser } from '../../interfaces/fr-user.interface';
-import { FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ToastrService } from 'ngx-toastr';
 import { SearchTypes } from './search-types.enum';
+import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 
 @Component({
   selector: 'dev-portal-header',
@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   public subscriber: Subscription;
 
   constructor(
-    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride,
     private userService : UserService,
     private searchService : SearchService,
     private toastrService : ToastrService,

@@ -1,7 +1,7 @@
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { PortalUser } from '../../interfaces/fr-user.interface';
+import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 
 @Component({
   selector: 'user-card',
@@ -14,7 +14,7 @@ export class UserCardComponent implements OnInit {
 
   constructor(
     private userService : UserService,
-    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride
   ) { }
 
   ngOnInit() {

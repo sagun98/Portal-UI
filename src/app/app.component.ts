@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
 import { ToastrService } from 'ngx-toastr';
 import { isNull } from 'util';
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
+import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   public showLogin: boolean = false;
 
   constructor(
-    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTag,
+    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride,
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService,
     private userService: UserService,
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit{
 
     setTimeout(t => {
 
+      // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
         if(message.origin.indexOf(environment.forumBase) >= 0){
           const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
@@ -67,11 +68,11 @@ export class AppComponent implements OnInit{
 
         if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ) {
           this.router.navigate([`/`]).then(navigated => {
-            if( isNull(navigated) ){
+            // if( isNull(navigated) ){
               alert('You need to be logged in to view this content.');
               this.showLogin = false;
               setTimeout(t => { this.showLogin = true; })
-            }
+            // }
           });
         }
       });
