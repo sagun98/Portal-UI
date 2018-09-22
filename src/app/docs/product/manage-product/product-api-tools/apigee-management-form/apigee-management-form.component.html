@@ -1,0 +1,72 @@
+<form [formGroup]="form">
+  <div class="form-group">
+    <label for="productName" class="required">Apigee Org</label>
+    <label [className]=" ( form.get('org').invalid && ( submitted || form.get('org').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+      <select name="org" formControlName="org">
+        <option *ngFor="let org of orgs;let index = index;" [value]="index == 0 ? '' : org">{{ org | uppercase }}</option>
+      </select>
+    </label>
+  </div>
+
+  <ng-container *ngIf="form.get('org').value !== 'none'">
+    <div class="form-group">
+      <label for="productName" class="required">Apigee Product</label>
+      <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+        <select name="id" formControlName="id">
+          <option *ngFor="let product of products;let index = index" [value]="index == 0 ? '' : product">{{ product }}</option>
+        </select>
+      </label>
+    </div>      
+
+    <div class="form-group">
+      <label for="productName" class="required">Apigee API Key Duration</label>
+      <label [className]=" ( form.get('duration').invalid && ( submitted || form.get('duration').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="duration" type="number" name="duration" placeholder="Enter Apigee Key Duration" formControlName="duration"/>
+      </label>
+    </div>
+  </ng-container>
+
+</form>
+
+<!-- <form [formGroup]="form">
+  <div class="form-group">
+    <label for="productName" class="required">API Management Tool</label>
+    <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+      <select name="name" formControlName="name">
+        <option *ngFor="let option of apiManagementTools" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </label>
+  </div>
+
+  <ng-container *ngIf="form.get('name').value != 'null' && form.get('name').value != null">
+
+    <div class="form-group">
+      <label for="productName" class="required">Apigee Org</label>
+      <label [className]=" ( form.get('org').invalid && ( submitted || form.get('org').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+        <select name="org" formControlName="org">
+          <option *ngFor="let org of orgs">{{ org | uppercase }}</option>
+        </select>
+      </label>
+    </div>
+
+    <ng-container *ngIf="form.get('org').value !== 'none'">
+      <div class="form-group">
+        <label for="productName" class="required">Apigee Product</label>
+        <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <select name="id" formControlName="id">
+            <option *ngFor="let option of apiManagementTools" [value]="option.value">{{ option.label }}</option>
+          </select>
+        </label>
+      </div>      
+
+      <div class="form-group">
+        <label for="productName" class="required">Apigee API Key Duration</label>
+        <label [className]=" ( form.get('duration').invalid && ( submitted || form.get('duration').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+            <input id="duration" type="number" name="duration" placeholder="Enter Apigee Key Duration" formControlName="duration"/>
+        </label>
+      </div>
+    </ng-container>
+
+  </ng-container>
+
+</form> -->

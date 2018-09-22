@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+  <div class="form-group">
+    <label for="productName" class="required">API Management Tool</label>
+    <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+      <select name="name" formControlName="name">
+        <option *ngFor="let option of apiManagementTools" [value]="option.value">{{ option.label }}</option>
+      </select>
+    </label>
+  </div>
+
+  <apigee-management-form *ngIf="API_MANAGEMENT_TOOLS.APIGEE === API_MANAGEMENT_TOOLS[form.get('name').value]" [form]="form" [submitted]="submitted" [apigeeTool]="apiTool"></apigee-management-form>
+
+</form>
+  

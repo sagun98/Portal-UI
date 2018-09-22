@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <div class="form-group">
+    <label for="productName" class="required">Apigee Org</label>
+    <label [className]=" ( form.get('org').invalid && ( submitted || form.get('org').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+      <select name="org" formControlName="org">
+        <option *ngFor="let org of orgs;let index = index;" [value]="index == 0 ? '' : org">{{ org | uppercase }}</option>
+      </select>
+    </label>
+  </div>
+
+  <ng-container *ngIf="form.get('org').value !== 'none'">
+    <div class="form-group">
+      <label for="productName" class="required">Apigee API</label>
+      <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+        <select name="id" formControlName="id">
+          <option *ngFor="let api of apis;let index = index" [value]="index == 0 ? '' : api">{{ api }}</option>
+        </select>
+      </label>
+    </div>
+  </ng-container>
+</form>
