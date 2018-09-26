@@ -13,10 +13,10 @@ export class ApigeeClientService {
   ) { }
 
   public getApigeeProducts(org: string) : Observable<string[]> {
-    return <Observable<string[]>> this.http.get(`${environment.restBase}/apigee-integration/products`);
+    return <Observable<string[]>> this.http.get(`${environment.restBase}/apigee/products`);
   }
 
   public getApigeeApis(org: String) : Observable<string[]> {
-    return  <Observable<string[]>> this.http.get(`${environment.restBase}/apigee-integration/apis`);
+    return  <Observable<string[]>> this.http.get(`${environment.restBase}/apigee/apis`);
   }
 }

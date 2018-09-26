@@ -16,5 +16,5 @@ export interface API extends PermissibleEntity{
     file? : File,
     swaggerUrl? : string,
     tags? : string[],
-    apiManagementTool : ApiManagementTool
+    apiManagementTool? : ApiManagementTool
 }
