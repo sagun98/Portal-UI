@@ -1,3 +1,5 @@
+import { API_MANAGEMENT_TOOLS } from './../../../core/enums/api-management-tools.enum';
+import { ApigeeApiTool } from './../../../core/interfaces/apigee-api-tool.interface';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
@@ -15,12 +17,17 @@ import { UserService } from '../../../core/services/user/user.service';
 import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
 
 
-const mockApi: API = {
+export const mockApi: API = {
   id : 'qwers12345',
   name : 'Mock API',
   description : 'Mock API Description',
   slug : 'test',
   userPrivileges : [],
+  apiManagementTool : <ApigeeApiTool> {
+    id : 'mock',
+    org : 'mock',
+    name : API_MANAGEMENT_TOOLS.APIGEE
+  }
 };
 
 class MockApiService extends ApiService {

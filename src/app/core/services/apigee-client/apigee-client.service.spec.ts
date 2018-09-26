@@ -1,3 +1,4 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ApigeeClientService } from './apigee-client.service';
@@ -5,7 +6,13 @@ import { ApigeeClientService } from './apigee-client.service';
 describe('ApigeeClientService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ApigeeClientService]
+      imports : [
+        HttpClientModule
+      ],
+      providers: [
+        HttpClient,
+        ApigeeClientService
+      ]
     });
   });
 
