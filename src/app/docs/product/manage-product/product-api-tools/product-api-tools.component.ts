@@ -1,5 +1,5 @@
-import { ERROR_CLASSES } from './../../../../core/constants/error-classes.constant';
-import { ApiManagementTool, DefaultApiManagementTool } from './../../../../core/interfaces/api-management-tool.interface';
+import { ERROR_CLASSES } from '../../../../core/constants/error-classes.constant';
+import { ApiManagementTool, DefaultApiManagementTool } from '../../../../core/interfaces/api-management-tool.interface';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { API_MANAGEMENT_TOOLS } from '../../../../core/enums/api-management-tools.enum';

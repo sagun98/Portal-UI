@@ -1,0 +1,14 @@
+:host {
+
+    table > tbody > tr > td {
+        vertical-align: middle;
+
+        &.nobr {
+            white-space: nowrap;
+        }
+    }
+
+    .alert {
+        margin-top:0rem !important;
+    }
+}

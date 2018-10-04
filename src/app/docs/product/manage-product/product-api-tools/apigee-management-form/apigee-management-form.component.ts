@@ -1,5 +1,7 @@
-import { ApigeeClientService } from './../../../../../core/services/apigee-client/apigee-client.service';
-import { APIGEE_ORGS } from './../../../../../core/constants/apigee-orgs.constant';
+import { APIGEE_KEY_DURATIONS } from './../../../../../core/constants/apigee-key-durations.constant';
+import { LabelValuePair } from './../../../../../core/interfaces/label-value-pair.interface';
+import { ApigeeClientService } from '../../../../../core/services/apigee-client/apigee-client.service';
+import { APIGEE_ORGS } from '../../../../../core/constants/apigee-orgs.constant';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { ApigeeManagementTool, DefaultApigeeManagementTool } from '../../../../../core/interfaces/apigee-management-tool.interface';
@@ -19,6 +21,7 @@ export class ApigeeManagementFormComponent implements OnInit {
   public errorClasses = ERROR_CLASSES;
   public orgs = ['none', ...APIGEE_ORGS];
   public products: string[] = [];
+  public durations: LabelValuePair[] = APIGEE_KEY_DURATIONS;
 
   constructor(
     private formBuilder : FormBuilder,

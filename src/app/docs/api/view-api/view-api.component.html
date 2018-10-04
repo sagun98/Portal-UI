@@ -20,7 +20,20 @@
 
   <div class="api-documentation-content" dynamicContentRouting [innerHtml]="gettingStartedSafe"></div>
 
-  <h2 id="api-documentation">API Documentation</h2>
+  <h2 id="api-documentation">
+    API Documentation
+    <clr-tooltip *ngIf="api.apiManagementTool">
+        <a><clr-icon clrTooltipTrigger shape="key" size="30" class="ml10" (click)="openApiKeyModal()"></clr-icon></a>
+        <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+            <span>Get API Key</span>
+        </clr-tooltip-content>
+    </clr-tooltip>
+  </h2>
+
+  <apigee-api-key-modal *ngIf="api.apiManagementTool && api.apiManagementTool.name && api.apiManagementTool.name === 'APIGEE' " 
+                        [opened]="apikeyModalOpen"
+                        [api]="api"
+  ></apigee-api-key-modal>
 
   <hr class="bottom-spacer-20"/>
 

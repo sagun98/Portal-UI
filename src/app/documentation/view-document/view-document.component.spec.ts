@@ -1,5 +1,5 @@
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CoreSharedModule } from './../../core/core-shared/core-shared.module';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

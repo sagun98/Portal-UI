@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { Angulartics2GoogleGlobalSiteTagOverride } from './../../../shared/angulartics-2-google-global-site-tag-override.service';
+import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 import { Angulartics2Module } from 'angulartics2';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';

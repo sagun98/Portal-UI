@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst';
+import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst/angulartics2-gst';
 import { Injectable } from '@angular/core';
 import { Angulartics2, GoogleGlobalSiteTagSettings } from 'angulartics2';
 

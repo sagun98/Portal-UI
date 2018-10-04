@@ -17,7 +17,22 @@
       <div class="bottom-spacer-20" [innerHtml]="product.overview"></div>
     </ng-container>
 
-    <h2 class="bottom-spacer-20">APIs</h2>
+    <h2 class="bottom-spacer-20">
+      APIs
+      <clr-tooltip *ngIf="product.apiManagementTool">
+        <a>
+          <clr-icon clrTooltipTrigger shape="key" size="30" class="ml10" (click)="openApiKeyModal()"></clr-icon>
+        </a>
+        <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+          <span>Get API Key for this Product Group</span>
+        </clr-tooltip-content>
+      </clr-tooltip>
+    </h2>
+
+    <apigee-api-key-modal *ngIf="product.apiManagementTool && product.apiManagementTool.name && product.apiManagementTool.name === 'APIGEE' " 
+                        [opened]="apikeyModalOpen"
+                        [product]="product"
+    ></apigee-api-key-modal>
 
     <clr-stack-view class="bottom-spacer-40">
       <clr-stack-block [clrSbExpandable]="true" *ngFor="let api of product.apis" [clrSbExpanded]="(activeApi && activeApi.id === api.id)" (clrSbExpandedChange)="getApiDefinition(api, $event)">

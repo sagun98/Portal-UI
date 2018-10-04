@@ -1,4 +1,4 @@
-import { NodeBBCategoryService } from './../../domain/nodebb/category/nodebb-category.service';
+import { NodeBBCategoryService } from '../../domain/nodebb/category/nodebb-category.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { USER_PERMISSIONS } from '../../core/enums/user-permissions.enum';

@@ -1,56 +1,61 @@
-import { of, Observable } from 'rxjs';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ApigeeApiToolComponent } from './apigee-api-tool.component';
-import { ApigeeClientService } from '../../../../../core/services/apigee-client/apigee-client.service';
+import { API_MANAGEMENT_TOOLS } from '../../../../../core/enums/api-management-tools.enum';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+// tslint:disble
+import { async, TestBed } from '@angular/core/testing';
 
-export class MockApigeeClientService extends ApigeeClientService {
-  
-  constructor (_http : HttpClient) {
-    super(_http);
-  }
-
-  public getApigeeProducts(org: string) : Observable<string[]> {
-    return <Observable<string[]>> of(['Product 1', 'Product 2', 'Product 3']);
-  }
-
-  public getApigeeApis(org: String) : Observable<string[]> {
-    return <Observable<string[]>> of(['Api 1', 'Api 2', 'Api 3']);
-  }
-
-}
-
+import {ApigeeApiToolComponent} from './apigee-api-tool.component';
+import {ApigeeClientService, MockApigeeClientService} from '../../../../../core/services/apigee-client/apigee-client.service';
+import { ApigeeApiTool } from '../../../../../core/interfaces/apigee-api-tool.interface';
+      
 describe('ApigeeApiToolComponent', () => {
-  let component: ApigeeApiToolComponent;
-  let fixture: ComponentFixture<ApigeeApiToolComponent>;
+  let fixture;
+  let component;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports : [
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule
       ],
-      providers : [
-        HttpClient,
-        {provide : ApigeeClientService, useClass : MockApigeeClientService, deps : [HttpClient]}
+      declarations: [
+        ApigeeApiToolComponent
       ],
-      declarations: [ ApigeeApiToolComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
+      providers: [
+        HttpClient,
+        {provide: ApigeeClientService, useClass: MockApigeeClientService, deps : [HttpClient]},
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(ApigeeApiToolComponent);
-    component = fixture.componentInstance;
+    component = fixture.debugElement.componentInstance;
 
-    component.parentForm = new FormGroup ({}) ;
+    component.apigeeTool = <ApigeeApiTool> {
+      name : API_MANAGEMENT_TOOLS.APIGEE,
+      id : 'Proxy 1',
+      org : component.orgs[1]
+    };
+
+    component.parentForm = new FormGroup({
+      name : new FormControl(component.apigeeTool.name, [Validators.required])
+    });
 
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create a component', async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
+  
+    
+  it('should run #ngOnInit()', async(() => {
+    component.ngOnInit();
+    expect(component.form.get('name').value).toEqual(component.apigeeTool.name);
+    expect(component.form.get('id').value).toEqual(component.apigeeTool.id);
+    expect(component.form.get('org').value).toEqual(component.apigeeTool.org);
+  }));
+        
+  it('should run #buildForm()', async(() => {
+    expect( Object.keys( component.form.controls ).length ).toEqual(3);
+  }));        
 });

@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { ApigeeApiKeyModalComponent } from './modals/apigee-api-key-modal/apigee-api-key-modal.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,7 +9,8 @@ import { CommonModule } from '@angular/common';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 
 const COMPONENTS = [
-  EntityPermissionsModalComponent
+  EntityPermissionsModalComponent,
+  ApigeeApiKeyModalComponent
 ]
 
 @NgModule({
@@ -16,6 +19,7 @@ const COMPONENTS = [
     FormsModule,
     ReactiveFormsModule,
     ClarityModule,
+    RouterModule,
     CoreSharedModule
   ],
   declarations: [

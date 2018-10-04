@@ -11,7 +11,7 @@ import { of } from 'rxjs/observable/of';
 import { FormBuilder } from '@angular/forms';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
-import { RouterTestingModule } from '../../../../../node_modules/@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;

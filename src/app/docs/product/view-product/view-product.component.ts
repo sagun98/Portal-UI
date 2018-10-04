@@ -16,6 +16,7 @@ export class ViewProductComponent extends EntityComponent {
   public activeApi: API;
   public product: Product;
   public apis: any[];
+  public apikeyModalOpen: boolean = false;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -48,4 +49,11 @@ export class ViewProductComponent extends EntityComponent {
     });
   }
 
+  public openApiKeyModal () {
+    this.apikeyModalOpen = false;
+
+    setTimeout( t => {
+      this.apikeyModalOpen = true;
+    }); 
+  }
 }

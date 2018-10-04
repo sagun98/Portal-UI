@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ViewApiComponent } from './view-api/view-api.component';
 import { ApiResolve } from './resolves/api.resolve';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
+import { DocsSharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
     FormsModule,
     ReactiveFormsModule,
     CoreSharedModule,
+    DocsSharedModule,
     RouterModule
   ],
   providers : [

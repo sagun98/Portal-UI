@@ -1,15 +1,6 @@
 import { UserPrivilegeClass } from "../../core/classes/user-privilege";
 import { environment } from "../../../environments/environment";
-import {
-  HttpClient,
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpResponse,
-  HTTP_INTERCEPTORS,
-  HttpHeaders
-} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, of, Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
@@ -18,6 +9,7 @@ import { CRUD } from "../../core/enums/crud.enum";
 import { APIListChange } from "./interfaces/apiListChange.interface";
 import { API } from "./interfaces/api.interface";
 import { Privilege } from "../../core/interfaces/permissible.interface";
+import { Product } from "../product/interfaces/product.interface";
 
 interface CachedAPIs {
   api?: boolean;
@@ -150,23 +142,7 @@ export class ApiService {
     );
   }
 
-  // Convert object to form data
-  private getFormDataFromObject(obj: any): FormData {
-    let formData: FormData = new FormData();
-
-    Object.keys(obj).forEach(key => {
-      const htmlKeyTest = new RegExp("(reference|overview|gettingStarted)");
-      let value = obj[key];
-
-      if (isNull(value)) value = "";
-
-      if (htmlKeyTest.test(key) && value === "") value = "<p>&nbsp;</p>";
-
-      if (isArray(value)) value = JSON.stringify(value);
-
-      formData.append(key, value);
-    });
-
-    return formData;
+  public getProducts (api: API) : Observable<Product[]> {
+    return <Observable<Product[]>> this.http.get(`${environment.restBase}/apis/${api.id}/products`);
   }
 }

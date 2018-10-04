@@ -1,5 +1,5 @@
-import { API_MANAGEMENT_TOOLS } from './../../../core/enums/api-management-tools.enum';
-import { ApigeeApiTool } from './../../../core/interfaces/apigee-api-tool.interface';
+import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
+import { ApigeeApiTool } from '../../../core/interfaces/apigee-api-tool.interface';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';

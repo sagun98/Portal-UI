@@ -4,7 +4,7 @@ import {By} from '@angular/platform-browser';
 
 import {DynamicContentRoutingDirective} from './dynamic-content-routing.directive';
 import {Component, Directive} from '@angular/core';
-import { RouterTestingModule } from '../../../../node_modules/@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
   template: `

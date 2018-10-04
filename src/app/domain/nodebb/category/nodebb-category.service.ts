@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { NodeBBPrivilegeRequest } from './nodebb-privilege-request.interface';
-import { NodebbModule } from './../nodebb.module';
+import { NodebbModule } from '../nodebb.module';
 import { NodeBBCategory } from './nodebb-category.interface';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';

@@ -1,0 +1,45 @@
+<clr-modal [(clrModalOpen)]="opened">
+
+    <h3 class="modal-title bottom-spacer-20">
+      <clr-icon size="23" shape="key"></clr-icon> Get API Key
+    </h3>
+  
+    <div class="modal-body">
+
+      <clr-alert [clrAlertType]="'alert-warning'" *ngIf="! products.length && didProductLookup" [clrAlertClosable]="false">
+        <div clr-alert-item class="alert-item">
+          <span class="alert-text">
+            This API is not associated with any Products in the Pearson Developer Portal. Please associate this API with the correct
+            Product to retrieve an API Key
+          </span>
+        </div>
+      </clr-alert>
+
+      <table class="table" *ngIf="products.length">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>API Key</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products;let index = index;">
+            <td class="nobr">{{ product.name }}</td>
+            <td>
+              <ng-container *ngIf="apiKeys[index] && apiKeys[index][0] && apiKeys[index][0].consumerKey">{{ apiKeys[index][0].consumerKey }}</ng-container>
+              <ng-container *ngIf="apiKeys[index] && apiKeys[index].error">
+                <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosable]="false">
+                  <div clr-alert-item class="alert-item">
+                    <span class="alert-text">
+                      Associated Apigee API Proxy: <b>{{ api.apiManagementTool.id }}</b>, is not a member of the
+                      Apigee Product: <b>{{ product.apiManagementTool.id }}</b>.  Please open a ticket <a [routerLink]="'/forum/category/' + api.cid"><b>Here</b></a>
+                    </span>
+                  </div>
+                </clr-alert>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>  
+  </clr-modal>

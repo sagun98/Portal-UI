@@ -1,8 +1,9 @@
-import { API_MANAGEMENT_TOOLS } from './../enums/api-management-tools.enum';
+import { API_MANAGEMENT_TOOLS } from '../enums/api-management-tools.enum';
 
 export interface ApiManagementTool {
-    name: API_MANAGEMENT_TOOLS,
-    id : string
+    name: string,
+    id : string,
+    [key: string]: any;
 }
 
 export const DefaultApiManagementTool = <ApiManagementTool> {

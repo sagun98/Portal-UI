@@ -1,5 +1,6 @@
+import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum';
 import { UserService } from '../../../core/services/user/user.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { API } from '../interfaces/api.interface';
@@ -22,6 +23,10 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
 
   @Input() api: API = null;
 
+  public apiKey: string = '';
+  public apikeyModalOpen: boolean = false;
+  public keyStrategy = ApigeeKeyStrategy;
+
   constructor(
     private activatedRoute : ActivatedRoute,
     private userService : UserService,
@@ -36,7 +41,8 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       this.setSwaggerUI();
       setTimeout(t => {
         document['removeAllListeners']('focus');
-      })
+      });
+      this.apikeyModalOpen = false;
     });
 
     // const editor = SwaggerEditorBundle({
@@ -110,4 +116,11 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustHtml( this.api.reference );
   }
 
+  public openApiKeyModal () : void {
+    this.apikeyModalOpen = false;
+
+    setTimeout( t => {
+      this.apikeyModalOpen = true;
+    }); 
+  }
 }
