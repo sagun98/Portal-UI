@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  variables:
+    REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui-develop"
+    IMAGE_TAG: "0.1.0-SNAPSHOT"
+
+phases:
+  build:
+    commands:
+      - echo Building the Docker image...        
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
+  post_build:
+    commands:
+      - echo Pushing the Docker images...
+      - $(aws ecr get-login --region us-east-1 --no-include-email)
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7))
+      - echo Writing image definitions file...
+      - printf '[{"name":"dev-portal-ui-develop","imageUri":"%s"}]' $REPOSITORY_URI:$(echo $IMAGE_TAG-$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)) > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
