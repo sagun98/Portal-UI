@@ -1,0 +1,23 @@
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'md'" [clrModalClosable]="false">
+
+  <h3 class="modal-title bottom-spacer-20">
+    <clr-icon size="23" shape="info-standard"></clr-icon> <span class="ml10">Open API Specification 2.0 Notification</span>
+  </h3>
+
+  <div class="modal-body">
+    <clr-alert [clrAlertType]="'alert-warning'" [clrAlertClosable]="false">
+      <div clr-alert-item class="alert-item">
+        <span class="alert-text">
+         Open API Specification 2.0 Swagger Documents will be automatically upgraded to, and store as Open API Specification 3.0 Documents upon saving this API.  
+         Please keep your 2.0 Documents for your own records.
+        </span>
+      </div>
+    </clr-alert>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="ok()">
+      <clr-icon shape="check"></clr-icon> OK
+    </button>
+  </div>
+</clr-modal>

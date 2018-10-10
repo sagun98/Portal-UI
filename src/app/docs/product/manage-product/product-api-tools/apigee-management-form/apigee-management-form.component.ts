@@ -1,5 +1,5 @@
-import { APIGEE_KEY_DURATIONS } from './../../../../../core/constants/apigee-key-durations.constant';
-import { LabelValuePair } from './../../../../../core/interfaces/label-value-pair.interface';
+import { APIGEE_KEY_DURATIONS } from '../../../../../core/constants/apigee-key-durations.constant';
+import { LabelValuePair } from '../../../../../core/interfaces/label-value-pair.interface';
 import { ApigeeClientService } from '../../../../../core/services/apigee-client/apigee-client.service';
 import { APIGEE_ORGS } from '../../../../../core/constants/apigee-orgs.constant';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';

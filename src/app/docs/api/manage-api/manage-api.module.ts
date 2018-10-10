@@ -9,6 +9,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { RouterModule } from '@angular/router';
 import { DocsSharedModule } from '../../shared/shared.module';
 import { ApiApiToolsModule } from './api-api-tools/api-api-tools.module';
+import { Swagger2AlertModalComponent } from './swagger2-alert-modal/swagger2-alert-modal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ApiApiToolsModule } from './api-api-tools/api-api-tools.module';
     CoreSharedModule
   ],
   declarations: [
-    ManageApiComponent
+    ManageApiComponent,
+    Swagger2AlertModalComponent
   ],
   exports : [
     ManageApiComponent

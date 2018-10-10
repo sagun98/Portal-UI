@@ -27,12 +27,25 @@
             <td class="nobr">{{ product.name }}</td>
             <td>
               <ng-container *ngIf="apiKeys[index] && apiKeys[index][0] && apiKeys[index][0].consumerKey">{{ apiKeys[index][0].consumerKey }}</ng-container>
-              <ng-container *ngIf="apiKeys[index] && apiKeys[index].error">
+              
+              <!-- Has Product that has an API Management Platform, but this API is not in the Product Group in Apigee -->
+              <ng-container *ngIf="apiKeys[index] && apiKeys[index].error && product.apiManagementTool">
                 <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosable]="false">
                   <div clr-alert-item class="alert-item">
                     <span class="alert-text">
                       Associated Apigee API Proxy: <b>{{ api.apiManagementTool.id }}</b>, is not a member of the
                       Apigee Product: <b>{{ product.apiManagementTool.id }}</b>.  Please open a ticket <a [routerLink]="'/forum/category/' + api.cid"><b>Here</b></a>
+                    </span>
+                  </div>
+                </clr-alert>
+              </ng-container>
+
+              <!-- Has Product that does not have an API Management Tool associated with it -->
+              <ng-container *ngIf="apiKeys[index] && apiKeys[index].error && ! product.apiManagementTool">
+                <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosable]="false">
+                  <div clr-alert-item class="alert-item">
+                    <span class="alert-text">
+                      This product is not associated with an Apigee Product.  Unable to retrieve an API Key.  Please open a ticket <a [routerLink]="'/forum/category/' + api.cid"><b>Here</b></a>
                     </span>
                   </div>
                 </clr-alert>

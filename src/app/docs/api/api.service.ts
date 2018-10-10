@@ -46,7 +46,6 @@ export class ApiService {
   }
 
   public addApi(api: API) {
-    debugger;
     if (!api.id || !api.id.length) delete api.id;
 
     let swagger = "";

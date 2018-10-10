@@ -82,22 +82,29 @@ export class ApigeeApiKeyModalComponent implements OnInit, OnChanges {
         let apiKeyRequests: any[] = [];
 
         this.products.forEach(product => {
-          apiKeyRequests.push( 
-            this.apigeeClient.getApiKey(product.apiManagementTool.org, product, this.api.apiManagementTool.id).pipe(
-              map((res) => res),
-              catchError( (errorResponse : HttpErrorResponse, caught: Observable<HttpEvent<any>>) => {
-                this.httpErrorService.override = true;
-                return of({error : errorResponse.error.message});
-              })
-            )
-          );
+
+          if(product.apiManagementTool) {
+            apiKeyRequests.push( 
+              this.apigeeClient.getApiKey(product.apiManagementTool.org, product, this.api.apiManagementTool.id).pipe(
+                map((res) => res),
+                catchError( (errorResponse : HttpErrorResponse, caught: Observable<HttpEvent<any>>) => {
+                  this.httpErrorService.override = true;
+                  return of({error : errorResponse.error.message});
+                })
+              )
+            );
+          } else {
+            apiKeyRequests.push( of({error : true}) );
+          }
         });
 
-        forkJoin(apiKeyRequests).subscribe( 
-          (apiKeys: ApigeeApiKey[]) => {
-            this.apiKeys = apiKeys;
-          }
-        );
+        if (apiKeyRequests.length) {
+          forkJoin(apiKeyRequests).subscribe( 
+            (apiKeys: ApigeeApiKey[]) => {
+              this.apiKeys = apiKeys;
+            }
+          );
+        }
       }
     });
   }

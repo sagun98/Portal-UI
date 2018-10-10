@@ -91,12 +91,14 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   public get swaggerJson () {
 
     // Make sure operation ids are unique so only one opens at a time
-    Object.keys( this.api.swagger['paths'] ).forEach(path => {
-      const swaggerPath = this.api.swagger['paths'][path];
-      Object.keys( swaggerPath ).forEach(method => {
-        this.api.swagger['paths'][path][method].operationId = path.concat(method).replace(/\//gi, '');
-      })
-    })
+    if(this.api.swagger){
+      Object.keys( this.api.swagger['paths'] ).forEach(path => {
+        const swaggerPath = this.api.swagger['paths'][path];
+        Object.keys( swaggerPath ).forEach(method => {
+          this.api.swagger['paths'][path][method].operationId = path.concat(method).replace(/\//gi, '');
+        })
+      });
+    }
     
     return this.api.swagger;
   }

@@ -1,4 +1,4 @@
-import { LabelValuePair } from './../interfaces/label-value-pair.interface';
+import { LabelValuePair } from '../interfaces/label-value-pair.interface';
 
 
 export const APIGEE_KEY_DURATIONS:LabelValuePair[] = [

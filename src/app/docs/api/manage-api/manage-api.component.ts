@@ -5,12 +5,14 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 import { API } from '../interfaces/api.interface';
 import { UserService } from '../../../core/services/user/user.service';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
+import { ManageApiService } from './manage-api.service';
+import { Swagger2AlertModalComponent } from './swagger2-alert-modal/swagger2-alert-modal.component';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -26,10 +28,12 @@ enum SWAGGER_UPLOAD_OPTION {
 export class ManageApiComponent extends EntityComponent implements OnInit {
 
   @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : [], apiManagementTool : null};
+  @ViewChild(Swagger2AlertModalComponent) swaggerMessageModal : Swagger2AlertModalComponent;
   
   public errorClasses = ERROR_CLASSES;
   public form: FormGroup;
   public submitted: boolean = false;
+  public showSwaggerVersion2Message: boolean = false;
   public tinymceConfig = TINYCMCE_CONFIG;
   public saveMethod: string = 'addApi';
   public swaggerUploadOptions = SWAGGER_UPLOAD_OPTION;
@@ -41,6 +45,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router : Router,
     private userService : UserService,
+    private manageApiService: ManageApiService,
     private toastrService: ToastrService
   ) {
     super();
@@ -125,12 +130,29 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
     });
 
-    this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-      this.cacheApi();
-      this.router.navigate([`/docs/api/${api.slug}`]);
-    })
+    this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
+
+      if (version === 2){
+        this.showSwaggerVersion2Message = true;
+        this.swaggerMessageModal.onClosed.subscribe(closed => {
+          if (closed)
+            this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+              this.router.navigate([`/docs/api/${api.slug}`]);
+            });
+        })
+      }
+
+      else
+        this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+          this.router.navigate([`/docs/api/${api.slug}`]);
+        });
+
+    });    
   }
   
+  
+
+
   public get UIFormattedTags () {
     if(! this.api.tags)
       return [];
@@ -140,9 +162,8 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     });
   }
 
-  public cacheApi () {
-    if(this.apiService._api_cache_)
-      this.apiService.provideCachedVersion.api = true;
+  public get backRoute () : string {
+    return (this.api.id) ? '../' : '../search';
   }
 
   public handleDelete () {

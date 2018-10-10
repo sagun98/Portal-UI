@@ -151,6 +151,13 @@
         <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
       </div>
 
+      <swagger2-alert-modal
+        [opened]="showSwaggerVersion2Message"
+        (onClose)="finishSave()"
+      >
+
+      </swagger2-alert-modal>
+
     </section>
 
     <div class="fixed-footer">
@@ -169,7 +176,7 @@
           </button>
         </div>
         <div class="col-xs-4">
-          <a type="submit" class="btn btn-danger-outline pull-right" (click)="cacheApi()" routerLink="../">
+          <a type="submit" class="btn btn-danger-outline pull-right" [routerLink]="backRoute">
             <clr-icon shape="times"></clr-icon>
             <span class="ml5 hidden-xs">Cancel</span>
           </a>
