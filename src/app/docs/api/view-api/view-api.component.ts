@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { ForumService } from './../../../core/services/forum/forum.service';
 import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum';
 import { UserService } from '../../../core/services/user/user.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
@@ -7,6 +9,9 @@ import { API } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { Privilege } from '../../../core/interfaces/permissible.interface';
+import { ApiService } from '../api.service';
+import { PermissionsService } from '../../../core/services/permissions/permissions.service';
+import { NodeBBCategoryService } from '../../../domain/nodebb/category/nodebb-category.service';
 // import { SwaggerEditor, SwaggerEditorStandalonePreset } from 'swagger-editor-dist';
 
 export const swaggerUIBundle = SwaggerUIBundle;
@@ -26,11 +31,18 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   public apiKey: string = '';
   public apikeyModalOpen: boolean = false;
   public keyStrategy = ApigeeKeyStrategy;
+  public following: boolean = false;
+  public isEntityAdmin: boolean = false;
+  public announcementCid: number;
 
   constructor(
     private activatedRoute : ActivatedRoute,
     private userService : UserService,
     private domSanitizer: DomSanitizer,
+    private apiService: ApiService,
+    private toastrService: ToastrService,
+    private permissionService: PermissionsService,
+    private nodeBBService: NodeBBCategoryService
   ){
     super(); 
   }
@@ -39,6 +51,16 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       this.api = data.api || this.api;
       this.setSwaggerUI();
+      this.following = this.userService.isFollowingEntity(this.api.followers);
+      this.isEntityAdmin = this.permissionService.isEntityAdmin(this.api);
+    
+      if(this.isEntityAdmin){
+        this.announcementCid = this.api.cid;
+        this.nodeBBService.getChildCategoryId(this.api.cid, 'announcements').subscribe(cid => {
+          this.announcementCid = cid;
+        });
+      }
+
       setTimeout(t => {
         document['removeAllListeners']('focus');
       });
@@ -124,5 +146,21 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
     setTimeout( t => {
       this.apikeyModalOpen = true;
     }); 
+  }
+
+  public follow () {
+    this.apiService.follow(this.api.id, this.api.cid).subscribe(api => {
+      this.toastrService.info("You are now following " + this.api.name);
+      this.following = this.userService.isFollowingEntity(api.followers);
+      this.api = api;
+    });
+  }
+
+  public unfollow () {
+    this.apiService.unfollow(this.api.id, this.api.cid).subscribe(api => {
+      this.toastrService.info("You are no longer following " + this.api.name);
+      this.following = this.userService.isFollowingEntity(api.followers);
+      this.api = api;
+    });
   }
 }

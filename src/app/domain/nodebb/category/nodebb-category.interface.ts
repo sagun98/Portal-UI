@@ -7,6 +7,7 @@ export interface NodeBBCategory {
     privileges : NodeBBPrivilege[]
     title: string;
     icon ? : string;
+    children? : NodeBBCategory[]
 }
 
 export interface NodeBBPrivilege {

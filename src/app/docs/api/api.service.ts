@@ -20,9 +20,7 @@ interface CachedAPIs {
   providedIn: "root"
 })
 export class ApiService {
-  public $onApiListChanged: Subject<APIListChange> = new Subject<
-    APIListChange
-  >();
+  public $onApiListChanged: Subject<APIListChange> = new Subject<APIListChange>();
   public _api_cache_: API;
   public _apis_cache_: API[] = [];
   public provideCachedVersion: CachedAPIs = {
@@ -143,5 +141,13 @@ export class ApiService {
 
   public getProducts (api: API) : Observable<Product[]> {
     return <Observable<Product[]>> this.http.get(`${environment.restBase}/apis/${api.id}/products`);
+  }
+
+  public follow (id: string, cid: number) : Observable<API> {
+    return <Observable<API>> this.http.post(`${environment.restBase}/apis/${id}/category/${cid}/follow`, null);
+  }
+
+  public unfollow (id: string, cid: number) : Observable<API> {
+    return <Observable<API>> this.http.delete(`${environment.restBase}/apis/${id}/category/${cid}/follow`);
   }
 }

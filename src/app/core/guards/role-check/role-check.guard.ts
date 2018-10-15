@@ -37,6 +37,9 @@ export class RoleCheckGuard implements CanActivate, CanActivateChild {
       else{
         this.userService.user.subscribe( (user : PortalUser) => {
 
+          if(! user)
+            return;
+
           if( this.userService.isAdmin() ){
             observer.next(true)
             observer.complete();

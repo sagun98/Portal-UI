@@ -1,7 +1,7 @@
 import { tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, of } from 'rxjs';
+import { Subject, of, Observable } from 'rxjs';
 import { ProductListChange } from './interfaces/product-list-change.interface';
 import { CRUD } from '../../core/enums/crud.enum';
 import { Product } from './interfaces/product.interface';
@@ -100,5 +100,13 @@ export class ProductService {
         this._product_cache_ = product;
       })
     );
+  }
+
+  public follow (id: string, cid: number) : Observable<Product> {
+    return <Observable<Product>> this.http.post(`${environment.restBase}/products/${id}/category/${cid}/follow`, null);
+  }
+
+  public unfollow (id: string, cid: number) : Observable<Product> {
+    return <Observable<Product>> this.http.delete(`${environment.restBase}/products/${id}/category/${cid}/follow`);
   }
 }

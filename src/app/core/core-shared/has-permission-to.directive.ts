@@ -21,11 +21,11 @@ export class HasPermissionToDirective implements OnChanges {
   }
 
   public ngOnChanges () {
-    const userPrivileges = (this.entity.userPrivileges) ? this.entity.userPrivileges[0] : <Privilege> {username : '', permissions : []};
+    const userPrivileges = (this.entity.userPrivileges) ? this.entity.userPrivileges[0] : <Privilege> {username : this.userService._lastUser.value.username, permissions : ['NONE']};
 
    if( this.userService.isAdmin() || ! userPrivileges || (userPrivileges && ! userPrivileges.permissions) || (userPrivileges && userPrivileges.permissions && ! userPrivileges.permissions.length) )
     return;
 
-    this.element.nativeElement.style.display = (userPrivileges.permissions.indexOf(this.hasPermissionTo) >= 0) ? this.initialDisplay : 'none';  
+    this.element.nativeElement.style.display = (userPrivileges.permissions.indexOf(this.hasPermissionTo) >= 0) ? this.initialDisplay : 'none';
   }
 }

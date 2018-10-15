@@ -4,10 +4,32 @@
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit API
   </a>
 
-  <h1>
-    {{ api.name }}
-    <!-- <button class="ml20 btn btn-primary-outlined">Follow</button> -->
-  </h1>
+  <div class="pull-right">
+    <clr-tooltip *ngIf="! following && ! isEntityAdmin">
+      <button clrTooltipTrigger class="ml20 btn btn-primary-outlined" (click)="follow()">Follow</button>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+          <span>Get notified via Email when there are updates to the {{ api.name }}</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+
+    <clr-tooltip  *ngIf="following && ! isEntityAdmin">
+      <button clrTooltipTrigger class="ml20 btn btn-primary-outlined" (click)="unfollow()">Unfollow</button>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+        <span>Stop receiving updates on {{ api.name }}</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+    
+    <a class="ml20 btn btn-primary-outlined" *ngIf="api.cid" [routerLink]="'/forum/category/' + api.cid"><clr-icon shape="talk-bubbles"></clr-icon> Discuss</a>
+    
+    <clr-tooltip *ngIf="isEntityAdmin">
+      <a clrTooltipTrigger class="ml20 btn btn-primary-outlined" [routerLink]="'/forum/category/' + announcementCid"><clr-icon shape="bell"></clr-icon> Post Update</a>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+          <span>Post announcement to users following this API</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+  </div>
+
+  <h1>{{ api.name }}</h1>
 
   <p class="bottom-spacer-20">{{ api.description }}</p>
 
@@ -52,12 +74,12 @@
   
   <div class="api-documentation-content" dynamicContentRouting [innerHtml]="referenceSafe"></div>
 
-  <ng-container *ngIf="api.cid">
+  <!-- <ng-container *ngIf="api.cid">
   <h2>API Forum</h2>
 
   <hr/>
 
   <a [routerLink]="'/forum/category/' + api.cid">{{ api.name }} Forum</a>  
-  </ng-container>
+  </ng-container> -->
 
 </div>

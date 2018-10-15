@@ -5,6 +5,7 @@ import { USER_PERMISSIONS, ENTITY_PERMISSIONS } from '../enums/user-permissions.
 import { PermissibleEntity, Privilege } from '../interfaces/permissible.interface';
 import { of } from 'rxjs';
 import { UserPrivilegeClass } from './user-privilege';
+import { ForumService } from '../services/forum/forum.service';
 
 export class EntityComponent {
   public managePrivilegesModalOpened: boolean = false;
@@ -33,5 +34,5 @@ export class EntityComponent {
       
       setTimeout(t => { this.managePrivilegesModalOpened = true; });
     });
-  } 
+  }
 }

@@ -1,10 +1,14 @@
-import { ApiService } from '../../api/api.service';
+import { ApiService } from './../../api/api.service';
+import { NodeBBCategoryService } from './../../../domain/nodebb/category/nodebb-category.service';
+import { PermissionsService } from './../../../core/services/permissions/permissions.service';
+import { ToastrService } from 'ngx-toastr';
 import { Component } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../interfaces/product.interface';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
+import { UserService } from '../../../core/services/user/user.service';
 
 @Component({
   selector: 'app-view-product',
@@ -17,11 +21,18 @@ export class ViewProductComponent extends EntityComponent {
   public product: Product;
   public apis: any[];
   public apikeyModalOpen: boolean = false;
+  public following: boolean = false;
+  public isEntityAdmin: boolean = false;
+  public announcementCid: number;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
     protected productService: ProductService,
-    protected apiService : ApiService,
+    protected apiService: ApiService,
+    private userService : UserService,
+    private toastrService: ToastrService,
+    private permissionService: PermissionsService,
+    private nodeBBService: NodeBBCategoryService
   ) { 
     super(); 
   }
@@ -31,6 +42,15 @@ export class ViewProductComponent extends EntityComponent {
       this.apis = data.apiData;
       this.product = <Product>data.product;
       this.activeApi = null;
+      this.following = this.userService.isFollowingEntity(this.product.followers);
+      this.isEntityAdmin = this.permissionService.isEntityAdmin(this.product);
+    
+      if(this.isEntityAdmin){
+        this.announcementCid = this.product.cid;
+        this.nodeBBService.getChildCategoryId(this.product.cid, 'announcements').subscribe(cid => {
+          this.announcementCid = cid;
+        });
+      }
 
       this.product.apis = this.product.apis.filter(api => {
         return api !== null;
@@ -55,5 +75,21 @@ export class ViewProductComponent extends EntityComponent {
     setTimeout( t => {
       this.apikeyModalOpen = true;
     }); 
+  }
+
+  public follow () {
+    this.productService.follow(this.product.id, this.product.cid).subscribe(product => {
+      this.toastrService.info("You are now following " + this.product.name);
+      this.following = this.userService.isFollowingEntity(product.followers);
+      this.product = product;
+    });
+  }
+
+  public unfollow () {
+    this.productService.unfollow(this.product.id, this.product.cid).subscribe(product => {
+      this.toastrService.info("You are no longer following " + this.product.name);
+      this.following = this.userService.isFollowingEntity(product.followers);
+      this.product = product;
+    });
   }
 }

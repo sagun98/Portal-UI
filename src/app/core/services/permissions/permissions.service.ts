@@ -1,7 +1,10 @@
+import { UserService } from './../user/user.service';
+import { Privilege } from './../../interfaces/permissible.interface';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs';
-import { UserRole } from '../../interfaces/fr-user.interface';
+import { UserRole, PortalUser } from '../../interfaces/fr-user.interface';
 import { Injectable } from '@angular/core';
+import { PermissibleEntity } from '../../interfaces/permissible.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,9 @@ export class PermissionsService {
 
   public onForbiddenRouteAttempt: Subject<ActivatedRouteSnapshot> = new Subject<ActivatedRouteSnapshot>();
 
-  constructor() { }
+  constructor(
+    private userService: UserService
+  ) { }
 
   public matchesAnyPermissions(permissionsToTest: string[], userRoles: UserRole[]) : boolean {
     let matches = false;
@@ -28,5 +33,22 @@ export class PermissionsService {
       }
 
     return matches
+  }
+
+  public isEntityAdmin (entity: PermissibleEntity) : boolean {
+    let isAdmin = false;
+    const user: PortalUser = this.userService._lastUser.value;
+
+    if(entity.userPrivileges)
+      for(let i=0; i < entity.userPrivileges.length; i++){
+        const privilege: Privilege = entity.userPrivileges[i];
+        
+        if (privilege.username === user.username && (privilege.permissions.indexOf("ADMIN") >= 0) ) {
+          isAdmin = true;
+          break;
+        }
+      }
+
+    return isAdmin;
   }
 }

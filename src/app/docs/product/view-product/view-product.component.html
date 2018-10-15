@@ -4,6 +4,31 @@
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Page Edit
   </a>
 
+  <div class="pull-right">
+    <clr-tooltip *ngIf="! following && ! isEntityAdmin">
+      <button clrTooltipTrigger class="ml20 btn btn-primary-outlined" (click)="follow()">Follow</button>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+          <span>Get notified via Email when there are updates to the {{ product.name }}</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+
+    <clr-tooltip  *ngIf="following && ! isEntityAdmin">
+      <button clrTooltipTrigger class="ml20 btn btn-primary-outlined" (click)="unfollow()">Unfollow</button>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+        <span>Stop receiving updates on {{ product.name }}</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+    
+    <a class="ml20 btn btn-primary-outlined" *ngIf="product.cid" [routerLink]="'/forum/category/' + product.cid"><clr-icon shape="talk-bubbles"></clr-icon> Discuss</a>
+    
+    <clr-tooltip *ngIf="isEntityAdmin">
+      <a clrTooltipTrigger class="ml20 btn btn-primary-outlined" [routerLink]="'/forum/category/' + announcementCid"><clr-icon shape="bell"></clr-icon> Post Update</a>
+      <clr-tooltip-content clrPosition="top-left" clrSize="sm" *clrIfOpen style="min-width:200px;">
+          <span>Post announcement to users following this Product</span>
+      </clr-tooltip-content>
+    </clr-tooltip>
+  </div>
+
 
     <h1 class="bottom-spacer-10">{{ product.name }}</h1>
 

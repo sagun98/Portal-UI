@@ -117,6 +117,13 @@ export class UserService {
     );
   }
 
+  public isFollowingEntity (followers: string[]) : boolean {
+    if(! followers)
+      return false;
+      
+    return (followers.indexOf(this._user.username) >= 0);
+  }
+
   public staticLogout () {
     this.userRequest = null;
     this.authToken = '';

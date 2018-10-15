@@ -51,7 +51,7 @@ export class ManageApiService {
     const reader = new FileReader();
     reader.readAsText(file, "UTF-8");
 
-    reader.onload =  (evt) => {
+    reader.onload =  (evt:any) => {
       if(file.name.endsWith(".yaml"))
         version = this.getYamlVersion( evt.target.result );
 
