@@ -14,7 +14,8 @@ export const USER_PERMISSIONS = Object.assign({}, objectPermissions);
 
 export enum ENTITY_PERMISSIONS {
     MODIFY = 'MODIFY', 
-    ADMIN = 'ADMIN'
+    ADMIN = 'ADMIN',
+    COLLABORATOR = 'COLLABORATOR'
 }
 
 

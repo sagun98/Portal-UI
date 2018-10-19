@@ -43,11 +43,46 @@ export class PermissionsService {
       for(let i=0; i < entity.userPrivileges.length; i++){
         const privilege: Privilege = entity.userPrivileges[i];
         
-        if (privilege.username === user.username && (privilege.permissions.indexOf("ADMIN") >= 0) ) {
+        if (privilege.username === user.username && (privilege.permissions && privilege.permissions.indexOf("ADMIN") >= 0) ) {
           isAdmin = true;
           break;
         }
       }
+
+    return isAdmin;
+  }
+
+  public hasPermission (entity: PermissibleEntity, permission: string) : boolean {
+    let isAdmin = false;
+    const user: PortalUser = this.userService._lastUser.value;
+
+    if(entity.userPrivileges)
+      for(let i=0; i < entity.userPrivileges.length; i++){
+        const privilege: Privilege = entity.userPrivileges[i];
+        
+        if (privilege.username === user.username && (privilege.permissions && privilege.permissions.indexOf(permission) >= 0) ) {
+          isAdmin = true;
+          break;
+        }
+      }
+
+    return isAdmin;
+  }
+
+  public hasOnlyPermission (entity: PermissibleEntity, permission: string) : boolean {
+    let isAdmin = false;
+    const user: PortalUser = this.userService._lastUser.value;
+
+    if(entity.userPrivileges)
+      for(let i=0; i < entity.userPrivileges.length; i++){
+        const privilege: Privilege = entity.userPrivileges[i];
+        
+        if (privilege.username === user.username && (privilege.permissions && privilege.permissions.length == 1 && privilege.permissions.indexOf(permission) >= 0) ) {
+          isAdmin = true;
+          break;
+        }
+      }
+
 
     return isAdmin;
   }

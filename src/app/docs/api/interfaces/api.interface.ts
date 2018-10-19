@@ -1,7 +1,8 @@
 import { ApiManagementTool } from '../../../core/interfaces/api-management-tool.interface';
 import { PermissibleEntity } from "../../../core/interfaces/permissible.interface";
+import { Publishable } from '../../../core/interfaces/publishable.interface';
 
-export interface API extends PermissibleEntity{
+export interface API extends PermissibleEntity, Publishable{
     id? : string,
     cid? : number,
     version? : number,

@@ -4,7 +4,6 @@ import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, of, Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
-import { isNull, isArray } from "util";
 import { CRUD } from "../../core/enums/crud.enum";
 import { APIListChange } from "./interfaces/apiListChange.interface";
 import { API } from "./interfaces/api.interface";
@@ -30,7 +29,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  public getApi(apiId) {
+  public getApi(apiId) : Observable<API> {
     // if(this.provideCachedVersion.api){
     //   this.provideCachedVersion.api = false;
     //   return of(this._api_cache_);

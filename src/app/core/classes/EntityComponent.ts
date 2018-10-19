@@ -6,10 +6,13 @@ import { PermissibleEntity, Privilege } from '../interfaces/permissible.interfac
 import { of } from 'rxjs';
 import { UserPrivilegeClass } from './user-privilege';
 import { ForumService } from '../services/forum/forum.service';
+import { PermissionsService } from '../services/permissions/permissions.service';
 
-export class EntityComponent {
+export abstract class EntityComponent {
   public managePrivilegesModalOpened: boolean = false;
   public userPrivileges: UserPrivilegeClass[] = [];
+  
+  protected abstract getPermissionService() : PermissionsService;
 
   public getEntityPrivileges() : Observable<Object>{ return of({}); }
 
@@ -22,8 +25,14 @@ export class EntityComponent {
   }
 
   public disableFormBasedOnPrivileges (form: FormGroup, entity : PermissibleEntity) {
-    if ( entity.id && (! entity.userPrivileges || ! entity.userPrivileges.length))
+    if ( this.noPermission(entity) || this.getPermissionService().hasOnlyPermission(entity, "COLLABORATOR") ) {
       form.disable();
+
+      form.valueChanges.subscribe(v => {
+        if(v.apiManagementTool)
+          form.get('apiManagementTool').disable({emitEvent : false, onlySelf : true});
+      });
+    }
   }
 
   public openManageApiPrivilegesModal() {
@@ -34,5 +43,9 @@ export class EntityComponent {
       
       setTimeout(t => { this.managePrivilegesModalOpened = true; });
     });
+  }
+
+  private noPermission (entity) : boolean {
+    return <boolean> (entity.id && (! entity.userPrivileges || ! entity.userPrivileges.length));
   }
 }

@@ -1,8 +1,11 @@
 import { Privilege } from '../interfaces/permissible.interface';
+import { ENTITY_PERMISSIONS } from '../enums/user-permissions.enum';
 
 export class UserPrivilegeClass {
     
     public username : string = '';
+
+    public collaborateOnly: boolean = false;
 
     public permissions : string[] = [];
 
@@ -14,14 +17,16 @@ export class UserPrivilegeClass {
     constructor (userPrivilege : Privilege) {
         this.setPrivilegeMap(userPrivilege);
         this.username = userPrivilege.username;
-        this.permissions = userPrivilege.permissions;
-
+        this.permissions = userPrivilege.permissions || [];
+        this.collaborateOnly = userPrivilege.collaborateOnly || this.collaborateOnly;
     }
 
     private setPrivilegeMap (userPrivilege: Privilege ) {
-        ["ADMIN", "MODIFY"].forEach(p => {
-            if (userPrivilege.permissions.indexOf(p) >= 0 )
-                this.privilegeMap[p] = true;
+        Object.keys(ENTITY_PERMISSIONS).forEach(key => {
+            if (userPrivilege.permissions && userPrivilege.permissions.length && userPrivilege.permissions.indexOf(key) >= 0 )
+                this.privilegeMap[key] = true;
+            else
+                this.privilegeMap[key] = false;
         });
     }
 
@@ -33,8 +38,6 @@ export class UserPrivilegeClass {
                 const i = this.permissions.indexOf(k);
                 this.permissions.splice(i, 1);
             }
-
-            console.log(this.permissions);
-        })
+        });
     }
 }

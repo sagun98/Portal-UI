@@ -52,7 +52,7 @@ export class AppComponent implements OnInit{
 
       this.permissionsService.onForbiddenRouteAttempt.subscribe( (route : ActivatedRouteSnapshot) => {
         alert('You have attempted to access a forbidden resource');
-        this.router.navigate([`/home`]);
+        // this.router.navigate([`/home`]);
       });
 
       this.userService.$onUnAuthenticatedNavigationAttempt.subscribe( (failedNav : FailedNavigation) => {

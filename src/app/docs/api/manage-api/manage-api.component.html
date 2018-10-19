@@ -3,7 +3,7 @@
   <h3>
     <span>{{ title }}</span>
     <!-- Function defined in parent class -->
-    <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="api">
+    <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
       <clr-tooltip>
           <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
           <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
@@ -27,6 +27,8 @@
     [userPrivileges]="userPrivileges" 
     [opened]="managePrivilegesModalOpened"
     [validateNewUser]="validateUserRoles"
+    [entity]="api"
+    [canCollaborate]="true"
     (onSave)="saveApiFineGrainedPrivileges($event)"
     >
 
@@ -76,6 +78,24 @@
         </label>
       </div>
 
+      <div class="form-group" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
+        <label for="published" class="required">
+          Published?
+          <clr-tooltip>
+            <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
+            <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+              <span>Publish your API to make it discoverable by other developers on the Pearson Developer Portal.</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </label>
+        <label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="published" formControlName="published">
+            <label for="published"></label>
+          </div>
+        </label>
+      </div>
+      
       
       <api-api-tools [api]="api" [submitted]="submitted" [form]="form">
       </api-api-tools>
@@ -117,7 +137,7 @@
         <label for="tags">
           Tags
           <clr-tooltip>
-            <clr-icon clrTooltipTrigger shape="info-circle" size="16"></clr-icon>
+              <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
             <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
               <span>Type a tag (keyword) and press "Enter" to add it</span>
             </clr-tooltip-content>
@@ -163,13 +183,23 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="api">
-            <clr-icon shape="check"></clr-icon>
+          <button type="submit" class="btn btn-primary-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="api">
+            <clr-icon shape="floppy"></clr-icon>
             <span class="ml5 hidden-xs">Save API</span>
           </button>
+
+          <!-- <clr-tooltip>
+            <button clrTooltipTrigger type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="api">
+              <clr-icon shape="check-circle"></clr-icon>
+              <span class="ml5 hidden-xs">Publish API</span>
+            </button>
+            <clr-tooltip-content clrPosition="top-right" clrSize="sm" *clrIfOpen>
+                <span>Allow other develoeprs to discover your API on the Pearson Developer Portal</span>
+            </clr-tooltip-content>
+          </clr-tooltip> -->
         </div>
         <div class="col-xs-4 text-center">
-          <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.API.DELETE]" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="api">
+          <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.API.DELETE]" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
             <clr-icon shape="times-circle"></clr-icon>
             <span class="ml5 hidden-xs">Delete API</span>
           </button>

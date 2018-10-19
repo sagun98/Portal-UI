@@ -1,3 +1,4 @@
+import { PermissionsService } from './../../../core/services/permissions/permissions.service';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from '../../../core/services/user/user.service';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
@@ -42,7 +43,8 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
     protected slugUtilService : SlugUtilityService,
     protected userService : UserService,
     protected toastrService: ToastrService,
-    protected router : Router
+    protected router : Router,
+    protected permissionService: PermissionsService
   ) {
     super();
   }
@@ -151,5 +153,9 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
 
   public getEntityPrivileges () : Observable<Object> {
     return this.productService.getPrivileges(this.product.id);
+  }
+
+  protected getPermissionService(): PermissionsService {
+    return this.permissionService
   }
 }

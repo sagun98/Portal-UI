@@ -13,6 +13,7 @@ import { UserService } from '../../../core/services/user/user.service';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 import { ManageApiService } from './manage-api.service';
 import { Swagger2AlertModalComponent } from './swagger2-alert-modal/swagger2-alert-modal.component';
+import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -27,7 +28,7 @@ enum SWAGGER_UPLOAD_OPTION {
 })
 export class ManageApiComponent extends EntityComponent implements OnInit {
 
-  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : [], apiManagementTool : null};
+  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : [], apiManagementTool : null, published : false};
   @ViewChild(Swagger2AlertModalComponent) swaggerMessageModal : Swagger2AlertModalComponent;
   
   public errorClasses = ERROR_CLASSES;
@@ -46,7 +47,8 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     private router : Router,
     private userService : UserService,
     private manageApiService: ManageApiService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    protected permissionService: PermissionsService
   ) {
     super();
   }
@@ -83,7 +85,8 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       tags : [this.UIFormattedTags, []],
       slug : [this.api.slug, [Validators.required]],
       swaggerUrl : [this.api.swaggerUrl],
-      userPrivileges : [this.api.userPrivileges]
+      userPrivileges : [this.api.userPrivileges],
+      published : [this.api.published || false, [Validators.required]]
     });
 
     this.form.get('slug').disable();
@@ -195,5 +198,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   public getEntityPrivileges () : Observable<Object> {
     return this.apiService.getPrivileges(this.api.id);
+  }
+
+  protected getPermissionService () : PermissionsService {
+    return this.permissionService;
   }
 }

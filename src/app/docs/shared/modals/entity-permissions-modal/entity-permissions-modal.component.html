@@ -28,13 +28,19 @@
             ADMIN
             <a (click)="addPrivilegeToUsers('ADMIN', true)"><clr-icon shape="angle-double" flip="vertical"></clr-icon></a>
           </th>
+          <th *ngIf="canCollaborate && ! entity.published">
+            <a (click)="addPrivilegeToUsers('COLLABORATOR', false)"><clr-icon shape="angle-double"></clr-icon></a>
+            COLLABORATOR
+            <a (click)="addPrivilegeToUsers('COLLABORATOR', true)"><clr-icon shape="angle-double" flip="vertical"></clr-icon></a>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let userPrivilege of userPrivileges">
           <td> <a class="pull-left" (click)="removeUserPrivileges(userPrivilege)"><clr-icon shape="trash" size="20"></clr-icon></a> {{ userPrivilege.username }} </td>
-          <td> <input type="checkbox" name="modify" [(ngModel)]="userPrivilege.privilegeMap.MODIFY" (change)="handlePrivilegeChange('MODIFY', userPrivilege) "/> </td>
-          <td> <input type="checkbox" name="admin" [(ngModel)]="userPrivilege.privilegeMap.ADMIN" (change)="handlePrivilegeChange('ADMIN', userPrivilege)"/> </td>
+          <td> <input type="checkbox" name="modify" [(ngModel)]="userPrivilege.privilegeMap.MODIFY" (change)="handlePrivilegeChange('MODIFY', userPrivilege) " [disabled]="userPrivilege.collaborateOnly"/> </td>
+          <td> <input type="checkbox" name="admin" [(ngModel)]="userPrivilege.privilegeMap.ADMIN" (change)="handlePrivilegeChange('ADMIN', userPrivilege)" [disabled]="userPrivilege.collaborateOnly"/> </td>
+          <td *ngIf="canCollaborate && ! entity.published"> <input type="checkbox" name="collaborator" [(ngModel)]="userPrivilege.privilegeMap.COLLABORATOR" (change)="handlePrivilegeChange('COLLABORATOR', userPrivilege)"/> </td>
         </tr>
         <tr *ngIf="! userPrivileges.length">
           <td colspan="3">

@@ -12,9 +12,10 @@ import { PortalUser } from '../../../../core/interfaces/fr-user.interface';
 export class EntityPermissionsModalComponent implements OnInit {
 
   @Input() opened : boolean = false;
-  @Input() Entity : PermissibleEntity;
+  @Input() entity : PermissibleEntity;
   @Input() userPrivileges : UserPrivilegeClass[] = [];
   @Input() validateNewUser;
+  @Input() canCollaborate: boolean = false;
   @Output() onSave: EventEmitter<UserPrivilegeClass[]> = new EventEmitter<UserPrivilegeClass[]>();
 
   public modified: boolean = false;
@@ -63,6 +64,17 @@ export class EntityPermissionsModalComponent implements OnInit {
         permissions.push("ADMIN");
 
       this.userPrivileges.push(new UserPrivilegeClass(<Privilege> {
+        username : user.username,
+        permissions : permissions
+      }));
+
+      this.modified = true;
+    }
+    else if(! this.validateNewUser(user) && this.canCollaborate){
+      let permissions = ["COLLABORATOR"];
+
+      this.userPrivileges.push(new UserPrivilegeClass(<Privilege> {
+        collaborateOnly : true,
         username : user.username,
         permissions : permissions
       }));

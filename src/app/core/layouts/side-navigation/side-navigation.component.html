@@ -35,6 +35,13 @@
       <li *ngFor="let api of apisFiltered">
         <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/api/' +  api.slug " [ngClass]="{'active' : (selectedSlug === api.slug || selectedApiId == api.id) }">
           {{ api.name }}
+
+          <clr-tooltip>
+            <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! api.published" class="is-highlight" shape="note"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+              <span>In Draft Status</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
         </a>
       </li>
     </ul>

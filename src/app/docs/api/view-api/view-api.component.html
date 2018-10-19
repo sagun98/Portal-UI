@@ -1,6 +1,6 @@
 <div class="container">
 
-  <a class="btn btn-sm edit-page-btn" routerLink="edit" [hasPermission]="[permissions.API.UPDATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="api">
+  <a class="btn btn-sm edit-page-btn" routerLink="edit" [hasPermission]="[permissions.API.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="api">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit API
   </a>
 

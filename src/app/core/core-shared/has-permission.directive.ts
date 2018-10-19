@@ -32,11 +32,15 @@ export class HasPermissionDirective implements OnInit {
         return;
       }
 
-      if (!matches)
+      if (!matches){
         this.element.nativeElement.style.display = 'none';
+        this.element.nativeElement.dataset['display'] = 'none';
+      }
 
-      else
+      else {
         this.element.nativeElement.style.display = this.initialDisplay;
+        this.element.nativeElement.dataset['display'] = '';
+      }
 
     });
   }

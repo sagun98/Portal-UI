@@ -163,4 +163,8 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       this.api = api;
     });
   }
+
+  protected getPermissionService(): PermissionsService {
+    return this.permissionService
+  }
 }

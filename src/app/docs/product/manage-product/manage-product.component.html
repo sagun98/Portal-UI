@@ -3,7 +3,7 @@
   <h3>
     <span>{{ title }}</span>
     <!-- Function defined in parent class -->
-    <a *ngIf="product.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="product">
+    <a *ngIf="product.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="product">
       <clr-tooltip>
           <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
           <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
@@ -121,13 +121,13 @@
 
       <div class="row">
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.PRODUCT.UPDATE, permissions.PRODUCT.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="product">
+          <button type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.PRODUCT.UPDATE, permissions.PRODUCT.CREATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="product">
             <clr-icon shape="check"></clr-icon>
             <span class="ml5 hidden-xs">Save Product</span>
           </button>
         </div>
         <div class="col-xs-4 text-center">
-          <button type="button" class="btn btn-danger-outline" (click)="handleDelete()" *ngIf="product.id" [hasPermission]="[permissions.PRODUCT.DELETE]" [hasPermissionTo]="entityPermissions.ADMIN" [entity]="product">
+          <button type="button" class="btn btn-danger-outline" (click)="handleDelete()" *ngIf="product.id" [hasPermission]="[permissions.PRODUCT.DELETE]" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="product">
             <clr-icon shape="times-circle"></clr-icon>
             <span class="ml5 hidden-xs">Delete Product</span>
           </button>

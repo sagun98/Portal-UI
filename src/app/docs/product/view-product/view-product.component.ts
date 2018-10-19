@@ -92,4 +92,8 @@ export class ViewProductComponent extends EntityComponent {
       this.product = product;
     });
   }
+
+  protected getPermissionService(): PermissionsService {
+    return this.permissionService
+  }
 }
