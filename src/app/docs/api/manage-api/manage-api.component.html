@@ -152,18 +152,18 @@
       <div class="form-group">
           <label>Swagger Document OR URL</label>
           <div class="radio-inline">
-              <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" />
+              <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
               <label for="upload-swagger-file">Upload Swagger File</label>
           </div>
           <div class="radio-inline">
-              <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" />
+              <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
               <label for="reference-swagger-url">Reference Swagger via URL</label>
           </div>
       </div>
 
       <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
         <label for="productName">Swagger Document</label>
-        <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)"/>
+        <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)" [disabled]="form.disabled"/>
       </div>
 
       <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">

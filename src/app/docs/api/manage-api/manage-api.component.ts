@@ -98,6 +98,13 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
     if( ! this.userService.isAdmin() ) {
       this.disableFormBasedOnPrivileges(this.form, this.api);
+
+      setTimeout(t => {
+        if(this.form.disabled){
+          this.toastrService.warning('Not authorized to edit this API');
+          this.router.navigate([`/docs/api/search`]);
+        }
+      });
     }
   }
 
@@ -152,9 +159,6 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
     });    
   }
-  
-  
-
 
   public get UIFormattedTags () {
     if(! this.api.tags)

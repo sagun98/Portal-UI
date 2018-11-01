@@ -1,0 +1,17 @@
+:host {
+    cursor: pointer;
+
+    .card-block {
+        white-space: normal;
+
+        padding: 50px;
+
+        min-height: 200px;
+        max-height: 200px;
+
+        @media screen and (max-width: 767px) {
+            padding: 25px;
+        }
+        
+    }
+}

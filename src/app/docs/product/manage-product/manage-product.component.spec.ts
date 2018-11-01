@@ -41,8 +41,8 @@ describe('NewProductComponent', () => {
     description : 'Mock API Description',
     slug : 'test',
     userPrivileges : [],
+    published : true
   }];
-
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

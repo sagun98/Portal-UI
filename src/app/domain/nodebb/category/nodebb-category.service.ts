@@ -1,3 +1,4 @@
+import { NodeBBCategoriesResponse } from './nodebb-categories.interface';
 import { Observable, of } from 'rxjs';
 import { NodeBBPrivilegeRequest } from './nodebb-privilege-request.interface';
 import { NodebbModule } from '../nodebb.module';
@@ -17,9 +18,17 @@ export class NodeBBCategoryService extends WriteApiHelper {
   protected apiBase: string = 'api/v2/categories';
 
   constructor(
-    private http: HttpClient
+    protected http: HttpClient
   ) { 
     super();
+  }
+
+  public getAllCategories () : Observable<NodeBBCategoriesResponse> {
+    return <Observable<NodeBBCategoriesResponse>> this.http.get(`${environment.forumBase}/api/categories`);
+  }
+
+  public getCategoryBySlug (slug: string) : Observable<NodeBBCategory> {
+    return <Observable<NodeBBCategory>> this.http.get(`${environment.forumBase}/api/category/${slug}`);
   }
 
   public getChildCategoryId (parentCid: number, childName: string) : Observable<number> {
@@ -28,6 +37,9 @@ export class NodeBBCategoryService extends WriteApiHelper {
         return of(parentCid);
       }),
       map( (category: NodeBBCategory) => {
+        if(!category || ! category.children)
+          return null;
+
         let announcementCategory : NodeBBCategory = category.children.filter(category => {
           return ( category.name.toLocaleLowerCase() === childName.toLocaleLowerCase() );
         })[0];

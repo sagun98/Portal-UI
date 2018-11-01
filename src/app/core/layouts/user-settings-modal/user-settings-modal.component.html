@@ -24,7 +24,36 @@
         <button clrTabLink><h4>My Roles</h4></button>
         <ng-template  [(clrIfActive)]="activeTabs.myRoles">
           <clr-tab-content>
-            HERE
+          
+            <div class="row">
+              <div class="col-sm-6">
+
+                  <role-card 
+                    role="PRODUCT_OWNER"
+                    [user]="user"
+                    title="Product Owner">
+                      If you are the owner of a Product Group, click here to request the role. 
+                      This role will allow you to create new Products and add API's to them.
+                  </role-card>
+                
+
+              </div>
+              <div class="col-sm-6">
+
+                  <role-card 
+                    role="API_DEVELOPER"
+                    [user]="user"
+                    title="API Developer">
+                      If you are an API Developer and you'd like to create, document and publish API's, as well as allow other
+                      Pearson Developers to consume them, click here.
+                  </role-card>
+              
+              </div>
+            </div>
+
+            
+          
+          
           </clr-tab-content>
         </ng-template>
       </clr-tab>

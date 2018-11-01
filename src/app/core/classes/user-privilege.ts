@@ -9,16 +9,22 @@ export class UserPrivilegeClass {
 
     public permissions : string[] = [];
 
+    public email: string = '';
+
     public privilegeMap : any = {
         ADMIN : false,
         MODIFY : false
     };
+
+    public uniquePrivilege: string =  '';
     
     constructor (userPrivilege : Privilege) {
         this.setPrivilegeMap(userPrivilege);
         this.username = userPrivilege.username;
         this.permissions = userPrivilege.permissions || [];
         this.collaborateOnly = userPrivilege.collaborateOnly || this.collaborateOnly;
+        this.email = userPrivilege.email;
+        this.setUniquePrivilege();
     }
 
     private setPrivilegeMap (userPrivilege: Privilege ) {
@@ -28,6 +34,10 @@ export class UserPrivilegeClass {
             else
                 this.privilegeMap[key] = false;
         });
+    }
+
+    public setUniquePrivilege () : void {
+        this.uniquePrivilege = this.permissions[0];
     }
 
     public updatePermissions (prop: string)  {

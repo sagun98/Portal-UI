@@ -35,9 +35,7 @@
               "node_modules/tinymce/tinymce.js",
               "node_modules/@clr/icons/clr-icons.min.js",
               "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-              "node_modules/tinymce/themes/modern/theme.js",
-              "node_modules/swagger-editor-dist/swagger-editor-bundle.js",
-              "node_modules/swagger-editor-dist/swagger-editor-standalone-preset.js"
+              "node_modules/tinymce/themes/modern/theme.js"
             ]
           },
           "configurations": {
@@ -84,7 +82,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "codeCoverageExclude": ["src/assets/**/*"],
+            "codeCoverageExclude": [
+              "src/assets/**/*",
+              "src/app/**/*.module.ts"
+            ],
             "styles": [
               "src/styles.css"
             ],

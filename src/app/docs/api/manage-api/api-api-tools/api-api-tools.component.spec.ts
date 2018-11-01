@@ -60,7 +60,7 @@ describe('ApiApiToolsComponent', () => {
   it('should run #handleNameChange()', fakeAsync(() => {
     expect( Object.keys(component.parentForm.controls).length ).toEqual(1);
 
-    component.form.get('name').setValue( component.apiManagementTools[0] );
+    component.form.get('name').setValue( component.apiManagementTools[0].value );
 
     tick();
 

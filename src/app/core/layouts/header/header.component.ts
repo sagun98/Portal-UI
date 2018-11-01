@@ -5,7 +5,7 @@ import { Component, OnInit, Input, HostBinding, ViewChild, ElementRef, ViewChild
 import { UserService } from '../../services/user/user.service';
 import {  Observable, Subscription } from 'rxjs';
 import { PortalUser } from '../../interfaces/fr-user.interface';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ToastrService } from 'ngx-toastr';
 import { SearchTypes } from './search-types.enum';
@@ -24,16 +24,17 @@ export class HeaderComponent implements OnInit {
   @ViewChild('portalSearch') portalSearchInput: ElementRef;
   // @ViewChild(UserCardComponent) userCardComponent: UserCardComponent;
   @ViewChildren(UserCardComponent) userCardQuery: QueryList<UserCardComponent>;
+  @ViewChild('form') _form: NgForm;
 
   public loggedIn: boolean = false;
   public user: PortalUser;
   public activeSearch: boolean = false;
   public searchResults: any[] = [];
-  public form : NgForm;
+  public form : FormGroup;
   public userSettingsOpened : boolean = false;
 
   public docmousedown: Observable<Event>;
-  public subscriber: Subscription;
+  public subscriber: Subscription = new Subscription();
 
   constructor(
     private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride,
@@ -60,9 +61,9 @@ export class HeaderComponent implements OnInit {
     this.hostActiveSearchClass = true;
   }
 
-  public doSearch (form: NgForm) {
+  public doSearch (form: any) {
     this.form = form;
-    const phrase: string = form.controls['keywords'].value;
+    const phrase: string = (form.controls['keywords']) ? form.controls['keywords'].value : '';
     
     this.searchService.search(phrase).subscribe( (results: any[]) => {
       this.searchResults = results;

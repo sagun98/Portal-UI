@@ -17,6 +17,24 @@ export class PermissionsService {
     private userService: UserService
   ) { }
 
+  public hasRole (permissionsToTest: string[], userRoles: UserRole[]) {
+    let matches = false;
+
+    if(userRoles && userRoles.length)
+      for (let i = 0; i < userRoles.length; i++) {
+
+        const roleName = userRoles[i].name;
+        
+
+        if ( permissionsToTest.indexOf(roleName) >= 0 ) {
+          matches = true;
+          break;
+        }
+      }
+
+    return matches
+  }
+
   public matchesAnyPermissions(permissionsToTest: string[], userRoles: UserRole[]) : boolean {
     let matches = false;
 

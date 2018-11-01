@@ -12,6 +12,7 @@ import { FormBuilder } from '@angular/forms';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule, ToastrService } from '../../../../../node_modules/ngx-toastr';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;
@@ -247,19 +248,21 @@ describe('ViewApiComponent', () => {
         ClarityModule,
         CoreSharedModule,
         RouterTestingModule,
+        ToastrModule.forRoot(),
         HttpClientModule
       ],
       providers : [
         HttpClient,
         FormBuilder,
+        ToastrService,
         { provide : UserService, useClass : MockUserService, deps : [HttpClient]},
         {
           provide : ActivatedRoute, useValue : {
             data : of({
               api : {
                 swagger : swaggerJson,
-                overview : {items : []},
-                gettingStarted : {items : []},
+                overview : "<div><a id=\"external-link\" href=\"https://nfl.com\">This is an external link</a></div>",
+                gettingStarted : "<div><a id=\"getting-started\" href=\"#anchor\">Getting Started</a></div>",
                 reference : {items : []},
               }
             }),
@@ -281,5 +284,15 @@ describe('ViewApiComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should click external link', () => {
+    let href: HTMLElement = document.querySelector("#overview a");
+    href.click();
+  });
+
+  it('should go to an anchor', () => {
+    let href: HTMLElement = document.querySelector("#getting-started a");
+    href.click();
   });
 });

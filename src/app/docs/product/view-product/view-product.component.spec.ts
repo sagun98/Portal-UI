@@ -1,3 +1,4 @@
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
 import { ApigeeApiTool } from '../../../core/interfaces/apigee-api-tool.interface';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
@@ -27,7 +28,8 @@ export const mockApi: API = {
     id : 'mock',
     org : 'mock',
     name : API_MANAGEMENT_TOOLS.APIGEE
-  }
+  },
+  published : true
 };
 
 class MockApiService extends ApiService {
@@ -66,6 +68,7 @@ describe('ViewProductComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         HttpClientModule,
+        ToastrModule.forRoot(),
         CoreSharedModule
       ],
       declarations: [
@@ -73,6 +76,7 @@ describe('ViewProductComponent', () => {
         ViewProductComponent
       ],
       providers : [
+        ToastrService,
         { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
         {

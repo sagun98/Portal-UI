@@ -25,7 +25,8 @@ export class EntityPermissionsModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    if (this.entity.published)
+      this.canCollaborate = false;
   }
 
   public handleFailedFormValidation(failed : boolean) {
@@ -39,6 +40,11 @@ export class EntityPermissionsModalComponent implements OnInit {
   public handlePrivilegeChange (privilegeName : string, userPrivilege : UserPrivilegeClass) {
     this.modified = true;
     userPrivilege.updatePermissions(privilegeName);
+  }
+
+  public onPermissionSelect (userPrivilege: UserPrivilegeClass) {
+    this.modified = true;
+    userPrivilege.permissions = [userPrivilege.uniquePrivilege];
   }
 
   public handleSave () {
@@ -58,13 +64,14 @@ export class EntityPermissionsModalComponent implements OnInit {
 
     if(this.validateNewUser(user)) {
 
-      let permissions = ["MODIFY"];
+      let permissions = (this.canCollaborate) ? ["COLLABORATOR"] : ["MODIFY"];
 
       if(this.userPrivileges.length === 0)
         permissions.push("ADMIN");
 
       this.userPrivileges.push(new UserPrivilegeClass(<Privilege> {
         username : user.username,
+        email : user.email,
         permissions : permissions
       }));
 
@@ -76,7 +83,8 @@ export class EntityPermissionsModalComponent implements OnInit {
       this.userPrivileges.push(new UserPrivilegeClass(<Privilege> {
         collaborateOnly : true,
         username : user.username,
-        permissions : permissions
+        permissions : permissions,
+        email : user.email
       }));
 
       this.modified = true;

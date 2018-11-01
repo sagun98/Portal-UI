@@ -5,6 +5,7 @@ export interface PermissibleEntity {
 
 export interface Privilege {
     username : string,
+    email: string,
     permissions : string[],
     [propName: string] : any;
 }

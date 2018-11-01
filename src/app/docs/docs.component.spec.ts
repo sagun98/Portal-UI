@@ -13,6 +13,7 @@ import { of } from 'rxjs';
 import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
 import { UserService } from '../core/services/user/user.service';
+import { Privilege } from '../core/interfaces/permissible.interface';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;
@@ -32,7 +33,10 @@ describe('DocsComponent', () => {
     name : "Mock API",
     slug : 'mock-api',
     description : "Mock API Description",
-    userPrivileges : []
+    userPrivileges : [
+      
+    ],
+    published : true
   }
 
   const productId = 'asdf1324';

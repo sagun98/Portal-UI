@@ -16,6 +16,7 @@ import { UserSettingsModalComponent } from './user-settings-modal/user-settings-
 import { RoleManagementComponent } from './user-settings-modal/role-management/role-management.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.component';
+import { RoleCardComponent } from './user-settings-modal/role-card/role-card.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.
     UserCardComponent,
     UserSettingsModalComponent,
     RoleManagementComponent,
-    DevPortalFooterComponent
+    DevPortalFooterComponent,
+    RoleCardComponent
   ],
   exports : [
     SideNavigationComponent,

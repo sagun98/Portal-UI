@@ -1,13 +1,14 @@
 
 export interface NodeBBCategory {
     cid?: number;
-    description: string;
+    description?: string;
     disabled?: boolean;
-    name: string;
-    privileges : NodeBBPrivilege[]
-    title: string;
+    name?: string;
+    privileges? : NodeBBPrivilege[]
+    title?: string;
     icon ? : string;
-    children? : NodeBBCategory[]
+    children? : NodeBBCategory[],
+    slug? : string
 }
 
 export interface NodeBBPrivilege {

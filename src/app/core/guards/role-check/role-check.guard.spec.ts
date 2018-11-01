@@ -1,53 +1,81 @@
-import { HttpClientModule } from '@angular/common/http';
-import { TestBed, async } from '@angular/core/testing';
+import { Observable } from 'rxjs/Observable';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TestBed, async, inject } from '@angular/core/testing';
 import {RoleCheckGuard} from './role-check.guard';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, CanActivateChild } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../../services/user/user.service';
+import { MockUserService } from '../../layouts/side-navigation/side-navigation.component.spec';
+import { PermissionsService } from '../../services/permissions/permissions.service';
+import { UserRole } from '../../interfaces/fr-user.interface';
 
 describe('RoleCheckGuard', () => {
-  let service;
+  let roleCheckGuard: RoleCheckGuard;
 
   let router = {
     navigate: jasmine.createSpy('navigate')
   };
 
-    
-  const userService = {
-    // mock properties here 
+  let route: ActivatedRouteSnapshot = {
+    params : null,
+    paramMap : null,
+    pathFromRoot : null,
+    routeConfig : null,
+    root : null,
+    children : null,
+    parent : null,
+    firstChild : null,
+    queryParams : null,
+    queryParamMap : null,
+    component : null,
+    fragment : null,
+    outlet : null,
+    url : null,
+    data : {
+      permissions : ['ADMIN']
+    }
   }
-        
-  const permissionsService = {
-    // mock properties here 
-  }
-      
+
   beforeEach(() => {
-
     TestBed.configureTestingModule({
-        imports: [
-          CommonModule, 
-          HttpClientModule
-        ],
-        providers: [
-          RoleCheckGuard,
-          {provide: Router, useValue: router}
-        ]
-    })
-    .compileComponents();
-
-    //service = new RoleCheckGuard(userService, permissionsService);
+      imports : [
+        HttpClientModule
+      ],
+      providers: [
+        HttpClient,
+        {provide : UserService, useClass : MockUserService, deps : [HttpClient]},
+        PermissionsService
+      ]
+    });
   });
-
     
-  it('should run #canActivate()', async(() => {
-    // const result = canActivate(route, state);
+  it('should run #canActivate(): Role:ADMIN | Guard:Admin', inject([RoleCheckGuard], (guard: RoleCheckGuard) => {
+    let canActive = <Observable<boolean>> guard.canActivate(route, null);
+    
+    canActive.subscribe(allowed => {
+      expect(allowed).toBeTruthy();
+    });
+  }));
+
+  it('should run #canActivate(): Role:API_DEVELOPER | Guard:Admin', inject([RoleCheckGuard, UserService], (guard: RoleCheckGuard, userService : UserService) => {
+    let canActive = <Observable<boolean>> guard.canActivate(route, null);
+
+    userService['_user'].roles = [
+      <UserRole> {id : '1234', name : 'API_DEVELOPER', privileges : []}
+    ];
+    
+    canActive.subscribe(allowed => {
+      expect(allowed).toBeFalsy();
+    });
   }));
         
-  it('should run #canActivateChild()', async(() => {
-    // const result = canActivateChild(childRoute, state);
+  it('should run #canActivateChild(): Role:None | Guard:Admin', inject([RoleCheckGuard, UserService], (guard: RoleCheckGuard, userService : UserService) => {
+    let canActive = <Observable<boolean>> guard.canActivateChild(route, null);
+
+    userService['_user'].roles = [];
+    
+    canActive.subscribe(allowed => {
+      expect(allowed).toBeFalsy();
+    });
   }));
-        
-  it('should run #checkRoles()', async(() => {
-    // const result = checkRoles(route, state);
-  }));
-      
 });

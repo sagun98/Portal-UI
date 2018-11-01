@@ -1,3 +1,4 @@
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ForumService } from './forum.service';
@@ -5,7 +6,13 @@ import { ForumService } from './forum.service';
 describe('ForumService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ForumService]
+      imports : [
+        HttpClientModule
+      ],
+      providers: [
+        HttpClient,
+        ForumService
+      ]
     });
   });
 
