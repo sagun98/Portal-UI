@@ -72,6 +72,8 @@ export class UserService {
   }
 
   public authenticate(credentials: FRCredentials) {
+    credentials = credentials || <FRCredentials>{password : '', username : ''};
+
     let headers = new HttpHeaders()
       .append('X-OpenAM-Username', credentials.username)
       .append('X-OpenAM-Password', credentials.password);

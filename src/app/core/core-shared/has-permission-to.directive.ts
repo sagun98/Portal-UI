@@ -24,7 +24,7 @@ export class HasPermissionToDirective implements OnChanges {
   }
 
   public ngOnChanges () {
-    const userPrivileges = (this.entity.userPrivileges) ? this.entity.userPrivileges[0] : <Privilege> {username : this.userService._lastUser.value.username, permissions : ['NONE']};
+    const userPrivileges = (this.entity.userPrivileges && this.entity.userPrivileges.length) ? this.entity.userPrivileges[0] : <Privilege> {username : this.userService._lastUser.value.username, permissions : ['NONE']};
     userPrivileges.permissions = userPrivileges.permissions || ['NONE'];
 
     if( this.userService.isAdmin() || this.permissionsService.hasPermission(this.entity, "ADMIN")/* || ! userPrivileges || (userPrivileges && ! userPrivileges.permissions) || (userPrivileges && userPrivileges.permissions && ! userPrivileges.permissions.length) */)

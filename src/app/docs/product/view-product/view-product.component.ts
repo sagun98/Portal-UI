@@ -44,6 +44,7 @@ export class ViewProductComponent extends EntityComponent {
       this.activeApi = null;
       this.following = this.userService.isFollowingEntity(this.product.followers);
       this.isEntityAdmin = this.permissionService.isEntityAdmin(this.product);
+      this.apikeyModalOpen = false;
     
       if(this.isEntityAdmin){
         this.announcementCid = this.product.cid;
@@ -91,6 +92,10 @@ export class ViewProductComponent extends EntityComponent {
       this.following = this.userService.isFollowingEntity(product.followers);
       this.product = product;
     });
+  }
+
+  public handleApikeyModalClosed (closed: boolean) : void {
+    this.apikeyModalOpen = closed;
   }
 
   protected getPermissionService(): PermissionsService {

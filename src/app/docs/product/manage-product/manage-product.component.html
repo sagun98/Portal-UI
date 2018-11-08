@@ -42,22 +42,29 @@
           <label for="productName" class="required">Product Slug</label>
   
         <label [className]=" ( form.get('slug').invalid && ( submitted || form.get('slug').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
-          <input id="productName" type="text" name="slug" placeholder="Product Slug" formControlName="slug"/>
-          <span *ngIf="form.get('slug').errors && form.get('slug').errors.required && (submitted || form.get('slug').dirty)" class="tooltip-content">This field cannot be empty!</span>
 
-          <clr-tooltip *ngIf="form.get('slug').disabled">
-            <clr-icon clrTooltipTrigger class="ml5"  (click)="form.get('slug').enable()"  shape="lock" flip="horizontal"></clr-icon>
-            <clr-tooltip-content *clrIfOpen>
-                <span>Click unlock to edit this field</span>
-            </clr-tooltip-content>
-          </clr-tooltip>
 
-          <clr-tooltip *ngIf="form.get('slug').enabled">
-            <clr-icon clrTooltipTrigger class="ml5" *ngIf="form.get('slug').enabled"  (click)="form.get('slug').disable();" shape="unlock"></clr-icon>
-            <clr-tooltip-content *clrIfOpen>
-                <span>Click lock to reset the field value</span>
-            </clr-tooltip-content>
-          </clr-tooltip>
+          
+          <ng-container *ngIf="product.version >= 0">{{ product.slug }}</ng-container>
+
+          <ng-container *ngIf="product.version === null">
+            <input id="productName" type="text" name="slug" placeholder="Product Slug" formControlName="slug"/>
+            <span *ngIf="form.get('slug').errors && form.get('slug').errors.required && (submitted || form.get('slug').dirty)" class="tooltip-content">This field cannot be empty!</span>
+
+            <clr-tooltip *ngIf="form.get('slug').disabled">
+              <clr-icon clrTooltipTrigger class="ml5"  (click)="form.get('slug').enable()"  shape="lock" flip="horizontal"></clr-icon>
+              <clr-tooltip-content *clrIfOpen>
+                  <span>Click unlock to edit this field</span>
+              </clr-tooltip-content>
+            </clr-tooltip>
+
+            <clr-tooltip *ngIf="form.get('slug').enabled">
+              <clr-icon clrTooltipTrigger class="ml5" *ngIf="form.get('slug').enabled"  (click)="form.get('slug').disable();" shape="unlock"></clr-icon>
+              <clr-tooltip-content *clrIfOpen>
+                  <span>Click lock to reset the field value</span>
+              </clr-tooltip-content>
+            </clr-tooltip>
+          </ng-container>
         </label>
       </div>
 

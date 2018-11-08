@@ -54,7 +54,8 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
       this.apis = data.apiData;
       this.saveMethod = data.saveMethod;
       this.product = <Product>data.product || <Product>{
-        overview: ''
+        overview: '',
+        version : null
       };
 
       this.activeApi = null;
@@ -84,7 +85,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
     this.form.get('slug').disable();
 
     this.form.get('name').valueChanges.subscribe(value => {
-      if(this.form.get('slug').disabled)
+      if(this.form.get('slug').disabled && ! this.product.version)
         this.form.get('slug').setValue( this.slugUtilService.formatSlug(value) );
     });
 

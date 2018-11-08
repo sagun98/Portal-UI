@@ -92,7 +92,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     this.form.get('slug').disable();
 
     this.form.get('name').valueChanges.subscribe(name => {
-      if( this.form.get('slug').disabled )
+      if( this.form.get('slug').disabled && ! this.api.version)
         this.setSlugValue(name);
     });
 

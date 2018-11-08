@@ -65,9 +65,9 @@ export class DevPortalFooterComponent implements OnInit {
 
   private setDevPortalLinks () {
     this.nodeBBBlogsResolve.resolve(null, null).subscribe( (forumData: any) => {
-      this.columnLinks[1].push(new ColumnLink('Feedback', '/forum' + forumData.feedback.url));
-      this.columnLinks[1].push(new ColumnLink('Support', '/forum' + forumData.generalSupport.url));
-      this.columnLinks[1].push(new ColumnLink('Announcements', '/forum' + forumData.blogs.url));
+      this.columnLinks[1].push(new ColumnLink('Feedback', '/forum/category/' + forumData.feedback.cid));
+      this.columnLinks[1].push(new ColumnLink('Support', '/forum/category/' + forumData.generalSupport.cid));
+      this.columnLinks[1].push(new ColumnLink('Announcements', '/forum/category/' + forumData.blogs.cid));
     });
   }
 }

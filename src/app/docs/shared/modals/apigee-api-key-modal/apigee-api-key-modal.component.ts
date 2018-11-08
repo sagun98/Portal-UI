@@ -24,6 +24,7 @@ export class ApigeeApiKeyModalComponent implements OnInit, OnChanges {
   
   @Output() onApiKeyRetrieved: EventEmitter<String> = new EventEmitter<String>();
   @Output() onApiNotInProduct: EventEmitter<String> = new EventEmitter<String>();
+  @Output() onClosed: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public products: Product[] = [];
   public apiKeys: ApigeeApiKey[] = [];
