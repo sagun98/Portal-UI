@@ -22,12 +22,11 @@ export class ForumComponent implements OnInit {
       const extraPath = urlSegments.map(segment => {return segment.path}).join('/');
       this.forumURL = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.forumBase + '/' + extraPath );
 
-      var iframe = document.querySelector("iframe");
-
-      setTimeout(t => {
-        iframe.contentWindow.postMessage(window.location.origin, "*");
-      }, 1000);
+      window.addEventListener("message", (message) => {
+        var iframe = document.querySelector("iframe");
+        if(message && message.data && message.data === "loaded")
+          iframe.contentWindow.postMessage(window.location.origin, "*");
+      });
     });
   }
-
 }

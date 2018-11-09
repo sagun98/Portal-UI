@@ -39,6 +39,9 @@ export class AppComponent implements OnInit{
 
       // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
+        if(message.data === "loaded")
+          return;
+          
         if(message.origin.indexOf(environment.forumBase) >= 0){
           const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
           const path = message.data.replace(pattern, '');
