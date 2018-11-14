@@ -22,6 +22,8 @@
     </a>
   </h3>
 
+  <!-- <iframe src="http://localhost:3200" id="swagger-editor" style="width:100%;height:calc(100vh - 220px);"></iframe> -->
+
   <entity-permissions-modal 
     *ngIf="managePrivilegesModalOpened"
     [userPrivileges]="userPrivileges" 
@@ -76,6 +78,28 @@
             <span *ngIf="form.get('slug').errors && form.get('slug').errors.required && (submitted || form.get('slug').dirty)" class="tooltip-content">This field cannot be empty!</span>
           </ng-container>
         </label>
+      </div>
+
+      <div class="form-group">
+        <label class="required">Swagger Document OR URL</label>
+        <div class="radio-inline">
+            <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
+            <label for="upload-swagger-file">Upload Swagger File</label>
+        </div>
+        <div class="radio-inline">
+            <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
+            <label for="reference-swagger-url">Reference Swagger via URL</label>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
+        <label for="productName" class="required" >Swagger Document</label>
+        <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)" [disabled]="form.disabled"/>
+      </div>
+
+      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">
+        <label for="productName" class="required" >Swagger URL</label>
+        <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
       </div>
 
       <div class="form-group" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
@@ -147,28 +171,6 @@
           <ng-select [items]="form.get('tags').value" [addTag]="true" [hideSelected]="true" multiple="true" bindLabel="label" formControlName="tags">
           </ng-select>
         </label>
-      </div>
-
-      <div class="form-group">
-          <label>Swagger Document OR URL</label>
-          <div class="radio-inline">
-              <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
-              <label for="upload-swagger-file">Upload Swagger File</label>
-          </div>
-          <div class="radio-inline">
-              <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
-              <label for="reference-swagger-url">Reference Swagger via URL</label>
-          </div>
-      </div>
-
-      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
-        <label for="productName">Swagger Document</label>
-        <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)" [disabled]="form.disabled"/>
-      </div>
-
-      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">
-        <label for="productName">Swagger URL</label>
-        <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
       </div>
 
       <swagger2-alert-modal

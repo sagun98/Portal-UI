@@ -1,44 +1,61 @@
 <div class="container">
 
-  <h2>API Search</h2>
+  <ng-container *ngIf="! apis.length">
+      <no-apis [apis]="ApiResults">
+      </no-apis>
+  </ng-container>
 
-  <a class="btn btn-sm edit-page-btn" routerLink="../new" [hasPermission]="[permissions?.API?.CREATE]">
-    <clr-icon shape="plus" class="is-solid"></clr-icon> Add API
-  </a>
+  <ng-container *ngIf="apis.length > 0 && apis.length <= maxBeforeSearch">
+    <h2>API Catalog</h2>
+    <hr/>
 
-  <!-- <p>Enter the API Name, or a list of keywords to find the API you need.</p> -->
+    <div class="row">
+      <div class="col-md-4" *ngFor="let api of apis">
+        <api-card [api]="api"></api-card>
+      </div>
+    </div>
+  </ng-container>
 
-  <form [formGroup]="form" class="clr-form bottom-spacer-40" (submit)="searchApis()">
-    <section class="form-block">
-      <div class="form-group row">
-        <div class="col-xs-12 col-md-8 col-lg-6">
-          <label  [className]=" ( form.get('keywords').invalid && ( submitted || form.get('keywords').dirty) ) ? errorClasses + ' tooltip-top-left' : 'search' ">            
-            <input id="apiName" autocomplete="off" type="text" name="title" placeholder="Enter the API Name, or a list of keywords to find the API you need." formControlName="keywords" />
-            
-            <button type="submit" class="btn btn-primary">
-              <clr-icon shape="search" size="25"></clr-icon>
-            </button>
+  <!-- Create Component -->
+  <ng-container *ngIf="apis.length > maxBeforeSearch">
+    <h2>API Search</h2>
 
-            <span *ngIf="form.get('keywords').errors && form.get('keywords').errors.required && (submitted || form.get('keywords').dirty)"
-              class="tooltip-content">This field cannot be empty!</span>
-          </label>
+    <a class="btn btn-sm edit-page-btn" routerLink="../new" [hasPermission]="[permissions?.API?.CREATE]">
+      <clr-icon shape="plus" class="is-solid"></clr-icon> Add API
+    </a>
+
+    <form [formGroup]="form" class="clr-form bottom-spacer-40" (submit)="searchApis()">
+      <section class="form-block">
+        <div class="form-group row">
+          <div class="col-xs-12 col-md-8 col-lg-6">
+            <label  [className]=" ( form.get('keywords').invalid && ( submitted || form.get('keywords').dirty) ) ? errorClasses + ' tooltip-top-left' : 'search' ">            
+              <input id="apiName" autocomplete="off" type="text" name="title" placeholder="Enter the API Name, or a list of keywords to find the API you need." formControlName="keywords" />
+              
+              <button type="submit" class="btn btn-primary">
+                <clr-icon shape="search" size="25"></clr-icon>
+              </button>
+
+              <span *ngIf="form.get('keywords').errors && form.get('keywords').errors.required && (submitted || form.get('keywords').dirty)"
+                class="tooltip-content">This field cannot be empty!</span>
+            </label>
+          </div>
         </div>
-      </div>
-    </section>
-    <input style="display:none" type="submit" name="submit"/>
-  </form>
+      </section>
+      <input style="display:none" type="submit" name="submit"/>
+    </form>
 
-  <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
-      <div clr-alert-item class="alert-item">
-          <span class="alert-text">
-              No Search Results Found
-          </span>
-      </div>
-  </clr-alert>
+    <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
+        <div clr-alert-item class="alert-item">
+            <span class="alert-text">
+                No Search Results Found
+            </span>
+        </div>
+    </clr-alert>
 
-  <ng-container *ngIf="ApiResults && ApiResults.length">
-    <api-search-results [apis]="ApiResults" (apiSelected)="gotoApi($event)">
-        <h3><span class="mr10">Search Results:</span> <span class="badge badge-info" style="margin-top:-25px;">{{ ApiResults.length }} Results Found</span></h3>
-    </api-search-results>
+    <ng-container *ngIf="ApiResults && ApiResults.length">
+      <api-search-results [apis]="ApiResults" (apiSelected)="gotoApi($event)">
+          <h3><span class="mr10">Search Results:</span> <span class="badge badge-info" style="margin-top:-25px;">{{ ApiResults.length }} Results Found</span></h3>
+      </api-search-results>
+    </ng-container>
   </ng-container>
 </div>

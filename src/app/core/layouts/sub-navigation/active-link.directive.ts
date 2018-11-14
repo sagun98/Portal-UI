@@ -21,17 +21,21 @@ export class ActiveLinkDirective implements OnInit {
 
     this.router.events.subscribe(routerEvent => {
       if( this.router.navigated ) {
-        const event = <NavigationEnd>routerEvent;
-        const url: string = event.url;
-        const element =  this.el.nativeElement as HTMLElement;
-        const matches = this.pattern.test(url)
-
-        if ( matches )
-          element.classList.add('active');
-        else
-          element.classList.remove('active');
+       this.setActiveLinkClass(routerEvent);
       }
     });
+  }
+
+  private setActiveLinkClass (routerEvent:  any) {
+    const event = <NavigationEnd>routerEvent;
+    const url: string = event.url;
+    const element =  this.el.nativeElement as HTMLElement;
+    const matches = this.pattern.test(url)
+
+    if ( matches )
+      element.classList.add('active');
+    else
+      element.classList.remove('active');
   }
 
 }

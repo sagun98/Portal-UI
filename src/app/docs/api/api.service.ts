@@ -21,7 +21,7 @@ interface CachedAPIs {
 export class ApiService {
   public $onApiListChanged: Subject<APIListChange> = new Subject<APIListChange>();
   public _api_cache_: API;
-  public _apis_cache_: API[] = [];
+  public _apis: API[] = [];
   public provideCachedVersion: CachedAPIs = {
     api: false,
     apis: false
@@ -116,7 +116,11 @@ export class ApiService {
   }
 
   public getApiList() {
-    return this.http.get(`${environment.restBase}/apis`);
+    return this.http.get(`${environment.restBase}/apis`).pipe(
+      tap((apis : API[]) => {
+        this._apis = apis;
+      })
+    );
   }
 
   public getPrivileges(id) {

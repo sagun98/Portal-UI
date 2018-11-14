@@ -10,6 +10,17 @@
     </label>
 
     <ul class="nav-list">
+    
+      <li *ngIf="! products.length" style="padding:0rem .25rem;">
+        <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false">
+          <div class="alert-item">
+            <span class="alert-text">
+              No Products have been created
+            </span>
+          </div>
+        </clr-alert>
+      </li>
+    
       <li *ngFor="let product of products">
         <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/product/' +  product.slug " [ngClass]="{'active' : (selectedSlug === product.slug || selectedProductId === product.id) }">
           {{product.name}}
@@ -29,9 +40,20 @@
     </label>
 
     <ul class="nav-list">
-      <li style="margin-bottom:15px;">
+      <li style="margin-bottom:15px;" *ngIf="apisFiltered.length">
         <input id="api-search" [(ngModel)]="apiFilter" placeholder="Search APIs" type="text" style="width:100%;">
       </li>
+
+      <li *ngIf="! apisFiltered.length" style="padding:0rem .25rem;">
+        <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false">
+          <div class="alert-item">
+            <span class="alert-text">
+              No APIs have been created or published
+            </span>
+          </div>
+        </clr-alert>
+      </li>
+      
       <li *ngFor="let api of apisFiltered">
         <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/api/' +  api.slug " [ngClass]="{'active' : (selectedSlug === api.slug || selectedApiId == api.id) }">
           {{ api.name }}

@@ -1,3 +1,4 @@
+import { ApiService } from './../api/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
@@ -19,15 +20,21 @@ export class ApiSearchComponent implements OnInit {
   public submitted: boolean = false;
   public finishedSearch: boolean = false;
   public ApiResults: API[] = [];
+  public apis: API[] = [];
+  public maxBeforeSearch: number = 9;
+
 
   constructor(
     private formBuilder : FormBuilder,
     private searchService : SearchService,
+    private apiService: ApiService,
     private router : Router
   ) { }
 
   ngOnInit() {
     this.buildForm();
+
+    this.apis = this.apiService._apis;
   }
 
   public get permissions () : any {

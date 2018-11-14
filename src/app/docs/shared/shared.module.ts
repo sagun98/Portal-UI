@@ -7,10 +7,12 @@ import { EntityPermissionsModalComponent } from './modals/entity-permissions-mod
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
+import { ApiCardComponent } from './api-card/api-card.component';
 
 const COMPONENTS = [
   EntityPermissionsModalComponent,
-  ApigeeApiKeyModalComponent
+  ApigeeApiKeyModalComponent,
+  ApiCardComponent
 ]
 
 @NgModule({
@@ -23,7 +25,8 @@ const COMPONENTS = [
     CoreSharedModule
   ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ApiCardComponent
   ],
   exports : [
     ...COMPONENTS

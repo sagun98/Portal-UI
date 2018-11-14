@@ -1,0 +1,16 @@
+:host {
+    text-align: center;
+
+    .card-text {
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+
+        height:92px;
+    }
+}

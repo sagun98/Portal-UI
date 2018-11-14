@@ -14,6 +14,7 @@ import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 import { ManageApiService } from './manage-api.service';
 import { Swagger2AlertModalComponent } from './swagger2-alert-modal/swagger2-alert-modal.component';
 import { PermissionsService } from '../../../core/services/permissions/permissions.service';
+import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../../core/interfaces/browser-message.interface';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -39,6 +40,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public saveMethod: string = 'addApi';
   public swaggerUploadOptions = SWAGGER_UPLOAD_OPTION;
   public swaggerOption: SWAGGER_UPLOAD_OPTION = SWAGGER_UPLOAD_OPTION.FILE;
+  private iframeLoaded:boolean = false;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -59,6 +61,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.activatedRoute.data.subscribe(data => {
       this.api = <API> data.api || this.api;
       this.saveMethod = data.saveMethod || this.saveMethod;
@@ -67,6 +70,14 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 200, save_onsavecallback: () => { } });
 
     this.buildForm();
+
+    // window.addEventListener('message', ( message: BrowserMessage<any> )  => {
+    //   const iframe:any = document.getElementById("swagger-editor");
+
+    //   this.acknowledgeIframeLoaded(message, iframe);
+
+    //   this.updateSwaggerFromEditor(message);
+    // });
   }
 
   private buildForm() {
@@ -207,4 +218,26 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   protected getPermissionService () : PermissionsService {
     return this.permissionService;
   }
+
+  private updateSwaggerFromEditor (message : BrowserMessage<SwaggerEditorYAML>) {
+    if (message.data && message.data.payload && message.data.payload.openAPI){
+      this.form.get('swagger').setValue(message.data.payload.openAPI);
+    }
+  }
+
+  private acknowledgeIframeLoaded (message : BrowserMessage<SwaggerEditorLoaded>, iframe: any) {
+    if ((message.data && message.data.payload && message.data.payload.loaded) && ! this.iframeLoaded){
+      this.iframeLoaded = true;
+
+      iframe.contentWindow.postMessage({
+        type : 'loaded',
+        payload : {
+          loaded : true
+        }
+      }, '*');
+    }
+  }
+
+  private 
+
 }

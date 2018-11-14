@@ -2,13 +2,14 @@ import { ApiService } from './../../api/api.service';
 import { NodeBBCategoryService } from './../../../domain/nodebb/category/nodebb-category.service';
 import { PermissionsService } from './../../../core/services/permissions/permissions.service';
 import { ToastrService } from 'ngx-toastr';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../interfaces/product.interface';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { UserService } from '../../../core/services/user/user.service';
+import { SideNavigationComponent } from '../../../core';
 
 @Component({
   selector: 'app-view-product',
@@ -24,6 +25,9 @@ export class ViewProductComponent extends EntityComponent {
   public following: boolean = false;
   public isEntityAdmin: boolean = false;
   public announcementCid: number;
+
+  @ViewChild(SideNavigationComponent) sideNavigationComponent:SideNavigationComponent;
+
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -45,7 +49,7 @@ export class ViewProductComponent extends EntityComponent {
       this.following = this.userService.isFollowingEntity(this.product.followers);
       this.isEntityAdmin = this.permissionService.isEntityAdmin(this.product);
       this.apikeyModalOpen = false;
-    
+
       if(this.isEntityAdmin){
         this.announcementCid = this.product.cid;
         this.nodeBBService.getChildCategoryId(this.product.cid, 'announcements').subscribe(cid => {
@@ -54,7 +58,7 @@ export class ViewProductComponent extends EntityComponent {
       }
 
       this.product.apis = this.product.apis.filter(api => {
-        return api !== null;
+        return (api !== null && api.published === true);
       })
     });
   }
@@ -65,9 +69,11 @@ export class ViewProductComponent extends EntityComponent {
       return;
     }
 
-    this.apiService.getApi(api.id).subscribe((activeApi: API) => {
-      this.activeApi = activeApi;
-    });
+    // this.apiService.getApi(api.id).subscribe((activeApi: API) => {
+    //   this.activeApi = activeApi;
+    // });
+
+    this.activeApi = api;
   }
 
   public openApiKeyModal () {

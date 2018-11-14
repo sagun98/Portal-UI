@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    {{ api.name }}
+  </div>
+  <div class="card-block">
+    <div class="card-title">
+
+    </div>
+    <div class="card-text">
+      {{ api.description }}
+    </div>
+  </div>
+  <div class="card-footer inline full">
+    <a class="btn btn-sm btn-link" style="float:left"  [routerLink]=" '/forum/category/' + api.cid "><clr-icon shape="talk-bubbles"></clr-icon> Discuss</a>
+    <a class="btn btn-sm btn-link" style="float:right" [routerLink]=" '/docs/api/' + api.id "><clr-icon shape="help-info"></clr-icon> View API</a>
+  </div>
+</div>

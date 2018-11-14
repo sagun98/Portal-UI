@@ -58,6 +58,8 @@ export class SideNavigationComponent implements OnInit {
           return api.id !== apiListChange.api.id
         });
       }
+
+      this.apiService._apis = this.apis;
     });
 
     this.productService.$onProductListChanged.subscribe( (productListChange : ProductListChange) => {
