@@ -14,6 +14,7 @@ import { ManageApiModule } from './api/manage-api/manage-api.module';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ApiSearchModule } from './api-search/api-search.module';
 import { CoreSharedModule } from '../core/core-shared/core-shared.module';
+import { DocsSharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
@@ -26,7 +27,7 @@ import { CoreSharedModule } from '../core/core-shared/core-shared.module';
     ApiSearchModule,
     SharedModule,
     CoreSharedModule,
-    // NodebbModule,
+    DocsSharedModule,
     RouterModule.forChild(documentationRoutes)
   ],
   declarations: [

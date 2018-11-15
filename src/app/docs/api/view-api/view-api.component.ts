@@ -42,14 +42,12 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
     private apiService: ApiService,
     private toastrService: ToastrService,
     private permissionService: PermissionsService,
-    private nodeBBService: NodeBBCategoryService
+    private nodeBBService: NodeBBCategoryService,
   ){
     super(); 
   }
 
   ngOnInit() {
-  
-
     this.activatedRoute.data.subscribe(data => {
       this.api = data.api || this.api;
       this.setSwaggerUI();

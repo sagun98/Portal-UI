@@ -8,10 +8,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { ApiCardComponent } from './api-card/api-card.component';
+import { NoApisComponent } from './no-apis/no-apis.component';
 
 const COMPONENTS = [
   EntityPermissionsModalComponent,
   ApigeeApiKeyModalComponent,
+  NoApisComponent,
   ApiCardComponent
 ]
 

@@ -1,8 +1,15 @@
 <div class="container">
+  <a class="btn btn-sm edit-page-btn" routerLink="../new" [hasPermission]="[permissions?.API?.CREATE]">
+    <clr-icon shape="plus" class="is-solid"></clr-icon> Add API
+  </a>
 
   <ng-container *ngIf="! apis.length">
-      <no-apis [apis]="ApiResults">
-      </no-apis>
+    <no-apis  title="API Catalog" 
+      no-content-text="No APIs have been created or published yet.  Do you want to be the first?"
+      add-content-text='Click the "ADD API" button to the top right, or the "Add" button next to the APIs List on the left side navigation.'
+      no-role-text="Don't have the API Developer Role (required to create an API)?"
+      request-role-text="Click Here to find out how to request the API Developer Role.">
+    </no-apis>
   </ng-container>
 
   <ng-container *ngIf="apis.length > 0 && apis.length <= maxBeforeSearch">
@@ -19,10 +26,6 @@
   <!-- Create Component -->
   <ng-container *ngIf="apis.length > maxBeforeSearch">
     <h2>API Search</h2>
-
-    <a class="btn btn-sm edit-page-btn" routerLink="../new" [hasPermission]="[permissions?.API?.CREATE]">
-      <clr-icon shape="plus" class="is-solid"></clr-icon> Add API
-    </a>
 
     <form [formGroup]="form" class="clr-form bottom-spacer-40" (submit)="searchApis()">
       <section class="form-block">

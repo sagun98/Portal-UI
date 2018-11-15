@@ -189,7 +189,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
     if( doDelete )
       this.apiService.deleteApi(this.api).subscribe(api => {
-        this.router.navigate([`/docs/product`]);
+        this.router.navigate([`/docs/api/search`]);
       });
   }
 
