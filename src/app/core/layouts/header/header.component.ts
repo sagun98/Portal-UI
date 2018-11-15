@@ -66,10 +66,12 @@ export class HeaderComponent implements OnInit {
     const phrase: string = (form.controls['keywords']) ? form.controls['keywords'].value : '';
     
     this.searchService.search(phrase).subscribe( (results: any[]) => {
-      this.searchResults = results;
+      this.searchResults = results || [];
 
-      if(results.length)
+      if(results && results.length)
         this.addEventListener();
+      else if(! results)
+        return;
       else
         this.toastrService.warning('No Results Found.  Please refine your search and try again', '');
     });

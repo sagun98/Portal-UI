@@ -69,6 +69,8 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       this.apikeyModalOpen = false;
     });
 
+    this.removeSwaggerAPISearch();
+
     // const editor = SwaggerEditorBundle({
     //   dom_id: '#swagger-editor',
     //   layout: 'StandaloneLayout',
@@ -164,6 +166,11 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       this.following = this.userService.isFollowingEntity(api.followers);
       this.api = api;
     });
+  }
+
+  private removeSwaggerAPISearch () {
+    document.querySelector(".download-url-input").remove();
+    document.querySelector(".download-url-button").remove();
   }
 
   protected getPermissionService(): PermissionsService {

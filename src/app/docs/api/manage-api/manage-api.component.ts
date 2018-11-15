@@ -77,7 +77,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     //   this.acknowledgeIframeLoaded(message, iframe);
 
     //   this.updateSwaggerFromEditor(message);
-    // });
+    // });    
   }
 
   private buildForm() {
