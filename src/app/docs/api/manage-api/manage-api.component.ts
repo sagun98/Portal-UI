@@ -29,7 +29,7 @@ enum SWAGGER_UPLOAD_OPTION {
 })
 export class ManageApiComponent extends EntityComponent implements OnInit {
 
-  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : [], apiManagementTool : null, published : false};
+  @Input() api: API = {version : null, name : null, description : null, overview : '', gettingStarted : '', reference : '', swagger : null, userPrivileges : null, apiManagementTool : null, published : false};
   @ViewChild(Swagger2AlertModalComponent) swaggerMessageModal : Swagger2AlertModalComponent;
   
   public errorClasses = ERROR_CLASSES;

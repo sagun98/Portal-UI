@@ -69,11 +69,11 @@ export class ViewProductComponent extends EntityComponent {
       return;
     }
 
-    // this.apiService.getApi(api.id).subscribe((activeApi: API) => {
-    //   this.activeApi = activeApi;
-    // });
+    this.apiService.getApi(api.id).subscribe((activeApi: API) => {
+      this.activeApi = activeApi;
+    });
 
-    this.activeApi = api;
+    //this.activeApi = api;
   }
 
   public openApiKeyModal () {
