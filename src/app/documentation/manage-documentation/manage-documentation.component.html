@@ -1,0 +1,129 @@
+<div class="container">
+  <h3>
+    <span>{{ title }}</span>
+    <!-- Function defined in parent class -->
+    <a *ngIf="documentation.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="documentation">
+      <clr-tooltip>
+          <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
+          <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+              <span>Manage API User Privileges</span>
+          </clr-tooltip-content>
+      </clr-tooltip>
+    </a>
+  </h3>
+
+  <entity-permissions-modal 
+    *ngIf="managePrivilegesModalOpened"
+    [userPrivileges]="userPrivileges" 
+    [opened]="managePrivilegesModalOpened"
+    [validateNewUser]="validateUserRoles"
+    [entity]="documentation"
+    [canCollaborate]="true"
+    (onSave)="saveFineGrainedPrivileges($event)"
+    >
+
+  </entity-permissions-modal>
+
+  <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveDocumentation()">
+
+    <section class="form-block">
+      <div class="form-group">
+        <label for="productName" class="required">Name</label>
+        <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input id="name" type="text" name="Name" placeholder="Enter Documentatino Area Name" formControlName="name" maxlength="25"/>
+          <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="productName" class="required">Slug</label>
+
+        <label [className]=" ( form.get('slug').invalid && ( submitted || form.get('slug').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+
+          <ng-container *ngIf="documentation.version >= 0">
+            {{ documentation.slug }}
+          </ng-container>
+
+          <ng-container *ngIf="documentation.version === null">
+            <input id="slug" type="text" name="slug" placeholder="Enter Documentation Area Slug" formControlName="slug" />
+            
+            <clr-tooltip *ngIf="form.get('slug').disabled">
+                <clr-icon clrTooltipTrigger class="ml5"  (click)="form.get('slug').enable()"  shape="lock" flip="horizontal"></clr-icon>
+                <clr-tooltip-content *clrIfOpen>
+                    <span>Click unlock to edit this field</span>
+                </clr-tooltip-content>
+            </clr-tooltip>
+
+            <clr-tooltip *ngIf="form.get('slug').enabled">
+              <clr-icon clrTooltipTrigger class="ml5" *ngIf="form.get('slug').enabled"  (click)="form.get('slug').disable();" shape="unlock"></clr-icon>
+              <clr-tooltip-content *clrIfOpen>
+                  <span>Click lock to reset the field value</span>
+              </clr-tooltip-content>
+            </clr-tooltip>
+            
+            <span *ngIf="form.get('slug').errors && form.get('slug').errors.required && (submitted || form.get('slug').dirty)" class="tooltip-content">This field cannot be empty!</span>
+          </ng-container>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="productName" class="required">Description</label>
+
+        <label for="productDescription" [className]=" (form.get('description').invalid && (submitted || form.get('description').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+            <textarea id="description" rows="3" formControlName="description" placeholder="Enter API Description"></textarea>
+            <span *ngIf="form.get('description').errors && form.get('description').errors.required && (submitted || form.get('description').dirty)" class="tooltip-content">This field cannot be empty!</span>
+            <span *ngIf="form.get('description').errors && form.get('description').errors.minlength && (submitted || form.get('description').dirty)" class="tooltip-content">This field must contain at least 5 characters!</span>
+        </label>
+      </div>
+
+      <div class="form-group" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="documentation">
+        <label for="published" class="required">
+          Published?
+          <clr-tooltip>
+            <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
+            <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+              <span>Publish your API to make it discoverable by other developers on the Pearson Developer Portal.</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </label>
+        <label>
+          <div class="toggle-switch">
+            <input type="checkbox" id="published" formControlName="published">
+            <label for="published"></label>
+          </div>
+        </label>
+      </div>
+
+      <div class="bottom-spacer-30">
+        <label for="overview">Overview:</label>
+        <div for="overview">
+          <editor id="content" placeholder="Documentation Content" [initialValue]="documentation.conent" [init]="tinymceConfig" formControlName="content">
+          </editor>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed-footer">
+      <div class="row">
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary-outline pull-left">
+            <clr-icon shape="floppy"></clr-icon>
+            <span class="ml5 hidden-xs">Save API</span>
+          </button>
+        </div>
+        <div class="col-xs-4 text-center">
+          <button type="button" *ngIf="documentation.id" (click)="handleDelete()" class="btn btn-danger-outline">
+            <clr-icon shape="times-circle"></clr-icon>
+            <span class="ml5 hidden-xs">Delete API</span>
+          </button>
+        </div>
+        <div class="col-xs-4">
+          <a type="submit" class="btn btn-danger-outline pull-right" routerLink="/documentation/main">
+            <clr-icon shape="times"></clr-icon>
+            <span class="ml5 hidden-xs">Cancel</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

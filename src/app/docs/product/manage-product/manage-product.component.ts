@@ -1,4 +1,4 @@
-import { PermissionsService } from './../../../core/services/permissions/permissions.service';
+import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from '../../../core/services/user/user.service';
 import { EntityComponent } from '../../../core/classes/EntityComponent';

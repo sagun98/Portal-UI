@@ -1,3 +1,4 @@
+import { ManageDocumentationModule } from './manage-documentation/manage-documentation.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,17 +10,17 @@ import { DocumentationRoutingModule } from './documentation.routes';
 import { DocumentationSideNavigationComponent } from './documentation-side-navigation/documentation-side-navigation.component';
 import { DocumentationLandingPageComponent } from './documentation-landing-page/documentation-landing-page.component';
 import { ViewDocumentComponent } from './view-document/view-document.component';
-import { ManageArticleComponent } from './manage-article/manage-article.component';
 import { CoreSharedModule } from '../core/core-shared/core-shared.module';
+import { ManageDocumentationAreaModule } from './manage-documentation-area/manage-documentation-area.module';
 
 @NgModule({
   imports: [
     DocumentationRoutingModule,
+    ManageDocumentationModule,
     CommonModule,
     ClarityModule,
     FormsModule,
     ReactiveFormsModule,
-    EditorModule,
     CoreSharedModule,
     NgSelectModule
   ],
@@ -29,15 +30,14 @@ import { CoreSharedModule } from '../core/core-shared/core-shared.module';
     DocumentationSideNavigationComponent,
     DocumentationLandingPageComponent,
     ViewDocumentComponent,
-    ManageArticleComponent
   ],
 
   exports : [
+    ManageDocumentationAreaModule,
     DocumentationComponent,
     DocumentationSideNavigationComponent,
     DocumentationLandingPageComponent,
     ViewDocumentComponent,
-    ManageArticleComponent
   ],
 
   schemas : [CUSTOM_ELEMENTS_SCHEMA]

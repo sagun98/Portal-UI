@@ -15,11 +15,11 @@ export enum BLOG_CATEGORIES  {
 }
 
 
-@Component({
-  selector: 'app-manage-article',
-  templateUrl: './manage-article.component.html',
-  styleUrls: ['./manage-article.component.scss']
-})
+// @Component({
+//   selector: 'app-manage-article',
+//   templateUrl: './manage-article.component.html',
+//   styleUrls: ['./manage-article.component.scss']
+// })
 export class ManageArticleComponent implements OnInit  {
 
   public today : Date = new Date();

@@ -5,7 +5,7 @@ import {NodeBBBlogsResolve, FORUM_CATEGORIES} from './blogs.resolve';
 import { NodeBBCategoryService } from '../domain/nodebb/category/nodebb-category.service';
 import { NodeBBCategoriesResponse } from '../domain/nodebb/category/nodebb-categories.interface';
 import { NodeBBCategory } from '../domain/nodebb/category/nodebb-category.interface';
-import { of } from 'node_modules/rxjs';
+import { of } from 'rxjs';
 
 const blogCategoryMock: NodeBBCategory = {
   "cid" : 1,

@@ -1,4 +1,4 @@
-import { PermissionsService } from './../services/permissions/permissions.service';
+import { PermissionsService } from '../services/permissions/permissions.service';
 import { UserService } from '../services/user/user.service';
 import { ENTITY_PERMISSIONS } from '../enums/user-permissions.enum';
 import { PermissibleEntity, Privilege } from '../interfaces/permissible.interface';
@@ -26,7 +26,7 @@ export class HasPermissionToDirective implements OnChanges {
   public ngOnChanges () {
     // this is a new entity with not FGRs
     // Let coarse grain win
-    if((! this.entity.userPrivileges && ! this.entity.version) || (this.entity.userPrivileges && ! this.entity.userPrivileges.length))
+    if((! this.entity.userPrivileges && ! this.entity.version) || (this.entity.userPrivileges && ! this.entity.userPrivileges.length ))
       return;
 
     const userPrivileges = (this.entity.userPrivileges && this.entity.userPrivileges.length) ? this.entity.userPrivileges[0] : <Privilege> {username : this.userService._lastUser.value.username, permissions : ['NONE']};

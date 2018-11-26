@@ -1,6 +1,37 @@
 <section id="documentation-side-nav" class="sidenav-content">
 
-  <section class="nav-group collapsible">
+  <div class="padding-5" [hasPermission]="['ADMIN']">
+    <button class="btn btn-primary-outlined" id="add-documentation-area-btn" routerLink="/documentation/area/new"><clr-icon shape="plus"></clr-icon> Add Documentation Area</button>
+  </div>
+
+  <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas;let index = index;">
+    <input [id]="'tab' + index" type="checkbox"/>
+
+    <label [for]="'tab' + index" (dblclick)="editDocumentationArea(documentationArea.slug)">
+      {{ documentationArea.name }}
+
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation(documentationArea.slug)" [hasPermission]="['ADMIN']">
+        Add <clr-icon shape="plus-circle" [title]="'Add ' + documentationArea.name + ' Document' "></clr-icon>
+      </button>
+    </label>
+
+    <ul class="nav-list">
+      <li *ngFor="let document of documentationArea.documents;">
+        <a class="nav-link" routerlinkactive="active" [class.active]="(document.id == currentId || document.slug == currentSlug)" [routerLink]="'/documentation/area/' + documentationArea.slug + '/' + document.slug">
+          {{document.name}}
+
+          <clr-tooltip>
+            <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+              <span>In Draft Status</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">
 
     <label for="tab1">
@@ -36,5 +67,7 @@
         </a>
       </li>
     </ul>
-  </section>
+  </section> -->
+
+
 </section>

@@ -1,5 +1,5 @@
-import { UserService } from './../user/user.service';
-import { AdminTestUser, ApiDeveloperTestUser, ProductOwnerTestUser } from './../../layouts/user-settings-modal/role-card/role-card.component.spec';
+import { UserService } from '../user/user.service';
+import { AdminTestUser, ApiDeveloperTestUser, ProductOwnerTestUser } from '../../layouts/user-settings-modal/role-card/role-card.component.spec';
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {PermissionsService} from './permissions.service';

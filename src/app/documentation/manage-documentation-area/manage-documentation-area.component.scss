@@ -1,0 +1,12 @@
+:host {
+
+    label {
+        input {
+            min-width: 10rem;
+        }
+    }
+
+    .fixed-footer {
+        width : calc(100% - 12rem) !important;
+    }
+}

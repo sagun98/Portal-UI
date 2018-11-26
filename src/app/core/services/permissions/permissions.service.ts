@@ -1,5 +1,5 @@
-import { UserService } from './../user/user.service';
-import { Privilege } from './../../interfaces/permissible.interface';
+import { UserService } from '../user/user.service';
+import { Privilege } from '../../interfaces/permissible.interface';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserRole, PortalUser } from '../../interfaces/fr-user.interface';

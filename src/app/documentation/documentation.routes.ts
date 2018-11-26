@@ -1,3 +1,4 @@
+import { DocumentationAreasResolve } from './resolves/documentation-areas.resolve';
 import { DocumentationLandingPageComponent } from './documentation-landing-page/documentation-landing-page.component';
 import { Routes, RouterModule } from "@angular/router";
 import { DocumentationResolve } from './resolves/documentation.resolve';
@@ -7,23 +8,19 @@ import { NgModule } from '@angular/core';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { DocumentResolve } from './resolves/document.resolve';
 import { ManageArticleComponent } from './manage-article/manage-article.component';
-import { RoleCheckGuard } from '../core/guards/role-check/role-check.guard';
 
 export const DocumentationRoutes: Routes = [
     {
         path : 'new', component : ManageArticleComponent, data : {saveMethod : 'saveBlogPost'}
     },
     {
-        path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : {
-            Blogs : DocumentationResolve
-        },
+        path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : { DocumentationAreas : DocumentationAreasResolve, Blogs : DocumentationResolve },
+        
         children : [
             { path : 'main', component : DocumentationLandingPageComponent, resolve : {LandingPage : DocumentationLandingPageResolve} },
-            { path : ':blogId', component : ViewDocumentComponent, resolve : { BlogPost : DocumentResolve  } }
+            { path : ':blogId', component : ViewDocumentComponent, resolve : { BlogPost : DocumentResolve  } },
+            { path: 'area', loadChildren: './manage-documentation-area/manage-documentation-area.module#ManageDocumentationAreaModule'}
         ]
-    },
-    {
-        path : ':blogId/edit', component : ManageArticleComponent, data : {saveMethod : 'updateBlogPost', permissions : ['ADMIN']}, resolve : { BlogPost : DocumentResolve }, canActivate : [RoleCheckGuard]
     }
 ]
 

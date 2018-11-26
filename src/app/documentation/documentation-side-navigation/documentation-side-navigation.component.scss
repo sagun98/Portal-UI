@@ -6,11 +6,20 @@
 
             a {
                 padding: .3rem 0 .3rem .5rem;
+
+                clr-icon{
+                    margin-left: 5px;
+                    margin-top: -4px;
+                }
             }
         }
     }
 
     section {
+        #add-documentation-area-btn {
+            width : 100%;
+        }
+
         label {
             margin-bottom: 10px;
             

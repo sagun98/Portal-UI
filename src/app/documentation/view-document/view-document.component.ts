@@ -1,8 +1,7 @@
-import { environment } from '../../../environments/environment';
+import { Documentation } from './../../core/interfaces/documentation.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
-import { BlogPost } from '../interfaces/blog-post.interface';
 
 @Component({
   selector: 'app-view-document',
@@ -11,7 +10,7 @@ import { BlogPost } from '../interfaces/blog-post.interface';
 })
 export class ViewDocumentComponent implements OnInit {
 
-  @Input() blogPost : BlogPost;
+  @Input() documentation : Documentation;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -21,15 +20,11 @@ export class ViewDocumentComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
-      this.blogPost = data.BlogPost || this.blogPost;
-
-      setTimeout(t => {
-        //this.fixInternalRouting();
-      }, 100);
+      this.documentation = data.Documentation || this.documentation;
     });
   }
 
-  public get safeBlogPost () {
-    return this.domSanitizer.bypassSecurityTrustHtml( this.blogPost.content );
+  public get safeContent () {
+    return this.domSanitizer.bypassSecurityTrustHtml( this.documentation.content );
   }
 }

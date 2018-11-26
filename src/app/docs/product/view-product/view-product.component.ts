@@ -1,6 +1,6 @@
-import { ApiService } from './../../api/api.service';
-import { NodeBBCategoryService } from './../../../domain/nodebb/category/nodebb-category.service';
-import { PermissionsService } from './../../../core/services/permissions/permissions.service';
+import { ApiService } from '../../api/api.service';
+import { NodeBBCategoryService } from '../../../domain/nodebb/category/nodebb-category.service';
+import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, ViewChild } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';

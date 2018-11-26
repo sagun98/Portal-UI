@@ -91,7 +91,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       overview : [this.api.overview, []],
       gettingStarted : [this.api.gettingStarted, []],
       reference : [this.api.reference, []],
-      swagger : [this.api.swagger, [/* Validators.required */]],
+      swagger : [this.api.swagger, [ Validators.required ]],
       file : [],
       tags : [this.UIFormattedTags, []],
       slug : [this.api.slug, [Validators.required]],
@@ -123,17 +123,6 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     return tags.map(tag => {
       return tag.label;
     })
-  }
-
-  private setSlugValue (name?: string) {
-    name = name || this.form.get('name').value;
-    let slug = name.replace(/[^A-Za-z0-9\s]/gi, '').replace(/\s+/gi, "_").toLowerCase();
-    const lastCharacter = slug.substring(slug.length - 1, slug.length);
-
-    if(lastCharacter === '_')
-      slug = slug.substring(0, slug.length - 1);
-
-    this.form.get('slug').setValue(slug);
   }
 
   public saveApi () {
@@ -221,7 +210,11 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   private updateSwaggerFromEditor (message : BrowserMessage<SwaggerEditorYAML>) {
     if (message.data && message.data.payload && message.data.payload.openAPI){
-      this.form.get('swagger').setValue(message.data.payload.openAPI);
+      var file = new File([message.data.payload.openAPI], "swagger.yml", {
+        type: "text/plain",
+      });
+
+      this.form.get('file').setValue(file);
     }
   }
 
@@ -232,12 +225,10 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       iframe.contentWindow.postMessage({
         type : 'loaded',
         payload : {
-          loaded : true
+          loaded : true,
+          swagger : this.form.get('swagger').value
         }
       }, '*');
     }
   }
-
-  private 
-
 }

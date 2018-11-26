@@ -1,3 +1,5 @@
+import { Documentation } from './../core/interfaces/documentation.interface';
+import { DocumentationArea } from '../core/interfaces/documentation-area.interface';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -5,6 +7,9 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { PageableResponse } from './interfaces/pagable-response.interface';
 import { BlogPost } from './interfaces/blog-post.interface';
+import { Subject } from 'rxjs';
+import { Privilege } from '../core/interfaces/permissible.interface';
+import { UserPrivilegeClass } from '../core/classes/user-privilege';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +40,8 @@ export class DocumentationService {
     );
   }
 
+  public onChange: Subject<any> = new Subject<any>();
+
   public getAllDocumentation (_params) {
     let params = new HttpParams();
 
@@ -57,5 +64,55 @@ export class DocumentationService {
 
   public updateBlogPost (blogPost : BlogPost) {
     return <Observable<BlogPost>> this.http.put(`${environment.restBase}/blogs/${blogPost.id}`, blogPost);
+  }
+
+  public findAllDocumentationArea () : Observable<DocumentationArea[]> {
+    return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`);
+  }
+
+  public findDocumentationArea (id: string) : Observable<DocumentationArea> {
+    return <Observable<DocumentationArea>> this.http.get(`${environment.restBase}/documentation-area/${id}`);
+  }
+
+  public createDocumentationArea (documentationArea: DocumentationArea) : Observable<DocumentationArea> {
+    return <Observable<DocumentationArea>> this.http.post(`${environment.restBase}/documentation-area`, documentationArea);
+  }
+
+  public udpateDocumentationArea (documentationArea: DocumentationArea) : Observable<DocumentationArea> {
+    return <Observable<DocumentationArea>> this.http.put(`${environment.restBase}/documentation-area/${documentationArea.id}`, documentationArea);
+  }
+
+  public deleteDocumentationArea (documentationArea: DocumentationArea) {
+    return this.http.delete(`${environment.restBase}/documentation-area/${documentationArea.id}`);
+  }
+
+  public createDocumentation (documentationAreaId : string, documentation : Documentation) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.post(`${environment.restBase}/documentation-area/${documentationAreaId}/documents`, documentation);
+  }
+
+  public findDocumentationById (documentationAreaId : string, documentationId : string) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.get(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}`);
+  }
+
+  public updateDocumentation (documentationAreaId : string, documentation : Documentation) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentation.id}`, documentation);
+  }
+
+  public deleteDocumentation (documentationAreaId : string, documentationId: string) : Observable<any> {
+    return this.http.delete(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}`);
+  }
+
+  public getPrivileges (documentationAreaId: string, documentationId : string) {
+    return this.http.get(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}/privileges`).pipe(
+      map((privileges: Privilege[]) => {
+        return privileges.map(p => {
+          return new UserPrivilegeClass(p);
+        });
+      })
+    );
+  }
+
+  public setUserPrivileges (documentationAreaId: string, documentationId : string, privileges: UserPrivilegeClass[]) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}/privileges`, privileges)
   }
 }

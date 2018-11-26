@@ -28,7 +28,6 @@ export class AppComponent implements OnInit{
   ){}
 
   ngOnInit(){
-
     this.userService.$loggedIn.subscribe(loggedIn => {
       if(loggedIn && ! this.userService.staticUser){
         this.userService.user.subscribe(user => { });

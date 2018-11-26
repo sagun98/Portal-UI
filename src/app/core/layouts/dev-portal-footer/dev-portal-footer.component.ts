@@ -20,6 +20,8 @@ export class DevPortalFooterComponent implements OnInit {
     new RegExp('/docs/product/new'),
     new RegExp('/docs/product/.*/edit'),
     new RegExp('/documentation/new'),
+    new RegExp('/documentation/area/mew'),
+    new RegExp('/documentation/area/.*/edit'),
     new RegExp('/documentation/.*/edit')
   ];
 

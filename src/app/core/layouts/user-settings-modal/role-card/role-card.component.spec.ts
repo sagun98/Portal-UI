@@ -1,4 +1,4 @@
-import { IPortalUser, UserRole, UserPrivilege } from './../../../interfaces/fr-user.interface';
+import { IPortalUser, UserRole, UserPrivilege } from '../../../interfaces/fr-user.interface';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';

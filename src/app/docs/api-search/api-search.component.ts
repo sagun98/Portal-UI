@@ -1,4 +1,4 @@
-import { ApiService } from './../api/api.service';
+import { ApiService } from '../api/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';

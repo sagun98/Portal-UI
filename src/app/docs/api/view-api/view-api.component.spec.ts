@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ToastrModule, ToastrService } from '../../../../../node_modules/ngx-toastr';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;

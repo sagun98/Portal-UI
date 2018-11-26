@@ -1,4 +1,4 @@
-import { environment } from './../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Component, OnInit, Input } from '@angular/core';
 import { API } from '../../api/interfaces/api.interface';
 import { NodeBBBlogsResolve, FORUM_CATEGORIES } from '../../../resolves/blogs.resolve';

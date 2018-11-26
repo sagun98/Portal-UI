@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { ForumService } from './../../../core/services/forum/forum.service';
+import { ForumService } from '../../../core/services/forum/forum.service';
 import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum';
 import { UserService } from '../../../core/services/user/user.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';

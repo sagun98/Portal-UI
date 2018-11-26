@@ -1,4 +1,4 @@
-import { PermissionsService } from './../../../services/permissions/permissions.service';
+import { PermissionsService } from '../../../services/permissions/permissions.service';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PortalUser } from '../../../interfaces/fr-user.interface';
 

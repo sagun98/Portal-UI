@@ -1,6 +1,6 @@
 import { CRUD } from './crud.enum';
 
-const permissibleObjects = ['API', 'PRODUCT', 'BLOG'];
+const permissibleObjects = ['API', 'PRODUCT', 'DOCUMENTATION'];
 let objectPermissions = {};
 
 permissibleObjects.forEach(object => {

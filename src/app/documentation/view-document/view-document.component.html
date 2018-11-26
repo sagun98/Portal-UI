@@ -4,18 +4,14 @@
   </a>
 
   <div class="text-center">
-    <h2 class="bottom-spacer-10">{{ blogPost.title }}</h2>
+    <h2 class="bottom-spacer-10">{{ documentation.name }}</h2>
     <h5 class="bottom-spacer-10">
-      <i>{{ blogPost.summary }}</i>
+      <i>{{ documentation.description }}</i>
     </h5>
-    <p>
-      <span class="mr20">{{ blogPost.author }}</span>
-      <span>{{ blogPost.publicationDate | date : 'MMMM dd, yyyy' }}</span>
-    </p>
   </div>
 
   <hr class="bottom-spacer-20" />
 
-  <div class="documentation-body" dynamicContentRouting [innerHTML]="safeBlogPost"></div>
+  <div class="documentation-body" dynamicContentRouting [innerHTML]="safeContent"></div>
 
 </div>

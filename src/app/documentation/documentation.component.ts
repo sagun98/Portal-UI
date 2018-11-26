@@ -1,7 +1,9 @@
+import { DocumentationService } from './documentation.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { BlogPost } from './interfaces/blog-post.interface';
+import { DocumentationArea } from '../core/interfaces/documentation-area.interface';
 
 @Component({
   selector: 'app-documentation',
@@ -12,6 +14,8 @@ export class DocumentationComponent implements OnInit {
 
   @Input() landingPage: BlogPost;
   @Input() documentationBlogs: BlogPost[];
+  @Input() documentationAreas: DocumentationArea[];
+
   @ViewChild('main') mainElementRef: ElementRef;
   public currentId: string;
   public currentSlug: string;
@@ -19,12 +23,14 @@ export class DocumentationComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
+    private documentationService : DocumentationService,
     private router: Router
   ) { } 
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.documentationBlogs = data.Blogs || this.documentationBlogs;
+      this.documentationAreas = data.DocumentationAreas || this.documentationAreas;
     });
 
     this.router.events.subscribe((event: NavigationEnd) => {
@@ -33,6 +39,12 @@ export class DocumentationComponent implements OnInit {
           this.scrollTop();
         }
       }
+    });
+
+    this.documentationService.onChange.subscribe(evt => {
+      this.documentationService.findAllDocumentationArea().subscribe(documentationAreas => {
+        this.documentationAreas = documentationAreas;
+      });
     });
   }
 
