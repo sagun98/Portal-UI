@@ -40,11 +40,12 @@
     </label>
 
     <ul class="nav-list">
-      <li style="margin-bottom:15px;" *ngIf="apisFiltered.length">
+      <li id="api-search-container" *ngIf="apis.length">
+        <clr-icon shape="search"></clr-icon>
         <input id="api-search" [(ngModel)]="apiFilter" placeholder="Search APIs" type="text" style="width:100%;">
       </li>
 
-      <li *ngIf="! apisFiltered.length" style="padding:0rem .25rem;">
+      <li *ngIf="! apis.length" style="padding:0rem .25rem;">
         <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false">
           <div class="alert-item">
             <span class="alert-text">

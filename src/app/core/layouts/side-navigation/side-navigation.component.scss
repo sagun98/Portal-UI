@@ -4,6 +4,20 @@
 
     .nav-list{
         padding: 0px;
+
+        li#api-search-container {
+            margin-bottom: 20px;
+            position: relative;
+
+            clr-icon {
+                position: absolute;
+                margin: 3px 0px 0px 10px;
+            }
+
+            input {
+                padding-left: 35px;
+            }
+        }
     }
 
     label > button{
