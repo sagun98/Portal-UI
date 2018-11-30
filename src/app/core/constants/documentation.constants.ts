@@ -1,0 +1,1 @@
+export const DOCUMENTATION_LANDING_PAGE_LABEL = 'documentation landing page';

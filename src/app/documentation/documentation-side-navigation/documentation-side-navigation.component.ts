@@ -1,3 +1,4 @@
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from './../../core/constants/documentation.constants';
 import { UserService } from './../../core/services/user/user.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -36,22 +37,6 @@ export class DocumentationSideNavigationComponent implements OnInit {
         }
       }
     });
-
-    // if (this.activatedRoute.children.length)
-    //   this.activatedRoute.children[0].params.subscribe(params => {
-    //     this.currentId = params.blogId || this.currentId;
-    //     this.currentSlug = params.blogId || this.currentId;
-    //   });
-
-    // if (this.documentationBlogs && this.documentationBlogs.length) {
-    //   this.consumeApiBlogs = this.documentationBlogs.filter((documentationBlog: BlogPost) => {
-    //     return documentationBlog.subCategory === "Consuming APIs";
-    //   });
-
-    //   this.creatingApiBlogs = this.documentationBlogs.filter((documentationBlog: BlogPost) => {
-    //     return documentationBlog.subCategory === "Creating APIs";
-    //   });
-    // }
   }
 
   public editDocumentationArea (slug: string) : void {
@@ -65,5 +50,11 @@ export class DocumentationSideNavigationComponent implements OnInit {
 
   public goToBlog(blog) {
     this.blogClick.emit(blog);
+  }
+
+  public get sideNavigationDocumentationAreas () {
+    return this.documentationAreas.filter(documentationArea => {
+      return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
+    });
   }
 }

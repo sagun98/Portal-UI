@@ -4,13 +4,13 @@
     <button class="btn btn-primary-outlined" id="add-documentation-area-btn" routerLink="/documentation/area/new"><clr-icon shape="plus"></clr-icon> Add Documentation Area</button>
   </div>
 
-  <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas;let index = index;">
+  <section class="nav-group collapsible" *ngFor="let documentationArea of sideNavigationDocumentationAreas;let index = index;">
     <input [id]="'tab' + index" type="checkbox"/>
 
     <label [for]="'tab' + index" (dblclick)="editDocumentationArea(documentationArea.slug)">
       {{ documentationArea.name }}
 
-      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation(documentationArea.slug)" [hasPermission]="['ADMIN']">
+      <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation(documentationArea.slug)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']">
         Add <clr-icon shape="plus-circle" [title]="'Add ' + documentationArea.name + ' Document' "></clr-icon>
       </button>
     </label>

@@ -1,22 +1,26 @@
 import { Documentation } from './../../core/interfaces/documentation.interface';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
+import { EntityComponent } from '../../core/classes/EntityComponent';
+import { PermissionsService } from '../../core/services/permissions/permissions.service';
 
 @Component({
   selector: 'app-view-document',
   templateUrl: './view-document.component.html',
   styleUrls: ['./view-document.component.scss']
 })
-export class ViewDocumentComponent implements OnInit {
+export class ViewDocumentComponent extends EntityComponent implements OnInit {
 
   @Input() documentation : Documentation;
 
   constructor(
     private activatedRoute : ActivatedRoute,
     private domSanitizer: DomSanitizer,
-    private router: Router
-  ) { }
+    private permissionsService: PermissionsService
+  ) { 
+    super();
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
@@ -26,5 +30,9 @@ export class ViewDocumentComponent implements OnInit {
 
   public get safeContent () {
     return this.domSanitizer.bypassSecurityTrustHtml( this.documentation.content );
+  }
+
+  protected getPermissionService(): PermissionsService {
+    return this.permissionsService;
   }
 }

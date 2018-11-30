@@ -5,9 +5,6 @@
   </h3>
 
   <div class="modal-body">
-
-    |{{ activeTabs | json }}| test
-
     <clr-tabs>
       <clr-tab *ngIf="user?.roleMap?.ADMIN">
         <button clrTabLink>
@@ -50,7 +47,7 @@
             <hr style="margin-top:20px;"/>
           
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-4">
 
                   <role-card 
                     role="PRODUCT_OWNER"
@@ -62,7 +59,7 @@
                 
 
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
 
                   <role-card 
                     role="API_DEVELOPER"
@@ -70,6 +67,17 @@
                     title="API Developer">
                       If you are an API Developer and you'd like to create, document and publish API's, as well as allow other
                       Pearson Developers to consume them, request this role.
+                  </role-card>
+              
+              </div>
+
+              <div class="col-sm-4">
+
+                  <role-card 
+                    role="DOCUMENTATION_CONTRIBUTOR"
+                    [user]="user"
+                    title="Documentation Contributor">
+                      If you would like to add documentation on any subject regaurding API development or consumption at Pearson, request this role.
                   </role-card>
               
               </div>

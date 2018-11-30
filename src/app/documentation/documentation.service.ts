@@ -3,18 +3,21 @@ import { DocumentationArea } from '../core/interfaces/documentation-area.interfa
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { PageableResponse } from './interfaces/pagable-response.interface';
 import { BlogPost } from './interfaces/blog-post.interface';
 import { Subject } from 'rxjs';
 import { Privilege } from '../core/interfaces/permissible.interface';
 import { UserPrivilegeClass } from '../core/classes/user-privilege';
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../core/constants/documentation.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentationService {
+
+  public documentationLandingPageArea: DocumentationArea;
 
   constructor(
     private http : HttpClient
@@ -67,7 +70,14 @@ export class DocumentationService {
   }
 
   public findAllDocumentationArea () : Observable<DocumentationArea[]> {
-    return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`);
+    return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`).pipe(
+      tap( (documentationAreas: DocumentationArea[]) => {
+        documentationAreas.forEach(documentationArea => {
+          if (documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
+            this.documentationLandingPageArea = documentationArea;
+        });
+      })
+    );
   }
 
   public findDocumentationArea (id: string) : Observable<DocumentationArea> {

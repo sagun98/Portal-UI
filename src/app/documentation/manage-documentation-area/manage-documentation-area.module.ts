@@ -22,11 +22,11 @@ import { ViewDocumentComponent } from '../view-document/view-document.component'
     RouterModule.forChild([
       { path : 'new', component : ManageDocumentationAreaComponent, data : {permissions : ['ADMIN']}, canActivate : [RoleCheckGuard]},
       { path : ':id/edit', component : ManageDocumentationAreaComponent, data : {permissions : ['ADMIN']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {DocumentationArea : DocumentationAreaResolve}},
-      { path : ':id/new', component :  ManageDocumentationComponent, data : {permissions : ['ADMIN']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {
+      { path : ':id/new', component :  ManageDocumentationComponent, data : {permissions : ['ADMIN', 'DOCUMENTATION_CONTRIBUTOR']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {
         DocumentationArea : DocumentationAreaResolve
       }},
       { path : ':id/:slug', component :  ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve}},
-      { path : ':id/:slug/edit', component :  ManageDocumentationComponent, data : {permissions : ['ADMIN']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {
+      { path : ':id/:slug/edit', component :  ManageDocumentationComponent, data : {permissions : ['ADMIN', 'DOCUMENTATION_CONTRIBUTOR']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {
         Documentation : DocumentationNewResolve,
         DocumentationArea : DocumentationAreaResolve
       }}

@@ -1,9 +1,11 @@
+import { DocumentationService } from './../documentation.service';
 import { UserService } from '../../core/services/user/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
 import { UserPrivilegesComponentHelper } from '../../core/classes/user-privileges-helper';
+import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
 
 @Component({
   selector: 'app-documentation-landing-page',
@@ -13,16 +15,24 @@ import { UserPrivilegesComponentHelper } from '../../core/classes/user-privilege
 export class DocumentationLandingPageComponent extends UserPrivilegesComponentHelper implements OnInit { 
 
   @Input() landingPage: BlogPost;
+  
+  public documentationLandingPage: DocumentationArea;
 
   constructor(
     private activatedRoute:ActivatedRoute,
+    private documentationService: DocumentationService,
     private domSanitizer : DomSanitizer,
     private _userService : UserService
   ) { super(_userService); }
 
   ngOnInit() {
+    this.documentationLandingPage = this.documentationService.documentationLandingPageArea;
+
     this.activatedRoute.data.subscribe( data => {
-      this.landingPage = data.LandingPage || this.landingPage;
+      const documentationArea: DocumentationArea = data.LandingPage;
+      const landingPage = (documentationArea &&  documentationArea.documents.length) ? documentationArea.documents[0] : null;
+
+      this.landingPage = landingPage || this.landingPage;
     });
   }
 

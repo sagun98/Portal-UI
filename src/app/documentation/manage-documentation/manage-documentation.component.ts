@@ -1,3 +1,4 @@
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from './../../core/constants/documentation.constants';
 import { Observable, of } from 'rxjs';
 import { DocumentationService } from './../documentation.service';
 import { DocumentationArea } from './../../core/interfaces/documentation-area.interface';
@@ -123,7 +124,10 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
       this.toastrService.success('Documentation Updated Successfully');
 
-      this.router.navigate([`/documentation/area/${this.documentationArea.slug}/${this.documentation.slug}`]);
+      if(this.documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
+        this.router.navigate([`/documentation/main`]);
+      else
+        this.router.navigate([`/documentation/area/${this.documentationArea.slug}/${this.documentation.slug}`]);
       
       this.documentationService.onChange.next(null);
     });

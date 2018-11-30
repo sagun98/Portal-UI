@@ -46,7 +46,9 @@ export class RoleCheckGuard implements CanActivate, CanActivateChild {
             return;
           }
 
-          const matches = this.permissionsService.matchesAnyPermissions(permissions, user.roles);
+          //const matches = this.permissionsService.matchesAnyPermissions(permissions, user.roles);
+          const matches = this.permissionsService.hasRole(permissions, user.roles);
+          
           observer.next(matches);
           observer.complete();
           

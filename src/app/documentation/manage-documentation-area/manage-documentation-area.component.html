@@ -9,7 +9,7 @@
       <div class="form-group">
         <label for="productName" class="required">Name</label>
         <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
-          <input id="name" type="text" name="Name" placeholder="Enter Documentatino Area Name" formControlName="name" maxlength="25"/>
+          <input id="name" type="text" name="Name" placeholder="Enter Documentation Area Name" formControlName="name" maxlength="45"/>
           <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
         </label>
       </div>

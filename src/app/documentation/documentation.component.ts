@@ -1,5 +1,4 @@
 import { DocumentationService } from './documentation.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { BlogPost } from './interfaces/blog-post.interface';
@@ -22,7 +21,6 @@ export class DocumentationComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private domSanitizer: DomSanitizer,
     private documentationService : DocumentationService,
     private router: Router
   ) { } 
@@ -61,5 +59,4 @@ export class DocumentationComponent implements OnInit {
     const mainElement: HTMLElement = <HTMLElement>this.mainElementRef.nativeElement;
     // mainElement.scrollTop = 0;
   }
-
 }

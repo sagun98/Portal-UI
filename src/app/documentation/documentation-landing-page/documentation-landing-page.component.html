@@ -2,8 +2,13 @@
    
   
   <h1>Welcome to the Pearson Developer Portal</h1>
-  <a  *ngIf="landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]=" '../' + landingPage.id + '/edit'">
-    <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Page
+
+  <a  *ngIf="! landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPage.slug + '/new'">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Landing Page
+  </a>
+  
+  <a  *ngIf="landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPage.slug + '/' + landingPage.slug + '/edit'">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Landing Page
   </a>
 
   <hr/>

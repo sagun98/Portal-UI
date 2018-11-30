@@ -1,3 +1,4 @@
+
 import { DocumentationService } from '../documentation.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -10,6 +11,6 @@ export class DocumentationLandingPageResolve implements Resolve<any> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.documentationService.getDocumentationLandingPage();
+        return this.documentationService.findDocumentationArea(this.documentationService.documentationLandingPageArea.id);
     }
 }

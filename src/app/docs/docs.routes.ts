@@ -34,8 +34,10 @@ export const documentationRoutes: Routes = [
                     apiData: ApisResolve
                 },
                 data : {
-                    saveMethod : 'addProduct'
-                }
+                    saveMethod : 'addProduct',
+                    permissions : ['ADMIN', 'PRODUCT_OWNER']
+                },
+                canActivate : [RoleCheckGuard]
             },
             {
                 path: 'product/:productId',
@@ -52,14 +54,18 @@ export const documentationRoutes: Routes = [
                     product: ProductResolve
                 },
                 data : {
-                    saveMethod : 'updateProduct'
-                }
+                    saveMethod : 'updateProduct',
+                    permissions : ['ADMIN', 'PRODUCT_OWNER']
+                },
+                canActivate : [RoleCheckGuard]
             },
             {
                 path : 'api/new', component : ManageApiComponent,
                 data : {
-                    saveMethod : 'addApi'
-                }
+                    saveMethod : 'addApi',
+                    permissions : ['ADMIN', 'API_DEVELOPER']
+                },
+                canActivate : [RoleCheckGuard]
             },
             {
                 path : 'api/search', component : ApiSearchComponent
@@ -77,7 +83,7 @@ export const documentationRoutes: Routes = [
                 },
                 data : {
                     saveMethod : 'updateApi',
-                    permissions : ['API_UPDATE']
+                    permissions : ['API_DEVELOPER']
                 }
             },
         ]

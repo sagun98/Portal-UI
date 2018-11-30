@@ -30,7 +30,7 @@
       <div class="form-group">
         <label for="productName" class="required">Name</label>
         <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
-          <input id="name" type="text" name="Name" placeholder="Enter Documentatino Area Name" formControlName="name" maxlength="40"/>
+          <input id="name" type="text" name="Name" placeholder="Enter Document Name" formControlName="name" maxlength="60"/>
           <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
         </label>
       </div>
@@ -106,13 +106,13 @@
     <div class="fixed-footer">
       <div class="row">
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary-outline pull-left">
+          <button type="submit" class="btn btn-primary-outline pull-left" [hasPermission]="[permissions.DOCUMENTATION.CREATE, permissions.DOCUMENTATION.UREATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="documentation">
             <clr-icon shape="floppy"></clr-icon>
             <span class="ml5 hidden-xs">Save API</span>
           </button>
         </div>
         <div class="col-xs-4 text-center">
-          <button type="button" *ngIf="documentation.id" (click)="handleDelete()" class="btn btn-danger-outline">
+          <button type="button" *ngIf="documentation.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.DOCUMENTATION.DELETE]" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="documentation">
             <clr-icon shape="times-circle"></clr-icon>
             <span class="ml5 hidden-xs">Delete API</span>
           </button>
