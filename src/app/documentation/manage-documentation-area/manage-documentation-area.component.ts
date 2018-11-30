@@ -1,7 +1,8 @@
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from './../../core/constants/documentation.constants';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentationArea, DefaultDocumentationArea } from '../../core/interfaces/documentation-area.interface';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DocumentationService } from '../documentation.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
@@ -38,9 +39,11 @@ export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent i
       if (this.documentationArea.id) {
         this.title = `Edit ${this.documentationArea.name}`;
         this.saveMethod = 'udpateDocumentationArea';
-      }
+      } 
 
       this.buildForm();
+
+      this.setFormValues();
     });
   }
 
@@ -65,9 +68,24 @@ export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent i
 
     this.documentationAreaService[this.saveMethod](documentationArea).subscribe(documentationArea => {
       this.documentationArea = documentationArea;
+
+      if(documentationArea.name.toLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
+        this.documentationAreaService.documentationLandingPageArea = documentationArea;
+
       this.router.navigate([`/documentation/main`]);
       this.documentationAreaService.onChange.next(null);
     });
+  }
+
+  private setFormValues () : void {
+    let params: Params = this.activatedRoute.snapshot.queryParams;
+
+    if( Object.keys(params).length ) {
+      Object.keys(params).forEach(key => {
+        this.form.get(key).setValue(params[key]);
+        this.form.get(key).disable();
+      });
+    }
   }
 
   private buildForm () : void {

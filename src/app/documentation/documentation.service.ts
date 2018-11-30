@@ -85,7 +85,11 @@ export class DocumentationService {
   }
 
   public createDocumentationArea (documentationArea: DocumentationArea) : Observable<DocumentationArea> {
-    return <Observable<DocumentationArea>> this.http.post(`${environment.restBase}/documentation-area`, documentationArea);
+    return <Observable<DocumentationArea>> this.http.post(`${environment.restBase}/documentation-area`, documentationArea).pipe(
+      tap(t => {
+        this.documentationLandingPageArea = null;
+      })
+    );
   }
 
   public udpateDocumentationArea (documentationArea: DocumentationArea) : Observable<DocumentationArea> {
@@ -93,7 +97,11 @@ export class DocumentationService {
   }
 
   public deleteDocumentationArea (documentationArea: DocumentationArea) {
-    return this.http.delete(`${environment.restBase}/documentation-area/${documentationArea.id}`);
+    return this.http.delete(`${environment.restBase}/documentation-area/${documentationArea.id}`).pipe(
+      tap(t => {
+        this.documentationLandingPageArea = null;
+      })
+    );
   }
 
   public createDocumentation (documentationAreaId : string, documentation : Documentation) : Observable<Documentation> {

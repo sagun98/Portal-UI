@@ -3,11 +3,15 @@
   
   <h1>Welcome to the Pearson Developer Portal</h1>
 
-  <a  *ngIf="! landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPage.slug + '/new'">
-    <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Landing Page
+  <a  *ngIf="documentationLandingPageArea.version == null && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPageArea.slug + '/new'" [queryParams]="{name : 'Documentation Landing Page'}">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Documentation Landing Page Area
+  </a>
+
+  <a  *ngIf="documentationLandingPageArea.version != null && landingPage.version == null && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPageArea.slug + '/new'">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Documentation Landing Page
   </a>
   
-  <a  *ngIf="landingPage.content && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPage.slug + '/' + landingPage.slug + '/edit'">
+  <a  *ngIf="landingPage.version != null && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPageArea.slug + '/' + landingPage.slug + '/edit'">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Landing Page
   </a>
 

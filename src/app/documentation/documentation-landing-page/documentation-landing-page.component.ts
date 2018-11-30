@@ -6,6 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
 import { UserPrivilegesComponentHelper } from '../../core/classes/user-privileges-helper';
 import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
+import { Documentation } from '../../core/interfaces/documentation.interface';
 
 @Component({
   selector: 'app-documentation-landing-page',
@@ -16,7 +17,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
 
   @Input() landingPage: BlogPost;
   
-  public documentationLandingPage: DocumentationArea;
+  public documentationLandingPageArea: DocumentationArea;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -26,11 +27,16 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
   ) { super(_userService); }
 
   ngOnInit() {
-    this.documentationLandingPage = this.documentationService.documentationLandingPageArea;
+    this.documentationLandingPageArea = this.documentationService.documentationLandingPageArea;
 
     this.activatedRoute.data.subscribe( data => {
       const documentationArea: DocumentationArea = data.LandingPage;
-      const landingPage = (documentationArea &&  documentationArea.documents.length) ? documentationArea.documents[0] : null;
+      const landingPage = (documentationArea && documentationArea.documents && documentationArea.documents.length) ? documentationArea.documents[0] : <Documentation> {
+        id : '',
+        slug : '',
+        content : '',
+        name : ''
+      };
 
       this.landingPage = landingPage || this.landingPage;
     });

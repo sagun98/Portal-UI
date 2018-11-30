@@ -16,6 +16,16 @@
     </label>
 
     <ul class="nav-list">
+      <li *ngIf="! documentationArea.documents" style="padding:0rem .25rem;">
+        <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false">
+          <div class="alert-item">
+            <span class="alert-text">
+              No documents have been created or published for this category
+            </span>
+          </div>
+        </clr-alert>
+      </li>
+
       <li *ngFor="let document of documentationArea.documents;">
         <a class="nav-link" routerlinkactive="active" [class.active]="(document.id == currentId || document.slug == currentSlug)" [routerLink]="'/documentation/area/' + documentationArea.slug + '/' + document.slug">
           {{document.name}}
