@@ -35,6 +35,9 @@ export class DocumentationSideNavigationComponent implements OnInit {
             this.currentSlug = p.slug;
           });
         }
+        if(this.activatedRoute.children.length && this.activatedRoute.children[0].snapshot.data.LandingPage){
+          this.currentSlug = null;
+        }
       }
     });
   }

@@ -91,7 +91,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       overview : [this.api.overview, []],
       gettingStarted : [this.api.gettingStarted, []],
       reference : [this.api.reference, []],
-      swagger : [this.api.swagger, [ Validators.required ]],
+      swagger : [this.api.swagger, [ /*Validators.required*/]],
       file : [],
       tags : [this.UIFormattedTags, []],
       slug : [this.api.slug, [Validators.required]],
@@ -128,11 +128,16 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public saveApi () {
     this.submitted = true;
 
+    const apiData = this.form.getRawValue();
+      
     if(this.form.invalid) {
       return;
     }
 
-    const apiData = this.form.getRawValue();
+    if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
+      this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
+      return;
+    }
 
     apiData.tags = this.getServerFormattedTags( apiData.tags );
 
