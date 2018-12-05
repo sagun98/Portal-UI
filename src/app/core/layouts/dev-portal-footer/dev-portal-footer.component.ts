@@ -15,12 +15,12 @@ export class DevPortalFooterComponent implements OnInit {
   @Input() year: number = new Date().getFullYear();
   @Input() columnLinks: ColumnLink[][] = [[],[]];
   @Input() editUrls: RegExp[] = [
-    new RegExp('/docs/api/new'),
-    new RegExp('/docs/api/.*/edit'),
-    new RegExp('/docs/product/new'),
+    new RegExp('/docs/api/new$'),
+    new RegExp('/docs/api/.*/edit$'),
+    new RegExp('/docs/product/new$'),
     new RegExp('/docs/product/.*/edit'),
-    new RegExp('/documentation/area/new'),
-    new RegExp('/documentation/area/.*/(new|edit)')
+    new RegExp('/documentation/area/new$'),
+    new RegExp('/documentation/area/.*/(new|edit)$')
   ];
 
   constructor(

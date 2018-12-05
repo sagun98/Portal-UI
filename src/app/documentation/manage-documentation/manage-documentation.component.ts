@@ -55,7 +55,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
     this.buildForm();
 
-    this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 400, save_onsavecallback: () => { } });
+    this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 'calc(100vh - 675px)', save_onsavecallback: () => { } });
   }
 
   private buildForm () : void {
@@ -68,6 +68,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       content : [this.documentation.content, [Validators.required]],
       published : [this.documentation.published || false],
       userPrivileges : [this.documentation.userPrivileges || null],
+      parentSlug : [this.documentation.parentSlug || null],
       tags : [this.documentation.tags || []]
     });
 

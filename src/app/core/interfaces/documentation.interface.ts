@@ -9,6 +9,7 @@ export interface Documentation extends PermissibleEntity, Publishable{
     version? : number,
     position? : number,
     content? : string,
+    parentSlug? : string,
     tags: string[]
 }
 
@@ -17,6 +18,7 @@ export const DefaultDocumentation = <Documentation> {
     name : '',
     description : '',
     slug : '',
+    parentSlug : '',
     version : null,
     position : null,
     content : '<p></p>',

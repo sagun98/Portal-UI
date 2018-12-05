@@ -49,7 +49,7 @@
         <label for="productName" class="required">Description</label>
 
         <label for="productDescription" [className]=" (form.get('description').invalid && (submitted || form.get('description').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
-            <textarea id="description" rows="6" formControlName="description" placeholder="Enter API Description"></textarea>
+            <textarea id="description" rows="6" formControlName="description" placeholder="Enter Documentation Area Description"></textarea>
             <span *ngIf="form.get('description').errors && form.get('description').errors.required && (submitted || form.get('description').dirty)" class="tooltip-content">This field cannot be empty!</span>
             <span *ngIf="form.get('description').errors && form.get('description').errors.minlength && (submitted || form.get('description').dirty)" class="tooltip-content">This field must contain at least 5 characters!</span>
         </label>
