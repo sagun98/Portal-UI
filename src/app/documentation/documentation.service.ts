@@ -7,7 +7,7 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { PageableResponse } from './interfaces/pagable-response.interface';
 import { BlogPost } from './interfaces/blog-post.interface';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Privilege } from '../core/interfaces/permissible.interface';
 import { UserPrivilegeClass } from '../core/classes/user-privilege';
 import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../core/constants/documentation.constants';
@@ -18,6 +18,14 @@ import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../core/constants/documentatio
 export class DocumentationService {
 
   public documentationLandingPageArea: DocumentationArea;
+
+  public $documentationLandingPageArea: BehaviorSubject<DocumentationArea> = new BehaviorSubject<DocumentationArea>({
+    description : '',
+    id : '',
+    documents : [],
+    name : '',
+    slug : ''
+  });
 
   constructor(
     private http : HttpClient
@@ -72,10 +80,23 @@ export class DocumentationService {
   public findAllDocumentationArea () : Observable<DocumentationArea[]> {
     return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`).pipe(
       tap( (documentationAreas: DocumentationArea[]) => {
+        let hasLandingPage: boolean = false;
         documentationAreas.forEach(documentationArea => {
-          if (documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
+          if (documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL) {
             this.documentationLandingPageArea = documentationArea;
+            this.$documentationLandingPageArea.next(documentationArea);
+            hasLandingPage = true;
+          }
         });
+
+        if (! hasLandingPage)
+          this.$documentationLandingPageArea.next( <DocumentationArea> {
+            description : '',
+            id : '',
+            documents : [],
+            name : '',
+            slug : ''
+          });
       })
     );
   }
