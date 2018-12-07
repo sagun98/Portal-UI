@@ -27,7 +27,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
   ) { super(_userService); }
 
   ngOnInit() {
-    this.documentationLandingPageArea = this.documentationService.documentationLandingPageArea;
+    this.documentationLandingPageArea = this.documentationService.documentationLandingPageArea || {};
 
     this.activatedRoute.data.subscribe( data => {
       const documentationArea: DocumentationArea = data.LandingPage;
