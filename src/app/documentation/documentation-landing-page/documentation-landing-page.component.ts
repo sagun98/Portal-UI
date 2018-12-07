@@ -38,6 +38,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
         name : ''
       };
 
+      this.documentationLandingPageArea = documentationArea;
       this.landingPage = landingPage || this.landingPage;
     });
   }
