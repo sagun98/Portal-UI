@@ -7,7 +7,7 @@
       <clr-tooltip>
           <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
           <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
-              <span>Manage API User Privileges</span>
+              <span>Manage API Collection User Privileges</span>
           </clr-tooltip-content>
       </clr-tooltip>
     </a>
@@ -19,6 +19,7 @@
     [opened]="managePrivilegesModalOpened"
     [validateNewUser]="validateUserRoles"
     (onSave)="saveApiFineGrainedPrivileges($event)"
+    [entity]="product"
     >
 
   </entity-permissions-modal>

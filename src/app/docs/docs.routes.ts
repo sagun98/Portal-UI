@@ -21,14 +21,14 @@ export const documentationRoutes: Routes = [
         },
         children: [
             {
-                path: 'product',
+                path: 'apicollections',
                 component: ProductPageComponent,
                 resolve: {
                     productData: ProductsResolveCached
                 }
             },
             {
-                path: 'product/new',
+                path: 'apicollections/new',
                 component: ManageProductComponent,
                 resolve: {
                     apiData: ApisResolve
@@ -40,14 +40,14 @@ export const documentationRoutes: Routes = [
                 canActivate : [RoleCheckGuard]
             },
             {
-                path: 'product/:productId',
+                path: 'apicollections/:productId',
                 component: ViewProductComponent,
                 resolve: {
                     product: ProductResolve
                 }
             },
             {
-                path: 'product/:productId/edit',
+                path: 'apicollections/:productId/edit',
                 component: ManageProductComponent,
                 resolve: {
                     apiData: ApisResolve,

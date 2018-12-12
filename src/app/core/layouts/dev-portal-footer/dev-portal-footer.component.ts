@@ -17,8 +17,8 @@ export class DevPortalFooterComponent implements OnInit {
   @Input() editUrls: RegExp[] = [
     new RegExp('/docs/api/new$'),
     new RegExp('/docs/api/.*/edit$'),
-    new RegExp('/docs/product/new$'),
-    new RegExp('/docs/product/.*/edit'),
+    new RegExp('/docs/apicollections/new$'),
+    new RegExp('/docs/apicollections/.*/edit'),
     new RegExp('/documentation/area/new$'),
     new RegExp('/documentation/area/.*/(new|edit)$')
   ];

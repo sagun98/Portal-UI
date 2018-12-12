@@ -105,7 +105,7 @@ export class HeaderComponent implements OnInit {
 
   public gotoResult (result : any) {
 
-    const url = (result.type === SearchTypes.PRODUCT) ? '/docs/product/' + result.slug :
+    const url = (result.type === SearchTypes.PRODUCT) ? '/docs/apicollections/' + result.slug :
                 (result.type === SearchTypes.DOCUMENTATION) ? '/documentation/area/' + result.slug :
                 (result.type === SearchTypes.FORUM) ? '/forum/topic/' + result.slug :
                 (result.type === SearchTypes.API) ? '/docs/api/' + result.slug : '';

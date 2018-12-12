@@ -109,7 +109,7 @@ export class SideNavigationComponent implements OnInit {
     $event.preventDefault();
     $event.stopPropagation();
 
-    this.router.navigate([`/docs/product/new`]);
+    this.router.navigate([`/docs/apicollections/new`]);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Directive, Input, OnInit, ElementRef } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouteConfigLoadEnd } from '@angular/router';
 
 @Directive({
   selector: '[activeLink]'
@@ -20,7 +20,8 @@ export class ActiveLinkDirective implements OnInit {
     this.pattern = new RegExp(this.activeLink);
 
     this.router.events.subscribe(routerEvent => {
-      if( this.router.navigated ) {
+      let isNavEnd: boolean = routerEvent instanceof NavigationEnd;
+      if( this.router.navigated && isNavEnd) {
        this.setActiveLinkClass(routerEvent);
       }
     });

@@ -66,7 +66,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   }
 
   public get title () {
-    const title = (this.product.id) ? `Edit ${this.product.name}` : "Create New Product";
+    const title = (this.product.id) ? `Edit ${this.product.name}` : "Create New API Collection";
     return title;
   }
 
@@ -110,7 +110,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
 
     this.productService[this.saveMethod](productData).subscribe((product: Product) => {
       this.cacheProduct();
-      this.router.navigate([`/docs/product/${product.slug}`]);
+      this.router.navigate([`/docs/apicollections/${product.slug}`]);
     });
   }
 
@@ -130,7 +130,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
 
     if( doDelete )
       this.productService.deleteProduct(this.product).subscribe(product => {
-        this.router.navigate([`/docs/product`]);
+        this.router.navigate([`/docs/apicollections`]);
       });
   }
   

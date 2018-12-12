@@ -3,7 +3,7 @@
   <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">
 
-    <label for="tab1">Products 
+    <label for="tab1">API Collections 
       <button class="btn btn-sm btn-link pull-right" (click)="addProduct($event)" [hasPermission]="[permissions.PRODUCT.CREATE]">
           Add <clr-icon shape="plus-circle" title="Add Product"></clr-icon>
         </button>
@@ -15,14 +15,14 @@
         <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false">
           <div class="alert-item">
             <span class="alert-text">
-              No Products have been created
+              No API Collections have been created
             </span>
           </div>
         </clr-alert>
       </li>
     
       <li *ngFor="let product of products">
-        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/product/' +  product.slug " [ngClass]="{'active' : (selectedSlug === product.slug || selectedProductId === product.id) }">
+        <a class="nav-link" routerlinkactive="active" [routerLink]="'/docs/apicollections/' +  product.slug " [ngClass]="{'active' : (selectedSlug === product.slug || selectedProductId === product.id) }">
           {{product.name}}
         </a>
       </li>

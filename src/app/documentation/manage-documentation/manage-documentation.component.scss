@@ -8,5 +8,9 @@
 
     .fixed-footer {
         width : calc(100% - 12rem) !important;
+
+        @media screen and (max-width : 768px) {
+            width : 100% !important;
+        }
     }
 }

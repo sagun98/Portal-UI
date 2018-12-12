@@ -1,11 +1,11 @@
 <div class="container">
 
   <a class="btn btn-sm edit-page-btn" routerLink="new" [hasPermission]="[permissions?.PRODUCT?.DELETE]">
-    <clr-icon shape="plus" class="is-solid"></clr-icon> Add Product
+    <clr-icon shape="plus" class="is-solid"></clr-icon> Add API Collection
   </a>
 
   <ng-container *ngIf="products.length">
-    <h2>Products</h2>
+    <h2>API Collections</h2>
     <hr/>
 
     <div class="row">
@@ -18,11 +18,11 @@
 
   <ng-container *ngIf="! products.length">
 
-      <no-apis  title="Products" 
-                no-content-text="No Products have been created yet.  Do you want to be the first?"
-                add-content-text='Click the "ADD PRODUCT" button to the top right, or the "Add" button next to the Products List on the left side navigation.'
-                no-role-text="Don't have the Product Owner Role (required to create a Product)?"
-                request-role-text="Click Here to find out how to request the Product Owner Role.">
+      <no-apis  title="API Collections" 
+                no-content-text="No API Collections have been created yet.  Do you want to be the first?"
+                add-content-text='Click the "ADD API Collection" button to the top right, or the "Add" button next to the API Collections List on the left side navigation.'
+                no-role-text="Don't have the API Collections Owner Role (required to create an API Collections)?"
+                request-role-text="Click Here to find out how to request the API Collections Role.">
           
       </no-apis>
     <!-- <div class="row">

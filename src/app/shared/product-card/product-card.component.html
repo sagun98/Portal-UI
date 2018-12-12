@@ -1,4 +1,4 @@
-<div class="card" [routerLink]=" '/docs/product/' + product.slug ">
+<div class="card" [routerLink]=" '/docs/apicollections/' + product.slug ">
   <div class="card-header">
     {{ product.name }}
   </div>
@@ -12,6 +12,6 @@
   </div>
   <div class="card-footer">
     <!-- <a class="btn btn-sm btn-link" style="float:left"><clr-icon shape="talk-bubbles"></clr-icon> Discuss</a> -->
-    <a class="btn btn-sm btn-link" xstyle="float:right" [routerLink]=" '/docs/product/' + product.id "><clr-icon shape="help-info"></clr-icon> View Product</a>
+    <a class="btn btn-sm btn-link" xstyle="float:right" [routerLink]=" '/docs/apicollections/' + product.id "><clr-icon shape="help-info"></clr-icon> View API Collection</a>
   </div>
 </div>
