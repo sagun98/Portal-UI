@@ -1,12 +1,11 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import {DocumentationComponent} from './documentation.component';
-import {Component, Directive} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DomSanitizer} from '@angular/platform-browser';
+
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClarityModule } from '@clr/angular';
+import { HttpClientModule } from '../../../node_modules/@angular/common/http';
 
 describe('DocumentationComponent', () => {
   let fixture;
@@ -18,7 +17,8 @@ describe('DocumentationComponent', () => {
         ClarityModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         DocumentationComponent

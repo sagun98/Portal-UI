@@ -1,6 +1,5 @@
 import { ManageDocumentationModule } from './manage-documentation/manage-documentation.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from '@clr/angular';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

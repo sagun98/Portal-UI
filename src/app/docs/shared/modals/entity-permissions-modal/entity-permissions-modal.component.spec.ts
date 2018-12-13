@@ -1,3 +1,4 @@
+import { mockApi } from './../../../product/view-product/view-product.component.spec';
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -27,6 +28,9 @@ describe('EntityPermissionsModalComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EntityPermissionsModalComponent);
     component = fixture.componentInstance;
+
+    component.entity = mockApi;
+
     fixture.detectChanges();
   });
 

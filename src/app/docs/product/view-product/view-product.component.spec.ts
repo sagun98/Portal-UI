@@ -1,3 +1,4 @@
+import { UserPrivilege } from './../../../core/interfaces/fr-user.interface';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
 import { ApigeeApiTool } from '../../../core/interfaces/apigee-api-tool.interface';
@@ -53,9 +54,10 @@ describe('ViewProductComponent', () => {
     slug : 'test',
     overview : null,
     apis : [],
-    "userPrivileges" : [
+    userPrivileges : [
       {
         "username" : "UTESTT4",
+        "email" : "UTESTT4@pearson.com",
         "permissions" : ["ADMIN"]
       }
     ]

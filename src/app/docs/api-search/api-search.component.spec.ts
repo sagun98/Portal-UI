@@ -1,3 +1,4 @@
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,8 +17,11 @@ export const SearchResultsTest = [
 ];
 
 export class SearchServiceMock extends SearchService{
-  constructor (private _http : HttpClient) {
-    super(_http);
+  constructor (
+    private _http : HttpClient, 
+    private _toastrService: ToastrService
+  ) {
+    super(_http, _toastrService);
   }
 
   public search (phrase : string) {
@@ -35,11 +39,12 @@ describe('ApiSearchComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        ToastrModule,
         CoreSharedModule,
         RouterTestingModule
       ],
       providers : [
-        // HttpClient,
+        ToastrService,
         {provide : SearchService, useClass : SearchServiceMock, deps : [HttpClient]}
       ],
       declarations: [ ApiSearchComponent ],

@@ -12,10 +12,8 @@ import { APP_BASE_HREF } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService, FailedNavigation, FAILED_NAVIGATION_TYPE } from './core/services/user/user.service';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
-import { HTTP_ERROR_TYPES } from './core/enums/http-error-types.enum';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MockUserService } from './core/layouts/side-navigation/side-navigation.component.spec';
-import { appRoutes } from './app.routes';
 import { Router } from '@angular/router';
 import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
 
@@ -71,11 +69,13 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should run #ngOnInit()', () => {
+  it('should run #ngOnInit()', fakeAsync(() => {
     component.ngOnInit();
+
+    tick();
     
     expect(component).toBeTruthy();
-  });
+  }));
 
   it('should run #ngOnInit()$loggedIn', fakeAsync(() => {
     component.ngOnInit();
@@ -118,25 +118,4 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('should run #ngOnInit()$onError', fakeAsync(() => {
-    component.ngOnInit();
-
-    tick();
-
-    component['httpErrorsServices'].$onError.next([
-      {
-        "id" : 1234,
-        "message" : "This failed",
-        "type" : HTTP_ERROR_TYPES.ERROR,
-        "response" : <HttpErrorResponse>{
-          "status" : 401,
-          "statusText" : "Unauthorized"
-        }
-      }
-    ]);
-
-    tick();
-    
-    expect(component).toBeTruthy();
-  }));
 });

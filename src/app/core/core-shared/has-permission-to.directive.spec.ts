@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {HasPermissionToDirective} from './has-permission-to.directive';
 import {Component, Directive, ElementRef, OnInit} from '@angular/core';
@@ -66,16 +66,22 @@ describe('HasPermissionToDirective', () => {
     
   it('should run #ngOnChanges()', async(() => {
     fixture.detectChanges();
-        
-    console.log(directive['element'].nativeElement.style.display);
-        
-    expect(directive['element'].nativeElement.style.display).toEqual("");
 
-    component.entity.userPrivileges[0].permissions=[""];
+    expect(directive['element'].nativeElement.style.display).toEqual("initial");
+
+    component.entity = {
+      "userPrivileges" : [
+        {
+          "username" : "UTESTT4",
+          "email" : "UTESTT4@pearsoncom",
+          "permissions" : ["NONE"]
+        }
+      ]
+    };
 
     fixture.detectChanges();
 
-    expect(directive['element'].nativeElement.style.display).toEqual("");
+    expect(directive['element'].nativeElement.style.display).toEqual("initial");
   }));
       
 });

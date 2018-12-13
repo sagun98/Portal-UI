@@ -32,44 +32,4 @@ export class ProductPageComponent implements OnInit {
       this.products = data.productData;
     });
   }
-
-  public createUser () {
-    // const newNodeBBUser: NodeBBUser = {
-    //   fullname : 'Derek Carter',
-    //   username : 'UCARTD4',
-    //   email : 'derek.carter@pearson.com',
-    //   title : 'UCARTD4'
-    // };
-
-    // this.nodeBBUserService.createUser(newNodeBBUser).subscribe( (response:NodeBBUserCreateResponse) => {
-    //   if(response.code === 'ok'){
-        // const uid: number = 3;
-
-        // const newCategory: NodeBBCategory = {
-        //   description : 'Entitlements API Forum',
-        //   name : 'Entitlements API Forum',
-        //   icon : "fa-comments-o",
-        //   privileges : [
-        //     <NodeBBPrivilege> {
-        //       uid : uid,
-        //       isAdminOrMod : true
-        //     }
-        //   ],
-        //   title : 'Entitlements API Forum'
-        // }
-
-        // this.nodeBBCategoryService.createCategory(newCategory, 1).subscribe(response => {
-        //   let privilegeRequest: NodeBBPrivilegeRequest = {
-        //     _uid : 1,
-        //     privileges : ['moderate'],
-        //     groups : [uid]
-        //   };
-
-        //   this.nodeBBCategoryService.setModerator(response.payload.cid, privilegeRequest).subscribe(r => {
-        //     console.log("r: ", r);
-        //   });
-        // });
-    //}
-    //})
-  }
 }

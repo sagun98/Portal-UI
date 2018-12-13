@@ -7,12 +7,8 @@ import { DocumentationLandingPageResolve } from './resolves/landing-page.resolve
 import { NgModule } from '@angular/core';
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { DocumentResolve } from './resolves/document.resolve';
-import { ManageArticleComponent } from './manage-article/manage-article.component';
 
 export const DocumentationRoutes: Routes = [
-    {
-        path : 'new', component : ManageArticleComponent, data : {saveMethod : 'saveBlogPost'}
-    },
     {
         path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : { DocumentationAreas : DocumentationAreasResolve, Blogs : DocumentationResolve },
         
