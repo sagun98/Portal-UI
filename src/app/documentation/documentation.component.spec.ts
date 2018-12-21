@@ -5,7 +5,7 @@ import {DocumentationComponent} from './documentation.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { ClarityModule } from '@clr/angular';
-import { HttpClientModule } from '../../../node_modules/@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('DocumentationComponent', () => {
   let fixture;

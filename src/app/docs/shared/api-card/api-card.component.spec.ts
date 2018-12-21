@@ -1,4 +1,4 @@
-import { mockApi } from './../../product/view-product/view-product.component.spec';
+import { mockApi } from '../../product/view-product/view-product.component.spec';
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 

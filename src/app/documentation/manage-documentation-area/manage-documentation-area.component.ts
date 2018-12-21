@@ -1,4 +1,4 @@
-import { DOCUMENTATION_LANDING_PAGE_LABEL } from './../../core/constants/documentation.constants';
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../../core/constants/documentation.constants';
 import { environment } from '../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentationArea, DefaultDocumentationArea } from '../../core/interfaces/documentation-area.interface';

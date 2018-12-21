@@ -1,5 +1,5 @@
-import { DocumentationArea, DefaultDocumentationArea } from './../../core/interfaces/documentation-area.interface';
-import { CoreSharedModule } from './../../core/core-shared/core-shared.module';
+import { DocumentationArea, DefaultDocumentationArea } from '../../core/interfaces/documentation-area.interface';
+import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -8,7 +8,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ManageDocumentationComponent } from './manage-documentation.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ToastrModule } from '../../../../node_modules/ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { Documentation, DefaultDocumentation } from '../../core/interfaces/documentation.interface';
 
 describe('ManageDocumentationComponent', () => {

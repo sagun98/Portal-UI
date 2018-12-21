@@ -7,6 +7,7 @@ const isProd: boolean =  (env.ANGULAR_PRODUCTION_BUILD === 'true') ;
 const prodPostfix: string = (isProd) ? '.prod' : '';
 const environmentFile: string = `src/environments/environment${prodPostfix}.ts`;
 const envRestBase: string = env.RESTBASE || 'http://localhost:8080';
+const editorUrl: string = env.EDITOR_URL || 'http://localhost/editor/';
 const forumBase: string = env.FORUMBASE;
 const nodebbMasterToken: string = env.FORUM_MASTER_TOKEN;
 
@@ -14,7 +15,8 @@ const envFileContents = `
 export const environment = {
     production: ${isProd},
     restBase : '${envRestBase}',
-    forumBase : '${forumBase}'
+    forumBase : '${forumBase}',
+    editorUrl : '${editorUrl}'
 };
 `;
 

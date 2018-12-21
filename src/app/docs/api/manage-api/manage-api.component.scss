@@ -1,10 +1,32 @@
 :host {
-    input {
-        min-width: 11rem;
-    }
+    .container {
+        position: relative;
 
-    .help {
-        margin-top: -5px;
-        margin-right: 25px;
+        input {
+            min-width: 11rem;
+        }
+
+        .help {
+            margin-top: -5px;
+            margin-right: 25px;
+        }
+
+        .fixed-footer.expanded {
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 163px);
+            margin-top: -14px;
+            z-index: 1000;
+        }
+
+        .close-editor {
+            cursor : pointer;
+            position: absolute;
+            top: 20px;
+            right: 17px;
+        }
     }
 }

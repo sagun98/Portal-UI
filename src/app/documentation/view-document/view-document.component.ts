@@ -1,4 +1,4 @@
-import { Documentation } from './../../core/interfaces/documentation.interface';
+import { Documentation } from '../../core/interfaces/documentation.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';

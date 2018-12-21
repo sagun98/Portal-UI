@@ -1,6 +1,8 @@
 <div class="container">
 
-  <h3>
+  <clr-icon shape="times" size="30" class="close-editor" *ngIf="!sideNavOpen" (click)="openAPIEditor()"></clr-icon>
+
+  <h3 *ngIf="sideNavOpen">
     <span>{{ title }}</span>
     <!-- Function defined in parent class -->
     <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
@@ -22,7 +24,7 @@
     </a>
   </h3>
 
-  <!-- <iframe src="http://localhost:3200" id="swagger-editor" style="width:100%;height:calc(100vh - 220px);"></iframe> -->
+  <iframe [src]="editorUrl" id="swagger-editor" [hidden]="sideNavOpen"></iframe>
 
   <entity-permissions-modal 
     *ngIf="managePrivilegesModalOpened"
@@ -80,8 +82,12 @@
         </label>
       </div>
 
-      <div class="form-group">
-        <label class="required">Swagger Document OR URL</label>
+      <div class="form-group bottom-spacer-20">       
+         <label class="required">Swagger Option</label>
+        <div class="radio-inline" *ngIf="api.version != null">
+          <input type="radio" name="swaggerOptions" id="edit-existing-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.DOCUMENT" />
+          <label for="edit-existing-file">Edit Existing Swagger</label>
+        </div>
         <div class="radio-inline">
             <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
             <label for="upload-swagger-file">Upload Swagger File</label>
@@ -90,7 +96,12 @@
             <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
             <label for="reference-swagger-url">Reference Swagger via URL</label>
         </div>
+        <div class="radio-inline" *ngIf="api.version === null">
+          <input type="radio" name="swaggerOptions" id="new-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.DOCUMENT" />
+          <label for="new-swagger-file">Start from scratch</label>
+        </div>
       </div>
+
 
       <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
         <label for="productName" class="required" >Swagger Document</label>
@@ -100,6 +111,13 @@
       <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">
         <label for="productName" class="required" >Swagger URL</label>
         <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
+      </div>
+
+      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.DOCUMENT">
+        <label for="productName" class="required" >Open Swagger Editor</label>
+        <button class="btn btn-primary" type="button" (click)="openAPIEditor()">
+          <clr-icon shape="pencil"></clr-icon> Open Swagger Editor
+        </button>
       </div>
 
       <div class="form-group" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
@@ -181,7 +199,7 @@
 
     </section>
 
-    <div class="fixed-footer">
+    <div class="fixed-footer" [class.expanded]="! sideNavOpen">
       <div class="row">
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="api">

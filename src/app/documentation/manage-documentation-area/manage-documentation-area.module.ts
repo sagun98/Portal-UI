@@ -1,4 +1,4 @@
-import { DocumentationNewResolve } from './../resolves/documentation.new.resolve';
+import { DocumentationNewResolve } from '../resolves/documentation.new.resolve';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

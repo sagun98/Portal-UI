@@ -6,9 +6,7 @@
 
 </main>
 
-<nav class="sidenav" [clr-nav-level]="1">
-
+<nav class="sidenav" [clr-nav-level]="1" [@closeMenu]="menuOpened">
   <side-navigation [apis]="apis" [products]="products" [selectedSlug]="selectedSlug" [selectedApiId]="selectedApiId" [selectedProductId]="selectedProductId">
   </side-navigation>
-
 </nav>

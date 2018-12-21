@@ -1,3 +1,4 @@
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
@@ -15,11 +16,14 @@ import { ManageApiService } from './manage-api.service';
 import { Swagger2AlertModalComponent } from './swagger2-alert-modal/swagger2-alert-modal.component';
 import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../../core/interfaces/browser-message.interface';
+import { SideNavigationService } from '../../../core/layouts/side-navigation/side-navigation.service';
+import { environment } from '../../../../environments/environment';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
   FILE = 'file',
-  URL = 'url'
+  URL = 'url',
+  DOCUMENT = 'document'
 }
 
 @Component({
@@ -40,7 +44,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public saveMethod: string = 'addApi';
   public swaggerUploadOptions = SWAGGER_UPLOAD_OPTION;
   public swaggerOption: SWAGGER_UPLOAD_OPTION = SWAGGER_UPLOAD_OPTION.FILE;
+  public editorUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.editorUrl );
   private iframeLoaded:boolean = false;
+  public sideNavOpen: boolean = true;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -50,7 +56,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     private userService : UserService,
     private manageApiService: ManageApiService,
     private toastrService: ToastrService,
-    protected permissionService: PermissionsService
+    protected permissionService: PermissionsService,
+    protected sideNavigationService: SideNavigationService,
+    private domSanitizer: DomSanitizer
   ) {
     super();
   }
@@ -61,23 +69,25 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.activatedRoute.data.subscribe(data => {
       this.api = <API> data.api || this.api;
       this.saveMethod = data.saveMethod || this.saveMethod;
+
+      if(this.api.version != null)
+        this.swaggerOption = SWAGGER_UPLOAD_OPTION.DOCUMENT;
     });
 
     this.tinymceConfig = Object.assign({}, TINYCMCE_CONFIG, { height: 200, save_onsavecallback: () => { } });
 
     this.buildForm();
 
-    // window.addEventListener('message', ( message: BrowserMessage<any> )  => {
-    //   const iframe:any = document.getElementById("swagger-editor");
+    window.addEventListener('message', ( message: BrowserMessage<any> )  => {
+      const iframe:any = document.getElementById("swagger-editor");
 
-    //   this.acknowledgeIframeLoaded(message, iframe);
+      this.acknowledgeIframeLoaded(message, iframe);
 
-    //   this.updateSwaggerFromEditor(message);
-    // });    
+      this.updateSwaggerFromEditor(message);
+    });    
   }
 
   private buildForm() {
@@ -123,6 +133,24 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     return tags.map(tag => {
       return tag.label;
     })
+  }
+
+  public openAPIEditor () : void {
+    this.sideNavOpen = ! this.sideNavOpen;
+
+    if(! this.sideNavOpen){
+      if ( this.form.get('file').value ) {
+        const reader = new FileReader();
+        reader.readAsText(this.form.get('file').value, "UTF-8");
+        reader.onload =  (evt:any) => {
+          this.postSwaggerToEditor( document.getElementById("swagger-editor"), evt.target.result );
+        }
+      } else {
+        this.postSwaggerToEditor( document.getElementById("swagger-editor") );
+      }
+    }
+
+    this.sideNavigationService.setSideNavOpenState(this.sideNavOpen);
   }
 
   public saveApi () {
@@ -227,13 +255,20 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     if ((message.data && message.data.payload && message.data.payload.loaded) && ! this.iframeLoaded){
       this.iframeLoaded = true;
 
-      iframe.contentWindow.postMessage({
-        type : 'loaded',
-        payload : {
-          loaded : true,
-          swagger : this.form.get('swagger').value
-        }
-      }, '*');
+      this.postSwaggerToEditor(iframe);
     }
   }
+
+  private postSwaggerToEditor (iframe: any, content?: string) {
+
+    const swagger = content || this.form.get('swagger').value;
+
+    iframe.contentWindow.postMessage({
+          type : 'loaded',
+          payload : {
+            loaded : true,
+            swagger : swagger
+          }
+        }, '*');
+    }
 }

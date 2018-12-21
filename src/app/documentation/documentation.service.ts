@@ -1,4 +1,4 @@
-import { Documentation } from './../core/interfaces/documentation.interface';
+import { Documentation } from '../core/interfaces/documentation.interface';
 import { DocumentationArea } from '../core/interfaces/documentation-area.interface';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams } from '@angular/common/http';

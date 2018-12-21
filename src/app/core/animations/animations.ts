@@ -34,3 +34,10 @@ export const FadeInOutRuterAnimation = trigger('fadeInOutRouter', [
     // transition('1 => 0', animate('0ms ease-in-out'))
 ]);
 
+export const MenuSlideClose = trigger('closeMenu', [
+    state('1', style({ 'min-width' : 'inherit', 'width' : 'inherit'})),
+    state('0', style({ 'min-width' : '0rem', 'width' : '0rem'})),
+    transition(':enter', animate('1000ms ease-in-out')),
+    transition('* => *', animate('1000ms ease-in-out'))
+]);
+

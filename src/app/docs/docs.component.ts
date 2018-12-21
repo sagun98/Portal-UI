@@ -1,14 +1,15 @@
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
-// import { FadeInOutRuterAnimation } from '../core/animations/animations';
+import { SideNavigationService } from '../core/layouts/side-navigation/side-navigation.service';
+import { MenuSlideClose } from '../core/animations/animations';
 
 @Component({
   selector: 'app-docs',
   templateUrl: './docs.component.html',
   styleUrls: ['./docs.component.scss'],
-  // animations: [FadeInOutRuterAnimation]
+  animations: [MenuSlideClose]
 })
 export class DocsComponent implements OnInit {
 
@@ -18,14 +19,21 @@ export class DocsComponent implements OnInit {
   public selectedProductId: string = '';
   public selectedSlug: string = '';
   public routeChange: boolean = true;
+  @Input() menuOpened: boolean = true;
+  
   @ViewChild('main') mainElementRef: ElementRef;
 
   constructor(
     private activatedRoute : ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private sideNavigationService: SideNavigationService
   ){ }
 
   ngOnInit(){
+    this.sideNavigationService.$sideNavOpened.subscribe(opened => {
+      this.menuOpened = opened;
+    });
+
     this.apis = this.activatedRoute.snapshot.data.apisData;
     this.products = this.activatedRoute.snapshot.data.productData;
     
@@ -36,6 +44,7 @@ export class DocsComponent implements OnInit {
       this.activatedRoute.children[0].params.subscribe( params => {
         this.setParams(params);
         this.scrollTop();
+        this.menuOpened = true;
       });
 
       this.setParams(this.activatedRoute.snapshot.children[0].params);
@@ -48,6 +57,7 @@ export class DocsComponent implements OnInit {
         if( this.activatedRoute.snapshot.children.length ){
           this.setParams(this.activatedRoute.snapshot.children[0].params);
           this.scrollTop();
+          this.menuOpened = true;
         }
       }
     });

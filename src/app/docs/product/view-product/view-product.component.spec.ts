@@ -1,4 +1,4 @@
-import { UserPrivilege } from './../../../core/interfaces/fr-user.interface';
+import { UserPrivilege } from '../../../core/interfaces/fr-user.interface';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
 import { ApigeeApiTool } from '../../../core/interfaces/apigee-api-tool.interface';

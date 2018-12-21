@@ -8,6 +8,7 @@ import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interf
 import { CRUD } from '../../enums/crud.enum';
 import { Product } from '../../../docs/product/interfaces/product.interface';
 import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
+import { SideNavigationService } from './side-navigation.service';
 
 @Component({
   selector: 'side-navigation',
@@ -23,7 +24,6 @@ export class SideNavigationComponent implements OnInit {
   @Input() selectedApiId: string = '';
   @Input() selectedProductId: string = '';
   @Input() selectedSlug: string = '';
-
   @Output() onItemSelected: EventEmitter<any>  = new EventEmitter<any>();
 
   constructor(
@@ -37,6 +37,7 @@ export class SideNavigationComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.apiService.$onApiListChanged.subscribe( (apiListChange : APIListChange) => {
       // Add to the list
       if(apiListChange.action === CRUD.CREATE){

@@ -1,4 +1,4 @@
-import { DocumentationService } from './../documentation.service';
+import { DocumentationService } from '../documentation.service';
 import { UserService } from '../../core/services/user/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';

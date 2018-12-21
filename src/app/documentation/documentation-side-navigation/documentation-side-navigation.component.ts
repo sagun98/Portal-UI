@@ -1,5 +1,5 @@
-import { DOCUMENTATION_LANDING_PAGE_LABEL } from './../../core/constants/documentation.constants';
-import { UserService } from './../../core/services/user/user.service';
+import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../../core/constants/documentation.constants';
+import { UserService } from '../../core/services/user/user.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
