@@ -5,11 +5,11 @@
       <h1>Learn How To Build With Pearson Products</h1>
       <h2 class="bottom-spacer-20">Explore, Develop, Launch</h2>
 
-      <a  routerLink="/documentation/getting_started_to_consume_apis" class="btn btn-primary pull-left">
+      <a id="main-getting-started" [routerLink]="documentationLinks.GETTING_STARTED" class="btn btn-primary pull-left">
         <clr-icon shape="power" size="20"></clr-icon> Getting Started
       </a>
 
-      <a  routerLink="/documentation/main" class="btn btn-primary pull-right">
+      <a id="main-documentation" [routerLink]="documentationLinks.DOCUMENTATION" class="btn btn-primary pull-right">
         <clr-icon shape="file-group" size="20"></clr-icon> Documentation
       </a>
     </div>
@@ -81,7 +81,7 @@
           <clr-icon shape="file-group" size="30"></clr-icon>
           <span class="ml10">Documentation</span>
 
-          <a title="Get started with Documentation" routerLink="/documentation/main" class="goto">
+          <a id="documentation" title="Get started with Documentation" [routerLink]="documentationLinks.DOCUMENTATION" class="goto">
             <clr-icon class="is-highlight" shape="circle-arrow" size="30" dir="right"></clr-icon>
           </a>
         </h3>

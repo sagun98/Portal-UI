@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DOCUMENTATION_LINKS } from '../core/constants/documentation-links.constant';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   public supportForums : any[] = [];
   public supportCid: number;
   public announcementsCid: number;
+  public documentationLinks = DOCUMENTATION_LINKS;
 
   constructor(
     private activatedRoute: ActivatedRoute

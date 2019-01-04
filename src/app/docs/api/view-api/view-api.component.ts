@@ -128,17 +128,17 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   }
 
   // shorthand to get overview
-  public get overviewSafe (){
+  public get overviewSafe () : any{
     return this.domSanitizer.bypassSecurityTrustHtml( this.api.overview );
   }
 
   // shorthand to get gettingStarted safe
-  public get gettingStartedSafe (){
+  public get gettingStartedSafe (): any{
     return this.domSanitizer.bypassSecurityTrustHtml( this.api.gettingStarted );
   }
 
   // shorthand to get reference safe
-  public get referenceSafe (){
+  public get referenceSafe () : any{
     return this.domSanitizer.bypassSecurityTrustHtml( this.api.reference );
   }
 

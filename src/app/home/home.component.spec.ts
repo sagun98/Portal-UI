@@ -5,6 +5,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DOCUMENTATION_LINKS } from '../core/constants/documentation-links.constant';
 
 describe('HomeComponents', () => {
   let component: HomeComponent;
@@ -54,5 +55,19 @@ describe('HomeComponents', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have the correct link', () => {
+    let mainDocumentationElement = <HTMLElement> document.getElementById("main-documentation");
+    let mainGettingStartedElement = <HTMLElement> document.getElementById("main-getting-started");
+    let documentationElement = <HTMLElement> document.getElementById("documentation");
+
+    let mainDocumentationLink = mainDocumentationElement.getAttribute("href");
+    let mainGettingStartedLink = mainGettingStartedElement.getAttribute("href");
+    let documentationLink = documentationElement.getAttribute("href");
+
+    expect(mainDocumentationLink).toEqual(DOCUMENTATION_LINKS.DOCUMENTATION);
+    expect(mainGettingStartedLink).toEqual(DOCUMENTATION_LINKS.GETTING_STARTED);
+    expect(documentationLink).toEqual(DOCUMENTATION_LINKS.DOCUMENTATION);
   });
 });

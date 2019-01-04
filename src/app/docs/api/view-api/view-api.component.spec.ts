@@ -263,7 +263,7 @@ describe('ViewApiComponent', () => {
                 swagger : swaggerJson,
                 overview : "<div><a id=\"external-link\" href=\"https://nfl.com\">This is an external link</a></div>",
                 gettingStarted : "<div><a id=\"getting-started\" href=\"#anchor\">Getting Started</a></div>",
-                reference : {items : []},
+                reference : "<div>This is some reference content</div>",
               }
             }),
             snapshot : {}
@@ -287,6 +287,7 @@ describe('ViewApiComponent', () => {
   });
 
   it('should click external link', () => {
+    component.overviewSafe;
     let href: HTMLElement = document.querySelector("#overview a");
     href.click();
   });
@@ -294,5 +295,26 @@ describe('ViewApiComponent', () => {
   it('should go to an anchor', () => {
     let href: HTMLElement = document.querySelector("#getting-started a");
     href.click();
+  });
+
+  it('should render content when present', () => {
+    let overviewContent: HTMLElement = document.getElementById("overview");
+    let gettingStartedContent: HTMLElement = document.getElementById("getting-started");
+
+    expect(overviewContent).not.toBeNull();
+    expect(gettingStartedContent).not.toBeNull();
+  });
+
+  it('should not render content when not present', () => {
+    component.api.overview = '';
+    component.api.gettingStarted = '';
+
+    fixture.detectChanges();
+
+    let overviewContent: HTMLElement = document.getElementById("overview");
+    let gettingStartedContent: HTMLElement = document.getElementById("getting-started");
+
+    expect(overviewContent).toBeNull();
+    expect(gettingStartedContent).toBeNull();
   });
 });

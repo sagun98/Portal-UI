@@ -10,7 +10,7 @@ import { NodeBBCategory } from '../domain/nodebb/category/nodebb-category.interf
 export enum FORUM_CATEGORIES {
     BLOGS = 'Announcements',
     GENERAL_SUPPORT = 'General API Questions and Support Forum',
-    FEEDBACK = 'Feedback',
+    FEEDBACK = 'Developer Portal Feedback and Support',
     REQUEST_USER_ROLES = 'How To Request a User Role'
 }
 

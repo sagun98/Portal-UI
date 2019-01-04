@@ -33,17 +33,21 @@
 
   <p class="bottom-spacer-20">{{ api.description }}</p>
 
-  <h2>Overview</h2>
+  <ng-container *ngIf="overviewSafe.changingThisBreaksApplicationSecurity && overviewSafe.changingThisBreaksApplicationSecurity.length">
+    <h2>Overview</h2>
 
-  <hr/>
+    <hr/>
 
-  <div id="overview" class="api-documentation-content" dynamicContentRouting [innerHtml]="overviewSafe"></div>
+    <div id="overview" class="api-documentation-content" dynamicContentRouting [innerHtml]="overviewSafe"></div>
+  </ng-container>
 
-  <h2>Getting Started</h2>
+  <ng-container *ngIf="gettingStartedSafe.changingThisBreaksApplicationSecurity && gettingStartedSafe.changingThisBreaksApplicationSecurity.length">
+    <h2>Getting Started</h2>
 
-  <hr/>
+    <hr/>
 
-  <div id="getting-started" class="api-documentation-content" dynamicContentRouting [innerHtml]="gettingStartedSafe"></div>
+    <div id="getting-started" class="api-documentation-content" dynamicContentRouting [innerHtml]="gettingStartedSafe"></div>
+  </ng-container>
 
   <h2 id="api-documentation">
     API Documentation

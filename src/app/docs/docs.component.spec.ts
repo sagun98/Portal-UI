@@ -14,6 +14,7 @@ import { Product } from './product/interfaces/product.interface';
 import { API } from './api/interfaces/api.interface';
 import { UserService } from '../core/services/user/user.service';
 import { Privilege } from '../core/interfaces/permissible.interface';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;
@@ -49,6 +50,7 @@ describe('DocsComponent', () => {
         FormsModule,
         HttpClientModule,
         RouterTestingModule,
+        NoopAnimationsModule,
         CoreSharedModule
       ],
       declarations: [ 

@@ -25,10 +25,10 @@ const generalSupportCategoryMock: NodeBBCategory = {
 
 const feedbackCategoryMock: NodeBBCategory = {
   "cid" : 3,
-  "description" : "Feedback",
+  "description" : "Developer Portal Feedback and Support",
   "name" : FORUM_CATEGORIES.FEEDBACK,
   "slug" : "feedback",
-  "title" : "Feedback"
+  "title" : "Developer Portal Feedback and Support"
 };
 
 const categories: NodeBBCategoriesResponse = {
