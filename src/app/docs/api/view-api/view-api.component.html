@@ -33,7 +33,7 @@
 
   <p class="bottom-spacer-20">{{ api.description }}</p>
 
-  <ng-container *ngIf="overviewSafe.changingThisBreaksApplicationSecurity && overviewSafe.changingThisBreaksApplicationSecurity.length">
+  <ng-container *ngIf="(overviewSafe.changingThisBreaksApplicationSecurity && overviewSafe.changingThisBreaksApplicationSecurity.length > 30)">
     <h2>Overview</h2>
 
     <hr/>
@@ -41,7 +41,7 @@
     <div id="overview" class="api-documentation-content" dynamicContentRouting [innerHtml]="overviewSafe"></div>
   </ng-container>
 
-  <ng-container *ngIf="gettingStartedSafe.changingThisBreaksApplicationSecurity && gettingStartedSafe.changingThisBreaksApplicationSecurity.length">
+  <ng-container *ngIf="gettingStartedSafe.changingThisBreaksApplicationSecurity && gettingStartedSafe.changingThisBreaksApplicationSecurity.length > 30">
     <h2>Getting Started</h2>
 
     <hr/>

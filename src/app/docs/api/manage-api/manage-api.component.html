@@ -26,6 +26,8 @@
 
   <iframe [src]="editorUrl" id="swagger-editor" [hidden]="sideNavOpen"></iframe>
 
+  |{{ form.get('swaggerUrl').errors | json }}|
+
   <entity-permissions-modal 
     *ngIf="managePrivilegesModalOpened"
     [userPrivileges]="userPrivileges" 
@@ -85,35 +87,39 @@
       <div class="form-group bottom-spacer-20">       
          <label class="required">Swagger Option</label>
         <div class="radio-inline" *ngIf="api.version != null">
-          <input type="radio" name="swaggerOptions" id="edit-existing-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.DOCUMENT" />
+          <input type="radio" name="swaggerOption" id="edit-existing-file" formControlName="swaggerOption" [value]="swaggerUploadOptions.DOCUMENT" />
           <label for="edit-existing-file">Edit Existing Swagger</label>
         </div>
         <div class="radio-inline">
-            <input type="radio" name="swaggerOptions" id="upload-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
+            <input type="radio" name="swaggerOption" id="upload-swagger-file" formControlName="swaggerOption" [value]="swaggerUploadOptions.FILE" [disabled]="form.disabled"/>
             <label for="upload-swagger-file">Upload Swagger File</label>
         </div>
         <div class="radio-inline">
-            <input type="radio" name="swaggerOptions" id="reference-swagger-url" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
+            <input type="radio" name="swaggerOption" id="reference-swagger-url" formControlName="swaggerOption" [value]="swaggerUploadOptions.URL" [disabled]="form.disabled"/>
             <label for="reference-swagger-url">Reference Swagger via URL</label>
         </div>
         <div class="radio-inline" *ngIf="api.version === null">
-          <input type="radio" name="swaggerOptions" id="new-swagger-file" [(ngModel)]="swaggerOption" [ngModelOptions]="{standalone: true}" [value]="swaggerUploadOptions.DOCUMENT" />
+          <input type="radio" name="swaggerOption" id="new-swagger-file" formControlName="swaggerOption" [value]="swaggerUploadOptions.DOCUMENT" />
           <label for="new-swagger-file">Start from scratch</label>
         </div>
       </div>
 
 
-      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.FILE">
+      <div class="form-group" *ngIf="form.get('swaggerOption').value === swaggerUploadOptions.FILE">
         <label for="productName" class="required" >Swagger Document</label>
         <input type="file" class="bottom-spacer-20" (change)="handleUpload($event)" [disabled]="form.disabled"/>
       </div>
 
-      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.URL">
-        <label for="productName" class="required" >Swagger URL</label>
-        <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
+      <div class="form-group" *ngIf="form.get('swaggerOption').value === swaggerUploadOptions.URL">
+        <label for="swaggerUrl" class="required" >Swagger URL</label>
+
+        <label [className]=" ( form.get('swaggerUrl').invalid && ( submitted || form.get('swaggerUrl').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
+          <input type="text" class="bottom-spacer-20" placeholder="Enter URL to Swagger JSON or YAML file" formControlName="swaggerUrl"/>
+          <span *ngIf="form.get('swaggerUrl').errors && form.get('swaggerUrl').errors.required && (submitted || form.get('swaggerUrl').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
       </div>
 
-      <div class="form-group" *ngIf="swaggerOption === swaggerUploadOptions.DOCUMENT">
+      <div class="form-group" *ngIf="form.get('swaggerOption').value === swaggerUploadOptions.DOCUMENT">
         <label for="productName">Open Swagger Editor</label>
         <button class="btn btn-primary" type="button" (click)="openAPIEditor()">
           <clr-icon shape="pencil"></clr-icon> Open Swagger Editor

@@ -107,7 +107,8 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       slug : [this.api.slug, [Validators.required]],
       swaggerUrl : [this.api.swaggerUrl],
       userPrivileges : [this.api.userPrivileges],
-      published : [this.api.published || false, [Validators.required]]
+      published : [this.api.published || false, [Validators.required]],
+      swaggerOption : [this.swaggerOption]
     });
 
     this.form.get('slug').disable();
@@ -127,6 +128,18 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
         }
       });
     }
+
+    this.form.get('swaggerOption').valueChanges.subscribe( (value:SWAGGER_UPLOAD_OPTION) => {
+      this.form.get('swaggerUrl').clearValidators();
+
+      if(value == SWAGGER_UPLOAD_OPTION.URL)
+        this.form.get('swaggerUrl').setValidators(Validators.required);
+
+      if(value === SWAGGER_UPLOAD_OPTION.DOCUMENT)
+        this.openAPIEditor();
+
+      this.form.get('swaggerUrl').updateValueAndValidity({emitEvent : false});
+    });
   }
 
   private getServerFormattedTags (tags: any[]) {
@@ -159,6 +172,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     const apiData = this.form.getRawValue();
       
     if(this.form.invalid) {
+      if(! this.sideNavOpen)
+        this.openAPIEditor();
+
       return;
     }
 
@@ -172,6 +188,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     ['overview', 'gettingStarted', 'reference'].forEach(id => {
       apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
     });
+
+    if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
+      delete apiData.file
 
     this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
 
@@ -229,6 +248,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     this.apiService.updateFineGrainedPrivileges(this.api.id, privileges).subscribe(api => {
       this.toastrService.success('API User Privileges successfully updated');
       this.api = api;
+      
       this.form.get('version').setValue(api.version);
     });
   }

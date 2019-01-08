@@ -25,22 +25,28 @@ export class ManageApiService {
         this.getVersionFromFile(file, observer)
       
       else if(swaggerUrl){
-        this.http.get(`${swaggerUrl}`).subscribe(fileContents => {
+        this.http.get(`${swaggerUrl}`).subscribe(
+          fileContents => {
           
-          let version: number;
+            let version: number;
 
-          if (swaggerUrl.endsWith(".yaml"))
-            version = this.getYamlVersion(fileContents);
-          
-          else if (swaggerUrl.endsWith(".json"))
-            version = this.getJsonVersion(fileContents);
+            if (swaggerUrl.endsWith(".yaml") || swaggerUrl.endsWith(".yml") )
+              version = this.getYamlVersion(fileContents);
+            
+            else if (swaggerUrl.endsWith(".json"))
+              version = this.getJsonVersion(fileContents);
 
-          else
-            version = this.getJsonVersion(JSON.stringify(fileContents));
+            else
+              version = this.getJsonVersion(JSON.stringify(fileContents));
 
-          observer.next(version);
-          observer.complete();
-        });
+            observer.next(version);
+            observer.complete();
+          },
+          error => {
+            observer.next(2);
+            observer.complete();
+          }
+        );
       }
     });
   }
@@ -52,7 +58,7 @@ export class ManageApiService {
     reader.readAsText(file, "UTF-8");
 
     reader.onload =  (evt:any) => {
-      if(file.name.endsWith(".yaml"))
+      if(file.name.endsWith(".yaml") || file.name.endsWith(".yml"))
         version = this.getYamlVersion( evt.target.result );
 
       else if(file.name.endsWith(".json"))
@@ -68,7 +74,7 @@ export class ManageApiService {
   }
 
   private getJsonVersion (content) : number {
-    const jsonContent = JSON.parse(content);
+    const jsonContent = ((typeof content) === "string") ?  JSON.parse(content) : content;
 
     return (jsonContent.swagger && /2.0/.test(jsonContent.swagger)) ? 2 : (jsonContent.openapi && /2.0/.test(jsonContent.openapi)) ? 3 : null;
   }

@@ -62,12 +62,19 @@ describe('HomeComponents', () => {
     let mainGettingStartedElement = <HTMLElement> document.getElementById("main-getting-started");
     let documentationElement = <HTMLElement> document.getElementById("documentation");
 
+    let creatingApisElement = <HTMLElement> document.getElementById("creating-apis");
+    let consumingApisElement = <HTMLElement> document.getElementById("consuming-apis");
+
     let mainDocumentationLink = mainDocumentationElement.getAttribute("href");
     let mainGettingStartedLink = mainGettingStartedElement.getAttribute("href");
     let documentationLink = documentationElement.getAttribute("href");
+    let creatingApisLink = creatingApisElement.getAttribute("href");
+    let consumingApisLink = consumingApisElement.getAttribute("href");
 
     expect(mainDocumentationLink).toEqual(DOCUMENTATION_LINKS.DOCUMENTATION);
     expect(mainGettingStartedLink).toEqual(DOCUMENTATION_LINKS.GETTING_STARTED);
     expect(documentationLink).toEqual(DOCUMENTATION_LINKS.DOCUMENTATION);
+    expect(creatingApisLink).toEqual(DOCUMENTATION_LINKS.CREATING_APIS);
+    expect(consumingApisLink).toEqual(DOCUMENTATION_LINKS.CONSUMING_APIS);
   });
 });

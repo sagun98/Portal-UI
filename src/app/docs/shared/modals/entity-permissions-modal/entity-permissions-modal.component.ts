@@ -18,6 +18,8 @@ export class EntityPermissionsModalComponent implements OnInit {
   @Input() canCollaborate: boolean = false;
   @Output() onSave: EventEmitter<UserPrivilegeClass[]> = new EventEmitter<UserPrivilegeClass[]>();
 
+  private lastUserPrivileges: UserPrivilegeClass[] = [];
+
   public modified: boolean = false;
 
   constructor(
@@ -27,6 +29,8 @@ export class EntityPermissionsModalComponent implements OnInit {
   ngOnInit() {
     if (this.entity.published)
       this.canCollaborate = false;
+
+    this.lastUserPrivileges = this.userPrivileges;
   }
 
   public handleFailedFormValidation(failed : boolean) {
