@@ -10,6 +10,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { ToastrService } from 'ngx-toastr';
 import { SearchTypes } from './search-types.enum';
 import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
+import { HttpErrorsService } from '../../services/http-errors/http-errors.service';
 
 @Component({
   selector: 'dev-portal-header',
@@ -41,6 +42,7 @@ export class HeaderComponent implements OnInit {
     private userService : UserService,
     private searchService : SearchService,
     private toastrService : ToastrService,
+    private httpErrorsServices : HttpErrorsService,
     private router : Router
   ) { }
 
@@ -74,7 +76,12 @@ export class HeaderComponent implements OnInit {
         return;
       else
         this.toastrService.warning('No Results Found.  Please refine your search and try again', '');
-    });
+    },
+    error => {
+      this.httpErrorsServices.override = true;
+      this.toastrService.warning('You must be logged in to search.')
+    }
+    );
   }
 
   public addEventListener() {

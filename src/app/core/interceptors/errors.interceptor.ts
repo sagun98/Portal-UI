@@ -44,16 +44,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                 );
                 
-            else if(! errorResponse.error)
-                errorMessages.push(
-                    <HttpErrorMessage> {
-                        id: new Date().getTime(),
-                        type : HTTP_ERROR_TYPES.ERROR,
-                        title : '',
-                        message : '',
-                        response : errorResponse
-                    }
-                );
+            // else if(! errorResponse.error)
+            //     errorMessages.push(
+            //         <HttpErrorMessage> {
+            //             id: new Date().getTime(),
+            //             type : HTTP_ERROR_TYPES.ERROR,
+            //             title : '',
+            //             message : '',
+            //             response : errorResponse
+            //         }
+            //     );
                 
           
 
