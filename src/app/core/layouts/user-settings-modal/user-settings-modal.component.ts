@@ -12,6 +12,8 @@ export class UserSettingsModalComponent implements OnChanges {
 
   @Input() opened : boolean = false;
   @Input() user: PortalUser;
+  
+  public viewDocumentationDetails: boolean = false;
 
   public roles: UserRole[] = [];
   public activeTabs = {

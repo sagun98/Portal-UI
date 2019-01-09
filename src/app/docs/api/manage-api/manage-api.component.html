@@ -26,8 +26,6 @@
 
   <iframe [src]="editorUrl" id="swagger-editor" [hidden]="sideNavOpen"></iframe>
 
-  |{{ form.get('swaggerUrl').errors | json }}|
-
   <entity-permissions-modal 
     *ngIf="managePrivilegesModalOpened"
     [userPrivileges]="userPrivileges" 

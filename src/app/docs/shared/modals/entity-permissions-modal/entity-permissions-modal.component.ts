@@ -18,8 +18,6 @@ export class EntityPermissionsModalComponent implements OnInit {
   @Input() canCollaborate: boolean = false;
   @Output() onSave: EventEmitter<UserPrivilegeClass[]> = new EventEmitter<UserPrivilegeClass[]>();
 
-  private lastUserPrivileges: UserPrivilegeClass[] = [];
-
   public modified: boolean = false;
 
   constructor(
@@ -27,10 +25,14 @@ export class EntityPermissionsModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.entity.published)
+    if (this.entity.published){
       this.canCollaborate = false;
 
-    this.lastUserPrivileges = this.userPrivileges;
+      this.userPrivileges = this.userPrivileges.filter(privilege => {
+        const isCollaborator:boolean = (privilege.permissions.indexOf("COLLABORATOR") != -1) ? true : false;
+        return ! isCollaborator;
+      });
+    }
   }
 
   public handleFailedFormValidation(failed : boolean) {

@@ -24,18 +24,53 @@
 
             <h3>Request User Roles:</h3>
 
-            <p class="bottom-spacer">
+            <p>
               For Product Owners and API Developers who require the ability to add your resources to the API Catalog, please use the following MyStore form to request updated roles. 
               You will be notified as soon as your user profile has been updated.
             </p>
 
-            <div class="bottom-spacer">
+            <div>
               <a target="_blank" href="https://pearson.service-now.com/support/mystoredetail.do?sysparm_document_key=sc_cat_item,b612d19edbc267c0a9075a0adc9619d9&locationId=e953f9c6db252e00b20ffddabf9619d8">Pearson Developer Portal Access Form</a>
             </div>
 
             <p class="bottom-spacer-30">
                 <b>Note:</b> If link does not launch access request form, please go to MyStore and search for Pearson Developer Portal Access to find form.
             </p>
+
+            <h3>Adding General Documentation</h3>
+
+            <p class="bottom-spacer-20">
+              For teams or individuals who would like to add documentation the General Documentation pages, 
+              please create a ServiceNow ticket to request your Documentation area and edit rights. 
+              You will be notified as soon as your request has been completed.
+              
+              <br/>
+
+              <a (click)="viewDocumentationDetails = ! viewDocumentationDetails" href="javascript:void();"> 
+                  <span *ngIf="! viewDocumentationDetails">View complete details [+]</span>
+                  <span *ngIf="viewDocumentationDetails">Hide details [-]</span>
+              </a>
+            </p>
+
+            <ng-container *ngIf="viewDocumentationDetails">
+
+            <div class="bottom-spacer-20"><a href="https://pearson.service-now.com/incident.do?sys_id=-1&sysparm_query=active=true&sysparm_stack=incident_list.do?sysparm_query=active=true" target="_blank">ServiceNow Request for Documentation Area</a></div>
+
+            <p class="bottom-spacer-20"><b>Please include the following in your request:</b></p>
+
+            <ul>
+              <li><b>Caller</b>: [Your Name]</li>
+              <li><b>Reported Source</b>: Other</li>
+              <li><b>Ticket Type</b>: Request</li>
+              <li><b>Catagory</b>: Access</li>
+              <li><b>Assignment Group</b>: TO XC API Support Team</li>
+              <li><b>Brief Description</b>: Developer Portal Documentation Area Creation and Edit Rights</li>
+              <li><b>Description</b>: Access to create and edit Developer Portal Documentation Area</li>
+              <li>Documenation Area name you would like created or be given editing rights</li>
+              <li>List of users who will require editing rights</li>
+              <li>A general explanation of how you hope to use the documentation area</li>
+            </ul>
+            </ng-container>
 
             <hr style="margin-top:20px;"/>
           
