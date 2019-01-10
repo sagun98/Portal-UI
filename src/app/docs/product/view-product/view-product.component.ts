@@ -25,9 +25,10 @@ export class ViewProductComponent extends EntityComponent {
   public following: boolean = false;
   public isEntityAdmin: boolean = false;
   public announcementCid: number;
+  public unpublishedCount: number = 0;
+  public initialApiCount: number = 0;
 
   @ViewChild(SideNavigationComponent) sideNavigationComponent:SideNavigationComponent;
-
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -49,6 +50,8 @@ export class ViewProductComponent extends EntityComponent {
       this.following = this.userService.isFollowingEntity(this.product.followers);
       this.isEntityAdmin = this.permissionService.isEntityAdmin(this.product);
       this.apikeyModalOpen = false;
+      this.unpublishedCount = 0;
+      this.initialApiCount = this.product.apis.length;
 
       if(this.isEntityAdmin){
         this.announcementCid = this.product.cid;
@@ -58,8 +61,11 @@ export class ViewProductComponent extends EntityComponent {
       }
 
       this.product.apis = this.product.apis.filter(api => {
+        if(api !== null && !api.published)
+          this.unpublishedCount++;
+
         return (api !== null && api.published === true);
-      })
+      });
     });
   }
   
@@ -72,8 +78,6 @@ export class ViewProductComponent extends EntityComponent {
     this.apiService.getApi(api.id).subscribe((activeApi: API) => {
       this.activeApi = activeApi;
     });
-
-    //this.activeApi = api;
   }
 
   public openApiKeyModal () {
