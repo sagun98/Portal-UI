@@ -1,3 +1,4 @@
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPrivilege } from '../../../core/interfaces/fr-user.interface';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
@@ -30,7 +31,7 @@ export const mockApi: API = {
     org : 'mock',
     name : API_MANAGEMENT_TOOLS.APIGEE
   },
-  published : true
+  published : false
 };
 
 class MockApiService extends ApiService {
@@ -49,11 +50,11 @@ describe('ViewProductComponent', () => {
 
   const mockProduct: Product = {
     id : 'asdf1234',
-    name : "Mock Product",
+    name : "Mock Product PLEASE",
     description : 'Mock Product Description',
     slug : 'test',
     overview : null,
-    apis : [],
+    apis : [mockApi, mockApi, mockApi],
     userPrivileges : [
       {
         "username" : "UTESTT4",
@@ -70,6 +71,7 @@ describe('ViewProductComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         HttpClientModule,
+        NoopAnimationsModule,
         ToastrModule.forRoot(),
         CoreSharedModule
       ],
@@ -102,6 +104,11 @@ describe('ViewProductComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewProductComponent);
     component = fixture.componentInstance;
+    
+    component['activatedRoute'].data = of({
+      product : Object.assign({}, mockProduct),
+    });
+
     fixture.detectChanges();
   });
 
@@ -127,5 +134,25 @@ describe('ViewProductComponent', () => {
     expect(component.activeApi.id).toEqual(mockApi.id);
 
     expect(component.activeApi.name).toEqual(mockApi.name);
-  })
+  });
+
+  it('should not show warning if all APIs are not unpublshed', () => {
+    let newApi = Object.assign({}, mockApi);
+
+    newApi.published = true;
+
+    component.product.apis.push(newApi);
+
+    component.ngOnInit();
+    fixture.detectChanges();
+
+    let unpublishedElement: HTMLElement = document.getElementById("all-unpublished");
+
+    expect(unpublishedElement).toBeNull();
+  });
+
+  it('should show warning if all APIs are unpublshed', () => {
+    let unpublishedElement: HTMLElement = document.getElementById("all-unpublished");
+    expect(unpublishedElement).not.toBeNull();
+  });
 });
