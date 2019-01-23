@@ -121,6 +121,14 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       this.documentation.userPrivileges = this.documentation.userPrivileges || null;
       this.documentation.tags  = this.documentation.tags || [];
 
+      // Clean the docuemtation from any properties that aren't on the form
+      const formControlKeys = Object.keys(this.form.controls);
+      Object.keys(this.documentation).forEach(key => {
+        const index = formControlKeys.indexOf(key);
+        if(index == -1)
+          delete this.documentation[key];
+      });
+
       this.form.setValue(this.documentation);
 
       this.toastrService.success('Documentation Updated Successfully');
