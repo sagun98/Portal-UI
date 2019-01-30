@@ -11,8 +11,10 @@ phases:
       - npm i
       - npm install -g @angular/cli
       - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      - apt-get update
-      - sudo dpkg -i google-chrome-stable_current_amd64.deb
+      - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+      - sudo apt-get update 
+      - sudo apt-get install google-chrome-stable
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadless --watch false
