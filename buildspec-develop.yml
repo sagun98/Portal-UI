@@ -10,6 +10,8 @@ phases:
     commands:
       - npm i
       - npm install -g @angular/cli
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - sudo dpkg -i google-chrome-stable_current_amd64.deb
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadless --watch false
