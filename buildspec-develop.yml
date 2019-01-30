@@ -9,6 +9,7 @@ phases:
   install:
     commands:
       - npm i
+      - npm install -g @angular/cli
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadless --watch false
