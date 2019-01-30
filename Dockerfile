@@ -13,9 +13,8 @@ COPY *.json /app/
 COPY nginx.conf /app/
 COPY scripts /app/scripts
 COPY src /app/src
-COPY node_modules /app/src/node_modules
 
-RUN apt-get update && apt-get install nginx -y 
+RUN apt-get update && apt-get install nginx -y && npm install
 
 EXPOSE 80
 
