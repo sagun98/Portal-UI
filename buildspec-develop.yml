@@ -18,7 +18,6 @@ phases:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop/$(date +"%m%d%Y%H%M%S")/coverage --recursive
-      - echo Karma Unit Test Code Coverage https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop/$(date +"%m%d%Y%H%M%S")/coverage/index.html
   build:
     commands:
       - echo Building the Docker image...        
