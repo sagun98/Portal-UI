@@ -87,7 +87,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       this.documentationService.deleteDocumentation(this.documentationArea.id, this.documentation.id).subscribe(d => {
         this.router.navigate(['/documentation/main']);
         this.documentationService.onChange.next(null);
-        this.toastrService.success('This Document has benn successfully deleted');
+        this.toastrService.success('This Document has been successfully deleted');
       })
   }
 
