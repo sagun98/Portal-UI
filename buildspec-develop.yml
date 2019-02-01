@@ -19,6 +19,7 @@ phases:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop/$(echo $TIMESTAMP)/coverage --recursive
+      - echo https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop/$TIMESTAMP/coverage/index.html
   build:
     commands:
       - echo Building the Docker image...        
