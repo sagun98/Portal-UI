@@ -17,7 +17,8 @@ phases:
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
-      - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop/$(date +"%m%d%Y%H%M%S")/coverage --recursive
+      - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
+      - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop/$(echo $TIMESTAMP)/coverage --recursive
   build:
     commands:
       - echo Building the Docker image...        
