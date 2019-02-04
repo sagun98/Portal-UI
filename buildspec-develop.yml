@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui-develop"
-    IMAGE_TAG: "2.2.10-SNAPSHOT"
+    IMAGE_TAG: "2.3.0-SNAPSHOT"
 
 phases:
   install:
@@ -18,8 +18,8 @@ phases:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
-      - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop/$(echo $TIMESTAMP)/coverage --recursive
-      - echo https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop/$TIMESTAMP/coverage/index.html
+      - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop-717566366360/$(echo $TIMESTAMP)/coverage --recursive
+      - echo https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop-717566366360/$TIMESTAMP/coverage/index.html
   build:
     commands:
       - echo Building the Docker image...        
