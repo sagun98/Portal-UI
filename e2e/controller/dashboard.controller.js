@@ -41,7 +41,9 @@ class Dashboard {
     }
 
     deleteApi(){
+        browser.wait(EC.visibilityOf(this._page.delete_button),Configurations.timeOut);
         this._page.delete_button.click();
+        browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
         ale.accept();
     }
@@ -73,8 +75,8 @@ class Dashboard {
     }
 
     deleteProduct(){
+        browser.wait(EC.visibilityOf(this._page.deleteProductButton),Configurations.timeOut);
         this._page.deleteProductButton.click();
-        var EC = protractor.ExpectedConditions;
         browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
         ale.accept();
@@ -111,6 +113,7 @@ class Dashboard {
         browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
         ale.accept();
+
     }
 
     navToHomePage(){

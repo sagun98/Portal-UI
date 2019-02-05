@@ -58,6 +58,7 @@ describe('Delete an existing Api', () => {
 
     it('Go to edit API',()=> {
         NavigationPO.getEditApiButton().click();
+        browser.sleep(2000);
     });
 
     it('Delete Api',()=> {
@@ -114,6 +115,7 @@ describe('Delete an existing Product', () => {
     it('Go to edit API',()=> {
         browser.sleep(.5);
         NavigationPO.getEditApiButton().click();
+        browser.sleep(2000);
     });
 
     it('Delete Product',()=> {
@@ -175,6 +177,7 @@ describe('Delete an existing Documentation', () => {
 
     it('Go to edit API Documentation',()=> {
         NavigationPO.getEditApiDocButton().click();
+        browser.sleep(2000);
     });
 
     it('Delete Api Documentation',()=> {
