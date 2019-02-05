@@ -3,26 +3,48 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+let HtmlReporter = require('protractor-beautiful-reporter');
+
+
 exports.config = {
-  allScriptsTimeout: 11000,
-  specs: [
-    './src/**/*.e2e-spec.ts'
-  ],
+  allScriptsTimeout: 30000,
+  directConnect: true,
+  suites: {
+      nonprod: [
+          './spec/login.spec.js',
+           './spec/dashboard.spec.js', //Create API,Products,Documentation and checks for CRUD actions
+          './spec/checkLinks.spec.js',
+          ],
+      prod: [
+          './spec/loginProd.spec.js',
+          './spec/checkLinks.spec.js'
+      ]
+  },
   capabilities: {
     'browserName': 'chrome'
   },
-  directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'https://dev.code-test.aws.pearson.com/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 90000,
     print: function() {}
   },
-  onPrepare() {
-    require('ts-node').register({
-      project: require('path').join(__dirname, './tsconfig.e2e.json')
-    });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+
+  onPrepare: function() {
+      jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+      jasmine.getEnv().addReporter(new HtmlReporter({
+          // baseDirectory: `testresults/html/${Date.now()}`,
+          baseDirectory: `htmlreport`,
+          jsonsSubfolder: 'jsons',
+          preserveDirectory: false,
+          screenshotsSubfolder: 'images',
+          clientDefaults:{
+              columnSettings:{
+                  inlineScreenshots:true
+              }
+          }
+      }).getJasmine2Reporter());
   }
 };
+ 
