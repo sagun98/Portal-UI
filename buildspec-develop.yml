@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui-develop"
-    IMAGE_TAG: "2.3.0-SNAPSHOT"
+    IMAGE_TAG: "2.3.1-SNAPSHOT"
 
 phases:
   install:
