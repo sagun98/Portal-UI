@@ -21,7 +21,10 @@ exports.config = {
       ]
   },
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    chromeOptions: {
+        args: [ "--headless", "--no-sandbox" ]
+    }
   },
   baseUrl: 'https://dev.code-test.aws.pearson.com/',
   framework: 'jasmine',
