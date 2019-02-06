@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui-develop"
-    E2E_URI: "https://dev.code-test.aws.pearson.com/"
     IMAGE_TAG: "2.3.1-SNAPSHOT"
 
 phases:
@@ -18,7 +17,7 @@ phases:
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
-      - ng e2e --baseUrl='$(echo $E2E_URI)' --suite nonprod
+      - ng e2e --baseUrl='https://dev.code-test.aws.pearson.com/' --suite nonprod
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop-717566366360/$(echo $TIMESTAMP)/coverage --recursive
       - aws s3 cp htmlreport/ s3://codebuild-dev-portal-ui-tests-develop-717566366360/$(echo $TIMESTAMP)/e2e --recursive
