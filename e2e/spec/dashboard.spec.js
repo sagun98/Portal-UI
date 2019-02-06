@@ -72,7 +72,7 @@ describe('Delete an existing Api', () => {
 
 describe('Create new Api Collection(Product)', () => {
     it('Go to APIs',()=> {
-        browser.sleep(.5);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configuration.timeOut);
         NavigationPO.getApiLink().click();
     });
 
@@ -180,6 +180,9 @@ describe('Edit existing Api Documentation', () => {
 describe('Delete an existing Documentation', () => {
 
     it('Go to edit API Documentation',()=> {
+        browser.wait(EC.invisibilityOf(LoadingPO.toastr),Configuration.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configuration.timeOut);
+
         NavigationPO.getEditApiDocButton().click();
         browser.sleep(2000);
     });

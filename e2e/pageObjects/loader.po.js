@@ -8,6 +8,10 @@ class LoadingPO {
    get loadingOverlay () {
     return element(by.id(this.locators.loader.id));
    }
+
+   get toastr () {
+    return element(by.id(this.locators.toastr.css));
+   }
     
 }
 
