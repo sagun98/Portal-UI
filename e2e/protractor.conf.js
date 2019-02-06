@@ -11,9 +11,9 @@ exports.config = {
   directConnect: true,
   suites: {
       nonprod: [
-          './spec/login.spec.js',
-           './spec/dashboard.spec.js', //Create API,Products,Documentation and checks for CRUD actions
-          './spec/checkLinks.spec.js',
+          './spec/login.spec.js'//,
+        //    './spec/dashboard.spec.js',
+        //   './spec/checkLinks.spec.js',
           ],
       prod: [
           './spec/loginProd.spec.js',

@@ -1,0 +1,6 @@
+{
+    "loader" : {
+        "id" : "loading-indicator",
+        "css" : ".spinner.spinner-lg"
+    }
+}

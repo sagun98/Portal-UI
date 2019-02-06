@@ -3,6 +3,7 @@ const EC = protractor.ExpectedConditions;
 const Configurations = require("../common.conf.json");
 const LoginTD = require("../testdata/common/users.data.js");
 const NavigationPO = require("../pageObjects/navigationHelper.po");
+const LoadingPO = require("../pageObjects/loader.po");
 
 
 class Login {
@@ -13,6 +14,7 @@ class Login {
     login() {
         browser.get(browser.baseUrl);
         browser.wait(EC.visibilityOf(NavigationPO.getHomePageHeadingNotLoggedIn()));
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay));
 
         this._page.loginBtn.click();
         
@@ -24,6 +26,7 @@ class Login {
     loginProd() {
         browser.get(browser.baseUrl);
         browser.wait(EC.visibilityOf(NavigationPO.getHomePageHeadingNotLoggedIn()));
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay))
 
         this._page.loginBtn.click();
 
