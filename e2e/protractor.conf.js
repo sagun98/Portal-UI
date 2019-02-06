@@ -13,7 +13,7 @@ exports.config = {
       nonprod: [
           './spec/login.spec.js',
            './spec/dashboard.spec.js',
-        //   './spec/checkLinks.spec.js',
+          './spec/checkLinks.spec.js',
           ],
       prod: [
           './spec/loginProd.spec.js',

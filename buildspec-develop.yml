@@ -21,7 +21,8 @@ phases:
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-develop-717566366360/$(echo $TIMESTAMP)/coverage --recursive
       - aws s3 cp htmlreport/ s3://codebuild-dev-portal-ui-tests-develop-717566366360/$(echo $TIMESTAMP)/e2e --recursive
-      - echo https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop-717566366360/$TIMESTAMP/coverage/index.html
+      - echo Unit Test Coverage Link https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop-717566366360/$TIMESTAMP/coverage/index.html
+      - echo E2E Test Coverage Link https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-develop-717566366360/$TIMESTAMP/e2e/report.html
   build:
     commands:
       - echo Building the Docker image...        
