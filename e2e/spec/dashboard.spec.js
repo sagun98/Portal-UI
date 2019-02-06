@@ -161,6 +161,7 @@ describe('Edit existing Api Documentation', () => {
     });
 
     it('Go to edit API Documentation',()=> {
+        browser.wait(EC.invisibilityOf(LoadingPO.toastr),Configuration.timeOut);
         browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configuration.timeOut);
 
         NavigationPO.getEditApiDocButton().click();
@@ -188,6 +189,9 @@ describe('Delete an existing Documentation', () => {
     });
 
     it('Delete Api Documentation',()=> {
+        browser.wait(EC.invisibilityOf(LoadingPO.toastr),Configuration.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configuration.timeOut);
+        
         DashboardController.deleteApiDocumentation();
     });
 
