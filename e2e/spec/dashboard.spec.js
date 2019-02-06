@@ -3,6 +3,8 @@ const DashboardController = require("../controller/dashboard.controller");
 const NavigationPO = require("../pageObjects/navigationHelper.po");
 const EC = protractor.ExpectedConditions;
 const Configuration = require("../common.conf.json");
+const LoadingPO = require("../pageObjects/loader.po");
+
 
 describe('Successfully logged in', () => {
    it('Verify Heading', ()=> {
@@ -159,6 +161,8 @@ describe('Edit existing Api Documentation', () => {
     });
 
     it('Go to edit API Documentation',()=> {
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configuration.timeOut);
+
         NavigationPO.getEditApiDocButton().click();
     });
 
