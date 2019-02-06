@@ -3,6 +3,8 @@ const EC = protractor.ExpectedConditions;
 const Configurations = require("../common.conf.json");
 const DashboardTD = require("../testdata/dashboard.data");
 const NavigationPO = require("../pageObjects/navigationHelper.po");
+const LoadingPO = require("../pageObjects/loader.po");
+
 
 class Dashboard {
     constructor() {
@@ -12,6 +14,8 @@ class Dashboard {
     
     verifyHeading() {
         browser.wait(EC.visibilityOf(this._page.heading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.heading.getText()).toEqual(this._td.heading);
     }
 
@@ -30,6 +34,8 @@ class Dashboard {
     saveNewApiForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newApiHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newApiHeading.getText()).toEqual(this._td.apiName);
     }
 
@@ -37,11 +43,15 @@ class Dashboard {
     saveUpdatedApiForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newApiHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newApiHeading.getText()).toEqual(this._td.apiName+this._td.updatedApiName);
     }
 
     deleteApi(){
         browser.wait(EC.visibilityOf(this._page.delete_button),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         this._page.delete_button.click();
         browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
@@ -65,17 +75,23 @@ class Dashboard {
     saveProductForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newProductHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newProductHeading.getText()).toEqual(this._td.productName);
     }
 
     saveUpdatedProductForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newProductHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newProductHeading.getText()).toEqual(this._td.productName+this._td.updatedApiName);
     }
 
     deleteProduct(){
         browser.wait(EC.visibilityOf(this._page.deleteProductButton),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         this._page.deleteProductButton.click();
         browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
@@ -91,6 +107,8 @@ class Dashboard {
     saveNewApiDocsForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newApiDocsHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newApiDocsHeading.getText()).toEqual(this._td.apiDocName);
         browser.wait(EC.visibilityOf(NavigationPO.getEditApiButton()),Configurations.timeOut);
     }
@@ -104,11 +122,15 @@ class Dashboard {
     saveUpdatedDocsForm(){
         this._page.save_button.click();
         browser.wait(EC.visibilityOf(this._page.newApiDocsHeading),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(this._page.newApiDocsHeading.getText()).toEqual(this._td.apiDocName+this._td.updatedApiDocName);
     }
 
     deleteApiDocumentation(){
         browser.wait(EC.visibilityOf(this._page.deleteApiDocsButton),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         this._page.deleteApiDocsButton.click();
         browser.wait(EC.alertIsPresent(), Configurations.timeOut, "Alert is not getting present");
         let ale = browser.switchTo().alert();
@@ -119,6 +141,8 @@ class Dashboard {
     navToHomePage(){
         NavigationPO.getHomePageLink().click();
         browser.wait(EC.visibilityOf(NavigationPO.getHomePageHeadingNotLoggedIn()),Configurations.timeOut);
+        browser.wait(EC.invisibilityOf(LoadingPO.loadingOverlay),Configurations.timeOut);
+
         expect(NavigationPO.getHomePageHeadingNotLoggedIn().getText()).toEqual(this._td.headingNotLoggedIn);
     }
 
