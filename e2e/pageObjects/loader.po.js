@@ -10,7 +10,7 @@ class LoadingPO {
    }
 
    get toastr () {
-    return element(by.id(this.locators.toastr.css));
+    return element(by.css(this.locators.toastr.css));
    }
     
 }
