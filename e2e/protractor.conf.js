@@ -23,7 +23,7 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome',
     chromeOptions: {
-        args: [ "--headless", "--no-sandbox" ]
+        args: [ "--headless", "--window-size=1000,1000", "--no-sandbox" ]
     }
   },
   baseUrl: 'https://dev.code-test.aws.pearson.com/',
