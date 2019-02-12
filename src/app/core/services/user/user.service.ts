@@ -1,6 +1,6 @@
 import { IPortalUser } from '../../interfaces/fr-user.interface';
 import { environment } from '../../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share } from 'rxjs/operators';
@@ -95,10 +95,14 @@ export class UserService {
     );
   }
 
-  public getUserById (userId) {
-    return this.http.get<any>(`${environment.restBase}/users/${userId}`).pipe(
-      map((user : IPortalUser) => {
-        return (user) ?  new PortalUser(user) : null;
+
+
+  public getUserByIdOrEmail (userId) {
+    let params = new HttpParams();
+    params = params.append('email', userId);
+      return this.http.get<any>(`${environment.restBase}/users`,{params}).pipe(
+      map(([user] : IPortalUser[]) => {
+        return (user?  new PortalUser(user) : null);
       })
     );
   }
