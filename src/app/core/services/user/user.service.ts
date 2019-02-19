@@ -83,6 +83,13 @@ export class UserService {
     }));
   }
 
+  public getAllUsers() {
+    let headers = new HttpHeaders()
+      .append('PearsonSSOSession', this.authToken);
+    
+    return this.http.get<IPortalUser[]>(`${environment.restBase}/users`, { headers: headers, withCredentials: true});
+  }
+
   public getUser() {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
@@ -95,7 +102,26 @@ export class UserService {
     );
   }
 
+  public getUserById(userId: String) {
+    let headers = new HttpHeaders()
+      .append('PearsonSSOSession', this.authToken);
 
+    const url = `${environment.restBase}/users` + "/" + userId;
+    return this.http.get<IPortalUser>(url, { headers: headers, withCredentials: true});
+  }
+
+  public removeUser(userId: String) {
+    let headers = new HttpHeaders()
+      .append('PearsonSSOSession', this.authToken);
+
+    const url = `${environment.restBase}/users` + "/" + userId;
+    return this.http.delete(url, { headers: headers, withCredentials: true});
+  }
+
+  public createUser(username: String, firstName: String, lastName: String, email: String) {
+    let user = {"username": username, "firstName": firstName, "lastName": lastName, "email": email};
+    return this.http.post(`${environment.restBase}/users`, user);
+  }
 
   public getUserByIdOrEmail (userId) {
     let params = new HttpParams();

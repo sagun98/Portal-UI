@@ -1,0 +1,56 @@
+<h1>Manage User</h1>
+
+<form [formGroup]="userForm" (submit)="onSaveUser()">
+  <div class="bottom-spacer-30">
+    <label for="username">Username:</label>
+    <div for="username">
+      <input
+        type="text"
+        id="username"
+        placeholder="username"
+        formControlName="username"
+      />
+    </div>
+  </div>
+
+  <div class="bottom-spacer-30">
+    <label for="firstName">First Name:</label>
+    <div for="firstName">
+      <input
+        type="text"
+        id="firstName"
+        placeholder="firstName"
+        formControlName="firstName"
+      />
+    </div>
+  </div>
+
+  <div class="bottom-spacer-30">
+    <label for="lastName">Last Name:</label>
+    <div for="lastName">
+      <input
+        type="text"
+        id="lastName"
+        placeholder="lastName"
+        formControlName="lastName"
+      />
+    </div>
+  </div>
+
+  <div class="bottom-spacer-30">
+    <label for="email">Email:</label>
+    <div for="email">
+      <input
+        type="text"
+        id="email"
+        placeholder="email"
+        formControlName="email"
+        email
+      />
+    </div>
+  </div>
+
+  <button class="btn btn-primary-outline" type="submit">
+    Add User
+  </button>
+</form>

@@ -1,0 +1,16 @@
+<div class="container">
+  <a class="btn btn-sm" routerLink="edit">
+    <clr-icon shape="pencil" class="is-solid"></clr-icon>Add User</a>
+  <clr-stack-view>
+    <clr-stack-block [clrSbExpandable]="true" *ngFor="let user of users">
+      <clr-stack-label>{{ user.firstName }} {{ user.lastName }}</clr-stack-label>
+      <clr-stack-content>{{ user.email }}</clr-stack-content>
+
+      <clr-stack-block>
+        <clr-stack-content>
+          <a class="btn btn-sm btn-danger-outline" (click)="onDeleteUser(user.id)">Delete</a>
+        </clr-stack-content>
+      </clr-stack-block>
+    </clr-stack-block>
+  </clr-stack-view>
+</div>
