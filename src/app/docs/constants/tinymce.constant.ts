@@ -23,7 +23,6 @@ import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/code';
 import 'tinymce/plugins/imagetools';
 import 'tinymce/plugins/image';
-import 'tinymce/plugins/powerpaste';
 import { environment } from 'src/environments/environment';
 
 
