@@ -14,7 +14,6 @@ export const appRoutes: Routes = [
   { path : 'docs', loadChildren : './docs/docs.module#DocsModule', canActivate : [LoggedInGuard] },
   { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule', canActivate : [LoggedInGuard] },
   { path: 'forum', loadChildren : './forum/forum.module#ForumModule', canActivate : [LoggedInGuard] },
-  { path: 'users', loadChildren: './user/user.module#UserModule'},
   { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

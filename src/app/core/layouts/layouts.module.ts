@@ -17,6 +17,7 @@ import { RoleManagementComponent } from './user-settings-modal/role-management/r
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.component';
 import { RoleCardComponent } from './user-settings-modal/role-card/role-card.component';
+import { UserModule } from 'src/app/user/user.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { RoleCardComponent } from './user-settings-modal/role-card/role-card.com
     NgSelectModule,
     RouterModule,
     Angulartics2Module,
-    CoreSharedModule
+    CoreSharedModule,
+    UserModule
   ],
   declarations: [
     SideNavigationComponent, 

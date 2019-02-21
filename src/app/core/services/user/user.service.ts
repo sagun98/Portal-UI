@@ -16,6 +16,7 @@ export class UserService {
   public $doUserLogin: Subject<boolean> = new Subject<boolean>();
   public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
   public attemptedUrl: string = '';
+  public userStateChange: Subject<string> = new Subject<string>();
   
   private userRequest: Observable<{} | PortalUser>;
 

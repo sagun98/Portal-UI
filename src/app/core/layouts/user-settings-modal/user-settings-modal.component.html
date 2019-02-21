@@ -113,6 +113,17 @@
           </clr-tab-content>
         </ng-template>
       </clr-tab>
+
+      <clr-tab *ngIf="user?.roleMap?.ADMIN">
+          <button clrTabLink>
+            <h4>Manage Users</h4>
+          </button>
+          <ng-template [(clrIfActive)]="activeTabs.manageUsers">
+            <clr-tab-content>
+              <app-user></app-user>
+            </clr-tab-content>
+          </ng-template>
+        </clr-tab>
   
     </clr-tabs>
 

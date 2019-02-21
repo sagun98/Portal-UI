@@ -24,13 +24,20 @@ export class ViewUserComponent implements OnInit {
   }
 
   onDeleteUser(userId: String) {
-    const self = this;
-    this.userService.removeUser(userId).subscribe(() => {
-      this.userService.getAllUsers()
-        .subscribe(users => {
-          this.users = users;
-        });
+    const doDelete = confirm('Are you sure you want to delete this user?');
 
-    });
+    if (doDelete) {
+      const self = this;
+      this.userService.removeUser(userId).subscribe(() => {
+        this.userService.getAllUsers()
+          .subscribe(users => {
+            this.users = users;
+          });
+      });
+    }
+  }
+
+  onAddUser() {
+    this.userService.userStateChange.next('manage');
   }
 }

@@ -27,7 +27,7 @@ export class ManageUserComponent implements OnInit {
     if (this.userForm.invalid) { return; }
     this.userService.createUser(this.userForm.value.username, this.userForm.value.firstName, this.userForm.value.lastName, this.userForm.value.email)
       .subscribe(result => {
-        this.router.navigate(['users']);
+        this.userService.userStateChange.next('list');
       });
   }
 }

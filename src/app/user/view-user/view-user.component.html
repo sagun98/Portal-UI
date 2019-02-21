@@ -1,5 +1,5 @@
 <div class="container">
-  <a class="btn btn-sm" routerLink="edit">
+  <a class="btn btn-sm" (click)="onAddUser()">
     <clr-icon shape="pencil" class="is-solid"></clr-icon>Add User</a>
   <clr-stack-view>
     <clr-stack-block [clrSbExpandable]="true" *ngFor="let user of users">
