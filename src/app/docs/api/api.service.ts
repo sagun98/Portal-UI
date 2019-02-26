@@ -115,6 +115,36 @@ export class ApiService {
     return request;
   }
 
+  public createNewVersion(api: API) {
+    let swagger = "";
+
+    if (api.swagger) swagger = JSON.stringify(api.swagger);
+
+    let apiFormData: FormData = new FormData();
+
+    apiFormData.append("file", api.file);
+
+    delete api.file;
+    delete api.swagger;
+
+    apiFormData.append("apiJSON", JSON.stringify(api));
+    apiFormData.append("swagger", swagger);
+
+    const request = this.http.post(`${environment.restBase}/apis/${api.id}`, apiFormData).pipe(
+        tap((addedApi: API) => {
+          this._api_cache_ = addedApi;
+
+          // Emit ApiListChanged event
+          this.$onApiListChanged.next({
+            action: CRUD.UPDATE,
+            api: addedApi
+          });
+        })
+      );
+
+    return request;
+  }
+
   public getApiList() {
     return this.http.get(`${environment.restBase}/apis`).pipe(
       tap((apis : API[]) => {
@@ -140,6 +170,10 @@ export class ApiService {
     return <Observable<API>>(
       this.http.put(`${environment.restBase}/apis/${id}/privileges`, privileges)
     );
+  }
+
+  public getApiByVersion (apiId: string, version: string) : Observable<API>  {
+    return <Observable<API>> this.http.get(`${environment.restBase}/apis/${apiId}/version/${version}`)
   }
 
   public getProducts (api: API) : Observable<Product[]> {

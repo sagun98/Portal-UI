@@ -8,6 +8,7 @@ import { ViewApiComponent } from './view-api/view-api.component';
 import { ApiResolve } from './resolves/api.resolve';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { DocsSharedModule } from '../shared/shared.module';
+import { ApiByVersionResolve } from './resolves/api-by-version.resolve';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { DocsSharedModule } from '../shared/shared.module';
     RouterModule
   ],
   providers : [
-    ApiResolve
+    ApiResolve,
+    ApiByVersionResolve
   ],
   declarations: [
     ViewApiComponent

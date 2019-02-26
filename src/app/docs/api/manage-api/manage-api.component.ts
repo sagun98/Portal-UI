@@ -18,6 +18,7 @@ import { PermissionsService } from '../../../core/services/permissions/permissio
 import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../../core/interfaces/browser-message.interface';
 import { SideNavigationService } from '../../../core/layouts/side-navigation/side-navigation.service';
 import { environment } from '../../../../environments/environment';
+import { isDefined } from '@angular/compiler/src/util';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -166,50 +167,64 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     this.sideNavigationService.setSideNavOpenState(this.sideNavOpen);
   }
 
-  public saveApi () {
-    this.submitted = true;
+  public getApiByVersion (apiId: string, version: string) : void {
+    this.router.navigate([`/docs/api/${this.api.id}/version/${version}/edit`], {relativeTo: this.activatedRoute}).then(success => {
+      this.postSwaggerToEditor( document.getElementById("swagger-editor"), this.api.swagger );
 
-    const apiData = this.form.getRawValue();
-      
-    if(this.form.invalid) {
-      if(! this.sideNavOpen)
-        this.openAPIEditor();
-
-      return;
-    }
-
-    if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
-      this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
-      return;
-    }
-
-    apiData.tags = this.getServerFormattedTags( apiData.tags );
-
-    ['overview', 'gettingStarted', 'reference'].forEach(id => {
-      apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+      Object.keys(this.form.controls).forEach(controlName => {
+        if( typeof this.api[controlName] !== "undefined" )
+          this.form.get(controlName).setValue(this.api[controlName], {emitEvent : false});
+      })
     });
+    // this.apiService.getApiByVersion(apiId, version).subscribe(api => {
+    //   this.api = api;
 
-    if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
-      delete apiData.file
+    //   let tempApi = Object.assign({}, api);
 
-    this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
 
-      if (version === 2){
-        this.showSwaggerVersion2Message = true;
-        this.swaggerMessageModal.onClosed.subscribe(closed => {
-          if (closed)
-            this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-              this.router.navigate([`/docs/api/${api.slug}`]);
-            });
-        })
-      }
+    // });
+  }
 
-      else
-        this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-          this.router.navigate([`/docs/api/${api.slug}`]);
-        });
+  public saveApi () {
+    this.preSave().subscribe(apiData => {
+      this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
+        if (version === 2){
+          this.showSwaggerVersion2Message = true;
+          this.swaggerMessageModal.onClosed.subscribe(closed => {
+            if (closed)
+              this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+                this.router.navigate([`/docs/api/${api.slug}`]);
+              });
+          })
+        }
 
-    });    
+        else
+          this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+            this.router.navigate([`/docs/api/${api.slug}`]);
+          });
+      });
+    });
+  }
+
+  public handleNewVersion () {
+    this.preSave().subscribe(apiData => {
+      this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
+        if (version === 2){
+          this.showSwaggerVersion2Message = true;
+          this.swaggerMessageModal.onClosed.subscribe(closed => {
+            if (closed)
+              this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+                this.router.navigate([`/docs/api/${api.slug}`]);
+              });
+          })
+        }
+
+        else
+          this.apiService.createNewVersion(apiData).subscribe( (api: API) => {
+            this.router.navigate([`/docs/api/${api.slug}`]);
+          });
+      });
+    });
   }
 
   public get UIFormattedTags () {
@@ -259,6 +274,39 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   protected getPermissionService () : PermissionsService {
     return this.permissionService;
+  }
+
+  private preSave () : Observable<any> {
+    return new Observable(observer => {
+      this.submitted = true;
+
+      const apiData = this.form.getRawValue();
+        
+      if(this.form.invalid) {
+        if(! this.sideNavOpen)
+          this.openAPIEditor();
+
+        observer.error({});
+        return;
+      }
+
+      if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
+        this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
+        observer.error({});
+        return;
+      }
+
+      apiData.tags = this.getServerFormattedTags( apiData.tags );
+
+      ['overview', 'gettingStarted', 'reference'].forEach(id => {
+        apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+      });
+
+      if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
+        delete apiData.file;
+    
+      observer.next(apiData);
+    });
   }
 
   private updateSwaggerFromEditor (message : BrowserMessage<SwaggerEditorYAML>) {

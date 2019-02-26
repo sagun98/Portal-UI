@@ -24,9 +24,8 @@ export class HasPermissionToDirective implements OnChanges {
   }
 
   public ngOnChanges () {
-    // this is a new entity with not FGRs
-    // Let coarse grain win
-    if((! this.entity.userPrivileges && ! this.entity.version) || (this.entity.userPrivileges && ! this.entity.userPrivileges.length ))
+    // this is a new entity with no FGRs, Let coarse grain win
+    if((! this.entity.userPrivileges && ! this.entity.version)  || (! this.entity.version && this.entity.userPrivileges && ! this.entity.userPrivileges.length ))
       return;
 
     const userPrivileges = (this.entity.userPrivileges && this.entity.userPrivileges.length) ? this.entity.userPrivileges[0] : <Privilege> {username : this.userService._lastUser.value.username, permissions : ['NONE']};

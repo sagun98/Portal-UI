@@ -11,6 +11,7 @@ import { ViewApiComponent } from './api/view-api/view-api.component';
 import { ManageProductComponent } from './product/manage-product/manage-product.component';
 import { ApiResolve } from './api/resolves/api.resolve';
 import { RoleCheckGuard } from '../core/guards/role-check/role-check.guard';
+import { ApiByVersionResolve } from './api/resolves/api-by-version.resolve';
 
 export const documentationRoutes: Routes = [
     {
@@ -86,6 +87,16 @@ export const documentationRoutes: Routes = [
                     permissions : ['API_DEVELOPER']
                 }
             },
+            {
+                path : 'api/:apiId/version/:version/edit', component : ManageApiComponent, canActivate : [RoleCheckGuard],
+                resolve: {
+                    api: ApiByVersionResolve
+                },
+                data : {
+                    saveMethod : 'updateApi',
+                    permissions : ['API_DEVELOPER']
+                }
+            }
         ]
     },
 ];
