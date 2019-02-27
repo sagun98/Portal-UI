@@ -9,11 +9,13 @@ import { CommonModule } from '@angular/common';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { ApiCardComponent } from './api-card/api-card.component';
 import { NoApisComponent } from './no-apis/no-apis.component';
+import { ApiVersionSelectorComponent } from './api-version-selector/api-version-selector.component';
 
 const COMPONENTS = [
   EntityPermissionsModalComponent,
   ApigeeApiKeyModalComponent,
   NoApisComponent,
+  ApiVersionSelectorComponent,
   ApiCardComponent
 ]
 
@@ -27,8 +29,7 @@ const COMPONENTS = [
     CoreSharedModule
   ],
   declarations: [
-    ...COMPONENTS,
-    ApiCardComponent
+    ...COMPONENTS
   ],
   exports : [
     ...COMPONENTS

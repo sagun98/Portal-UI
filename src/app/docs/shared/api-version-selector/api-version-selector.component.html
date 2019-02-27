@@ -1,0 +1,22 @@
+<clr-dropdown *ngIf="(api.apiDetails && api.apiDetails.length)">
+  <button type="button" class="btn btn-link" clrDropdownTrigger>
+    Version: {{ api.apiVersion }}
+    <clr-icon shape="caret down"></clr-icon>
+  </button>
+  <clr-dropdown-menu clrPosition="right" *clrIfOpen>
+    
+    <ng-container *ngIf="createNewVersion">
+      <button clrDropdownItem (click)="_onNewVersionClick()">Create New Version <clr-icon shape="plus-circle" style="margin-top:-3px;"></clr-icon></button>
+
+      <ng-container *ngIf="api.apiDetails.length > 1">
+        <div class="dropdown-divider"></div>
+        <label class="dropdown-header">Existing Versions</label>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngFor="let detail of api.apiDetails">
+      <button *ngIf="detail.apiVersion !== api.apiVersion" type="button" clrDropdownItem (click)="versionChange(detail)">v{{ detail.apiVersion }}</button>
+    </ng-container>
+
+  </clr-dropdown-menu>
+</clr-dropdown>

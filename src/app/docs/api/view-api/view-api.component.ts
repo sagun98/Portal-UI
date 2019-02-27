@@ -1,9 +1,10 @@
+import { APIDetail } from './../../../core/interfaces/api-detail.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ForumService } from '../../../core/services/forum/forum.service';
 import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum';
 import { UserService } from '../../../core/services/user/user.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { API } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
@@ -37,6 +38,7 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
 
   constructor(
     private activatedRoute : ActivatedRoute,
+    private router: Router,
     private userService : UserService,
     private domSanitizer: DomSanitizer,
     private apiService: ApiService,
@@ -91,6 +93,12 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       });
     }
     return matches;
+  }
+
+  public getApiByVersion (apiDetail: APIDetail) : void {
+    this.router.navigate([`/docs/api/${this.api.slug}/version/${apiDetail.apiVersion}`], {relativeTo: this.activatedRoute}).then(success => {
+
+    });
   }
 
   private setSwaggerUI () {

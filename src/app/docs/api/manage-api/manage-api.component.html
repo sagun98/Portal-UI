@@ -2,17 +2,9 @@
 
   <clr-icon shape="times" size="30" class="close-editor" *ngIf="!sideNavOpen" (click)="openAPIEditor()"></clr-icon>
 
-  <clr-dropdown *ngIf="(api.apiDetails && api.apiDetails.length && api.apiDetails.length > 1) && sideNavOpen" class="bottom-spacer-20">
-    <button type="button" class="btn btn-link" clrDropdownTrigger>
-      Version: {{ api.apiVersion }}
-      <clr-icon shape="caret down"></clr-icon>
-    </button>
-    <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-      <ng-container *ngFor="let detail of api.apiDetails">
-        <button type="button" *ngIf="detail.apiVersion !== api.apiVersion" clrDropdownItem (click)="getApiByVersion(api.id, detail.apiVersion)">v{{ detail.apiVersion }}</button>
-      </ng-container>
-    </clr-dropdown-menu>
-  </clr-dropdown>
+  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+
+  <hr class="bottom-spacer-30" *ngIf="sideNavOpen && api.version"/> 
 
   <h3 *ngIf="sideNavOpen">
     <span>{{ title }}</span>
@@ -217,27 +209,20 @@
 
     <div class="fixed-footer" [class.expanded]="! sideNavOpen">
       <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-4">
           <button type="submit" class="btn btn-primary-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="api">
             <clr-icon shape="floppy"></clr-icon>
             <span class="ml5 hidden-xs">Save API</span>
           </button>
         </div>
 
-        <div class="col-xs-3">
-          <button type="button" (click)="handleNewVersion()" class="btn btn-primary-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY]" [entity]="api">
-            <clr-icon shape="floppy"></clr-icon>
-            <span class="ml5 hidden-xs">New Version</span>
-          </button>
-        </div>
-
-        <div class="col-xs-3 text-center">
+        <div class="col-xs-4 text-center">
           <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.API.DELETE]" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
             <clr-icon shape="times-circle"></clr-icon>
             <span class="ml5 hidden-xs">Delete API</span>
           </button>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-4">
           <a type="submit" class="btn btn-danger-outline pull-right" [routerLink]="backRoute">
             <clr-icon shape="times"></clr-icon>
             <span class="ml5 hidden-xs">Cancel</span>

@@ -21,6 +21,8 @@ export class ApiByVersionResolve implements Resolve<any> {
                     this.router.navigate([`/docs/api/search`]);
                     this.toastrService.error('This API cannot be found.');
                 }
+            },error => {
+                this.router.navigate([`/docs/api/search`]);
             })
         );
     }

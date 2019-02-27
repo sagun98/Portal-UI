@@ -1,3 +1,4 @@
+import { APIDetail } from './../../../core/interfaces/api-detail.interface';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
@@ -48,6 +49,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public editorUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.editorUrl );
   private iframeLoaded:boolean = false;
   public sideNavOpen: boolean = true;
+  private tempNewVersionFile;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -160,15 +162,15 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
           this.postSwaggerToEditor( document.getElementById("swagger-editor"), evt.target.result );
         }
       } else {
-        this.postSwaggerToEditor( document.getElementById("swagger-editor") );
+        this.postSwaggerToEditor( document.getElementById("swagger-editor"));
       }
     }
 
     this.sideNavigationService.setSideNavOpenState(this.sideNavOpen);
   }
 
-  public getApiByVersion (apiId: string, version: string) : void {
-    this.router.navigate([`/docs/api/${this.api.id}/version/${version}/edit`], {relativeTo: this.activatedRoute}).then(success => {
+  public getApiByVersion (apiDetail: APIDetail) : void {
+    this.router.navigate([`/docs/api/${this.api.slug}/version/${apiDetail.apiVersion}/edit`], {relativeTo: this.activatedRoute}).then(success => {
       this.postSwaggerToEditor( document.getElementById("swagger-editor"), this.api.swagger );
 
       Object.keys(this.form.controls).forEach(controlName => {
@@ -176,13 +178,6 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
           this.form.get(controlName).setValue(this.api[controlName], {emitEvent : false});
       })
     });
-    // this.apiService.getApiByVersion(apiId, version).subscribe(api => {
-    //   this.api = api;
-
-    //   let tempApi = Object.assign({}, api);
-
-
-    // });
   }
 
   public saveApi () {
@@ -207,24 +202,10 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   }
 
   public handleNewVersion () {
-    this.preSave().subscribe(apiData => {
-      this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
-        if (version === 2){
-          this.showSwaggerVersion2Message = true;
-          this.swaggerMessageModal.onClosed.subscribe(closed => {
-            if (closed)
-              this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-                this.router.navigate([`/docs/api/${api.slug}`]);
-              });
-          })
-        }
-
-        else
-          this.apiService.createNewVersion(apiData).subscribe( (api: API) => {
-            this.router.navigate([`/docs/api/${api.slug}`]);
-          });
-      });
-    });
+    this.tempNewVersionFile = this.form.get('file').value;
+    this.api.apiVersion = 'New';
+    this.saveMethod = "createNewVersion";
+    this.form.get('published').setValue(false);
   }
 
   public get UIFormattedTags () {
@@ -286,13 +267,13 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
         if(! this.sideNavOpen)
           this.openAPIEditor();
 
-        observer.error({});
+        // observer.error({});
         return;
       }
 
       if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
         this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
-        observer.error({});
+        // observer.error({});
         return;
       }
 

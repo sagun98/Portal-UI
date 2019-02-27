@@ -78,6 +78,12 @@ export const documentationRoutes: Routes = [
                 }
             },
             {
+                path: 'api/:apiId/version/:version', component: ViewApiComponent,
+                resolve: {
+                    api: ApiByVersionResolve
+                }
+            },
+            {
                 path : 'api/:apiId/edit', component : ManageApiComponent, canActivate : [RoleCheckGuard],
                 resolve: {
                     api: ApiResolve
