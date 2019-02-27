@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ERROR_CLASSES } from 'src/app/core/constants/error-classes.constant';
 
 @Component({
   selector: 'app-manage-user',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ManageUserComponent implements OnInit {
 
+  errorClasses = ERROR_CLASSES;
   userForm: FormGroup;
 
   constructor(private userService: UserService, private router: Router) {}
@@ -29,5 +31,9 @@ export class ManageUserComponent implements OnInit {
       .subscribe(result => {
         this.userService.userStateChange.next('list');
       });
+  }
+
+  onCancelAddUser() {
+    this.userService.userStateChange.next('list');
   }
 }

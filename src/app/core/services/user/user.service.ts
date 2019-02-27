@@ -103,14 +103,6 @@ export class UserService {
     );
   }
 
-  public getUserById(userId: String) {
-    let headers = new HttpHeaders()
-      .append('PearsonSSOSession', this.authToken);
-
-    const url = `${environment.restBase}/users` + "/" + userId;
-    return this.http.get<IPortalUser>(url, { headers: headers, withCredentials: true});
-  }
-
   public removeUser(userId: String) {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);

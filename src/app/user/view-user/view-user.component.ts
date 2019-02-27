@@ -27,7 +27,6 @@ export class ViewUserComponent implements OnInit {
     const doDelete = confirm('Are you sure you want to delete this user?');
 
     if (doDelete) {
-      const self = this;
       this.userService.removeUser(userId).subscribe(() => {
         this.userService.getAllUsers()
           .subscribe(users => {
