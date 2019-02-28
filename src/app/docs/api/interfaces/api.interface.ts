@@ -20,4 +20,5 @@ export interface API extends PermissibleEntity, Publishable{
     apiManagementTool? : ApiManagementTool,
     followers? : string[],
     apiVersion?: string;
+    deprecated?: boolean;
 }

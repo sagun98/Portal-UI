@@ -20,6 +20,7 @@ import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../..
 import { SideNavigationService } from '../../../core/layouts/side-navigation/side-navigation.service';
 import { environment } from '../../../../environments/environment';
 import { isDefined } from '@angular/compiler/src/util';
+import { deprecate } from 'util';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -111,6 +112,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       swaggerUrl : [this.api.swaggerUrl],
       userPrivileges : [this.api.userPrivileges],
       published : [this.api.published || false, [Validators.required]],
+      deprecated : [this.api.deprecated || false, []],
       swaggerOption : [this.swaggerOption]
     });
 
@@ -204,8 +206,31 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public handleNewVersion () {
     this.tempNewVersionFile = this.form.get('file').value;
     this.api.apiVersion = 'New';
+    this.api.deprecated = false;
     this.saveMethod = "createNewVersion";
     this.form.get('published').setValue(false);
+    this.form.get('deprecated').setValue(false);
+  }
+
+  public handleDeprecationClick () {
+    const deprecated = this.form.get('deprecated').value;
+    const verb = (deprecated) ? 'activate' : 'deprecate';
+
+    const doDeprecation = confirm(`Are you sure you want to ${verb} this version?`);
+
+    if (doDeprecation) {
+
+      this.form.get('deprecated').setValue(! deprecated);
+
+      this.preSave().subscribe(apiData => {
+        this.apiService.updateApi(apiData).subscribe(api => {
+          this.api = api;
+          this.form.get('version').setValue(api.version);
+          this.form.get('deprecated').setValue(api.deprecated);
+          this.toastrService.success(`Successfully ${verb}d this version of the ${api.name} API`);
+        });
+      });
+    }
   }
 
   public get UIFormattedTags () {

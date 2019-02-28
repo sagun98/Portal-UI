@@ -2,12 +2,21 @@
 
   <clr-icon shape="times" size="30" class="close-editor" *ngIf="!sideNavOpen" (click)="openAPIEditor()"></clr-icon>
 
-  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onDeprecateClick)="handleDeprecationClick($event)" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+
+  <!-- <button class="btn btn-danger-outline" style="margin-left:100px;">
+    <clr-icon shape="uninstall" size="25"></clr-icon>
+
+    Deprecate Version {{ api.apiVersion }}
+  </button> -->
 
   <hr class="bottom-spacer-30" *ngIf="sideNavOpen && api.version"/> 
 
   <h3 *ngIf="sideNavOpen">
     <span>{{ title }}</span>
+
+    <div *ngIf="api.deprecated" class="label label-warning ml10" style="vertical-align: super;">Deprecated</div>
+
     <!-- Function defined in parent class -->
     <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
       <clr-tooltip>

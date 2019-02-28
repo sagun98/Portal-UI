@@ -32,7 +32,7 @@
     </clr-tooltip>
   </div>
 
-  <h1>{{ api.name }}</h1>
+  <h1>{{ api.name }}     <div *ngIf="api.deprecated" class="label label-warning ml10" style="vertical-align: super;">Deprecated</div></h1>
 
   <p class="bottom-spacer-20">{{ api.description }}</p>
 
