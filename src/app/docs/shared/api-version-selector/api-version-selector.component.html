@@ -6,7 +6,7 @@
   <clr-dropdown-menu clrPosition="right" *clrIfOpen>
     
     <ng-container *ngIf="createNewVersion">
-      <button clrDropdownItem (click)="_onNewVersionClick()">Create New Version <clr-icon shape="plus-circle" style="margin-top:-3px;"></clr-icon></button>
+      <button clrDropdownItem (click)="_onNewVersionClick()" class="bottom-spacer-10">Create New Version <clr-icon shape="plus-circle" style="margin-top:-3px;"></clr-icon></button>
 
       <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="! api.deprecated">Deprecate Active Version <clr-icon shape="minus-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
       
