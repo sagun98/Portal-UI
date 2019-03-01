@@ -168,9 +168,10 @@ export class HeaderComponent implements OnInit {
             results.splice(i,1);
           } else {
             for(let j = (results.length-1) ; j >= 0; j--) {
-              if (results[j].itemId == result.itemId && results[j].version == idMap[result.itemId])
+              if (results[j].itemId == result.itemId && results[j].version == idMap[result.itemId]){
                 results.splice(j,1);
                 break;
+              }
             }
             idMap[result.itemId] = result.version;
           }
