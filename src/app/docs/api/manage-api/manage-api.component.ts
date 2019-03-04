@@ -216,7 +216,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     if (doDelete) {
       this.apiService.deleteVersion(this.api, this.api.apiVersion).subscribe(api => {
         this.router.navigate([`/docs/api/${api.slug}/version/${api.apiVersion}/edit`]).then(navigated => {
-
+          this.toastrService.success(`Version successfully deleted`);
         });
       });
     }
