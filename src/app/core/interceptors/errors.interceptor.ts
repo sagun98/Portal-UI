@@ -6,8 +6,7 @@ import { Observable, Subject, of, throwError } from "rxjs";
 import { Injectable } from "@angular/core";
 import { HTTP_ERROR_TYPES } from '../enums/http-error-types.enum';
 import { isArray } from 'util';
-import { _throw } from 'rxjs/observable/throw';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable({providedIn : 'root'})
 export class ErrorInterceptor implements HttpInterceptor {
@@ -16,6 +15,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     ) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if(request.url.indexOf(environment.forumBase) >= 0)
+            return <any> next.handle(request);
+
         return <any> next.handle(request).pipe(catchError( (errorResponse : HttpErrorResponse, caught: Observable<HttpEvent<any>>) => {
             
             const errorMessages: HttpErrorMessage[] = [];
@@ -43,19 +45,17 @@ export class ErrorInterceptor implements HttpInterceptor {
                         response : errorResponse
                     }
                 );
-                
-            // else if(! errorResponse.error)
-            //     errorMessages.push(
-            //         <HttpErrorMessage> {
-            //             id: new Date().getTime(),
-            //             type : HTTP_ERROR_TYPES.ERROR,
-            //             title : '',
-            //             message : '',
-            //             response : errorResponse
-            //         }
-            //     );
-                
-          
+            
+            else if(errorResponse.error && !errorResponse.error.message)
+                errorMessages.push(
+                    <HttpErrorMessage> {
+                        id: new Date().getTime(),
+                        type : errorResponse.error.type || HTTP_ERROR_TYPES.ERROR,
+                        title : errorResponse.error.title || '',
+                        message : errorResponse.message,
+                        response : errorResponse
+                    }
+                );
 
             this.httpErrorsServices.$onError.next(errorMessages);
 

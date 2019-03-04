@@ -1,3 +1,4 @@
+import { LoadingInterceptorService } from './core/loading-interceptor/loading-interceptor.service';
 import { environment } from '../environments/environment';
 import { PermissionsService } from './core/services/permissions/permissions.service';
 import { Router, ActivatedRouteSnapshot } from '@angular/router';
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit{
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService,
     private userService: UserService,
+    private loadingInterceptorService: LoadingInterceptorService,
     private permissionsService : PermissionsService,
     private router : Router
   ){}
@@ -87,11 +89,17 @@ export class AppComponent implements OnInit{
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
             //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
-            if (error.response.status === 401)
+            if (error.response.status === 401 || error.response.status === 0)
               this.userService.staticLogout();
 
-            if (error.response.status === 0) 
-              this.httpErrorsServices.override = false;
+            // Usually a CORS failure associated with a stale pearsonssosession token
+            if (error.response.status === 0) {
+              this.userService.staticLogout();
+              this.toastrService.error('Oops... It looks like your session timed out.  Please log back in to continue.');
+              this.showLogin = false;
+              setTimeout(t => { this.showLogin = true; })
+              this.loadingInterceptorService.closeOpenRequest();
+            }
 
             else if(! this.httpErrorsServices.override)
               this.toastrService[error.type ](error.title, error.message);

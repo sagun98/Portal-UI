@@ -145,6 +145,10 @@ export class ApiService {
     return request;
   }
 
+  public deleteVersion (api: API, version:string) : Observable<API>  {
+    return <Observable<API>> this.http.delete(`${environment.restBase}/apis/${api.id}/version/${version}`);
+  }
+
   public getApiList() {
     return this.http.get(`${environment.restBase}/apis`).pipe(
       tap((apis : API[]) => {

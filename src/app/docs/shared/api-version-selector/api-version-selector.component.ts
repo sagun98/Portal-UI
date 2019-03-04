@@ -14,6 +14,7 @@ export class ApiVersionSelectorComponent implements OnInit {
   @Output() onSelectionChange: EventEmitter<APIDetail> = new EventEmitter<APIDetail>();
   @Output() onNewVersionClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDeprecateClick: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDeleteClick: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -30,5 +31,9 @@ export class ApiVersionSelectorComponent implements OnInit {
 
   public _onDeprecateClick () : void {
     this.onDeprecateClick.next();
+  }
+
+  public _onDeleteClick () : void {
+    this.onDeleteClick.next();
   }
 }

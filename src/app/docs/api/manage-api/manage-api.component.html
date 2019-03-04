@@ -2,7 +2,7 @@
 
   <clr-icon shape="times" size="30" class="close-editor" *ngIf="!sideNavOpen" (click)="openAPIEditor()"></clr-icon>
 
-  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onDeprecateClick)="handleDeprecationClick($event)" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onDeleteClick)="handleVersionDelete($event)" (onDeprecateClick)="handleDeprecationClick($event)" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
 
   <!-- <button class="btn btn-danger-outline" style="margin-left:100px;">
     <clr-icon shape="uninstall" size="25"></clr-icon>

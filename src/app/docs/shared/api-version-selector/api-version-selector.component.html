@@ -8,9 +8,11 @@
     <ng-container *ngIf="createNewVersion">
       <button clrDropdownItem (click)="_onNewVersionClick()" class="bottom-spacer-10">Create New Version <clr-icon shape="plus-circle" style="margin-top:-3px;"></clr-icon></button>
 
-      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="! api.deprecated">Deprecate Active Version <clr-icon shape="minus-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
+      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="! api.deprecated" class="bottom-spacer-10">Deprecate Active Version <clr-icon shape="minus-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
       
-      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="api.deprecated">Activate this Version <clr-icon shape="power" class="has-badge--success" style="margin-top:-3px;"></clr-icon></button>
+      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="api.deprecated" class="bottom-spacer-10">Activate this Version <clr-icon shape="power" class="has-badge--success" style="margin-top:-3px;"></clr-icon></button>
+
+      <button clrDropdownItem (click)="_onDeleteClick()" *ngIf="api.apiDetails.length > 1">Delete this Version <clr-icon shape="times-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
 
       <ng-container *ngIf="api.apiDetails.length > 1">
         <div class="dropdown-divider"></div>

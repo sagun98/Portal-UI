@@ -19,8 +19,6 @@ import { PermissionsService } from '../../../core/services/permissions/permissio
 import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../../core/interfaces/browser-message.interface';
 import { SideNavigationService } from '../../../core/layouts/side-navigation/side-navigation.service';
 import { environment } from '../../../../environments/environment';
-import { isDefined } from '@angular/compiler/src/util';
-import { deprecate } from 'util';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -210,6 +208,18 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     this.saveMethod = "createNewVersion";
     this.form.get('published').setValue(false);
     this.form.get('deprecated').setValue(false);
+  }
+
+  public handleVersionDelete () {
+    const doDelete = confirm(`Are you sure you want to delete this version?`);
+
+    if (doDelete) {
+      this.apiService.deleteVersion(this.api, this.api.apiVersion).subscribe(api => {
+        this.router.navigate([`/docs/api/${api.slug}/version/${api.apiVersion}/edit`]).then(navigated => {
+
+        });
+      });
+    }
   }
 
   public handleDeprecationClick () {
