@@ -4,11 +4,13 @@
 
   <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onDeleteClick)="handleVersionDelete($event)" (onDeprecateClick)="handleDeprecationClick($event)" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
 
-  <!-- <button class="btn btn-danger-outline" style="margin-left:100px;">
-    <clr-icon shape="uninstall" size="25"></clr-icon>
-
-    Deprecate Version {{ api.apiVersion }}
-  </button> -->
+  <clr-alert [clrAlertType]="'info'" *ngIf="api.apiVersion == 'New'">
+    <clr-alert-item>
+      <span class="alert-text">
+        <b>New Version Mode:</b>  By default, all data is copied from the previously selected version, however, the published state will be set to false.  A new version number will be required in the Swagger Document to create a new version.
+      </span>
+    </clr-alert-item>
+  </clr-alert>
 
   <hr class="bottom-spacer-30" *ngIf="sideNavOpen && api.version"/> 
 

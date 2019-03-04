@@ -171,12 +171,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   public getApiByVersion (apiDetail: APIDetail) : void {
     this.router.navigate([`/docs/api/${this.api.slug}/version/${apiDetail.apiVersion}/edit`], {relativeTo: this.activatedRoute}).then(success => {
-      this.postSwaggerToEditor( document.getElementById("swagger-editor"), this.api.swagger );
-
-      Object.keys(this.form.controls).forEach(controlName => {
-        if( typeof this.api[controlName] !== "undefined" )
-          this.form.get(controlName).setValue(this.api[controlName], {emitEvent : false});
-      })
+      this.rebuildForm();
     });
   }
 
@@ -217,9 +212,19 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       this.apiService.deleteVersion(this.api, this.api.apiVersion).subscribe(api => {
         this.router.navigate([`/docs/api/${api.slug}/version/${api.apiVersion}/edit`]).then(navigated => {
           this.toastrService.success(`Version successfully deleted`);
+          this.api = api;
+          this.rebuildForm();
         });
       });
     }
+  }
+
+  private rebuildForm() {
+    this.postSwaggerToEditor(document.getElementById("swagger-editor"), this.api.swagger);
+    Object.keys(this.form.controls).forEach(controlName => {
+      if (typeof this.api[controlName] !== "undefined")
+        this.form.get(controlName).setValue(this.api[controlName], { emitEvent: false });
+    });
   }
 
   public handleDeprecationClick () {
