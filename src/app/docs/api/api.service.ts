@@ -146,7 +146,17 @@ export class ApiService {
   }
 
   public deleteVersion (api: API, version:string) : Observable<API>  {
-    return <Observable<API>> this.http.delete(`${environment.restBase}/apis/${api.id}/version/${version}`);
+    return <Observable<API>> this.http.delete(`${environment.restBase}/apis/${api.id}/version/${version}`).pipe(
+      tap((updatedApi: API) => {
+        this._api_cache_ = updatedApi;
+
+        // Emit ApiListChanged event
+        this.$onApiListChanged.next({
+          action: CRUD.UPDATE,
+          api: updatedApi
+        });
+      })
+    );
   }
 
   public getApiList() {
