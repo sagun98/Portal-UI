@@ -18,6 +18,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(request.url.indexOf(environment.forumBase) >= 0)
             return <any> next.handle(request);
 
+        if(request.url.indexOf(location.hostname) == -1)
+            return <any> next.handle(request);
+        
         return <any> next.handle(request).pipe(catchError( (errorResponse : HttpErrorResponse, caught: Observable<HttpEvent<any>>) => {
             
             const errorMessages: HttpErrorMessage[] = [];
