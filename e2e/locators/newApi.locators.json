@@ -1,0 +1,34 @@
+{
+    "apiName": {
+        "id": "apiName"
+    },
+
+    "createApiHeading": {
+        "css": "h3 span"
+    },
+
+    "description": {
+        "id": "description"
+    },
+
+    "file" : {
+        "css":"input[type=file]"
+    },
+
+    "save" : {
+        "css": ".btn.pull-left"
+    },
+
+    "newApiHeading": {
+        "css": "main > api > div > h1"
+    },
+
+    "editApiButton": {
+        "css": ".btn.btn-sm.edit-page-btn"
+    },
+
+    "deleteApiButton": {
+        "css": "[ng-reflect-has-permission='API_DELETE']"
+    }
+}
+

@@ -4,3 +4,5 @@ coverage/
 .vscode
 .env
 nodejs*
+htmlreport/
+.DS_Store

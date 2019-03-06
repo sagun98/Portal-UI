@@ -2,8 +2,23 @@
 
   <clr-icon shape="times" size="30" class="close-editor" *ngIf="!sideNavOpen" (click)="openAPIEditor()"></clr-icon>
 
+  <api-version-selector *ngIf="sideNavOpen" [createNewVersion]="true" [api]="api" (onDeleteClick)="handleVersionDelete($event)" (onDeprecateClick)="handleDeprecationClick($event)" (onNewVersionClick)="handleNewVersion($event)" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+
+  <clr-alert [clrAlertType]="'info'" *ngIf="api.apiVersion == 'New' && sideNavOpen">
+    <clr-alert-item>
+      <span class="alert-text">
+        <b>New Version Mode:</b>  By default, all data is copied from the previously selected version, however, the published state will be set to false.  A new version number will be required in the Swagger Document to create a new version.
+      </span>
+    </clr-alert-item>
+  </clr-alert>
+
+  <hr class="bottom-spacer-30" *ngIf="sideNavOpen && api.version"/> 
+
   <h3 *ngIf="sideNavOpen">
     <span>{{ title }}</span>
+
+    <div *ngIf="api.deprecated" class="label label-warning ml10" style="vertical-align: super;">Deprecated</div>
+
     <!-- Function defined in parent class -->
     <a *ngIf="api.id" class="ml20" (click)="openManageApiPrivilegesModal()" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
       <clr-tooltip>
@@ -210,17 +225,8 @@
             <clr-icon shape="floppy"></clr-icon>
             <span class="ml5 hidden-xs">Save API</span>
           </button>
-
-          <!-- <clr-tooltip>
-            <button clrTooltipTrigger type="submit" class="btn btn-success-outline pull-left" [hasPermission]="[permissions.API.UPDATE, permissions.API.CREATE]" [hasPermissionTo]="entityPermissions.MODIFY" [entity]="api">
-              <clr-icon shape="check-circle"></clr-icon>
-              <span class="ml5 hidden-xs">Publish API</span>
-            </button>
-            <clr-tooltip-content clrPosition="top-right" clrSize="sm" *clrIfOpen>
-                <span>Allow other develoeprs to discover your API on the Pearson Developer Portal</span>
-            </clr-tooltip-content>
-          </clr-tooltip> -->
         </div>
+
         <div class="col-xs-4 text-center">
           <button type="button" *ngIf="api.id" (click)="handleDelete()" class="btn btn-danger-outline" [hasPermission]="[permissions.API.DELETE]" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="api">
             <clr-icon shape="times-circle"></clr-icon>

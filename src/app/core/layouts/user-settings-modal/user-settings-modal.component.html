@@ -113,15 +113,26 @@
           </clr-tab-content>
         </ng-template>
       </clr-tab>
+
+      <clr-tab *ngIf="user?.roleMap?.ADMIN">
+          <button clrTabLink>
+            <h4>Manage Users</h4>
+          </button>
+          <ng-template [(clrIfActive)]="activeTabs.manageUsers">
+            <clr-tab-content>
+              <app-user></app-user>
+            </clr-tab-content>
+          </ng-template>
+        </clr-tab>
   
     </clr-tabs>
 
   </div>
 
-  <div class="modal-footer">
+  <!-- <div class="modal-footer">
     <button type="button" class="btn btn-primary" (click)="opened = false">
       <clr-icon shape="times"></clr-icon> Close
     </button>
-  </div>
+  </div> -->
 
 </clr-modal>

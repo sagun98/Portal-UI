@@ -1,0 +1,28 @@
+<clr-dropdown *ngIf="(api.apiDetails && api.apiDetails.length)">
+  <button type="button" class="btn btn-link" clrDropdownTrigger>
+    Version: {{ api.apiVersion }}
+    <clr-icon shape="caret down"></clr-icon>
+  </button>
+  <clr-dropdown-menu clrPosition="right" *clrIfOpen>
+    
+    <ng-container *ngIf="createNewVersion">
+      <button clrDropdownItem (click)="_onNewVersionClick()" class="bottom-spacer-10">Create New Version <clr-icon shape="plus-circle" style="margin-top:-3px;"></clr-icon></button>
+
+      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="! api.deprecated" class="bottom-spacer-10">Deprecate Active Version <clr-icon shape="minus-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
+      
+      <button clrDropdownItem (click)="_onDeprecateClick()" *ngIf="api.deprecated" class="bottom-spacer-10">Activate this Version <clr-icon shape="power" class="has-badge--success" style="margin-top:-3px;"></clr-icon></button>
+
+      <button clrDropdownItem (click)="_onDeleteClick()" *ngIf="api.apiDetails.length > 1">Delete this Version <clr-icon shape="times-circle" class="has-badge" style="margin-top:-3px;"></clr-icon></button>
+
+      <ng-container *ngIf="api.apiDetails.length > 1">
+        <div class="dropdown-divider"></div>
+        <label class="dropdown-header">Existing Versions</label>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngFor="let detail of api.apiDetails">
+      <button *ngIf="detail.apiVersion !== api.apiVersion" type="button" clrDropdownItem (click)="versionChange(detail)">v{{ detail.apiVersion }}</button>
+    </ng-container>
+
+  </clr-dropdown-menu>
+</clr-dropdown>

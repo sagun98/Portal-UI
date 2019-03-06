@@ -22,7 +22,7 @@ export const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false, preloadingStrategy : PreloadAllModules, useHash : false}
+      { enableTracing: false, preloadingStrategy : PreloadAllModules, useHash : false, onSameUrlNavigation: "reload"}
     )
   ],
   exports: [RouterModule],

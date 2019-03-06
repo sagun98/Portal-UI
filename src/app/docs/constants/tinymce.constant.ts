@@ -23,10 +23,52 @@ import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/code';
 import 'tinymce/plugins/imagetools';
 import 'tinymce/plugins/image';
+import { environment } from 'src/environments/environment';
+
 
 export const TINYCMCE_CONFIG = {
+    get authToken() {
+        return localStorage.getItem('pearson.devportal.authToken') || '';
+      },
     skin_url: '/assets/skins/lightgray',
-    plugins: 'colorpicker print preview image searchreplace autolink directionality link codesample table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
-    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | link image',
-    height: 350
+    plugins: 'colorpicker print preview image searchreplace autolink directionality link table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    toolbar1: 'insertfile undo redo | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | image',
+    automatic_uploads: true,
+    images_upload_credentials: true,
+    paste_data_images: true,
+    file_browser_callback_types: 'image',
+    convert_urls: true,
+    relative_urls : false,
+    remove_script_host : false,
+    height: 350,
+    images_upload_handler: function (blobInfo, success, failure) {
+        var xhr, formData;
+    
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.open('POST', `${environment.restBase}/uploads`);
+        xhr.setRequestHeader('pearsonssosession', TINYCMCE_CONFIG.authToken); // manually set header
+    
+        xhr.onload = function() {
+          var json;
+          if (xhr.status != 200) {
+            failure('HTTP Error: ' + xhr.status);
+            return;
+          }
+    
+          json = JSON.parse(xhr.responseText);
+    
+          if (!json || typeof json.location != 'string') {
+            failure('Invalid JSON: ' + xhr.responseText);
+            return;
+          }
+    
+          success(json.location);
+        };
+    
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+    
+        xhr.send(formData);
+      }
 }

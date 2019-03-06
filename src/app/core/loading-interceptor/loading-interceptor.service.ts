@@ -36,7 +36,10 @@ export class LoadingInterceptorService {
     this.$onRequest.next(openRequestCount);
   }
 
-  public closeOpenRequest (requestId : number) {
+  public closeOpenRequest (requestId? : number) {
+    if(! requestId)
+      this.activeRequestMap = {};
+
     delete this.activeRequestMap[requestId];
 
     const openRequestCount = Object.keys(this.activeRequestMap).length;

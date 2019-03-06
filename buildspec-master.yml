@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "717566366360.dkr.ecr.us-east-1.amazonaws.com/dev-portal-ui"
-    IMAGE_TAG: "2.3.0"
+    IMAGE_TAG: "2.3.1-SNAPSHOT"
 
 phases:
   install:
@@ -17,9 +17,12 @@ phases:
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
+      - ng e2e --baseUrl='https://dev.code-test.aws.pearson.com/' --suite nonprod
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-880745084073/$(echo $TIMESTAMP)/coverage --recursive
-      - echo https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-880745084073/$TIMESTAMP/coverage/index.html
+      - aws s3 cp htmlreport/ s3://codebuild-dev-portal-ui-tests-880745084073/$(echo $TIMESTAMP)/e2e --recursive
+      - echo Unit Test Coverage Link https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-880745084073/$TIMESTAMP/coverage/index.html
+      - echo E2E Test Coverage Link https://s3.amazonaws.com/codebuild-dev-portal-ui-tests-880745084073/$TIMESTAMP/e2e/report.html
   build:
     commands:
       - echo Building the Docker image...        

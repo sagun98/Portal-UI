@@ -1,0 +1,10 @@
+{
+    "loader" : {
+        "id" : "loading-indicator",
+        "css" : ".spinner.spinner-lg"
+    },
+    "toastr" : {
+        "id" : "",
+        "css" : ".toast"
+    }
+}

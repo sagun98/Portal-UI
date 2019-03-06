@@ -1,0 +1,20 @@
+{
+    "productName": {
+        "id": "productName"
+    },
+    "productDescription": {
+        "id": "productDescription"
+    },
+    "apis": {
+        "css": "input[role='combobox']"
+    },
+    "newProductHeading": {
+        "css": "main > app-view-product > div > h1"
+    },
+    "deleteProductButton": {
+        "css": "[ng-reflect-has-permission='PRODUCT_DELETE']"
+    }
+
+}
+
+

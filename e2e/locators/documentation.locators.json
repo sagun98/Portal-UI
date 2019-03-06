@@ -1,0 +1,30 @@
+{
+"createApiDocButton": {
+        "css": "#documentation-side-nav > section:nth-child(3) > label > button"
+    },
+
+    "createApiDocName": {
+        "id": "name"
+    },
+
+    "createApiDocDesc": {
+        "id": "description"
+    },
+
+    "editApiDocumentationButton": {
+        "css": "a[ng-reflect-has-permission='DOCUMENTATION_UPDATE']"
+    },
+    "newApiDocsHeading": {
+        "css": "app-view-document  h2"
+    },
+
+    "deleteApiDocumentationButton": {
+        "css": "[ng-reflect-has-permission='DOCUMENTATION_DELETE']"
+    },
+
+    "flashMsg": {
+        "css": ".toast-top-right.toast-container"
+    }
+}
+
+

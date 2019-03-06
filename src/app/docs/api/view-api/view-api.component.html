@@ -1,5 +1,8 @@
 <div class="container">
 
+  <api-version-selector *ngIf="api.apiDetails && api.apiDetails.length && api.apiDetails.length > 1" [api]="api" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
+
+
   <a class="btn btn-sm edit-page-btn" routerLink="edit" [hasPermission]="[permissions.API.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="api">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit API
   </a>
@@ -29,7 +32,7 @@
     </clr-tooltip>
   </div>
 
-  <h1>{{ api.name }}</h1>
+  <h1>{{ api.name }}     <div *ngIf="api.deprecated" class="label label-warning ml10" style="vertical-align: super;">Deprecated</div></h1>
 
   <p class="bottom-spacer-20">{{ api.description }}</p>
 

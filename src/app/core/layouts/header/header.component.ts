@@ -68,6 +68,9 @@ export class HeaderComponent implements OnInit {
     const phrase: string = (form.controls['keywords']) ? form.controls['keywords'].value : '';
     
     this.searchService.search(phrase).subscribe( (results: any[]) => {
+
+      results = this.eliminateDuplicates(results);
+
       this.searchResults = results || [];
 
       if(results && results.length)
@@ -115,7 +118,7 @@ export class HeaderComponent implements OnInit {
     const url = (result.type === SearchTypes.PRODUCT) ? '/docs/apicollections/' + result.slug :
                 (result.type === SearchTypes.DOCUMENTATION) ? '/documentation/area/' + result.slug :
                 (result.type === SearchTypes.FORUM) ? '/forum/topic/' + result.slug :
-                (result.type === SearchTypes.API) ? '/docs/api/' + result.slug : '';
+                (result.type === SearchTypes.API) ? `/docs/api/${result.slug}/version/${result.version}` : '';
 
     this.router.navigate([`${url}`]).then(navigated => {
       if(navigated){
@@ -144,5 +147,70 @@ export class HeaderComponent implements OnInit {
   public openUserSettingsModal (opened : boolean) {
     this.userSettingsOpened = false;
     setTimeout(t => { this.userSettingsOpened = opened; }); 
+  }
+
+  /**
+   * These two methods could be moved to a service
+   */
+
+  private eliminateDuplicates (results: any[]) : any[] {
+    const numOfResults = results.length;
+      let idMap = {};
+
+      for(let i = (numOfResults-1) ; i >= 0; i--) {
+        const result = results[i];
+        
+        if(result.type === SearchTypes.API && ! idMap[result.itemId]) {
+          idMap[result.itemId] = result.version;
+        }
+        else if (result.type === SearchTypes.API && idMap[result.itemId]) {
+          if ( this.versionGTE(idMap[result.itemId], result.version)) {
+            results.splice(i,1);
+          } else {
+            for(let j = (results.length-1) ; j >= 0; j--) {
+              if (results[j].itemId == result.itemId && results[j].version == idMap[result.itemId]){
+                results.splice(j,1);
+                break;
+              }
+            }
+            idMap[result.itemId] = result.version;
+          }
+        }
+      }
+
+    return results;
+  }
+
+  private versionGTE (v1, v2) : boolean {
+
+    let arr1 = v1.split(".");
+    let arr2 = v2.split(".");
+
+    let i = 0;
+    while (i < arr1.length || i < arr2.length) {
+      if(i<arr1.length && i<arr2.length){
+        if(parseInt(arr1[i]) < parseInt(arr2[i])){
+          return false;
+        }else if(parseInt(arr1[i]) > parseInt(arr2[i])){
+          return true;
+        }
+      }
+      
+      else if(i<arr1.length){
+        if(parseInt(arr1[i]) != 0){
+          return true;
+        }
+      }
+      
+      else if(i<arr2.length){
+        if(parseInt(arr2[i]) != 0){
+              return false;
+          }
+      }
+      
+      i++;
+    }
+
+    return true;
   }
 }

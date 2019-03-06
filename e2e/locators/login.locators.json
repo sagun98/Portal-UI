@@ -1,0 +1,21 @@
+{
+    "loginBtn": {
+        "css": "#sign-in",
+        "id": "sign-in"
+    },
+     
+    "username": {
+        "css": "#username",
+        "id": "username"
+    },
+    
+    "password": {
+        "css": "#password",
+        "id": "password"
+    },
+    
+     "login": {
+        "css": ".modal-footer .btn.btn-outline"
+    }
+}
+

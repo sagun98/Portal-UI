@@ -3,26 +3,51 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+let HtmlReporter = require('protractor-beautiful-reporter');
+
+
 exports.config = {
-  allScriptsTimeout: 11000,
-  specs: [
-    './src/**/*.e2e-spec.ts'
-  ],
-  capabilities: {
-    'browserName': 'chrome'
-  },
+  allScriptsTimeout: 30000,
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  suites: {
+      nonprod: [
+          './spec/login.spec.js',
+           './spec/dashboard.spec.js',
+          './spec/checkLinks.spec.js',
+          ],
+      prod: [
+          './spec/loginProd.spec.js',
+          './spec/checkLinks.spec.js'
+      ]
+  },
+  capabilities: {
+    'browserName': 'chrome',
+    chromeOptions: {
+        args: [ "--headless", "--window-size=1000,1000", "--no-sandbox" ]
+    }
+  },
+  baseUrl: 'https://dev.code-test.aws.pearson.com/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 90000,
     print: function() {}
   },
-  onPrepare() {
-    require('ts-node').register({
-      project: require('path').join(__dirname, './tsconfig.e2e.json')
-    });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+
+  onPrepare: function() {
+      jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+      jasmine.getEnv().addReporter(new HtmlReporter({
+          // baseDirectory: `testresults/html/${Date.now()}`,
+          baseDirectory: `htmlreport`,
+          jsonsSubfolder: 'jsons',
+          preserveDirectory: false,
+          screenshotsSubfolder: 'images',
+          clientDefaults:{
+              columnSettings:{
+                  inlineScreenshots:true
+              }
+          }
+      }).getJasmine2Reporter());
   }
 };
+ 

@@ -1,6 +1,6 @@
 import { IPortalUser } from '../../interfaces/fr-user.interface';
 import { environment } from '../../../../environments/environment';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share } from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class UserService {
   public $doUserLogin: Subject<boolean> = new Subject<boolean>();
   public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
   public attemptedUrl: string = '';
+  public userStateChange: Subject<string> = new Subject<string>();
   
   private userRequest: Observable<{} | PortalUser>;
 
@@ -83,6 +84,13 @@ export class UserService {
     }));
   }
 
+  public getAllUsers() {
+    let headers = new HttpHeaders()
+      .append('PearsonSSOSession', this.authToken);
+    
+    return this.http.get<IPortalUser[]>(`${environment.restBase}/users`, { headers: headers, withCredentials: true});
+  }
+
   public getUser() {
     let headers = new HttpHeaders()
       .append('PearsonSSOSession', this.authToken);
@@ -95,10 +103,25 @@ export class UserService {
     );
   }
 
-  public getUserById (userId) {
-    return this.http.get<any>(`${environment.restBase}/users/${userId}`).pipe(
-      map((user : IPortalUser) => {
-        return (user) ?  new PortalUser(user) : null;
+  public removeUser(userId: String) {
+    let headers = new HttpHeaders()
+      .append('PearsonSSOSession', this.authToken);
+
+    const url = `${environment.restBase}/users` + "/" + userId;
+    return this.http.delete(url, { headers: headers, withCredentials: true});
+  }
+
+  public createUser(username: String, firstName: String, lastName: String, email: String) {
+    let user = {"username": username, "firstName": firstName, "lastName": lastName, "email": email};
+    return this.http.post(`${environment.restBase}/users`, user);
+  }
+
+  public getUserByIdOrEmail (userId) {
+    let params = new HttpParams();
+    params = params.append('email', userId);
+      return this.http.get<any>(`${environment.restBase}/users`,{params}).pipe(
+      map(([user] : IPortalUser[]) => {
+        return (user?  new PortalUser(user) : null);
       })
     );
   }

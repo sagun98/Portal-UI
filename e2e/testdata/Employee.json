@@ -1,0 +1,406 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pearson Employee Template",
+        "description": "A sample API that demonstrates using OpenAPI 3.0 to document your Pearson API. Add a general description on your API using CommonMark Markdown or HTML.  \n\n <h>Key Features Includes:</h3>\n<ul>  <li>A blurb what the API does</li>  <li>Information on how it should be used</li>  </ul>\n<b><h3>Authorize the app before using it by clicking the \"Authorize\" button below.</h3></b>",
+        "termsOfService": "https://www.pearson.com/us/terms-of-use.html",
+        "contact": {
+            "name": "API Team",
+            "url": "http://developer.pearson.com",
+            "email": "apisupport@pearson.com"
+        },
+        "version": "1.0.2"
+    },
+    "servers": [
+        {
+            "url": "https://dev.api.pearson.com/users",
+            "description": "Development server"
+        },
+        {
+            "url": "https://staging.api.pearson.com/users",
+            "description": "Staging server"
+        }
+    ],
+    "security": [
+        {
+            "APIKey": []
+        }
+    ],
+    "paths": {
+        "/employees": {
+            "get": {
+                "description": "Returns all users from the system that the user has access to view.\n",
+                "operationId": "findEmployee",
+                "responses": {
+                    "200": {
+                        "description": "All users response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Employee"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new user in the Employee.",
+                "operationId": "addUser",
+                "requestBody": {
+                    "description": "A new user that needs to be added to the Employee. **Duplicates are not allowed**",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewEmployee"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "User response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/employees/{id}": {
+            "get": {
+                "description": "Returns a user based on a single ID",
+                "operationId": "Find users by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to fetch",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Updated an existing user in the Employee.",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the user to update",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "User to update to the Employee",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExistingEmployee"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "User response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an existing user in the Employee.",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the user to delete",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Updated an existing user in the Employee.",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the user to update",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "User to update to the Employee",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExistingEmployee"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "User response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Health check that service is available",
+                "operationId": "check health",
+                "responses": {
+                    "200": {
+                        "description": "Successful Connection"
+                    },
+                    "503": {
+                        "description": "Service Unavailable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Employee": {
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Employee"
+                    },
+                    {
+                        "required": [
+                            "id"
+                        ],
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "employee_name": {
+                                "type": "string",
+                                "format": "VarChar256"
+                            },
+                            "employee_salary": {
+                                "type": "string",
+                                "format": "VarChar256"
+                            },
+                            "employee_age": {
+                                "type": "string",
+                                "format": "VarChar256"
+                            },
+                            "profile_image": {
+                                "type": "string",
+                                "format": "VarChar256"
+                            }
+                        }
+                    }
+                ]
+            },
+            "NewEmployee": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "employee_name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "employee_salary": {
+                        "type": "string",
+                        "example": "$3050"
+                    },
+                    "employee_age": {
+                        "type": "string",
+                        "example": "20"
+                    },
+                    "profile_image": {
+                        "type": "string",
+                        "example": "https://images.google.com/faces/123.jpg"
+                    }
+                }
+            },
+            "ExistingEmployee": {
+                "properties": {
+                    "employee_name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "employee_salary": {
+                        "type": "string",
+                        "example": "$3050"
+                    },
+                    "employee_age": {
+                        "type": "string",
+                        "example": "20"
+                    },
+                    "profile_image": {
+                        "type": "string",
+                        "example": "https://images.google.com/faces/123.jpg"
+                    }
+                }
+            },
+            "Error": {
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "APIKey": {
+                "type": "apiKey",
+                "description": "Value <b>nMQlqi4dpYOSW4uIsdL2xO4GsJAr3DkA</b> (Copy this value below to authorize)",
+                "name": "apikey",
+                "in": "header"
+            }
+        }
+    }
+}

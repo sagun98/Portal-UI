@@ -18,5 +18,7 @@ export interface API extends PermissibleEntity, Publishable{
     swaggerUrl? : string,
     tags? : string[],
     apiManagementTool? : ApiManagementTool,
-    followers? : string[]
+    followers? : string[],
+    apiVersion?: string;
+    deprecated?: boolean;
 }

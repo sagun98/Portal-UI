@@ -1,0 +1,56 @@
+<h1>Manage User</h1>
+
+<form [formGroup]="userForm" (submit)="onSaveUser()">
+  <div class="bottom-spacer-30 form-group">
+    <label for="username" class="required">Username:</label>
+    <label [className]="(userForm.get('username').invalid && userForm.get('username').dirty ? errorClasses : '')">
+      <input
+        type="text"
+        id="username"
+        placeholder="username"
+        formControlName="username"
+      />
+    </label>
+  </div>
+
+  <div class="bottom-spacer-30 form-group">
+    <label for="firstName" class="required">First Name:</label>
+    <label [className]="(userForm.get('firstName').invalid && userForm.get('firstName').dirty ? errorClasses : '')">
+      <input
+        type="text"
+        id="firstName"
+        placeholder="firstName"
+        formControlName="firstName"
+      />
+    </label>
+  </div>
+
+  <div class="bottom-spacer-30 form-group">
+    <label for="lastName" class="required">Last Name:</label>
+    <label [className]="(userForm.get('lastName').invalid && userForm.get('lastName').dirty ? errorClasses : '')">
+      <input
+        type="text"
+        id="lastName"
+        placeholder="lastName"
+        formControlName="lastName"
+      />
+    </label>
+  </div>
+
+  <div class="bottom-spacer-30 form-group">
+    <label for="email" class="required">Email:</label>
+    <label [className]="(userForm.get('email').invalid && userForm.get('email').dirty ? errorClasses : '')">
+      <input
+        type="text"
+        id="email"
+        placeholder="email"
+        formControlName="email"
+        email
+      />
+    </label>
+  </div>
+
+  <button class="btn btn-primary" type="submit"><clr-icon shape="plus"></clr-icon> Add User</button>
+
+  <button class="btn btn-danger" (click)="onCancelAddUser()"><clr-icon shape="times"></clr-icon> Cancel</button>
+</form>

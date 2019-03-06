@@ -45,7 +45,7 @@ export class UserSearchFormComponent implements OnInit {
       return;
     }
 
-    this.userService.getUserById(username).subscribe( (user : PortalUser) => {
+    this.userService.getUserByIdOrEmail(username).subscribe( (user : PortalUser) => {
       if(! user ){
         this.onNoResults.emit(username);
         return;

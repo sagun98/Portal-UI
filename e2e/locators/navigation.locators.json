@@ -1,0 +1,49 @@
+{
+    "spinner": {
+        "css": ".spinner"
+    },
+
+    "sideNav": {
+        "css": ".sidenav-content"
+    },
+
+    "header": {
+        "css": " app-documentation > main > app-documentation-landing-page > div > h1"
+    },
+
+    "homePageHeadingNotLoggedIn": {
+        "css": "div.container.banner.text-center.inline.full > div > h1"
+    },
+
+    "homePageLink": {
+        "css": "a[routerlink='/home']"
+    },
+
+    "gettingStarted": {
+        "id": "main-getting-started"
+    },
+
+    "mainDocumentation": {
+      "id": "main-documentation"
+    },
+
+    "api": {
+        "navText": "APIs"
+    },
+
+    "nav": {
+        "css": "nav.subnav"
+    },
+
+    "addApiButton":{
+        "css": "a[ng-reflect-has-permission='API_CREATE']"
+    },
+
+    "addApiCollectionButton": {
+        "css": "[ng-reflect-has-permission='PRODUCT_CREATE']"
+    },
+
+    "documentationPage": {
+        "css": "[routerlink='/documentation/main']"
+    }
+}

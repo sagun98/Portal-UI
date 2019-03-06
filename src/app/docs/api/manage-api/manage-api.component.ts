@@ -1,3 +1,4 @@
+import { APIDetail } from './../../../core/interfaces/api-detail.interface';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
@@ -47,6 +48,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   public editorUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl ( environment.editorUrl );
   private iframeLoaded:boolean = false;
   public sideNavOpen: boolean = true;
+  private tempNewVersionFile;
 
   constructor(
     private formBuilder : FormBuilder,
@@ -108,6 +110,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       swaggerUrl : [this.api.swaggerUrl],
       userPrivileges : [this.api.userPrivileges],
       published : [this.api.published || false, [Validators.required]],
+      deprecated : [this.api.deprecated || false, []],
       swaggerOption : [this.swaggerOption]
     });
 
@@ -159,57 +162,90 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
           this.postSwaggerToEditor( document.getElementById("swagger-editor"), evt.target.result );
         }
       } else {
-        this.postSwaggerToEditor( document.getElementById("swagger-editor") );
+        this.postSwaggerToEditor( document.getElementById("swagger-editor"));
       }
     }
 
     this.sideNavigationService.setSideNavOpenState(this.sideNavOpen);
   }
 
-  public saveApi () {
-    this.submitted = true;
-
-    const apiData = this.form.getRawValue();
-      
-    if(this.form.invalid) {
-      if(! this.sideNavOpen)
-        this.openAPIEditor();
-
-      return;
-    }
-
-    if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
-      this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
-      return;
-    }
-
-    apiData.tags = this.getServerFormattedTags( apiData.tags );
-
-    ['overview', 'gettingStarted', 'reference'].forEach(id => {
-      apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+  public getApiByVersion (apiDetail: APIDetail) : void {
+    this.router.navigate([`/docs/api/${this.api.slug}/version/${apiDetail.apiVersion}/edit`], {relativeTo: this.activatedRoute}).then(success => {
+      this.rebuildForm();
     });
+  }
 
-    if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
-      delete apiData.file
+  public saveApi () {
+    this.preSave().subscribe(apiData => {
+      this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
+        if (version === 2){
+          this.showSwaggerVersion2Message = true;
+          this.swaggerMessageModal.onClosed.subscribe(closed => {
+            if (closed)
+              this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+                this.router.navigate([`/docs/api/${api.slug}`]);
+              });
+          })
+        }
 
-    this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
+        else
+          this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
+            this.router.navigate([`/docs/api/${api.slug}`]);
+          });
+      });
+    });
+  }
 
-      if (version === 2){
-        this.showSwaggerVersion2Message = true;
-        this.swaggerMessageModal.onClosed.subscribe(closed => {
-          if (closed)
-            this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-              this.router.navigate([`/docs/api/${api.slug}`]);
-            });
-        })
-      }
+  public handleNewVersion () {
+    this.tempNewVersionFile = this.form.get('file').value;
+    this.api.apiVersion = 'New';
+    this.api.deprecated = false;
+    this.saveMethod = "createNewVersion";
+    this.form.get('published').setValue(false);
+    this.form.get('deprecated').setValue(false);
+  }
 
-      else
-        this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-          this.router.navigate([`/docs/api/${api.slug}`]);
+  public handleVersionDelete () {
+    const doDelete = confirm(`Are you sure you want to delete this version?`);
+
+    if (doDelete) {
+      this.apiService.deleteVersion(this.api, this.api.apiVersion).subscribe(api => {
+        this.router.navigate([`/docs/api/${api.slug}/version/${api.apiVersion}/edit`]).then(navigated => {
+          this.toastrService.success(`Version successfully deleted`);
+          this.api = api;
+          this.rebuildForm();
         });
+      });
+    }
+  }
 
-    });    
+  private rebuildForm() {
+    this.postSwaggerToEditor(document.getElementById("swagger-editor"), this.api.swagger);
+    Object.keys(this.form.controls).forEach(controlName => {
+      if (typeof this.api[controlName] !== "undefined")
+        this.form.get(controlName).setValue(this.api[controlName], { emitEvent: false });
+    });
+  }
+
+  public handleDeprecationClick () {
+    const deprecated = this.form.get('deprecated').value;
+    const verb = (deprecated) ? 'activate' : 'deprecate';
+
+    const doDeprecation = confirm(`Are you sure you want to ${verb} this version?`);
+
+    if (doDeprecation) {
+
+      this.form.get('deprecated').setValue(! deprecated);
+
+      this.preSave().subscribe(apiData => {
+        this.apiService.updateApi(apiData).subscribe(api => {
+          this.api = api;
+          this.form.get('version').setValue(api.version);
+          this.form.get('deprecated').setValue(api.deprecated);
+          this.toastrService.success(`Successfully ${verb}d this version of the ${api.name} API`);
+        });
+      });
+    }
   }
 
   public get UIFormattedTags () {
@@ -259,6 +295,39 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   protected getPermissionService () : PermissionsService {
     return this.permissionService;
+  }
+
+  private preSave () : Observable<any> {
+    return new Observable(observer => {
+      this.submitted = true;
+
+      const apiData = this.form.getRawValue();
+        
+      if(this.form.invalid) {
+        if(! this.sideNavOpen)
+          this.openAPIEditor();
+
+        // observer.error({});
+        return;
+      }
+
+      if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
+        this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
+        // observer.error({});
+        return;
+      }
+
+      apiData.tags = this.getServerFormattedTags( apiData.tags );
+
+      ['overview', 'gettingStarted', 'reference'].forEach(id => {
+        apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+      });
+
+      if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
+        delete apiData.file;
+    
+      observer.next(apiData);
+    });
   }
 
   private updateSwaggerFromEditor (message : BrowserMessage<SwaggerEditorYAML>) {
