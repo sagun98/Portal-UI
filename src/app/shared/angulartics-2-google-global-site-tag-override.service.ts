@@ -1,3 +1,4 @@
+import { Router, NavigationStart } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2/gst/angulartics2-gst';
 import { Injectable } from '@angular/core';
@@ -39,13 +40,16 @@ export class GoogleGlobalSiteTagDefaults implements GoogleGlobalSiteTagSettings 
 })
 export class Angulartics2GoogleGlobalSiteTagOverride {
 
+  private navigationStartTime: number;
+  private navigationUrl: string;
+
   constructor(
     protected angulartics2: Angulartics2,
+    router: Router
   ) {
     const defaults = new GoogleGlobalSiteTagDefaults;
     
     defaults.ready.subscribe(ready => {
-
       if(ready){
 
         const _defaults = <GoogleGlobalSiteTagSettings> {
@@ -65,7 +69,24 @@ export class Angulartics2GoogleGlobalSiteTagOverride {
           .pipe(this.angulartics2.filterDeveloperMode())
           .subscribe((x: any) => this.exceptionTrack(x));
       }
-    })
+    });
+
+    router.events.subscribe(event => {
+      // console.log(event);
+      const routerEventType = event.constructor.name;
+
+      if(routerEventType === "NavigationStart"){
+        event = <NavigationStart> event;
+        this.navigationStartTime = new Date().getTime();
+        this.navigationUrl = event.url;
+      }
+
+      if(routerEventType === "NavigationEnd") {
+        const now = new Date().getTime();
+        const delta = now - this.navigationStartTime;
+        console.log(`Route change to ${this.navigationUrl} took: ${delta}ms`);
+      }
+    });
   }
 
   /**
