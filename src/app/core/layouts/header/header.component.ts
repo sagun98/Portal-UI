@@ -135,11 +135,18 @@ export class HeaderComponent implements OnInit {
 
     if(doLogout){
       this.userService.logout().subscribe( response =>  {
-        this.angulartics2GoogleGlobalSiteTag.eventTrack('userLogout', {
+
+        window['gtag']('config', 'UA-123646740-1', {'custom_map': {'dimension1': 'username'}});
+
+        this.angulartics2GoogleGlobalSiteTag.eventTrack('logout', {
           category : 'userAction',
-          label : 'userLogout',
-          value : this.user
+          label : 'logout',
+          value : this.user,
+          gstCustom : {
+            username : this.user.username
+          }
         });
+
       });
     }
   }

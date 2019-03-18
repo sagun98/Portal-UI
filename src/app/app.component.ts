@@ -15,7 +15,7 @@ import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   public showLogin: boolean = false;
 

@@ -59,10 +59,13 @@ export class LoginComponent implements OnInit, OnChanges {
               "timeOut" : 1500
             });
 
-            this.angulartics2GoogleGlobalSiteTag.eventTrack('userLogin', {
+            window['gtag']('config', 'UA-123646740-1', {'custom_map': {'dimension1': 'username'}});
+
+            this.angulartics2GoogleGlobalSiteTag.eventTrack('login', {
               category : 'userAction',
-              label : 'userLogin',
-              value : user
+              label : `login`,
+              value : 0,
+              gstCustom : { username : user.username }
             });
 
             const where = (this.userService.attemptedUrl.length) ? this.userService.attemptedUrl : '/documentation/main';

@@ -59,6 +59,17 @@ export class ErrorInterceptor implements HttpInterceptor {
                         response : errorResponse
                     }
                 );
+            
+            else if(! errorResponse.error)
+                errorMessages.push(
+                    <HttpErrorMessage> {
+                        id: new Date().getTime(),
+                        type : HTTP_ERROR_TYPES.ERROR,
+                        title : (errorResponse.status === 401) ? "User Session Expired" : "Application Error",
+                        message : errorResponse.message,
+                        response : errorResponse
+                    }
+                );
 
             this.httpErrorsServices.$onError.next(errorMessages);
 
