@@ -84,7 +84,13 @@ export class Angulartics2GoogleGlobalSiteTagOverride {
       if(routerEventType === "NavigationEnd") {
         const now = new Date().getTime();
         const delta = now - this.navigationStartTime;
-        console.log(`Route change to ${this.navigationUrl} took: ${delta}ms`);
+                
+        window['gtag']('event', 'timing_complete', {
+          'name' : 'routeChange',
+          'value' : delta,
+          'event_label' : this.navigationUrl,
+          'event_category' : 'Route Change'
+        });
       }
     });
   }

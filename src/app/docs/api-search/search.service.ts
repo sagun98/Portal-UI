@@ -31,6 +31,8 @@ export class SearchService {
       return of(null);
     }
 
+    window['gtag']('event', 'search', {search_term : phrase});
+
     return this.http.post(`${environment.restBase}/search${searchType}`, { phrase }); 
   }
 }
