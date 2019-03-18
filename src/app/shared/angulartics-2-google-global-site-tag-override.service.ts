@@ -85,12 +85,14 @@ export class Angulartics2GoogleGlobalSiteTagOverride {
         const now = new Date().getTime();
         const delta = now - this.navigationStartTime;
                 
-        window['gtag']('event', 'timing_complete', {
-          'name' : 'routeChange',
-          'value' : delta,
-          'event_label' : this.navigationUrl,
-          'event_category' : 'Route Change'
-        });
+        if (typeof window['gtag'] !== 'undefined' && window['gtag']) {
+          window['gtag']('event', 'timing_complete', {
+            'name' : 'routeChange',
+            'value' : delta,
+            'event_label' : this.navigationUrl,
+            'event_category' : 'Route Change'
+          });
+        }
       }
     });
   }
