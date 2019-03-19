@@ -72,8 +72,9 @@ export class Angulartics2GoogleGlobalSiteTagOverride {
     });
 
     router.events.subscribe(event => {
-      // console.log(event);
+      console.log(event);
       const routerEventType = event.constructor.name;
+      console.log(routerEventType);
 
       if(routerEventType === "NavigationStart"){
         event = <NavigationStart> event;
