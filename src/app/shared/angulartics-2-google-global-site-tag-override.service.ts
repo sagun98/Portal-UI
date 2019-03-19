@@ -74,15 +74,20 @@ export class Angulartics2GoogleGlobalSiteTagOverride {
     router.events.subscribe(event => {
       console.log(event);
       const routerEventType = event.constructor.name;
-      console.log(routerEventType);
 
-      if(routerEventType === "NavigationStart"){
+      const isNavigationStart = (event['navigationTrigger']) ? true : false;
+      const isNavigationEnd = (! event['navigationTrigger'] && ! event['state'] && ! event['snapshot']) ? true : false;
+
+      console.log(`isNavigationStart: ${isNavigationStart}`);
+      console.log(`isNavigationEnd: ${isNavigationEnd}`);
+
+      if(routerEventType === "NavigationStart" || isNavigationStart){
         event = <NavigationStart> event;
         this.navigationStartTime = new Date().getTime();
         this.navigationUrl = event.url;
       }
 
-      if(routerEventType === "NavigationEnd") {
+      if(routerEventType === "NavigationEnd" || isNavigationEnd) {
         const now = new Date().getTime();
         const delta = now - this.navigationStartTime;
                 
