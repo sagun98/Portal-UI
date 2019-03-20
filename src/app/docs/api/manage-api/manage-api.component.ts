@@ -182,9 +182,14 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
           this.showSwaggerVersion2Message = true;
           this.swaggerMessageModal.onClosed.subscribe(closed => {
             if (closed)
-              this.apiService[this.saveMethod](apiData).subscribe( (api: API) => {
-                this.router.navigate([`/docs/api/${api.slug}`]);
-              });
+              this.apiService[this.saveMethod](apiData).subscribe( 
+                (api: API) => {
+                  this.router.navigate([`/docs/api/${api.slug}`]);
+                },
+                error => {
+                  this.showSwaggerVersion2Message = false;
+                }
+              );
           })
         }
 
