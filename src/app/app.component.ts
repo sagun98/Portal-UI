@@ -89,11 +89,11 @@ export class AppComponent implements OnInit {
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
             //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
-            if (error.response.status === 401 || error.response.status === 0)
+            if (error.response.status === 401 && error.response.url.indexOf("api/user") === -1 )
               this.userService.staticLogout();
 
             // Usually a CORS failure associated with a stale pearsonssosession token
-            if (error.response.status === 0) {
+            else if (error.response.status === 0 || (error.response.status === 401 && error.response.url.indexOf("api/user") != -1 )) {
               this.userService.staticLogout();
               this.toastrService.error('Oops... It looks like your session timed out.  Please log back in to continue.');
               this.showLogin = false;
