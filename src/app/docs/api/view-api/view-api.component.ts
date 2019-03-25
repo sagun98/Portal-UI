@@ -65,7 +65,8 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
 
       setTimeout(t => {
         document['removeAllListeners']('focus');
-      });
+        window['removeAllListeners']('message');
+      }, 1000);
       this.apikeyModalOpen = false;
     });
 

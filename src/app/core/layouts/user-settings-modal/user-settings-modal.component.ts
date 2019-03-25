@@ -18,7 +18,9 @@ export class UserSettingsModalComponent implements OnChanges {
   public roles: UserRole[] = [];
   public activeTabs = {
     manageRoles : false,
-    myRoles : false
+    myRoles : false,
+    manageUsers : false,
+    massEmail: false
   };
 
   constructor(

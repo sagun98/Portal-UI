@@ -1,0 +1,19 @@
+:host {
+    form {
+
+        .form-group {
+
+            label {
+
+                input {
+                    width: 34.75rem;
+                    min-width: auto;
+                }
+            }
+
+            .mce-tinymce {
+                widows: 90%;
+            }
+        }
+    }
+}

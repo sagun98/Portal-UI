@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="sendEmail()">
+  <section class="form-block">
+    
+    <div class="form-group">
+      <label for="subject" class="required">Subject</label>
+      <label [className]=" ( form.get('subject').invalid && ( submitted || form.get('subject').dirty) ) ? errorClasses + ' tooltip-bottom-left' : '' ">
+        <input id="subject" type="text" name="subject" placeholder="Enter Email Subject" formControlName="subject" />
+        <span *ngIf="form.get('subject').errors && form.get('subject').errors.required && (submitted || form.get('subject').dirty)" class="tooltip-content">This field cannot be empty!</span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="body" class="required">Email Body</label>
+      <label for="body" [className]=" (form.get('body').invalid && (submitted || form.get('body').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
+          <editor id="body" placeholder="Add you message" [initialValue]="" [init]="tinymceConfig" formControlName="body"></editor>
+          <span *ngIf="form.get('body').errors && form.get('body').errors.required && (submitted || form.get('body').dirty)" class="tooltip-content">This field cannot be empty!</span>
+      </label>
+    </div>
+  </section>
+
+  <button class="btn btn-primary"><clr-icon shape="email"></clr-icon> Send Email</button>
+</form>
+  

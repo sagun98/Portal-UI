@@ -18,6 +18,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { DevPortalFooterComponent } from './dev-portal-footer/dev-portal-footer.component';
 import { RoleCardComponent } from './user-settings-modal/role-card/role-card.component';
 import { UserModule } from 'src/app/user/user.module';
+import { EmailComponent } from './email/email.component';
+import { EditorModule } from '../../../../node_modules/@tinymce/tinymce-angular';
 
 @NgModule({
   imports: [
@@ -31,6 +33,7 @@ import { UserModule } from 'src/app/user/user.module';
     RouterModule,
     Angulartics2Module,
     CoreSharedModule,
+    EditorModule,
     UserModule
   ],
   declarations: [
@@ -44,7 +47,8 @@ import { UserModule } from 'src/app/user/user.module';
     UserSettingsModalComponent,
     RoleManagementComponent,
     DevPortalFooterComponent,
-    RoleCardComponent
+    RoleCardComponent,
+    EmailComponent
   ],
   exports : [
     SideNavigationComponent,
@@ -52,7 +56,8 @@ import { UserModule } from 'src/app/user/user.module';
     HeaderComponent,
     SubNavigationComponent,
     LoginComponent,
-    DevPortalFooterComponent
+    DevPortalFooterComponent,
+    EmailComponent
   ],
   schemas : [
     //CUSTOM_ELEMENTS_SCHEMA
