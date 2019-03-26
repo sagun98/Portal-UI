@@ -40,6 +40,11 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
 
       this.documentationLandingPageArea = documentationArea;
       this.landingPage = landingPage || this.landingPage;
+
+      setTimeout(t => {
+        document['removeAllListeners']('focus');
+        window['removeAllListeners']('message');
+      }, 1000);
     });
   }
 
