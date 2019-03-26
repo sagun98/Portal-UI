@@ -66,6 +66,11 @@ export class ViewProductComponent extends EntityComponent {
 
         return (api !== null && api.published === true);
       });
+
+      setTimeout(t => {
+        document['removeAllListeners']('focus');
+        window['removeAllListeners']('message');
+      }, 1000);
     });
   }
   
