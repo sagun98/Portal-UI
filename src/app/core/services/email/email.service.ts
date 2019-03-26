@@ -14,16 +14,16 @@ export class EmailService {
     private http: HttpClient
   ) { }
 
-  public sendEmail (email: Email) /*: Observable<boolean> */{
-    // return <Observable<boolean>> this.http.post(`${environment.restBase}/email/mass`, email).pipe(map(response => {
-    //   return true;
-    // }));
+  public sendEmail (email: Email) : Observable<boolean> {
+    return <Observable<boolean>> this.http.post(`${environment.restBase}/email/all`, email).pipe(map(response => {
+      return true;
+    }));
 
-    return new Observable(observer => {
-      setTimeout(t => {
-        observer.next(true);
-        observer.complete();
-      }, 1500);
-    })
+    // return new Observable(observer => {
+    //   setTimeout(t => {
+    //     observer.next(true);
+    //     observer.complete();
+    //   }, 1500);
+    // });
   }
 }

@@ -10,7 +10,7 @@ import { DocumentResolve } from './resolves/document.resolve';
 
 export const DocumentationRoutes: Routes = [
     {
-        path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : { DocumentationAreas : DocumentationAreasResolve, Blogs : DocumentationResolve },
+    path : '', component : DocumentationComponent, data : {category : 'Documentation'}, resolve : { DocumentationAreas : DocumentationAreasResolve/*, Blogs : DocumentationResolve*/ },
         
         children : [
             { path : 'main', component : DocumentationLandingPageComponent, resolve : {LandingPage : DocumentationLandingPageResolve} },
