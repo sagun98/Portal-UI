@@ -17,7 +17,7 @@ export class EmailComponent implements OnInit {
   public errorClasses = ERROR_CLASSES;
   public tinymceConfig = TINYCMCE_CONFIG;
   public form: FormGroup;
-  public submitted: boolean;
+  public submitted: boolean = false;
   public email: Email;
 
   constructor(
@@ -51,6 +51,8 @@ export class EmailComponent implements OnInit {
     this.emailService.sendEmail(this.email).subscribe(sent => {
       this.loadingService.closeOpenRequest(1);
       this.toastrService.success('Your Email has been sent.');
+    }, error => {
+      this.toastrService.error('Unable to send this email');
     });
   }
 }
