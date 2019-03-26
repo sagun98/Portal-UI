@@ -25,6 +25,11 @@ export class ViewDocumentComponent extends EntityComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation;
+
+      setTimeout(t => {
+        document['removeAllListeners']('focus');
+        window['removeAllListeners']('message');
+      }, 1000);
     });
   }
 
