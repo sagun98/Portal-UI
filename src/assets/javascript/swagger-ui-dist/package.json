@@ -1,35 +1,32 @@
 {
-  "_args": [
-    [
-      "swagger-ui-dist@3.17.1",
-      "/Users/ucartd4/workspace/dev-portal-ui"
-    ]
-  ],
-  "_from": "swagger-ui-dist@3.17.1",
-  "_id": "swagger-ui-dist@3.17.1",
+  "_from": "swagger-ui-dist",
+  "_id": "swagger-ui-dist@3.22.0",
   "_inBundle": false,
-  "_integrity": "sha1-2wjtaBvPuhMUn35hD0izbNTBfeg=",
+  "_integrity": "sha512-ZFcQoi4XT2t/NGKByVwmb4iERLtGmQQEFqHNC1PmdauWVZ2y80akkzctghgAftTlc8xpUp+I62nm4Km2q82ajQ==",
   "_location": "/swagger-ui-dist",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "tag",
     "registry": true,
-    "raw": "swagger-ui-dist@3.17.1",
+    "raw": "swagger-ui-dist",
     "name": "swagger-ui-dist",
     "escapedName": "swagger-ui-dist",
-    "rawSpec": "3.17.1",
+    "rawSpec": "",
     "saveSpec": null,
-    "fetchSpec": "3.17.1"
+    "fetchSpec": "latest"
   },
   "_requiredBy": [
+    "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-3.17.1.tgz",
-  "_spec": "3.17.1",
+  "_resolved": "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-3.22.0.tgz",
+  "_shasum": "9f2417d774f21fac260b1497ead0650dc3e92861",
+  "_spec": "swagger-ui-dist",
   "_where": "/Users/ucartd4/workspace/dev-portal-ui",
   "bugs": {
     "url": "https://github.com/swagger-api/swagger-ui/issues"
   },
+  "bundleDependencies": false,
   "contributors": [
     {
       "url": "in alphabetical order"
@@ -60,6 +57,7 @@
     }
   ],
   "dependencies": {},
+  "deprecated": false,
   "description": "[![NPM version](https://badge.fury.io/js/swagger-ui-dist.svg)](http://badge.fury.io/js/swagger-ui-dist)",
   "devDependencies": {},
   "homepage": "https://github.com/swagger-api/swagger-ui#readme",
@@ -70,5 +68,5 @@
     "type": "git",
     "url": "git+ssh://git@github.com/swagger-api/swagger-ui.git"
   },
-  "version": "3.17.1"
+  "version": "3.22.0"
 }
