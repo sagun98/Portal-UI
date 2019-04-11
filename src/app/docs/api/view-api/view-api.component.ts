@@ -33,7 +33,7 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   public following: boolean = false;
   public isEntityAdmin: boolean = false;
   public announcementCid: number;
-  public bypassCORS: boolean = false;
+  public bypassCORS: boolean = true;
 
   constructor(
     private activatedRoute : ActivatedRoute,
