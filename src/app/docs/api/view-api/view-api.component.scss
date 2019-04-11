@@ -13,4 +13,20 @@
 
         margin-bottom : 20px;
     }
+
+    #bypass-cors-div {
+        position: absolute;
+        left: 300px;
+        
+        label {
+            font-size: 20px;
+
+            &:after {
+                top: .65rem;    
+            }
+            &:before {
+                top: .6rem;
+            }
+        }
+    }
 }

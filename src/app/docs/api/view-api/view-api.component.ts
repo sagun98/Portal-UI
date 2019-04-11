@@ -13,12 +13,10 @@ import { Privilege } from '../../../core/interfaces/permissible.interface';
 import { ApiService } from '../api.service';
 import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { NodeBBCategoryService } from '../../../domain/nodebb/category/nodebb-category.service';
-// import { SwaggerEditor, SwaggerEditorStandalonePreset } from 'swagger-editor-dist';
-
+import { SwaggerUIRequest } from '../../../core/interfaces/swagger-ui-request.interface';
+import { environment } from '../../../../environments/environment';
 export const swaggerUIBundle = SwaggerUIBundle;
 export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
-// export const swaggerEditor = SwaggerEditor;
-// export const swaggerEditorStandalonePreset = SwaggerEditorStandalonePreset;
 
 @Component({
   selector: 'api',
@@ -35,6 +33,7 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   public following: boolean = false;
   public isEntityAdmin: boolean = false;
   public announcementCid: number;
+  public bypassCORS: boolean = false;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -71,15 +70,6 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
     });
 
     this.removeSwaggerAPISearch();
-
-    // const editor = SwaggerEditorBundle({
-    //   dom_id: '#swagger-editor',
-    //   layout: 'StandaloneLayout',
-    //   spec : this.swaggerJson,
-    //   presets: [
-    //     SwaggerEditorStandalonePreset
-    //   ]
-    // })
   }
 
   public get canEditThisApi () {
@@ -108,7 +98,6 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       domNode: document.querySelector('#swagger-ui'),
       deepLinking: false,
       filter : false,
-      // displayOperationId : true,
       presets: [
           swaggerUIBundle.presets.apis,
           swaggerUIStandalonePreset
@@ -116,7 +105,26 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       plugins: [
           swaggerUIBundle.plugins.DownloadUrl
       ],
-      layout: 'StandaloneLayout'
+      layout: 'StandaloneLayout',
+
+      displayRequestDuration : true,
+      
+      requestInterceptor : (request : SwaggerUIRequest) => {
+        // If you want to bypass the CORS implementation on the server
+        if(this.bypassCORS) {
+          const BASE_URL = (/http/.test(environment.swaggerProxyBase)) ?  environment.swaggerProxyBase : window.location.origin;
+          request.url = `${BASE_URL}${decodeURIComponent(request.url)}`;
+        }
+
+        return request;
+      },
+
+      responseInterceptor : (response) => {
+        console.log(response);
+      },
+
+      showMutatedRequest : false
+
     });
   }
 
