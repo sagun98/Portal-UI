@@ -36,7 +36,7 @@
     "rxjs-compat": "^6.2.2",
     "swagger-editor": "^3.6.9",
     "swagger-editor-dist": "^3.6.9",
-    "swagger-ui-dist": "^3.17.1",
+    "swagger-ui-dist": "^3.22.0",
     "tinymce": "^4.7.13",
     "zone.js": "^0.8.26"
   },

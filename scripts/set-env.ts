@@ -9,6 +9,7 @@ const environmentFile: string = `src/environments/environment${prodPostfix}.ts`;
 const envRestBase: string = env.RESTBASE || 'http://localhost:8080';
 const editorUrl: string = env.EDITOR_URL || 'http://localhost/editor/';
 const forumBase: string = env.FORUMBASE;
+const swaggerProxyBase: string = env.SWAGGER_PROXY_BASE;
 const nodebbMasterToken: string = env.FORUM_MASTER_TOKEN;
 
 const envFileContents = `  
@@ -16,7 +17,8 @@ export const environment = {
     production: ${isProd},
     restBase : '${envRestBase}',
     forumBase : '${forumBase}',
-    editorUrl : '${editorUrl}'
+    editorUrl : '${editorUrl}',
+    swaggerProxyBase : '${swaggerProxyBase}'
 };
 `;
 

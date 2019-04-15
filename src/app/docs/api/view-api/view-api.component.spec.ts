@@ -8,7 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { of } from 'rxjs/observable/of';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -249,6 +249,8 @@ describe('ViewApiComponent', () => {
         CoreSharedModule,
         RouterTestingModule,
         ToastrModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
         HttpClientModule
       ],
       providers : [

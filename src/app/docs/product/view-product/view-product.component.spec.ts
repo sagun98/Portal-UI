@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { UserPrivilege } from '../../../core/interfaces/fr-user.interface';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
@@ -70,6 +71,8 @@ describe('ViewProductComponent', () => {
         ClarityModule,
         HttpClientModule,
         RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
         HttpClientModule,
         NoopAnimationsModule,
         ToastrModule.forRoot(),
