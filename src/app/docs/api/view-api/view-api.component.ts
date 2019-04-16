@@ -120,7 +120,7 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       },
 
       responseInterceptor : (response) => {
-        console.log(response);
+
       },
 
       showMutatedRequest : false
