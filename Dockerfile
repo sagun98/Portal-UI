@@ -5,6 +5,7 @@ FROM node:8.15.1-alpine
 
 # set working directory
 RUN mkdir /app
+RUN mkdir -p /run/nginx
 WORKDIR /app
 
 # add `/usr/src/app/node_modules/.bin` to $PATH
@@ -21,4 +22,4 @@ RUN apk update && apk add nginx && npm install
 
 EXPOSE 80
 
-ENTRYPOINT [ "/bin/bash", "/app/scripts/launch.sh"]
+ENTRYPOINT [ "/bin/sh", "/app/scripts/launch.sh"]

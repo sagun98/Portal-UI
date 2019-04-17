@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 cd /app && npm run build:$ANGULAR_BUILD_TYPE
 
