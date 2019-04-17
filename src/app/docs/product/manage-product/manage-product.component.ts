@@ -79,7 +79,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
       slug: [this.product.slug, [Validators.required]],
       description: [this.product.description, [Validators.required]],
       overview: [this.product.overview],
-      apis: [this.product.apis, [Validators.required]]
+      apis: [this.product.apis]
     });
 
     this.form.get('slug').disable();
