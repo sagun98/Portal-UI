@@ -1,20 +1,20 @@
 import { APIDetail } from './../../../core/interfaces/api-detail.interface';
 import { ToastrService } from 'ngx-toastr';
-import { ForumService } from '../../../core/services/forum/forum.service';
 import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum';
 import { UserService } from '../../../core/services/user/user.service';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { API } from '../interfaces/api.interface';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { Privilege } from '../../../core/interfaces/permissible.interface';
-import { ApiService } from '../api.service';
 import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { NodeBBCategoryService } from '../../../domain/nodebb/category/nodebb-category.service';
 import { SwaggerUIRequest } from '../../../core/interfaces/swagger-ui-request.interface';
 import { environment } from '../../../../environments/environment';
+import { ApiService } from '../../../core/services/api-service/api.service';
+import { API } from '../../../core/interfaces/api.interface';
+
 export const swaggerUIBundle = SwaggerUIBundle;
 export const swaggerUIStandalonePreset = SwaggerUIStandalonePreset;
 

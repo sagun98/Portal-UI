@@ -1,11 +1,11 @@
-import { ApiService } from '../api/api.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
-import { API } from '../api/interfaces/api.interface';
-import { SearchService, SEARCH_TYPES } from './search.service';
 import { Router } from '@angular/router';
 import { USER_PERMISSIONS } from '../../core/enums/user-permissions.enum';
+import { ApiService } from '../../core/services/api-service/api.service';
+import { API } from '../../core/interfaces/api.interface';
+import { SearchService, SEARCH_TYPES } from '../../core/services/search-service/search.service';
 
 @Component({
   selector: 'app-api-search',

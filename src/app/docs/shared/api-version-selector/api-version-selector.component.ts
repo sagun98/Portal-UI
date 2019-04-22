@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { API } from '../../api/interfaces/api.interface';
 import { APIDetail } from '../../../core/interfaces/api-detail.interface';
+import { API } from '../../../core/interfaces/api.interface';
 
 @Component({
   selector: 'api-version-selector',

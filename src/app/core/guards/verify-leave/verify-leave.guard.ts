@@ -1,13 +1,14 @@
 import { CanDeactivate } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ManageDocumentationAreaComponent } from '../../../documentation/manage-documentation-area/manage-documentation-area.component';
+import { VerifyLeaveComponent } from '../../interfaces/verify-leave-component.interface';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class VerifyLeaveGuard implements CanDeactivate<ManageDocumentationAreaComponent> {
+export class VerifyLeaveGuard implements CanDeactivate<VerifyLeaveComponent> {
 
-  canDeactivate(component: ManageDocumentationAreaComponent) {
+  canDeactivate(component: VerifyLeaveComponent) {
     return component.showLeaveConfirmation();
   }
 

@@ -1,5 +1,5 @@
-import { CRUD } from "../../../core/enums/crud.enum";
 import { Product } from "./product.interface";
+import { CRUD } from "../enums/crud.enum";
 
 export interface ProductListChange {
     action : CRUD,

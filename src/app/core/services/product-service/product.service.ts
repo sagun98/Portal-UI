@@ -2,12 +2,12 @@ import { tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, of, Observable } from 'rxjs';
-import { ProductListChange } from './interfaces/product-list-change.interface';
-import { CRUD } from '../../core/enums/crud.enum';
-import { Product } from './interfaces/product.interface';
-import { environment } from '../../../environments/environment';
-import { UserPrivilegeClass } from '../../core/classes/user-privilege';
-import { Privilege } from '../../core/interfaces/permissible.interface';
+import { ProductListChange } from '../../interfaces/product-list-change.interface';
+import { Product } from '../../interfaces/product.interface';
+import { environment } from '../../../../environments/environment';
+import { CRUD } from '../../enums/crud.enum';
+import { Privilege } from '../../interfaces/permissible.interface';
+import { UserPrivilegeClass } from '../../classes/user-privilege';
 
 interface CachedProducts {
   product?: boolean,

@@ -1,6 +1,5 @@
 import { UserCardComponent } from '../user-card/user-card.component';
 import { Router } from '@angular/router';
-import { SearchService } from '../../../docs/api-search/search.service';
 import { Component, OnInit, Input, HostBinding, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import {  Observable, Subscription } from 'rxjs';
@@ -11,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SearchTypes } from './search-types.enum';
 import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 import { HttpErrorsService } from '../../services/http-errors/http-errors.service';
+import { SearchService } from '../../services/search-service/search.service';
 
 @Component({
   selector: 'dev-portal-header',
@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
   @HostBinding('class.active-search') hostActiveSearchClass: boolean;
   @ViewChild('globalSearchResults') searchDropDown: ElementRef;
   @ViewChild('portalSearch') portalSearchInput: ElementRef;
-  // @ViewChild(UserCardComponent) userCardComponent: UserCardComponent;
   @ViewChildren(UserCardComponent) userCardQuery: QueryList<UserCardComponent>;
   @ViewChild('form') _form: NgForm;
 

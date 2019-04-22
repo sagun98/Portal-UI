@@ -5,18 +5,17 @@ import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ProductService } from '../product.service';
-import { Product } from '../interfaces/product.interface';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
-import { API } from '../../api/interfaces/api.interface';
-import { ApiService } from '../../api/api.service';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { SlugUtilityService } from '../../services/slug.service';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 import { ToastrService } from 'ngx-toastr';
 import { isNull } from 'util';
-
+import { ApiService } from '../../../core/services/api-service/api.service';
+import { API } from '../../../core/interfaces/api.interface';
+import { Product } from '../../../core/interfaces/product.interface';
+import { ProductService } from '../../../core/services/product-service/product.service';
 
 @Component({
   selector: 'app-product',

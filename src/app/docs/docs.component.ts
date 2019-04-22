@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { Product } from './product/interfaces/product.interface';
-import { API } from './api/interfaces/api.interface';
 import { SideNavigationService } from '../core/layouts/side-navigation/side-navigation.service';
 import { MenuSlideClose } from '../core/animations/animations';
+import { API } from '../core/interfaces/api.interface';
+import { Product } from '../core/interfaces/product.interface';
 
 @Component({
   selector: 'app-docs',

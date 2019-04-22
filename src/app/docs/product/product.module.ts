@@ -1,7 +1,6 @@
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

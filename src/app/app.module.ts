@@ -1,4 +1,3 @@
-// import { DocumentationModule } from './documentation/documentation.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +30,6 @@ import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-
     DevPortalCoreModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // DocumentationModule,
     Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride]),
   ],
   

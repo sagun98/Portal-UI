@@ -1,4 +1,4 @@
-import { API } from "./api.interface";
+import { API } from './api.interface';
 
 export interface APIListChange {
     action : string,

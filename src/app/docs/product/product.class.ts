@@ -1,12 +1,12 @@
 import { TINYCMCE_CONFIG } from '../constants/tinymce.constant';
 import { ActivatedRoute } from '@angular/router';
 import { OnInit } from '@angular/core';
-import { ProductService } from './product.service';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
-import { Product } from './interfaces/product.interface';
+import { Product } from '../../core/interfaces/product.interface';
+import { ProductService } from '../../core/services/product-service/product.service';
 
 export class ProductComponentBase implements OnInit {
 

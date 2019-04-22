@@ -1,6 +1,6 @@
-import { ApiManagementTool } from '../../../core/interfaces/api-management-tool.interface';
-import { PermissibleEntity } from '../../../core/interfaces/permissible.interface';
-import { API } from '../../api/interfaces/api.interface';
+import { PermissibleEntity } from "./permissible.interface";
+import { API } from "./api.interface";
+import { ApiManagementTool } from "./api-management-tool.interface";
 
 export interface Product extends PermissibleEntity{
     id ? : string,
