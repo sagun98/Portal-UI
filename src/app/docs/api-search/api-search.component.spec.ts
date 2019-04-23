@@ -3,12 +3,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ApiSearchComponent } from './api-search.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SearchService } from './search.service';
 import { of } from 'rxjs/observable/of';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
+import { SearchService } from '../../core/services/search-service/search.service';
 
 export const SearchResultsTest = [
   {itemId : 1234, title : 'test 1', description : 'testing 1234'},

@@ -9,8 +9,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 import { SearchServiceMock } from '../../../docs/api-search/api-search.component.spec';
-import { SearchService } from '../../../docs/api-search/search.service';
 import { SearchTypes } from './search-types.enum';
+import { SearchService } from '../../services/search-service/search.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

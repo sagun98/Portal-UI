@@ -7,13 +7,13 @@ import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core
 import { SideNavigationComponent } from './side-navigation.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Product } from '../../../docs/product/interfaces/product.interface';
-import { API } from '../../../docs/api/interfaces/api.interface';
-import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interface';
 import { CRUD } from '../../enums/crud.enum';
-import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
 import { CoreSharedModule } from '../../core-shared/core-shared.module';
 import { UserService } from '../../services/user/user.service';
+import { Product } from '../../interfaces/product.interface';
+import { API } from '../../interfaces/api.interface';
+import { APIListChange } from '../../interfaces/api-list-change.interface';
+import { ProductListChange } from '../../interfaces/product-list-change.interface';
 
 
 class RouterStub {
