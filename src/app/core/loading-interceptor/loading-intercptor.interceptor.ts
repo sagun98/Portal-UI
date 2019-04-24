@@ -36,7 +36,8 @@ export class LoadingInterceptor implements HttpInterceptor {
                     this.loadingInterceptorService.closeOpenRequest(requestId)
                 } 
                 
-                throw errorResponse;
+                return throwError(errorResponse);
+                //throw errorResponse;
             })
         )
     }

@@ -1,4 +1,12 @@
 <div class="container">
+
+  <div id="changeParentDocumentationArea" style="margin-right: 20px;" class="pull-right">
+    <h4 class="bottom-spacer-5">Documentation Area</h4>
+    <select name="parentDocumentationArea" [(ngModel)]="selectedDocumentationArea" (change)="changeParentDocumentationArea()">
+      <option *ngFor="let documentationArea of documentationAreas" [ngValue]="documentationArea">{{ documentationArea.name }}</option>
+    </select>
+  </div>
+
   <h3>
     <span>{{ title }}</span>
     <!-- Function defined in parent class -->

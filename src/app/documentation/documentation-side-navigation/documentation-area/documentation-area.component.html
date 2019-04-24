@@ -1,0 +1,32 @@
+<div cdkDropList (cdkDropListDropped)="dropArea($event, documentationAreas)">
+<section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag>
+  <input [id]="'n' + documentationArea.id" type="checkbox"/>
+
+  <label [for]="'n' + documentationArea.id">
+    {{ documentationArea.name }}
+  </label>
+
+  <ul class="nav-list documents" cdkDropList (cdkDropListDropped)="dropDocument($event, documentationArea)">
+    <li *ngFor="let document of documentationArea.documents" cdkDrag>
+      <a class="nav-link" routerlinkactive="active">
+        {{document.name}}
+      </a>
+
+      <clr-tooltip>
+        <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
+        <clr-tooltip-content *clrIfOpen>
+          <span>In Draft Status</span>
+        </clr-tooltip-content>
+      </clr-tooltip>
+    </li>
+  </ul>
+
+  <ul class="nav-list areas" >
+    <li *ngIf="documentationArea.children && documentationArea.children.length">
+      <documentation-area [documentationAreas]="documentationArea.children">
+
+      </documentation-area>
+    </li>
+  </ul>
+</section>
+</div>

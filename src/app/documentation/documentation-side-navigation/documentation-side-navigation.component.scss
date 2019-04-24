@@ -1,7 +1,7 @@
 :host {
     overflow: auto;
 
-    ul.nav-list {
+    /deep/ ul.nav-list {
         padding: 0rem;
 
         li {
@@ -17,7 +17,7 @@
         }
     }
 
-    section {
+    /deep/ section {
         #add-documentation-area-btn {
             width : 100%;
         }
@@ -30,12 +30,7 @@
             }
         }
         section.nav-group section {
-            margin-left: 15px;
-            margin-top: 0px !important;
-
-            ul {
-                margin-left: 2.25rem;
-            }
+            margin: 0px 0px 0px -25px !important;           
         }
     }
 }

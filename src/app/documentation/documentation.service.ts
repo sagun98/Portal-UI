@@ -27,6 +27,11 @@ export class DocumentationService {
     slug : ''
   });
 
+  public cache = {
+    documentationAreas : [],
+    $documentationAreas : new BehaviorSubject<DocumentationArea[]>([])
+  };
+
   constructor(
     private http : HttpClient
   ) { }
@@ -81,6 +86,7 @@ export class DocumentationService {
     return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`).pipe(
       tap( (documentationAreas: DocumentationArea[]) => {
         let hasLandingPage: boolean = false;
+        
         documentationAreas.forEach(documentationArea => {
           if (documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL) {
             this.documentationLandingPageArea = documentationArea;
@@ -97,6 +103,9 @@ export class DocumentationService {
             name : '',
             slug : ''
           });
+
+        this.cache.documentationAreas = documentationAreas;
+        this.cache.$documentationAreas.next(documentationAreas);
       })
     );
   }

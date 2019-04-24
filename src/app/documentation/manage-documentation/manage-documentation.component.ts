@@ -28,6 +28,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   public title: string = 'Add Documentation Document';
   public tinymceConfig = TINYCMCE_CONFIG;
   public saveMethod: string = 'createDocumentation';
+  public documentationAreas: DocumentationArea[] = [];
+  public selectedDocumentationArea: DocumentationArea;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -41,6 +43,11 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   }
 
   ngOnInit() {
+    this.documentationService.cache.$documentationAreas.subscribe(documentationAreas => {
+      documentationAreas = documentationAreas.filter(documentationarea => {return documentationarea.name !== 'Documentation Landing Page'});
+      this.documentationAreas = documentationAreas;
+    });
+
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation || DefaultDocumentation;
       this.documentationArea = data.DocumentationArea || this.documentationArea;
@@ -51,6 +58,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       }
       else
         this.title = 'Add New ' + this.documentationArea.name + ' Document';
+
+      this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
     });
 
     this.buildForm();
@@ -140,6 +149,24 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       
       this.documentationService.onChange.next(null);
     });
+  }
+
+  public changeParentDocumentationArea() : void {
+    console.log("Old Documentation Area ID: ", this.documentationArea.id);
+    console.log("New Documentation Area ID: ", this.selectedDocumentationArea.id);
+
+    if(this.selectedDocumentationArea.id !== this.documentationArea.id) {
+      let doChange:boolean = confirm("Are you sure you want to change this documents Documentation Area?");
+
+      if(doChange) {
+        console.log("DO IT!!");
+      }
+      else {
+        setTimeout(t => {
+          this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+        });
+      }
+    }
   }
 
   protected getPermissionService () : PermissionsService {

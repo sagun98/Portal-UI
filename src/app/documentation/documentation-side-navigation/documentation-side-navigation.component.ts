@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
 import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
+import { Documentation } from '../../core/interfaces/documentation.interface';
 
 @Component({
   selector: 'documentation-side-navigation',
@@ -18,8 +19,95 @@ export class DocumentationSideNavigationComponent implements OnInit {
   @Input() currentSlug: string;
   @Output() blogClick: EventEmitter<BlogPost> = new EventEmitter<BlogPost>();
 
-  public consumeApiBlogs: BlogPost[] = [];
-  public creatingApiBlogs: BlogPost[] = [];
+  public collapsdeState = {};
+  public dummyDocumentationAreas: DocumentationArea[] = [
+    {
+      id : 'asdf11',
+      name : 'Test1',
+      description : 'Description1',
+      slug : 'test1',
+      position : 1,
+      parent : null,
+      documents : [
+        <Documentation> {
+          id : 'asdf1114',
+          name : 'Documetation3',
+          description : "Description",
+          parentSlug : 'test1',
+          content : '<b>this is a test </b>'
+        },
+        <Documentation> {
+          id : 'asdf1115',
+          name : 'Documetation4',
+          description : "Description",
+          parentSlug : 'test1',
+          content : '<b>this is a test </b>'
+        }
+      ],
+      children : [
+        <DocumentationArea> {
+          id : 'asdf1122',
+          name : 'TEST 10',
+          description : 'TEST 10 Description',
+          slug : 'test10',
+          position : 1,
+          children : [],
+          documents : [
+            <Documentation> {
+              id : 'asdf1123',
+              name : 'Documetation11',
+              description : "Description",
+              parentSlug : 'test/test10',
+              content : '<b>this is a test </b>'
+            }
+          ]
+        },
+        <DocumentationArea> {
+          id : 'asdf12',
+          name : 'Test2',
+          description : 'Description2',
+          slug : 'test2',
+          position : 1,
+          parent : 'asdf11',
+          children : [
+            <DocumentationArea> {
+              id : 'asdf17',
+              name : 'Test4',
+              description : 'Description4',
+              slug : 'test2',
+              position : 1,
+              parent : 'asdf12',
+              documents : [
+                <Documentation> {
+                  id : 'asdf1116',
+                  name : 'Documetation6',
+                  description : "Description",
+                  parentSlug : 'test1/test2',
+                  content : '<b>this is a test </b>'
+                }
+              ]
+            }
+          ],
+          documents : [
+            <Documentation> {
+              id : 'asdf1113',
+              name : 'Documetation1',
+              description : "Description",
+              parentSlug : 'test1/test2',
+              content : '<b>this is a test </b>'
+            },
+            <Documentation> {
+              id : 'asdf1112',
+              name : 'Documetation2',
+              description : "Description",
+              parentSlug : 'test1/test2',
+              content : '<b>this is a test </b>'
+            }
+          ]
+        }
+      ]
+    }
+  ]
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,6 +128,11 @@ export class DocumentationSideNavigationComponent implements OnInit {
         }
       }
     });
+  }
+
+  public captureState (id: string) : void {
+    this.collapsdeState[id] = document.querySelector("#n" + id)['checked'];
+    console.log(this.collapsdeState);
   }
 
   public editDocumentationArea (slug: string) : void {

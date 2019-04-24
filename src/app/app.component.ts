@@ -7,8 +7,6 @@ import { HttpErrorMessage } from './core/interfaces/http-error.interface';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
 import { ToastrService } from 'ngx-toastr';
-import { isNull } from 'util';
-import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +18,6 @@ export class AppComponent implements OnInit {
   public showLogin: boolean = false;
 
   constructor(
-    private angulartics2GoogleGlobalSiteTag: Angulartics2GoogleGlobalSiteTagOverride,
     private httpErrorsServices : HttpErrorsService,
     private toastrService : ToastrService,
     private userService: UserService,
@@ -68,7 +65,9 @@ export class AppComponent implements OnInit {
         this.userService.attemptedUrl = failedNav.attemptedUrl;
 
         if(type === FAILED_NAVIGATION_TYPE.LOGOUT)
-          this.router.navigate([`/`]);
+          this.router.navigate([`/`]).then(navigated => {
+            console.log("navigated? ", navigated);
+          });
 
         if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ) {
           this.router.navigate([`/`]).then(navigated => {
@@ -88,7 +87,6 @@ export class AppComponent implements OnInit {
       this.httpErrorsServices.$onError.subscribe( (errors: HttpErrorMessage[]) => {
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
-            //  if(/\/user$/.test( error.response.url) && error.response.status === 403){
             if (error.response.status === 401 && error.response.url.indexOf("api/user") === -1 )
               this.userService.staticLogout();
 
