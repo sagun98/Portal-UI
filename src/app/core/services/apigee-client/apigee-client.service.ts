@@ -2,8 +2,8 @@ import { Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../../../docs/product/interfaces/product.interface';
 import { ApigeeApiKey } from '../../interfaces/apigee-api-key.interface';
+import { Product } from '../../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root'

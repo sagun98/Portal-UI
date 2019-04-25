@@ -1,14 +1,14 @@
 import { USER_PERMISSIONS } from '../../enums/user-permissions.enum';
-import { ApiService } from '../../../docs/api/api.service';
-import { ProductService, } from '../../../docs/product/product.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { API } from '../../../docs/api/interfaces/api.interface';
-import { APIListChange } from '../../../docs/api/interfaces/apiListChange.interface';
 import { CRUD } from '../../enums/crud.enum';
-import { Product } from '../../../docs/product/interfaces/product.interface';
-import { ProductListChange } from '../../../docs/product/interfaces/product-list-change.interface';
-import { SideNavigationService } from './side-navigation.service';
+import { Product } from '../../interfaces/product.interface';
+import { API } from '../../interfaces/api.interface';
+import { ApiService } from '../../services/api-service/api.service';
+import { ProductService } from '../../services/product-service/product.service';
+import { APIListChange } from '../../interfaces/api-list-change.interface';
+import { ProductListChange } from '../../interfaces/product-list-change.interface';
+
 
 @Component({
   selector: 'side-navigation',

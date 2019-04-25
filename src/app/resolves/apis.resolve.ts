@@ -1,8 +1,7 @@
-import { ApiService } from '../docs/api/api.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { Observable } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 import { Injectable } from '@angular/core';
+import { ApiService } from "../core/services/api-service/api.service";
 
 @Injectable({providedIn: 'root'})
 export class ApisResolve implements Resolve<any> {

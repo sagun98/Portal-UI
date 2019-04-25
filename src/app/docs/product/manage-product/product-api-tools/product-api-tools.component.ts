@@ -3,9 +3,9 @@ import { ApiManagementTool, DefaultApiManagementTool } from '../../../../core/in
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { API_MANAGEMENT_TOOLS } from '../../../../core/enums/api-management-tools.enum';
-import { Product } from '../../interfaces/product.interface';
 import { isNull } from 'util';
 import { API_MANAGEMENT_TOOLS_ARRAY } from '../../../../core/constants/api-tools.constants';
+import { Product } from '../../../../core/interfaces/product.interface';
 
 @Component({
   selector: 'product-api-tools',

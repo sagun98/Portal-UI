@@ -1,15 +1,15 @@
-import { ApiService } from '../../api/api.service';
 import { NodeBBCategoryService } from '../../../domain/nodebb/category/nodebb-category.service';
 import { PermissionsService } from '../../../core/services/permissions/permissions.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, ViewChild } from '@angular/core';
-import { API } from '../../api/interfaces/api.interface';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../product.service';
-import { Product } from '../interfaces/product.interface';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { UserService } from '../../../core/services/user/user.service';
 import { SideNavigationComponent } from '../../../core';
+import { ApiService } from '../../../core/services/api-service/api.service';
+import { API } from '../../../core/interfaces/api.interface';
+import { Product } from '../../../core/interfaces/product.interface';
+import { ProductService } from '../../../core/services/product-service/product.service';
 
 @Component({
   selector: 'app-view-product',

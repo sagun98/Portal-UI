@@ -8,10 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Documentation, DefaultDocumentation } from '../../core/interfaces/documentation.interface';
 import { EntityComponent } from '../../core/classes/EntityComponent';
 import { PermissionsService } from '../../core/services/permissions/permissions.service';
-import { TINYCMCE_CONFIG } from '../../docs/constants/tinymce.constant';
 import { ToastrService } from 'ngx-toastr';
 import { UserPrivilegeClass } from '../../core/classes/user-privilege';
 import { PortalUser } from '../../core/interfaces/fr-user.interface';
+import { TINYCMCE_CONFIG } from '../../core/constants/tinymce.constant';
 
 @Component({
   selector: 'app-manage-documentation',

@@ -1,8 +1,7 @@
 import { tap } from 'rxjs/operators';
-import { ApiService } from '../api.service';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
-
+import { ApiService } from '../../../core/services/api-service/api.service';
 export class ApiResolve implements Resolve<any> {
     
     constructor(

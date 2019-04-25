@@ -10,11 +10,10 @@ import { SideNavigationComponent } from '../core/layouts/side-navigation/side-na
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { Product } from './product/interfaces/product.interface';
-import { API } from './api/interfaces/api.interface';
 import { UserService } from '../core/services/user/user.service';
-import { Privilege } from '../core/interfaces/permissible.interface';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Product } from '../core/interfaces/product.interface';
+import { API } from '../core/interfaces/api.interface';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;

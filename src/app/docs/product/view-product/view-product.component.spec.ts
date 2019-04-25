@@ -1,14 +1,11 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { UserPrivilege } from '../../../core/interfaces/fr-user.interface';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { API_MANAGEMENT_TOOLS } from '../../../core/enums/api-management-tools.enum';
 import { ApigeeApiTool } from '../../../core/interfaces/apigee-api-tool.interface';
 import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { ViewApiComponent } from '../../api/view-api/view-api.component';
 import { ViewProductComponent } from './view-product.component';
-import { ApiService } from '../../api/api.service';
-import { API } from '../../api/interfaces/api.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
@@ -16,10 +13,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Product } from '../interfaces/product.interface';
 import { UserService } from '../../../core/services/user/user.service';
 import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
-
+import { API } from '../../../core/interfaces/api.interface';
+import { ApiService } from '../../../core/services/api-service/api.service';
+import { Product } from '../../../core/interfaces/product.interface';
 
 export const mockApi: API = {
   id : 'qwers12345',

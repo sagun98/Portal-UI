@@ -4,13 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { PortalUser } from '../../../core/interfaces/fr-user.interface';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { ToastrService } from 'ngx-toastr';
-import { ApiService } from '../api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ERROR_CLASSES } from '../../../core/constants/error-classes.constant';
 import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
-import { API } from '../interfaces/api.interface';
 import { UserService } from '../../../core/services/user/user.service';
 import { UserPrivilegeClass } from '../../../core/classes/user-privilege';
 import { ManageApiService } from './manage-api.service';
@@ -19,6 +17,8 @@ import { PermissionsService } from '../../../core/services/permissions/permissio
 import { BrowserMessage, SwaggerEditorLoaded, SwaggerEditorYAML } from '../../../core/interfaces/browser-message.interface';
 import { SideNavigationService } from '../../../core/layouts/side-navigation/side-navigation.service';
 import { environment } from '../../../../environments/environment';
+import { ApiService } from '../../../core/services/api-service/api.service';
+import { API } from '../../../core/interfaces/api.interface';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {

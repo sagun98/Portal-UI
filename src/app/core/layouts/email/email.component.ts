@@ -3,9 +3,9 @@ import { EmailService } from './../../services/email/email.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ERROR_CLASSES } from '../../constants/error-classes.constant';
-import { TINYCMCE_CONFIG } from '../../../docs/constants/tinymce.constant';
 import { Email } from '../../interfaces/email.interface';
 import { LoadingInterceptorService } from '../../loading-interceptor/loading-interceptor.service';
+import { TINYCMCE_CONFIG } from '../../constants/tinymce.constant';
 
 @Component({
   selector: 'email',

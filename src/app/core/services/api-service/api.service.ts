@@ -1,14 +1,14 @@
-import { UserPrivilegeClass } from "../../core/classes/user-privilege";
-import { environment } from "../../../environments/environment";
+import { APIListChange } from '../../interfaces/api-list-change.interface';
 import {HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, of, Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
-import { CRUD } from "../../core/enums/crud.enum";
-import { APIListChange } from "./interfaces/apiListChange.interface";
-import { API } from "./interfaces/api.interface";
-import { Privilege } from "../../core/interfaces/permissible.interface";
-import { Product } from "../product/interfaces/product.interface";
+import { API } from "../../interfaces/api.interface";
+import { environment } from '../../../../environments/environment';
+import { CRUD } from '../../enums/crud.enum';
+import { UserPrivilegeClass } from '../../classes/user-privilege';
+import { Product } from '../../interfaces/product.interface';
+import { Privilege } from '../../interfaces/permissible.interface';
 
 interface CachedAPIs {
   api?: boolean;

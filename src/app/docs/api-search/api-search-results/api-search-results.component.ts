@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { API } from '../../api/interfaces/api.interface';
+import { API } from '../../../core/interfaces/api.interface';
 
 @Component({
   selector: 'api-search-results',

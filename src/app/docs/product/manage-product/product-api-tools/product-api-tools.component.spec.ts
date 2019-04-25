@@ -1,10 +1,9 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductApiToolsComponent } from './product-api-tools.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Product } from '../../interfaces/product.interface';
+import { Product } from '../../../../core/interfaces/product.interface';
 
 describe('ProductApiToolsComponent', () => {
   let component: ProductApiToolsComponent;

@@ -1,12 +1,12 @@
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { API } from '../../interfaces/api.interface';
 import { DefaultApiManagementTool, ApiManagementTool } from '../../../../core/interfaces/api-management-tool.interface';
 import { API_MANAGEMENT_TOOLS } from '../../../../core/enums/api-management-tools.enum';
 import { API_MANAGEMENT_TOOLS_ARRAY } from '../../../../core/constants/api-tools.constants';
 import { ERROR_CLASSES } from '../../../../core/constants/error-classes.constant';
 import { isNull } from 'util';
 import { APIGEE_ORGS } from '../../../../core/constants/apigee-orgs.constant';
+import { API } from '../../../../core/interfaces/api.interface';
 
 @Component({
   selector: 'api-api-tools',

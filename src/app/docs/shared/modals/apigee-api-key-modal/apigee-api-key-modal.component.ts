@@ -1,14 +1,13 @@
 import { HttpErrorsService } from '../../../../core/services/http-errors/http-errors.service';
 import { HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { API } from '../../../api/interfaces/api.interface';
 import { forkJoin, of, Observable } from 'rxjs';
 import { ApigeeClientService } from '../../../../core/services/apigee-client/apigee-client.service';
-import { ApiService } from '../../../api/api.service';
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter, SimpleChanges } from '@angular/core';
-import { Product } from '../../../product/interfaces/product.interface';
 import { ApigeeApiKey } from '../../../../core/interfaces/apigee-api-key.interface';
-import { isNull } from 'util';
+import { ApiService } from '../../../../core/services/api-service/api.service';
+import { API } from '../../../../core/interfaces/api.interface';
+import { Product } from '../../../../core/interfaces/product.interface';
 
 @Component({
   selector: 'apigee-api-key-modal',
