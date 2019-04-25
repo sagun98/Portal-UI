@@ -1,7 +1,7 @@
 <div class="container">
 
-  <div id="changeParentDocumentationArea" style="margin-right: 20px;" class="pull-right">
-    <h4 class="bottom-spacer-5">Documentation Area</h4>
+  <div id="changeParentDocumentationArea" class="pull-right">
+    <h3 class="bottom-spacer-5">Documentation Area</h3>
     <select name="parentDocumentationArea" [(ngModel)]="selectedDocumentationArea" (change)="changeParentDocumentationArea()">
       <option *ngFor="let documentationArea of documentationAreas" [ngValue]="documentationArea">{{ documentationArea.name }}</option>
     </select>

@@ -156,7 +156,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
     console.log("New Documentation Area ID: ", this.selectedDocumentationArea.id);
 
     if(this.selectedDocumentationArea.id !== this.documentationArea.id) {
-      let doChange:boolean = confirm("Are you sure you want to change this documents Documentation Area?");
+      let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${this.selectedDocumentationArea.name}?`);
 
       if(doChange) {
         console.log("DO IT!!");
