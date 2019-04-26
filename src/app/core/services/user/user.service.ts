@@ -67,9 +67,10 @@ export class UserService {
   public setLoggedInState() {
     const authToken = this.authToken;
 
-    if (authToken.length) {
+    if (authToken.length) 
       this.$loggedIn.next(true);
-    }
+    else
+      this.$loggedIn.next(false);
   }
 
   public authenticate(credentials: FRCredentials) {
