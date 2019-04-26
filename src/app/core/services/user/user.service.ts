@@ -11,7 +11,7 @@ import { PortalUser } from '../../interfaces/fr-user.interface';
 })
 export class UserService {
 
-  public $loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public $loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   public $retrievedUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
   public $doUserLogin: Subject<boolean> = new Subject<boolean>();
   public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
