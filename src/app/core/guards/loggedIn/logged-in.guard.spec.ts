@@ -34,7 +34,7 @@ describe('LoggedInGuard', () => {
 
   it('should guard the route', fakeAsync(()=> {
     const route: ActivatedRouteSnapshot = null;
-    const state: RouterStateSnapshot = null;
+    const state: RouterStateSnapshot = {url : 'home', root : null};
     let loggedIn: boolean;
 
     userService.$loggedIn.next(true);
