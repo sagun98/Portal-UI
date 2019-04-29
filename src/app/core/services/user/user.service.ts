@@ -11,7 +11,7 @@ import { PortalUser } from '../../interfaces/fr-user.interface';
 })
 export class UserService {
 
-  public $loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public $loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   public $retrievedUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
   public $doUserLogin: Subject<boolean> = new Subject<boolean>();
   public $onUnAuthenticatedNavigationAttempt: BehaviorSubject<FailedNavigation> = new BehaviorSubject<any>(null);
@@ -67,9 +67,10 @@ export class UserService {
   public setLoggedInState() {
     const authToken = this.authToken;
 
-    if (authToken.length) {
+    if (authToken.length) 
       this.$loggedIn.next(true);
-    }
+    else
+      this.$loggedIn.next(false);
   }
 
   public authenticate(credentials: FRCredentials) {

@@ -151,19 +151,19 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
     });
   }
 
-  public changeParentDocumentationArea() : void {
+  public changeParentDocumentationArea(documentationArea: DocumentationArea) : void {
     console.log("Old Documentation Area ID: ", this.documentationArea.id);
-    console.log("New Documentation Area ID: ", this.selectedDocumentationArea.id);
+    console.log("New Documentation Area ID: ", documentationArea.id);
 
-    if(this.selectedDocumentationArea.id !== this.documentationArea.id) {
-      let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${this.selectedDocumentationArea.name}?`);
+    if(documentationArea.id !== this.documentationArea.id) {
+      let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
 
       if(doChange) {
         console.log("DO IT!!");
       }
       else {
         setTimeout(t => {
-          this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+          this.documentationArea = Object.assign({}, this.documentationArea);
         });
       }
     }

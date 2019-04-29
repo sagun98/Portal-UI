@@ -1,11 +1,19 @@
 <div class="container">
 
-  <div id="changeParentDocumentationArea" class="pull-right">
+  <!-- <div id="changeParentDocumentationArea" class="pull-right">
     <h3 class="bottom-spacer-5">Documentation Area</h3>
     <select name="parentDocumentationArea" [(ngModel)]="selectedDocumentationArea" (change)="changeParentDocumentationArea()">
       <option *ngFor="let documentationArea of documentationAreas" [ngValue]="documentationArea">{{ documentationArea.name }}</option>
     </select>
-  </div>
+  </div> -->
+
+  <documentation-area-selector
+    [documentationAreas]="documentationAreas"
+    [documentationArea]="documentationArea"
+    (onSelection)="changeParentDocumentationArea($event)"
+  >
+
+  </documentation-area-selector>
 
   <h3>
     <span>{{ title }}</span>

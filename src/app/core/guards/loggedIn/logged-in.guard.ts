@@ -3,6 +3,7 @@ import { FailedNavigation, FAILED_NAVIGATION_TYPE } from '../../services/user/us
 import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,26 +23,58 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
 
   private confirmIsLoggedIn (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
     return  new Observable(observer => {
-      const loggedIn = this.userService.$loggedIn.getValue()
+      // const loggedIn = this.userService.$loggedIn.getValue();
 
-      if( loggedIn ){
-        this.userService.user.subscribe(
-          user => {observer.next(loggedIn);observer.complete();},
-          errorResponse => {
-            observer.next(false);
-            observer.complete();
-          }
-        );
+      // console.log(`loggedIn: ${loggedIn}`);
 
-      }
-      else{
-        observer.next( loggedIn );
-        observer.complete();
-        this.userService.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
-          type : FAILED_NAVIGATION_TYPE.NAVIGATION,
-          attemptedUrl : state.url
-        });
-      }
+      // if(loggedIn !== null){
+      //   this.handle(loggedIn, observer, state);
+      // }
+
+      // else {
+      //   this.userService.$loggedIn.subscribe(loggedIn => {
+          
+      //     this.handle(loggedIn, observer, state);
+      //   });
+      // }
+      this.userService.$loggedIn.subscribe(loggedIn => {
+        console.log(`loggedIn: ${loggedIn}`);
+
+        if(loggedIn !== null){
+          this.handle(loggedIn, observer, state);
+        }
+
+        else {
+          this.userService.$loggedIn.subscribe(loggedIn => {
+            console.log(`loggedIn: ${loggedIn}`);
+            this.handle(loggedIn, observer, state);
+          });
+        }
+      });
     });
+  }
+
+  private handle (loggedIn: boolean, observer:Subscriber<boolean>, state: RouterStateSnapshot) {
+    if( loggedIn == null)
+      return;
+
+    if( loggedIn ){
+      this.userService.user.subscribe(
+        user => {observer.next(loggedIn);observer.complete();},
+        errorResponse => {
+          this.userService.staticLogout();
+        }
+      );
+
+    }
+    else{
+      observer.next( loggedIn );
+      observer.complete();
+      this.userService.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
+        type : FAILED_NAVIGATION_TYPE.NAVIGATION,
+        attemptedUrl : state.url
+      });
+    }
+
   }
 }

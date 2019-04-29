@@ -107,7 +107,7 @@
 
       <!-- Associated APIs -->
       <div class="form-group">
-        <label for="productApis" class="required">APIs</label>
+        <label for="productApis">APIs</label>
         <label for="productApis" [className]=" (form.get('apis').invalid && (submitted || form.get('apis').dirty)) ? errorClasses + ' textarea' : '' " style="flex-grow: 1;">
           <ng-select 
             id="productApis" 
@@ -120,7 +120,7 @@
             style="width: 100%"
           >
           </ng-select>
-          <span *ngIf="form.get('apis').errors && form.get('apis').errors.required && (submitted || form.get('apis').dirty)" class="tooltip-content">This field cannot be empty!</span>
+          <!-- <span *ngIf="form.get('apis').errors && form.get('apis').errors.required && (submitted || form.get('apis').dirty)" class="tooltip-content">This field cannot be empty!</span> -->
         </label>
       </div>
     </section>
