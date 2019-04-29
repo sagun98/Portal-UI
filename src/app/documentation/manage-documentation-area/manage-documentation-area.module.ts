@@ -11,6 +11,7 @@ import { VerifyLeaveGuard } from '../../core/guards/verify-leave/verify-leave.gu
 import { DocumentationAreaResolve } from '../resolves/documentation-area.resolve';
 import { ManageDocumentationComponent } from '../manage-documentation/manage-documentation.component';
 import { ViewDocumentComponent } from '../view-document/view-document.component';
+import { DocumentationSharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ViewDocumentComponent } from '../view-document/view-document.component'
     FormsModule,
     ClarityModule,
     CoreSharedModule,
+    DocumentationSharedModule,
     RouterModule.forChild([
       { path : 'new', component : ManageDocumentationAreaComponent, data : {permissions : ['ADMIN']}, canActivate : [RoleCheckGuard]},
       { path : ':id/edit', component : ManageDocumentationAreaComponent, data : {permissions : ['ADMIN']}, canDeactivate : [VerifyLeaveGuard], canActivate : [RoleCheckGuard], resolve : {DocumentationArea : DocumentationAreaResolve}},

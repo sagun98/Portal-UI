@@ -1,20 +1,19 @@
 import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../../core/constants/documentation.constants';
-import { environment } from '../../../environments/environment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentationArea, DefaultDocumentationArea } from '../../core/interfaces/documentation-area.interface';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DocumentationService } from '../documentation.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
-import { VerifyFormSavedComponent } from '../../core/classes/verify-form-saved';
+import { ChangableDocumentationArea } from '../classes/documentation-area-changable.class';
 
 @Component({
   selector: 'app-manage-documentation-area',
   templateUrl: './manage-documentation-area.component.html',
   styleUrls: ['./manage-documentation-area.component.scss']
 })
-export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent implements OnInit {
-
+export class ManageDocumentationAreaComponent extends ChangableDocumentationArea implements OnInit {
+  
   @Input() documentationArea: DocumentationArea;
 
   public errorClasses = ERROR_CLASSES;
@@ -22,9 +21,10 @@ export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent i
   public form : FormGroup;
   public submitted : boolean = false;
   public saveMethod: string = 'createDocumentationArea';
+  public parentDocumentationArea: DocumentationArea = null;
 
   constructor(
-    private documentationAreaService : DocumentationService,
+    protected documentationAreaService : DocumentationService,
     private activatedRoute : ActivatedRoute,
     private router : Router,
     private formBuilder : FormBuilder
@@ -33,13 +33,19 @@ export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent i
   }
 
   ngOnInit() {
+
+    super.ngOnInit();
+    
     this.activatedRoute.data.subscribe(data => {
       this.documentationArea = data.DocumentationArea || this.documentationArea || DefaultDocumentationArea;
 
       if (this.documentationArea.id) {
         this.title = `Edit ${this.documentationArea.name}`;
         this.saveMethod = 'udpateDocumentationArea';
-      } 
+      }
+
+      //TODO: Set parent documentation area based on the parent id
+      this.parentDocumentationArea = this.documentationArea;     
 
       this.buildForm();
 
@@ -118,4 +124,9 @@ export class ManageDocumentationAreaComponent extends VerifyFormSavedComponent i
 
     this.form.get('slug').setValue(slug);
   }
+
+  protected getDocumentationAreaService(): DocumentationService {
+    return this.documentationAreaService;
+  }
+
 }
