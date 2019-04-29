@@ -1,6 +1,7 @@
 # base image
 #FROM node:8.15.1-stretch
-FROM node:8.15.1-alpine
+#FROM node:8.15.1-alpine
+FROM node@sha256:8e9987a6d91d783c56980f1bd4b23b4c05f9f6076d513d6350fef8fe09ed01fd
 
 
 # set working directory
