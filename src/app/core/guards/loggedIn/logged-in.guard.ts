@@ -23,30 +23,13 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
 
   private confirmIsLoggedIn (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
     return  new Observable(observer => {
-      // const loggedIn = this.userService.$loggedIn.getValue();
-
-      // console.log(`loggedIn: ${loggedIn}`);
-
-      // if(loggedIn !== null){
-      //   this.handle(loggedIn, observer, state);
-      // }
-
-      // else {
-      //   this.userService.$loggedIn.subscribe(loggedIn => {
-          
-      //     this.handle(loggedIn, observer, state);
-      //   });
-      // }
       this.userService.$loggedIn.subscribe(loggedIn => {
-        console.log(`loggedIn: ${loggedIn}`);
-
         if(loggedIn !== null){
           this.handle(loggedIn, observer, state);
         }
 
         else {
           this.userService.$loggedIn.subscribe(loggedIn => {
-            console.log(`loggedIn: ${loggedIn}`);
             this.handle(loggedIn, observer, state);
           });
         }
@@ -60,8 +43,14 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
 
     if( loggedIn ){
       this.userService.user.subscribe(
-        user => {observer.next(loggedIn);observer.complete();},
+        user => {
+          observer.next(loggedIn);
+          observer.complete();
+        },
+
         errorResponse => {
+          observer.next( false );
+          observer.complete();
           this.userService.staticLogout();
         }
       );
@@ -75,6 +64,5 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
         attemptedUrl : state.url
       });
     }
-
   }
 }

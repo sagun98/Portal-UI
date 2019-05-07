@@ -1,6 +1,7 @@
 <div class="container">
 
   <documentation-area-selector
+    *ngIf="documentationArea.name !== 'Documentation Landing Page'"
     [documentationAreas]="documentationAreas"
     [documentationArea]="documentationArea"
     (onSelection)="changeParentDocumentationArea($event)"
