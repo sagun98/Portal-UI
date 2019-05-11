@@ -5,7 +5,7 @@
   </div>
 
   <documentation-area
-    [documentationAreas]="dummyDocumentationAreas"
+    [documentationAreas]="sideNavigationDocumentationAreas"
   >
 
   </documentation-area>
@@ -36,7 +36,7 @@
     </ul>
   </section> -->
 
-  <section class="nav-group collapsible" *ngFor="let documentationArea of sideNavigationDocumentationAreas;let index = index;">
+  <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of sideNavigationDocumentationAreas;let index = index;">
     <input [id]="'n' + documentationArea.id" type="checkbox" (click)="captureState(documentationArea.id)"/>
 
     <label [for]="'n' + documentationArea.id" (dblclick)="editDocumentationArea(documentationArea.slug)">
@@ -71,7 +71,7 @@
         </a>
       </li>
     </ul>
-  </section>
+  </section> -->
 
   <!-- <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">

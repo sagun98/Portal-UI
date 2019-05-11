@@ -27,7 +27,7 @@ export class DocumentationSideNavigationComponent implements OnInit {
       description : 'Description1',
       slug : 'test1',
       position : 1,
-      parent : null,
+      parentSlug : null,
       documents : [
         <Documentation> {
           id : 'asdf1114',
@@ -68,7 +68,7 @@ export class DocumentationSideNavigationComponent implements OnInit {
           description : 'Description2',
           slug : 'test2',
           position : 1,
-          parent : 'asdf11',
+          parentSlug : 'asdf11',
           children : [
             <DocumentationArea> {
               id : 'asdf17',
