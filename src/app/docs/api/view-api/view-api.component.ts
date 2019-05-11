@@ -184,8 +184,12 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   }
 
   private removeSwaggerAPISearch () {
-    document.querySelector(".download-url-input").remove();
-    document.querySelector(".download-url-button").remove();
+    try {
+      document.querySelector(".download-url-input").remove();
+      document.querySelector(".download-url-button").remove();
+    }catch (e) {
+      // unable to remove the buttons
+    }
   }
 
   protected getPermissionService(): PermissionsService {
