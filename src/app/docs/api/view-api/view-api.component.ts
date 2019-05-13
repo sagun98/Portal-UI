@@ -189,6 +189,7 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       document.querySelector(".download-url-button").remove();
     }catch (e) {
       // unable to remove the buttons
+      console.error("Unable to remove unrendered elements");
     }
   }
 
