@@ -6,4 +6,19 @@
     ul.nav-list.documents {
         margin-bottom : 10px;
     }
+
+    section.nav-group {
+
+        button {
+            margin-top: -1px;
+        }
+
+        ul.nav-list {
+            padding: 0rem 0 0 0.5rem;
+
+            li a.nav-link{
+                padding: .16667rem 0 .16667rem 1.5rem;
+            }
+        }
+    }
 }

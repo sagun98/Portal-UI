@@ -135,13 +135,13 @@ export class DocumentationSideNavigationComponent implements OnInit {
     console.log(this.collapsdeState);
   }
 
-  public editDocumentationArea (slug: string) : void {
+  public editDocumentationArea (id: string) : void {
     if (this.userService.isAdmin())
-      this.router.navigate([`/documentation/area/${slug}/edit`]);
+      this.router.navigate([`/documentation/area/${id}/edit`]);
   }
 
-  public addDocumentation (slug: string) {
-    this.router.navigate([`/documentation/area/${slug}/new`]);
+  public addDocumentation (id: string) {
+    this.router.navigate([`/documentation/area/${id}/new`]);
   }
 
   public goToBlog(blog) {

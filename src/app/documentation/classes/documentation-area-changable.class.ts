@@ -8,18 +8,23 @@ export abstract class ChangableDocumentationArea extends VerifyFormSavedComponen
 
     public documentationAreas: DocumentationArea[] = [];
     public selectedDocumentationArea: DocumentationArea;
+    public parentDocumentationArea: DocumentationArea = null;
+    public documentationArea: DocumentationArea;
+
     @ViewChild(DocumentationAreaSelectorComponent) documentationAreaSelector: DocumentationAreaSelectorComponent;
 
     protected abstract getDocumentationAreaService () : DocumentationService;
 
-    ngOnInit() {
+    protected setDocumentationAreaList() {
         this.getDocumentationAreaService().cache.$documentationAreas.subscribe(documentationAreas => {
             documentationAreas = documentationAreas.filter(documentationarea => {return documentationarea.name !== 'Documentation Landing Page'});
-            this.documentationAreas = documentationAreas;
+            const clone = JSON.parse(JSON.stringify(documentationAreas));
+            let flatDocumentationAreas = this.getDocumentationAreaService().getFlatDocumentationAreas(clone);
+            this.documentationAreas = flatDocumentationAreas;
         });
     }
 
-    protected changeParentDocumentationArea (documentationArea: DocumentationArea, oldDocumentationArea: DocumentationArea) : void {
+    public changeParentDocumentationArea (documentationArea: DocumentationArea, oldDocumentationArea: DocumentationArea) : void {
         console.log("New Documentation Area ID: ", documentationArea.id);
         console.log("Documentation Area ID: ", oldDocumentationArea.id);
 
@@ -27,7 +32,9 @@ export abstract class ChangableDocumentationArea extends VerifyFormSavedComponen
             let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
 
             if(doChange) {
-            console.log("DO IT!!");
+                console.log("DO IT!!");
+                this.parentDocumentationArea = documentationArea;
+                this.documentationArea.parentSlug = this.parentDocumentationArea.slug;
             }
             else {
             setTimeout(t => {

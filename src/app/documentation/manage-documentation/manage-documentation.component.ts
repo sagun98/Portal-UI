@@ -45,7 +45,9 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   ngOnInit() {
     this.documentationService.cache.$documentationAreas.subscribe(documentationAreas => {
       documentationAreas = documentationAreas.filter(documentationarea => {return documentationarea.name !== 'Documentation Landing Page'});
-      this.documentationAreas = documentationAreas;
+      const clone = JSON.parse(JSON.stringify(documentationAreas));
+      let flatDocumentationAreas = this.documentationService.getFlatDocumentationAreas(clone);
+      this.documentationAreas = flatDocumentationAreas;
     });
 
     this.activatedRoute.data.subscribe(data => {
@@ -124,6 +126,9 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
     let documentation: Documentation = this.form.getRawValue();
 
+    if(this.documentationArea)
+      documentation.parentSlug = this.documentationArea.slug;
+
     this.documentationService[this.saveMethod](this.documentationArea.id, documentation).subscribe(newDocumentation => {
       this.documentation = newDocumentation;
 
@@ -145,7 +150,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       if(this.documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
         this.router.navigate([`/documentation/main`]);
       else
-        this.router.navigate([`/documentation/area/${this.documentationArea.slug}/${this.documentation.slug}`]);
+        this.router.navigate([`/documentation/area/${this.documentation.slug}`]);
       
       this.documentationService.onChange.next(null);
     });
@@ -159,7 +164,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
 
       if(doChange) {
-        console.log("DO IT!!");
+        this.documentationArea = documentationArea;
       }
       else {
         setTimeout(t => {

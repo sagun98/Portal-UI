@@ -14,10 +14,11 @@ export class DocumentationNewResolve implements Resolve<any> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let documentationAreaId = route.params.id;
-        let documentationId = route.params.slug;
-
-        return this.documentationService.findDocumentationById(documentationAreaId, documentationId).pipe(
+        // let documentationAreaId = route.params.id;
+        // let documentationId = route.params.slug;
+        let slug = route.params.slug || Object.values(route.params).join('/');
+        
+        return this.documentationService.findDocumentationBySlug(slug).pipe(
             tap(result => {
                 if(! result){
                     this.router.navigate([`/documentation/main`]);

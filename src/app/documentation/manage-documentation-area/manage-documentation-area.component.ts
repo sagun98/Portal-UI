@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentationArea, DefaultDocumentationArea } from '../../core/interfaces/documentation-area.interface';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { DocumentationService } from '../documentation.service';
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ERROR_CLASSES } from '../../core/constants/error-classes.constant';
 import { ChangableDocumentationArea } from '../classes/documentation-area-changable.class';
 
@@ -21,7 +21,6 @@ export class ManageDocumentationAreaComponent extends ChangableDocumentationArea
   public form : FormGroup;
   public submitted : boolean = false;
   public saveMethod: string = 'createDocumentationArea';
-  public parentDocumentationArea: DocumentationArea = null;
 
   constructor(
     protected documentationAreaService : DocumentationService,
@@ -32,11 +31,10 @@ export class ManageDocumentationAreaComponent extends ChangableDocumentationArea
     super();
   }
 
-  ngOnInit() {
-
-    super.ngOnInit();
-    
+  ngOnInit() {    
     this.activatedRoute.data.subscribe(data => {
+      this.setDocumentationAreaList();
+
       this.documentationArea = data.DocumentationArea || this.documentationArea || DefaultDocumentationArea;
 
       if (this.documentationArea.id) {
@@ -45,7 +43,13 @@ export class ManageDocumentationAreaComponent extends ChangableDocumentationArea
       }
 
       //TODO: Set parent documentation area based on the parent id
-      this.parentDocumentationArea = this.documentationArea;     
+      this.parentDocumentationArea = this.documentationAreas.filter(_documentationArea => {
+        if (_documentationArea.slug === this.documentationArea.parentSlug)
+          return true;
+        return false;
+      })[0] || <DocumentationArea> {
+        id : null
+      };
 
       this.buildForm();
 
@@ -72,7 +76,12 @@ export class ManageDocumentationAreaComponent extends ChangableDocumentationArea
 
     let documentationArea = <DocumentationArea> this.form.getRawValue();
 
-    this.documentationAreaService[this.saveMethod](documentationArea).subscribe(documentationArea => {
+    console.log("this.parentDocumentationArea.slug: ", this.parentDocumentationArea.slug);
+
+    if (this.parentDocumentationArea.slug)
+      documentationArea.parentSlug = this.parentDocumentationArea.slug;
+
+    this.documentationAreaService[this.saveMethod](documentationArea, this.parentDocumentationArea).subscribe(documentationArea => {
       this.documentationArea = documentationArea;
 
       if(documentationArea.name.toLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { EntityComponent } from '../../core/classes/EntityComponent';
 import { PermissionsService } from '../../core/services/permissions/permissions.service';
+import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
 
 @Component({
   selector: 'app-view-document',
@@ -13,6 +14,7 @@ import { PermissionsService } from '../../core/services/permissions/permissions.
 export class ViewDocumentComponent extends EntityComponent implements OnInit {
 
   @Input() documentation : Documentation;
+  @Input() documentationArea : DocumentationArea;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -25,6 +27,7 @@ export class ViewDocumentComponent extends EntityComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation;
+      this.documentationArea = data.DocumentationArea || this.documentationArea;
 
       setTimeout(t => {
         document['removeAllListeners']('focus');

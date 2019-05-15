@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentationArea } from '../../../core/interfaces/documentation-area.interface';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
@@ -11,6 +11,8 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class DocumentationAreaComponent implements OnInit {
 
   @Input() documentationAreas: DocumentationArea[];
+  @Output() documentationAreaClick: EventEmitter<string> = new EventEmitter<string>();
+  @Output() addDocumentClick: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -27,4 +29,11 @@ export class DocumentationAreaComponent implements OnInit {
     moveItemInArray(documentationAreas, event.previousIndex, event.currentIndex);
   }
 
+  public emitDoubleClick(id: string) {
+    this.documentationAreaClick.emit(id);
+  }
+
+  public emitAddDocument(id: string) {
+    this.addDocumentClick.emit(id);
+  }
 }

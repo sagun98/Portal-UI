@@ -1,7 +1,6 @@
 <div class="container">
   
   <documentation-area-selector
-    *ngIf="documentationArea.id "
     [documentationAreas]="documentationAreas"
     [documentationArea]="parentDocumentationArea"
     (onSelection)="changeParentDocumentationArea($event, parentDocumentationArea)"

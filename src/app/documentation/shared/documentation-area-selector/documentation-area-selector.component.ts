@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { DocumentationArea } from '../../../core/interfaces/documentation-area.interface';
+import { DocumentationArea, DefaultDocumentationArea } from '../../../core/interfaces/documentation-area.interface';
 
 @Component({
   selector: 'documentation-area-selector',
@@ -10,12 +10,17 @@ export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
   @Input() documentationAreas: DocumentationArea[]  = [];
   @Input() documentationArea: DocumentationArea = null;
   @Output() onSelection: EventEmitter<DocumentationArea> = new EventEmitter<DocumentationArea>();
-  public selectedDocumentationArea: DocumentationArea = null;
-
+  
+  public noSelectionDocumentationArea : DocumentationArea = Object.assign({}, DefaultDocumentationArea, {name : 'Select Documentation Area'});
+  public selectedDocumentationArea: DocumentationArea = null
+  
   constructor() { }
 
   ngOnInit() {
-    this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+    if (this.documentationArea && this.documentationArea.id) 
+      this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+    else
+      this.selectedDocumentationArea = this.noSelectionDocumentationArea;
   }
 
   ngOnChanges () {
