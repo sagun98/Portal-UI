@@ -2,7 +2,6 @@
   <h3 class="bottom-spacer-5">Documentation Area</h3>
 
   <select name="parentDocumentationArea" [(ngModel)]="selectedDocumentationArea" (change)="handleChange()">
-    <option [ngValue]="noSelectionDocumentationArea">Select Documentation Area (Optional)</option>
     <option *ngFor="let documentationArea of documentationAreas" [ngValue]="documentationArea">{{ documentationArea.name }}</option>
   </select>
 </div>

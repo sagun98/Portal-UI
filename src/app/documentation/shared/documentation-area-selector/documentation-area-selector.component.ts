@@ -9,9 +9,10 @@ import { DocumentationArea, DefaultDocumentationArea } from '../../../core/inter
 export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
   @Input() documentationAreas: DocumentationArea[]  = [];
   @Input() documentationArea: DocumentationArea = null;
+  @Input() allowNoParent: boolean = false;
   @Output() onSelection: EventEmitter<DocumentationArea> = new EventEmitter<DocumentationArea>();
   
-  public noSelectionDocumentationArea : DocumentationArea = Object.assign({}, DefaultDocumentationArea, {name : 'Select Documentation Area'});
+  public noSelectionDocumentationArea : DocumentationArea = Object.assign({}, DefaultDocumentationArea, {name : 'No Parent (Root Node)', id : 'root'});
   public selectedDocumentationArea: DocumentationArea = null
   
   constructor() { }
@@ -21,6 +22,9 @@ export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
       this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
     else
       this.selectedDocumentationArea = this.noSelectionDocumentationArea;
+
+    if(this.allowNoParent)
+      this.documentationAreas.unshift(this.noSelectionDocumentationArea);
   }
 
   ngOnChanges () {

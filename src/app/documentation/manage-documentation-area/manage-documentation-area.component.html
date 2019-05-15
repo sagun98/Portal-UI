@@ -3,6 +3,7 @@
   <documentation-area-selector
     [documentationAreas]="documentationAreas"
     [documentationArea]="parentDocumentationArea"
+    [allowNoParent]="true"
     (onSelection)="changeParentDocumentationArea($event, parentDocumentationArea)"
   >
 

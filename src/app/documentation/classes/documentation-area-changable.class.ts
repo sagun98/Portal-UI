@@ -25,14 +25,10 @@ export abstract class ChangableDocumentationArea extends VerifyFormSavedComponen
     }
 
     public changeParentDocumentationArea (documentationArea: DocumentationArea, oldDocumentationArea: DocumentationArea) : void {
-        console.log("New Documentation Area ID: ", documentationArea.id);
-        console.log("Documentation Area ID: ", oldDocumentationArea.id);
-
         if(documentationArea.id !== oldDocumentationArea.id) {
             let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
 
             if(doChange) {
-                console.log("DO IT!!");
                 this.parentDocumentationArea = documentationArea;
                 this.documentationArea.parentSlug = this.parentDocumentationArea.slug;
             }
