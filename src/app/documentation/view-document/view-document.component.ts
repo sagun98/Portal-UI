@@ -29,10 +29,10 @@ export class ViewDocumentComponent extends EntityComponent implements OnInit {
       this.documentation = data.Documentation || this.documentation;
       this.documentationArea = data.DocumentationArea || this.documentationArea;
 
-      setTimeout(t => {
-        document['removeAllListeners']('focus');
-        window['removeAllListeners']('message');
-      }, 1000);
+      // setTimeout(t => {
+      //   document['removeAllListeners']('focus');
+      //   window['removeAllListeners']('message');
+      // }, 1000);
     });
   }
 

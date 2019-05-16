@@ -11,9 +11,7 @@ import { DefaultDocumentation } from '../../core/interfaces/documentation.interf
 describe('ViewDocumentComponent', () => {
   let component: ViewDocumentComponent;
   let fixture: ComponentFixture<ViewDocumentComponent>;
-  let mockDocument = Object.assign({
-    userPrivileges : []
-  }, DefaultDocumentation);
+  let mockDocument = Object.assign({ userPrivileges : [] }, DefaultDocumentation, {id : 'asdflkj1234'});
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,7 +39,7 @@ describe('ViewDocumentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ViewDocumentComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    //fixture.detectChanges();
   });
 
   it('should create', () => {

@@ -20,12 +20,10 @@ export class DocumentationAreaComponent implements OnInit {
   }
 
   public dropDocument(event: CdkDragDrop<string[]>, documentationArea: DocumentationArea) {
-    console.log(event);
     moveItemInArray(documentationArea.documents, event.previousIndex, event.currentIndex);
   }
 
   public dropArea(event: CdkDragDrop<string[]>, documentationAreas: DocumentationArea[]) {
-    console.log(event);
     moveItemInArray(documentationAreas, event.previousIndex, event.currentIndex);
   }
 
