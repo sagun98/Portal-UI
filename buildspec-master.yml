@@ -17,7 +17,7 @@ phases:
   pre_build:
     commands:
       - ng test --sourceMap=false --browsers ChromeHeadlessNoSandbox --watch false --codeCoverage
-      - ng e2e --baseUrl='https://dev.code-test.aws.pearson.com/' --suite nonprod
+      #- ng e2e --baseUrl='https://dev.code-test.aws.pearson.com/' --suite nonprod
       - TIMESTAMP=$(date +"%m%d%Y%H%M%S")
       - aws s3 cp coverage/ s3://codebuild-dev-portal-ui-tests-880745084073/$(echo $TIMESTAMP)/coverage --recursive
       - aws s3 cp htmlreport/ s3://codebuild-dev-portal-ui-tests-880745084073/$(echo $TIMESTAMP)/e2e --recursive
