@@ -14,14 +14,15 @@
     <li *ngFor="let document of documentationArea.documents" cdkDrag>
       <a class="nav-link" routerlinkactive="active" [routerLink]="'area/' + document.slug">
         {{document.name}}
-      </a>
+      
 
-      <clr-tooltip>
-        <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
-        <clr-tooltip-content *clrIfOpen>
-          <span>In Draft Status</span>
-        </clr-tooltip-content>
-      </clr-tooltip>
+        <clr-tooltip>
+          <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
+          <clr-tooltip-content *clrIfOpen>
+            <span>In Draft Status</span>
+          </clr-tooltip-content>
+        </clr-tooltip>
+      </a>
     </li>
   </ul>
 
