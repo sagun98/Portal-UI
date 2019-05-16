@@ -6,7 +6,7 @@ import { DocumentationAreaSelectorComponent } from './documentation-area-selecto
 import { DocumentationArea, DefaultDocumentationArea } from '../../../core/interfaces/documentation-area.interface';
 import { DebugElement } from '../../../../../node_modules/@angular/core';
 
-fdescribe('DocumentationAreaSelectorComponent', () => {
+describe('DocumentationAreaSelectorComponent', () => {
   let component: DocumentationAreaSelectorComponent;
   let fixture: ComponentFixture<DocumentationAreaSelectorComponent>;
 
