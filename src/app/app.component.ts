@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
       });
 
       this.userService.$onUnAuthenticatedNavigationAttempt.subscribe( (failedNav : FailedNavigation) => {
+
         if(! failedNav)
           return;
 
