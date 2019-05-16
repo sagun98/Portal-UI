@@ -170,7 +170,7 @@ export class DocumentationService {
   }
 
   public deleteDocumentation (documentationAreaId : string, documentationId: string) : Observable<any> {
-    return this.http.delete(`${environment.restBase}/documents/${documentationId}`);
+    return this.http.delete(`${environment.restBase}/documentation/${documentationId}`);
   }
 
   public getPrivileges (documentationAreaId: string, documentationId : string) {
