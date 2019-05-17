@@ -20,7 +20,8 @@ export class UserSettingsModalComponent implements OnChanges {
     manageRoles : false,
     myRoles : false,
     manageUsers : false,
-    massEmail: false
+    massEmail: false,
+    searchOptions : false
   };
 
   constructor(

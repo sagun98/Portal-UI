@@ -20,6 +20,7 @@ import { RoleCardComponent } from './user-settings-modal/role-card/role-card.com
 import { UserModule } from 'src/app/user/user.module';
 import { EmailComponent } from './email/email.component';
 import { EditorModule } from '../../../../node_modules/@tinymce/tinymce-angular';
+import { ManageSearchComponent } from './user-settings-modal/manage-search/manage-search.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { EditorModule } from '../../../../node_modules/@tinymce/tinymce-angular'
     RoleManagementComponent,
     DevPortalFooterComponent,
     RoleCardComponent,
-    EmailComponent
+    EmailComponent,
+    ManageSearchComponent
   ],
   exports : [
     SideNavigationComponent,

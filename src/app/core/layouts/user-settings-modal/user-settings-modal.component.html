@@ -135,6 +135,18 @@
         </ng-template>
       </clr-tab>
 
+      <clr-tab *ngIf="user?.roleMap?.ADMIN">        
+          <button clrTabLink><h4>Search Options</h4></button>
+          <ng-template [(clrIfActive)]="activeTabs.searchOptions">
+            <clr-tab-content style="padding:20px 10px">
+              <h3>Manage Search</h3>
+
+              <manage-search></manage-search>
+
+            </clr-tab-content>
+          </ng-template>
+        </clr-tab>
+
     </clr-tabs>
   </div>
 </clr-modal>

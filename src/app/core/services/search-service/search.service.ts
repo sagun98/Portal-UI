@@ -1,4 +1,5 @@
-import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,5 +35,17 @@ export class SearchService {
     window['gtag']('event', 'search', {search_term : phrase});
 
     return this.http.post(`${environment.restBase}/search${searchType}`, { phrase }); 
+  }
+
+  public reindex ()  {
+    return <Observable<boolean>> this.http.post(`${environment.restBase}/search/reindex`, {})
+      .pipe(map(
+        response => {
+          return true;
+        },
+        error => {
+          return false;
+        }
+      ));
   }
 }
