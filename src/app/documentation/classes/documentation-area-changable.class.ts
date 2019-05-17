@@ -35,7 +35,7 @@ export abstract class ChangableDocumentationArea extends VerifyFormSavedComponen
             else {
             setTimeout(t => {
                 this.documentationAreaSelector.documentationArea = Object.assign({}, oldDocumentationArea);
-                this.documentationAreaSelector.ngOnChanges();
+                this.documentationAreaSelector.ngOnInit();
             });
             }
         }

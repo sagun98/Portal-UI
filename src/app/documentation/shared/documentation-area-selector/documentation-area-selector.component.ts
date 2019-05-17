@@ -32,7 +32,7 @@ export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
     
     this.documentationAreas = this.documentationAreas.filter(da => {
       // If any part of the slug has a fragment of the slug of the DA being managed, remove it (its a child)
-      if( (da.slug && this.slug.length && (da.slug.indexOf(this.slug) >= 0)) || (this.documentationAreaId &&  da.id == this.documentationAreaId)) 
+      if( (da.slug && this.slug && this.slug.length && (da.slug.indexOf(this.slug) >= 0)) || (this.documentationAreaId &&  da.id == this.documentationAreaId)) 
         return false
       else
         return true;
