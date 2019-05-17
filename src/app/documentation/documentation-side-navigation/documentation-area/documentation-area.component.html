@@ -1,5 +1,8 @@
-<div cdkDropList (cdkDropListDropped)="dropArea($event, documentationAreas)">
-<section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag>
+<!-- <div cdkDropList (cdkDropListDropped)="dropArea($event, documentationAreas)"> -->
+<div>
+<!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
+<section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
+
   <input [id]="'n' + documentationArea.id" type="checkbox"/>
 
   <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)">
@@ -10,20 +13,22 @@
     </button>
   </label>
 
-  <ul class="nav-list documents" cdkDropList (cdkDropListDropped)="dropDocument($event, documentationArea)" *ngIf="documentationArea.documents && documentationArea.documents.length">
-    <li *ngFor="let document of documentationArea.documents" cdkDrag>
-      <a class="nav-link" routerlinkactive="active" [routerLink]="'area/' + document.slug">
-        {{document.name}}
-      
+  <!-- <ul class="nav-list documents" cdkDropList (cdkDropListDropped)="dropDocument($event, documentationArea)" *ngIf="documentationArea.documents && documentationArea.documents.length"> -->
+  <ul class="nav-list documents"  *ngIf="documentationArea.documents && documentationArea.documents.length">
 
-        <clr-tooltip>
-          <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
-          <clr-tooltip-content *clrIfOpen>
-            <span>In Draft Status</span>
-          </clr-tooltip-content>
-        </clr-tooltip>
-      </a>
-    </li>
+    <!-- <li *ngFor="let document of documentationArea.documents" cdkDrag> -->
+    <li *ngFor="let document of documentationArea.documents"> 
+        <a class="nav-link" routerlinkactive="active" [routerLink]="'area/' + document.slug">
+          {{document.name}}
+      
+          <clr-tooltip>
+            <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+              <span>In Draft Status</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </a>
+      </li>
   </ul>
 
   <ul class="nav-list areas" *ngIf="documentationArea.children && documentationArea.children.length">

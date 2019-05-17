@@ -9,6 +9,8 @@ import { DocumentationArea, DefaultDocumentationArea } from '../../../core/inter
 export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
   @Input() documentationAreas: DocumentationArea[]  = [];
   @Input() documentationArea: DocumentationArea = null;
+  @Input() documentationAreaId: string;
+  @Input() slug: string;
   @Input() allowNoParent: boolean = false;
   @Output() onSelection: EventEmitter<DocumentationArea> = new EventEmitter<DocumentationArea>();
   
@@ -18,18 +20,30 @@ export class DocumentationAreaSelectorComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    // set selected value (or not)
     if (this.documentationArea && this.documentationArea.id) 
       this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
     else
       this.selectedDocumentationArea = this.noSelectionDocumentationArea;
 
-    if(this.allowNoParent)
+    // Set root option on or not
+    if (this.allowNoParent)
       this.documentationAreas.unshift(this.noSelectionDocumentationArea);
+    
+    this.documentationAreas = this.documentationAreas.filter(da => {
+      // If any part of the slug has a fragment of the slug of the DA being managed, remove it (its a child)
+      if( (da.slug && this.slug.length && (da.slug.indexOf(this.slug) >= 0)) || (this.documentationAreaId &&  da.id == this.documentationAreaId)) 
+        return false
+      else
+        return true;
+    });
   }
 
-  ngOnChanges () {
-    if(this.documentationArea)
-      this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+  ngOnChanges (changes) {
+    // if(this.documentationArea && this.documentationArea.id)
+    //   this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+    if(! changes[Object.keys(changes)[0]].firstChange)
+      this.ngOnInit();
   }
 
   public handleChange() : void {
