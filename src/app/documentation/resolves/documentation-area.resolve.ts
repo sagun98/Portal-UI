@@ -10,9 +10,14 @@ export class DocumentationAreaResolve implements Resolve<any> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const documentationId = route.params.id || '';
-        const type = route.data;
+        const values =  Object.values(route.params);
+        const slug = values.slice(0, values.length - 1).join('/');
+        const id = route.params.id;
 
-        return this.documentationService.findDocumentationArea(documentationId);
+        if(slug.length)
+            return this.documentationService.findDocumentationAreaBySlug(slug);
+
+        else if(id.length)
+            return this.documentationService.findDocumentationArea(id);
     }
 }

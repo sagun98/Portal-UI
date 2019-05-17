@@ -74,7 +74,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             this.httpErrorsServices.$onError.next(errorMessages);
 
             // return throwError(caught);
-            throw errorResponse;
+            //throw errorResponse;
+            return throwError(errorResponse);
         }));
     }
 }

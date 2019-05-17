@@ -27,9 +27,28 @@ export class DocumentationService {
     slug : ''
   });
 
+  public cache = {
+    documentationAreas : [],
+    $documentationAreas : new BehaviorSubject<DocumentationArea[]>([])
+  };
+
   constructor(
     private http : HttpClient
   ) { }
+
+  public getFlatDocumentationAreas (documentationAreas: DocumentationArea[], container: DocumentationArea[] = []) : DocumentationArea[] {
+    documentationAreas.slice(0).forEach(_documentationArea => {
+      let children = _documentationArea.children;
+      delete _documentationArea.children;
+
+      container.push(_documentationArea);
+
+      if(children.length)
+        return this.getFlatDocumentationAreas(children, container);
+    });    
+
+    return container;
+  }
 
   public getBlogPost (blogId : string) {
     return <Observable<BlogPost>> this.http.get(`${environment.restBase}/blogs/${blogId}`);
@@ -81,6 +100,7 @@ export class DocumentationService {
     return <Observable<DocumentationArea[]>> this.http.get(`${environment.restBase}/documentation-area`).pipe(
       tap( (documentationAreas: DocumentationArea[]) => {
         let hasLandingPage: boolean = false;
+        
         documentationAreas.forEach(documentationArea => {
           if (documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL) {
             this.documentationLandingPageArea = documentationArea;
@@ -97,6 +117,9 @@ export class DocumentationService {
             name : '',
             slug : ''
           });
+
+        this.cache.documentationAreas = documentationAreas;
+        this.cache.$documentationAreas.next(documentationAreas);
       })
     );
   }
@@ -105,8 +128,13 @@ export class DocumentationService {
     return <Observable<DocumentationArea>> this.http.get(`${environment.restBase}/documentation-area/${id}`);
   }
 
-  public createDocumentationArea (documentationArea: DocumentationArea) : Observable<DocumentationArea> {
-    return <Observable<DocumentationArea>> this.http.post(`${environment.restBase}/documentation-area`, documentationArea).pipe(
+  public findDocumentationAreaBySlug (slug: string) : Observable<DocumentationArea> {
+    return <Observable<DocumentationArea>> this.http.get(`${environment.restBase}/documentation-area?slug=${slug}`);
+  }
+
+  public createDocumentationArea (documentationArea: DocumentationArea, parentDocumentationArea?: DocumentationArea) : Observable<DocumentationArea> {
+    let url = (parentDocumentationArea.id) ? `${environment.restBase}/documentation-area/${parentDocumentationArea.id}/children` : `${environment.restBase}/documentation-area`;
+    return <Observable<DocumentationArea>> this.http.post(url, documentationArea).pipe(
       tap(t => {
         this.documentationLandingPageArea = null;
       })
@@ -129,16 +157,20 @@ export class DocumentationService {
     return <Observable<Documentation>> this.http.post(`${environment.restBase}/documentation-area/${documentationAreaId}/documents`, documentation);
   }
 
-  public findDocumentationById (documentationAreaId : string, documentationId : string) : Observable<Documentation> {
-    return <Observable<Documentation>> this.http.get(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}`);
+  public findDocumentationById (documentationId : string) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.get(`${environment.restBase}/documentation/${documentationId}`);
+  }
+
+  public findDocumentationBySlug (slug: string) : Observable<Documentation> {
+    return <Observable<Documentation>> this.http.get(`${environment.restBase}/documentation?slug=${slug}`);
   }
 
   public updateDocumentation (documentationAreaId : string, documentation : Documentation) : Observable<Documentation> {
-    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentation.id}`, documentation);
+    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation/${documentation.id}`, documentation);
   }
 
   public deleteDocumentation (documentationAreaId : string, documentationId: string) : Observable<any> {
-    return this.http.delete(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}`);
+    return this.http.delete(`${environment.restBase}/documentation/${documentationId}`);
   }
 
   public getPrivileges (documentationAreaId: string, documentationId : string) {

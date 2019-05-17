@@ -1,0 +1,46 @@
+<!-- <div cdkDropList (cdkDropListDropped)="dropArea($event, documentationAreas)"> -->
+<div>
+<!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
+<section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
+
+  <input [id]="'n' + documentationArea.id" type="checkbox"/>
+
+  <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)">
+    {{ documentationArea.name }}
+
+    <button class="btn btn-sm btn-link pull-right" (click)="emitAddDocument(documentationArea.id)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']" [title]="'Add ' + documentationArea.name + ' Document' ">
+      Add <clr-icon shape="plus-circle"></clr-icon>
+    </button>
+  </label>
+
+  <!-- <ul class="nav-list documents" cdkDropList (cdkDropListDropped)="dropDocument($event, documentationArea)" *ngIf="documentationArea.documents && documentationArea.documents.length"> -->
+  <ul class="nav-list documents"  *ngIf="documentationArea.documents && documentationArea.documents.length">
+
+    <!-- <li *ngFor="let document of documentationArea.documents" cdkDrag> -->
+    <li *ngFor="let document of documentationArea.documents"> 
+        <a class="nav-link" routerlinkactive="active" [routerLink]="'area/' + document.slug">
+          {{document.name}}
+      
+          <clr-tooltip>
+            <clr-icon style="display: inline-block;" clrTooltipTrigger *ngIf="! document.published" class="is-highlight" shape="note"></clr-icon>
+            <clr-tooltip-content *clrIfOpen>
+              <span>In Draft Status</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+        </a>
+      </li>
+  </ul>
+
+  <ul class="nav-list areas" *ngIf="documentationArea.children && documentationArea.children.length">
+    <li>
+      <documentation-area 
+        [documentationAreas]="documentationArea.children"
+        (documentationAreaClick)="emitDoubleClick($event)"
+        (addDocumentClick)="emitAddDocument($event)"
+      >
+
+      </documentation-area>
+    </li>
+  </ul>
+</section>
+</div>

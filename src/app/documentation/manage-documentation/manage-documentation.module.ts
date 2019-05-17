@@ -7,7 +7,7 @@ import { ManageDocumentationComponent } from './manage-documentation.component';
 import { RouterModule } from '@angular/router';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgSelectModule } from '@ng-select/ng-select';
-// import { DocsSharedModule } from '../../docs/shared/shared.module';
+import { DocumentationSharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,8 +18,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     EditorModule,
     NgSelectModule,
     CoreSharedModule,
-    // DocsSharedModule,
-    ClarityModule
+    ClarityModule,
+    DocumentationSharedModule
   ],
 
   declarations: [ManageDocumentationComponent],

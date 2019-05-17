@@ -1,4 +1,14 @@
 <div class="container">
+
+  <documentation-area-selector
+    *ngIf="documentationArea.name !== 'Documentation Landing Page'"
+    [documentationAreas]="documentationAreas"
+    [documentationArea]="documentationArea"
+    (onSelection)="changeParentDocumentationArea($event)"
+  >
+
+  </documentation-area-selector>
+
   <h3>
     <span>{{ title }}</span>
     <!-- Function defined in parent class -->

@@ -1,6 +1,6 @@
 <div class="container full">
   
-  <a class="btn btn-sm edit-page-btn" [routerLink]="'edit'" [hasPermission]="[permissions.DOCUMENTATION.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="documentation">
+  <a class="btn btn-sm edit-page-btn" [routerLink]="'/documentation/area/' + documentationArea.id + '/document/' + documentation.id + '/edit'" [hasPermission]="[permissions.DOCUMENTATION.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="documentation">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Document
   </a>
 

@@ -1,7 +1,7 @@
 :host {
     overflow: auto;
 
-    ul.nav-list {
+    /deep/ ul.nav-list {
         padding: 0rem;
 
         li {
@@ -17,7 +17,7 @@
         }
     }
 
-    section {
+    /deep/ section {
         #add-documentation-area-btn {
             width : 100%;
         }
@@ -28,6 +28,9 @@
             button {
                 margin: 0px 10px 0px 0px;
             }
+        }
+        section.nav-group section {
+            margin: 0px 0px 0px 0px !important;           
         }
     }
 }

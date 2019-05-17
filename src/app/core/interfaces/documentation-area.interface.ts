@@ -7,6 +7,8 @@ export interface DocumentationArea {
     description? : string,
     version? : number,
     position? : number
+    parentSlug? : string,
+    children? : DocumentationArea[],
     documents? : Documentation[]
 }
 

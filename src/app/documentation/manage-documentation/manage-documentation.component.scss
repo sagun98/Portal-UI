@@ -7,10 +7,16 @@
     }
 
     .fixed-footer {
-        width : calc(100% - 12rem) !important;
+        width : calc(100% - 14.5rem) !important;
+        margin-left: -15px !important;
 
         @media screen and (max-width : 768px) {
             width : 100% !important;
         }
+    }
+
+    /deep/ #changeParentDocumentationArea {
+        margin-right: 75px;
+        margin-top: -5px;
     }
 }

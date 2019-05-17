@@ -11,6 +11,8 @@ import { DocumentationLandingPageComponent } from './documentation-landing-page/
 import { ViewDocumentComponent } from './view-document/view-document.component';
 import { CoreSharedModule } from '../core/core-shared/core-shared.module';
 import { ManageDocumentationAreaModule } from './manage-documentation-area/manage-documentation-area.module';
+import { DocumentationAreaComponent } from './documentation-side-navigation/documentation-area/documentation-area.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -20,6 +22,7 @@ import { ManageDocumentationAreaModule } from './manage-documentation-area/manag
     ClarityModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
     CoreSharedModule,
     NgSelectModule
   ],
@@ -29,6 +32,7 @@ import { ManageDocumentationAreaModule } from './manage-documentation-area/manag
     DocumentationSideNavigationComponent,
     DocumentationLandingPageComponent,
     ViewDocumentComponent,
+    DocumentationAreaComponent,
   ],
 
   exports : [

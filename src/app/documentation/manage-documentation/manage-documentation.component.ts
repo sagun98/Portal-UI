@@ -28,6 +28,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   public title: string = 'Add Documentation Document';
   public tinymceConfig = TINYCMCE_CONFIG;
   public saveMethod: string = 'createDocumentation';
+  public documentationAreas: DocumentationArea[] = [];
+  public selectedDocumentationArea: DocumentationArea;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -41,6 +43,13 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   }
 
   ngOnInit() {
+    this.documentationService.cache.$documentationAreas.subscribe(documentationAreas => {
+      documentationAreas = documentationAreas.filter(documentationarea => {return documentationarea.name !== 'Documentation Landing Page'});
+      const clone = JSON.parse(JSON.stringify(documentationAreas));
+      let flatDocumentationAreas = this.documentationService.getFlatDocumentationAreas(clone);
+      this.documentationAreas = flatDocumentationAreas;
+    });
+
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation || DefaultDocumentation;
       this.documentationArea = data.DocumentationArea || this.documentationArea;
@@ -51,6 +60,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       }
       else
         this.title = 'Add New ' + this.documentationArea.name + ' Document';
+
+      this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
     });
 
     this.buildForm();
@@ -115,6 +126,9 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
     let documentation: Documentation = this.form.getRawValue();
 
+    if(this.documentationArea)
+      documentation.parentSlug = this.documentationArea.slug;
+
     this.documentationService[this.saveMethod](this.documentationArea.id, documentation).subscribe(newDocumentation => {
       this.documentation = newDocumentation;
 
@@ -136,10 +150,28 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       if(this.documentationArea.name.toLocaleLowerCase() === DOCUMENTATION_LANDING_PAGE_LABEL)
         this.router.navigate([`/documentation/main`]);
       else
-        this.router.navigate([`/documentation/area/${this.documentationArea.slug}/${this.documentation.slug}`]);
+        this.router.navigate([`/documentation/area/${this.documentation.slug}`]);
       
       this.documentationService.onChange.next(null);
     });
+  }
+
+  public changeParentDocumentationArea(documentationArea: DocumentationArea) : void {
+    console.log("Old Documentation Area ID: ", this.documentationArea.id);
+    console.log("New Documentation Area ID: ", documentationArea.id);
+
+    if(documentationArea.id !== this.documentationArea.id) {
+      let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
+
+      if(doChange) {
+        this.documentationArea = documentationArea;
+      }
+      else {
+        setTimeout(t => {
+          this.documentationArea = Object.assign({}, this.documentationArea);
+        });
+      }
+    }
   }
 
   protected getPermissionService () : PermissionsService {

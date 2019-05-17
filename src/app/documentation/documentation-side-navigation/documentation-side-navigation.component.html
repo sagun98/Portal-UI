@@ -4,10 +4,44 @@
     <button class="btn btn-primary-outlined" id="add-documentation-area-btn" routerLink="/documentation/area/new"><clr-icon shape="plus"></clr-icon> Add Documentation Area</button>
   </div>
 
-  <section class="nav-group collapsible" *ngFor="let documentationArea of sideNavigationDocumentationAreas;let index = index;">
-    <input [id]="'tab' + index" type="checkbox"/>
+  <documentation-area
+    [documentationAreas]="sideNavigationDocumentationAreas"
+    (documentationAreaClick)="editDocumentationArea($event)"
+    (addDocumentClick)="addDocumentation($event)"
+  >
 
-    <label [for]="'tab' + index" (dblclick)="editDocumentationArea(documentationArea.slug)">
+  </documentation-area>
+
+  <!-- <section class="nav-group collapsible">
+    <input id="tab-hc-level1" type="checkbox"/>
+
+    <label for="tab-hc-level1">
+      Hard Coded Level 1
+    </label>
+
+    <ul class="nav-list">
+      <li>
+           
+        <section class="nav-group collapsible">
+          <input id="tab-hc-level2" type="checkbox" checked/>
+
+          <label for="tab-hc-level2">
+            Hard Coded Level 2
+          </label>
+
+          <ul class="nav-list">
+            <li>Hard Coded Documentation 3</li>
+          </ul>
+        </section>
+
+      </li>
+    </ul>
+  </section> -->
+
+  <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of sideNavigationDocumentationAreas;let index = index;">
+    <input [id]="'n' + documentationArea.id" type="checkbox" (click)="captureState(documentationArea.id)"/>
+
+    <label [for]="'n' + documentationArea.id" (dblclick)="editDocumentationArea(documentationArea.slug)">
       {{ documentationArea.name }}
 
       <button class="btn btn-sm btn-link pull-right" (click)="addDocumentation(documentationArea.slug)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']">
@@ -39,7 +73,7 @@
         </a>
       </li>
     </ul>
-  </section>
+  </section> -->
 
   <!-- <section class="nav-group collapsible">
     <input id="tab1" type="checkbox">

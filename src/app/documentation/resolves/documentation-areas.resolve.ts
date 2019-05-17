@@ -10,9 +10,6 @@ export class DocumentationAreasResolve implements Resolve<any> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const blogId = route.params.blogId || '';
-        const type = route.data;
-
         return this.documentationService.findAllDocumentationArea();
     }
 }
