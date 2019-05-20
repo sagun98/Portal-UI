@@ -136,11 +136,11 @@
       </clr-tab>
 
       <clr-tab *ngIf="user?.roleMap?.ADMIN">        
-          <button clrTabLink><h4>Search Options</h4></button>
+          <button clrTabLink><h4>System Options</h4></button>
           <ng-template [(clrIfActive)]="activeTabs.searchOptions">
             <clr-tab-content style="padding:20px 10px">
-              <h3>Manage Search</h3>
-
+             
+              <h4>Search Options</h4>
               <manage-search></manage-search>
 
             </clr-tab-content>

@@ -42,10 +42,10 @@ export class AppComponent implements OnInit {
           
         if(message.origin.indexOf(environment.forumBase) >= 0){
           const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
-          const path = message.data.replace(pattern, '');
+          const path = message.data.url.replace(pattern, '');
 
           if(path.indexOf('http') === -1)
-            this.router.navigate([`forum${path}`]);
+            this.router.navigate([`forum/${path}`]);
         }
       }, false);
 
