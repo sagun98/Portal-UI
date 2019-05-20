@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
         if(message.data === "loaded")
           return;
           
-        if(message.origin.indexOf(environment.forumBase) >= 0){
+        if ((message.origin.indexOf(environment.forumBase) >= 0) || (environment.forumBase.indexOf(message.origin) >= 0)) {
           const pattern = new RegExp(`(${environment.forumBase}|${environment.restBase})`, 'gi');
           const path = message.data.url.replace(pattern, '');
 
