@@ -9,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { UserService } from '../../core/services/user/user.service';
 import { MockUserService } from '../../core/layouts/side-navigation/side-navigation.component.spec';
 
-fdescribe('RequestApiModalComponent', () => {
+describe('RequestApiModalComponent', () => {
   let component: RequestApiModalComponent;
   let fixture: ComponentFixture<RequestApiModalComponent>;
 
