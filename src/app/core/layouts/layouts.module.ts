@@ -21,6 +21,7 @@ import { UserModule } from 'src/app/user/user.module';
 import { EmailComponent } from './email/email.component';
 import { EditorModule } from '../../../../node_modules/@tinymce/tinymce-angular';
 import { ManageSearchComponent } from './user-settings-modal/manage-search/manage-search.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ManageSearchComponent } from './user-settings-modal/manage-search/manag
     Angulartics2Module,
     CoreSharedModule,
     EditorModule,
+    SharedModule,
     UserModule
   ],
   declarations: [

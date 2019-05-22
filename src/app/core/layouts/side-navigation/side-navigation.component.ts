@@ -18,6 +18,7 @@ import { ProductListChange } from '../../interfaces/product-list-change.interfac
 export class SideNavigationComponent implements OnInit {
 
   public apiFilter:string = '';
+  public requestApiModalOpened:boolean = false;
 
   @Input() products: Product[] = [];
   @Input() apis: API[] = [];
@@ -84,6 +85,14 @@ export class SideNavigationComponent implements OnInit {
         });
       }
     })
+  }
+
+  public requestAPI() {
+    this.requestApiModalOpened = true;
+  }
+
+  public requestApiModalClosed (closed) {
+    this.requestApiModalOpened = closed;
   }
 
   public get apisFiltered () {

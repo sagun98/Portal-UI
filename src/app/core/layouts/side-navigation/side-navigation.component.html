@@ -67,7 +67,27 @@
           </clr-tooltip>
         </a>
       </li>
+
+      <li class="nav-alert-info" *ngIf="apisFiltered.length === 0 && apis.length > 0" style="padding:0rem .25rem;">
+        <clr-alert [clrAlertType]="'alert-info'" [clrAlertClosable]="false" class="link" title="Add API to Catalog" (click)="requestAPI()">
+          <div class="alert-item">
+            <span class="alert-text">
+              Looks like the API you're looking for is not in the catalog.  
+              Click here to request that it be added.
+            </span>
+          </div>
+        </clr-alert>
+      </li>
     </ul>
   </section>
+
+  <request-api-modal
+    *ngIf="requestApiModalOpened"
+    [requestApiModalOpened]="requestApiModalOpened"
+    (onClose)="requestApiModalClosed($event)"
+  >
+  </request-api-modal>
+
+
 
 </section>

@@ -1,0 +1,48 @@
+<clr-modal [(clrModalOpen)]="requestApiModalOpened" [clrModalClosable]="true" [clrModalSize]="'md'">
+  <h3 class="modal-title bottom-spacer-20">
+      <clr-icon shape="chat-bubble" size="25" style="margin-top:-5px;"></clr-icon> Request an API
+  </h3>
+
+  <div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="sendApiRequest()">
+      <section class="form-block">
+
+
+        <div class="form-group">
+          <label for="api-name" class="required">API Name</label>
+
+          <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-top-left' : '' ">
+            <input id="apiName" type="text" name="title" placeholder="Enter API Name" formControlName="name" />
+            <span *ngIf="form.get('name').errors && form.get('name').errors.required && (submitted || form.get('name').dirty)" class="tooltip-content">This field cannot be empty!</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="api-name">Collection</label>
+
+          <label>
+            <input id="collection" type="text" name="collection" placeholder="Enter Collection Name" formControlName="collection" />
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="api-name">Additional Information</label>
+
+          <label>
+            <textarea id="details" type="text" name="details" placeholder="Any Additional Comments?" formControlName="details">
+            </textarea>
+          </label>
+        </div>
+
+
+        <button type="submit" style="display: none"></button>
+      </section>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="sendApiRequest()"><clr-icon shape="envelope" size="25"></clr-icon> Send Request</button>
+  </div>
+</clr-modal>
+
+

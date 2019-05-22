@@ -18,6 +18,14 @@
                 padding-left: 35px;
             }
         }
+
+        li.nav-alert-info {
+            padding: .25rem;
+
+            .link {
+                cursor: pointer;
+            }
+        }
     }
 
     label > button{
