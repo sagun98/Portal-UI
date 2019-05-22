@@ -174,7 +174,7 @@ export class DocumentationService {
   }
 
   public getPrivileges (documentationAreaId: string, documentationId : string) {
-    return this.http.get(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}/privileges`).pipe(
+    return this.http.get(`${environment.restBase}/documentation/${documentationId}/privileges`).pipe(
       map((privileges: Privilege[]) => {
         return privileges.map(p => {
           return new UserPrivilegeClass(p);
@@ -184,6 +184,6 @@ export class DocumentationService {
   }
 
   public setUserPrivileges (documentationAreaId: string, documentationId : string, privileges: UserPrivilegeClass[]) : Observable<Documentation> {
-    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation-area/${documentationAreaId}/documents/${documentationId}/privileges`, privileges)
+    return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation/${documentationId}/privileges`, privileges)
   }
 }

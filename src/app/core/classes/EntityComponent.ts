@@ -40,8 +40,7 @@ export abstract class EntityComponent extends VerifyFormSavedComponent{
     this.managePrivilegesModalOpened = false;
     
     this.getEntityPrivileges().subscribe( (privileges : UserPrivilegeClass[]) => {
-      this.userPrivileges = privileges;
-      
+      this.userPrivileges = privileges;      
       setTimeout(t => { this.managePrivilegesModalOpened = true; });
     });
   }

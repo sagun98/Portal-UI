@@ -11,7 +11,7 @@
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Add Documentation Landing Page
   </a>
   
-  <a  *ngIf="landingPage.version != null && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPageArea.slug + '/' + landingPage.slug + '/edit'">
+  <a  *ngIf="landingPage.version != null && isAdmin" class="btn btn-sm " style="float: right;margin-top: -35px;" [routerLink]="'/documentation/area/' + documentationLandingPageArea.id + '/document/' + landingPage.id + '/edit'">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit Landing Page
   </a>
 

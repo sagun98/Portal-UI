@@ -1,3 +1,4 @@
+import { DocsSharedModule } from './../../docs/shared/shared.module';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +20,8 @@ import { DocumentationSharedModule } from '../shared/shared.module';
     NgSelectModule,
     CoreSharedModule,
     ClarityModule,
-    DocumentationSharedModule
+    DocumentationSharedModule,
+    DocsSharedModule
   ],
 
   declarations: [ManageDocumentationComponent],
