@@ -3,7 +3,7 @@
 <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
 <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
 
-  <input [id]="'n' + documentationArea.id" type="checkbox"/>
+  <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="depth >= defaultAllowedDepth"/>
 
   <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)">
     {{ documentationArea.name }}

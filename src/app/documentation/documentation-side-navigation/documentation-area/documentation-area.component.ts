@@ -11,12 +11,21 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class DocumentationAreaComponent implements OnInit {
 
   @Input() documentationAreas: DocumentationArea[];
+  @Input() defaultAllowedDepth: number = 2;
   @Output() documentationAreaClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() addDocumentClick: EventEmitter<string> = new EventEmitter<string>();
+  public depth: number = 0;
 
   constructor() { }
 
   ngOnInit() {
+    this.depth = (this.documentationAreas && this.documentationAreas.length) ? this.getDepth(this.documentationAreas[0]) : this.depth;
+
+    console.log("depth: ", this.depth);
+  }
+
+  public getDepth (documentationArea: DocumentationArea) : number{
+    return documentationArea.slug.split("/").length;
   }
 
   public dropDocument(event: CdkDragDrop<string[]>, documentationArea: DocumentationArea) {

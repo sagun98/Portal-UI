@@ -18,5 +18,7 @@ export const DefaultDocumentationArea = <DocumentationArea> {
     slug : '',
     description : '',
     version : null,
-    documents : []
+    documents : [],
+    children : [],
+    parentSlug : ''
 }
