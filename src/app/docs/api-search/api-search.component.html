@@ -47,13 +47,28 @@
       <input style="display:none" type="submit" name="submit"/>
     </form>
 
-    <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
+    <!-- <clr-alert [clrAlertType]="'alert-warning'" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
         <div clr-alert-item class="alert-item">
             <span class="alert-text">
                 No Search Results Found
             </span>
         </div>
+    </clr-alert> -->
+    <clr-alert  [clrAlertType]="'alert-info'" [clrAlertClosable]="false" class="link" title="Add API to Catalog" (click)="requestAPI()" *ngIf="finishedSearch && (! ApiResults || ! ApiResults.length)">
+      <div class="alert-item">
+        <span class="alert-text">
+          Looks like the API you're looking for is not in the catalog.  
+          Click here to request that it be added.
+        </span>
+      </div>
     </clr-alert>
+
+    <request-api-modal
+      *ngIf="requestApiModalOpened"
+      [requestApiModalOpened]="requestApiModalOpened"
+      (onClose)="requestApiModalClosed($event)"
+    >
+    </request-api-modal>
 
     <ng-container *ngIf="ApiResults && ApiResults.length">
       <api-search-results [apis]="ApiResults" (apiSelected)="gotoApi($event)">

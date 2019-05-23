@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { ClarityModule } from '@clr/angular';
@@ -15,6 +16,7 @@ import { DocsSharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     CoreSharedModule,
     RouterModule,
+    SharedModule,
     DocsSharedModule,
     ClarityModule
   ],

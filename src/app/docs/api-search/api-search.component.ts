@@ -22,6 +22,7 @@ export class ApiSearchComponent implements OnInit {
   public ApiResults: API[] = [];
   public apis: API[] = [];
   public maxBeforeSearch: number = 9;
+  public requestApiModalOpened:boolean = false;
 
 
   constructor(
@@ -45,6 +46,14 @@ export class ApiSearchComponent implements OnInit {
     this.form = this.formBuilder.group({
       keywords : [this.initialTerm, [Validators.required]]
     });
+  }
+
+  public requestAPI() {
+    this.requestApiModalOpened = true;
+  }
+
+  public requestApiModalClosed (closed) {
+    this.requestApiModalOpened = closed;
   }
 
   public searchApis() {
