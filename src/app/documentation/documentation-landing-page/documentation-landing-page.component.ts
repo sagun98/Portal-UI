@@ -43,7 +43,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
 
       setTimeout(t => {
         document['removeAllListeners']('focus');
-        window['removeAllListeners']('message');
+        // window['removeAllListeners']('message');
       }, 1000);
     });
   }

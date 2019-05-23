@@ -69,7 +69,7 @@ export class ViewProductComponent extends EntityComponent {
 
       setTimeout(t => {
         document['removeAllListeners']('focus');
-        window['removeAllListeners']('message');
+        // window['removeAllListeners']('message');
       }, 1000);
     });
   }
