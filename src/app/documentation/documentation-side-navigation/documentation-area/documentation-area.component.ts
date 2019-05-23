@@ -20,8 +20,6 @@ export class DocumentationAreaComponent implements OnInit {
 
   ngOnInit() {
     this.depth = (this.documentationAreas && this.documentationAreas.length) ? this.getDepth(this.documentationAreas[0]) : this.depth;
-
-    console.log("depth: ", this.depth);
   }
 
   public getDepth (documentationArea: DocumentationArea) : number{
