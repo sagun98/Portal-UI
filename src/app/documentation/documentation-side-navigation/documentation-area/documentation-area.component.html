@@ -3,12 +3,12 @@
 <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
 <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
 
-  <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="depth >= defaultAllowedDepth"/>
+  <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="state[documentationArea.id]"/>
 
-  <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)">
+  <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)" (click)="updateState(documentationArea)">
     {{ documentationArea.name }}
 
-    <button class="btn btn-sm btn-link pull-right" (click)="emitAddDocument(documentationArea.id)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']" [title]="'Add ' + documentationArea.name + ' Document' ">
+    <button class="btn btn-sm btn-link pull-right" (click)="emitAddDocument(documentationArea.id, $event)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']" [title]="'Add ' + documentationArea.name + ' Document' ">
       Add <clr-icon shape="plus-circle"></clr-icon>
     </button>
   </label>
@@ -35,6 +35,8 @@
     <li>
       <documentation-area 
         [documentationAreas]="documentationArea.children"
+        [defaultAllowedDepth]="defaultAllowedDepth"
+        [state]="state"
         (documentationAreaClick)="emitDoubleClick($event)"
         (addDocumentClick)="emitAddDocument($event)"
       >
