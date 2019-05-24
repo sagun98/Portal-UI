@@ -1,6 +1,7 @@
+import { Documentation } from './../../core/interfaces/documentation.interface';
 import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../../core/constants/documentation.constants';
 import { UserService } from '../../core/services/user/user.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
 import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
@@ -32,9 +33,10 @@ export class DocumentationSideNavigationComponent implements OnInit {
     this.router.events.subscribe( (event:NavigationEnd) => {
       if( this.router['lastSuccessfulId'] === this.router['navigationId'] ){
         if(this.activatedRoute.children.length && this.activatedRoute.children[0].children.length){
-          this.activatedRoute.children[0].children[0].params.subscribe(p => {
-            this.currentSlug = p.slug;
-            console.log("HERE");
+          this.activatedRoute.children[0].children[0].data.subscribe(data=> {
+            if(data && data.Documentation){
+              this.currentId = data.Documentation.id;
+            }
           });
         }
         if(this.activatedRoute.children.length && this.activatedRoute.children[0].snapshot.data.LandingPage){
@@ -44,30 +46,43 @@ export class DocumentationSideNavigationComponent implements OnInit {
     });
   }
 
-  public setInitialState (documentationAreas: DocumentationArea[]) {
-    this.traverseTreeAndSetState(documentationAreas);
+  private setInitialState (documentationAreas: DocumentationArea[]) {
+    let documentation: Documentation = this.traverseRouterChildrenForDocumentation(this.activatedRoute.snapshot);
+
+    this.traverseTreeAndSetState(documentationAreas, documentation);
   }
 
-  public traverseTreeAndSetState (documentationAreas: DocumentationArea[]) {
+  private traverseTreeAndSetState (documentationAreas: DocumentationArea[], documentation: Documentation) {
     documentationAreas.forEach(da => {
 
       let depth = da.slug.split("/").length;
 
       this.collapsdeState[da.id] = false;
 
-      if(depth >= this.defaultAllowedDepth)
+      let isCurrentAncestor: boolean = ( documentation && (documentation.slug.startsWith(da.slug)) )
+
+      if(depth >= this.defaultAllowedDepth && ! isCurrentAncestor)
         this.collapsdeState[da.id] = true;
       
-
       if(da.children && da.children.length){
-        this.traverseTreeAndSetState(da.children);
+        this.traverseTreeAndSetState(da.children, documentation);
       }
     });
   }
 
+  private traverseRouterChildrenForDocumentation (snapshot: ActivatedRouteSnapshot) : Documentation {
+    let children : ActivatedRouteSnapshot[] = snapshot.children;
+
+    if(children.length){
+      return this.traverseRouterChildrenForDocumentation(children[0]);
+    }
+    else {
+      return snapshot.data.Documentation;
+    }
+  }
+
   public captureState (id: string) : void {
     this.collapsdeState[id] = document.querySelector("#n" + id)['checked'];
-    console.log(this.collapsdeState);
   }
 
   public editDocumentationArea (id: string) : void {

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentationArea } from '../../../core/interfaces/documentation-area.interface';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
@@ -13,12 +14,15 @@ export class DocumentationAreaComponent implements OnInit {
   @Input() documentationAreas: DocumentationArea[];
   @Input() defaultAllowedDepth: number = 2;
   @Input() state: any = {test : false};
+  @Input() currentId: string;
 
   @Output() documentationAreaClick: EventEmitter<string> = new EventEmitter<string>();
   @Output() addDocumentClick: EventEmitter<string> = new EventEmitter<string>();
   public depth: number = 0;
 
-  constructor() { }
+  constructor(
+    private activatedRoute : ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.depth = (this.documentationAreas && this.documentationAreas.length) ? this.getDepth(this.documentationAreas[0]) : this.depth;

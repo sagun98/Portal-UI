@@ -18,7 +18,7 @@
 
     <!-- <li *ngFor="let document of documentationArea.documents" cdkDrag> -->
     <li *ngFor="let document of documentationArea.documents"> 
-        <a class="nav-link" routerlinkactive="active" [routerLink]="'area/' + document.slug">
+        <a class="nav-link" routerlinkactive="active" [ngClass]="{'active' : document.id === currentId }" [routerLink]="'area/' + document.slug">
           {{document.name}}
       
           <clr-tooltip>
@@ -37,6 +37,7 @@
         [documentationAreas]="documentationArea.children"
         [defaultAllowedDepth]="defaultAllowedDepth"
         [state]="state"
+        [currentId]="currentId"
         (documentationAreaClick)="emitDoubleClick($event)"
         (addDocumentClick)="emitAddDocument($event)"
       >
