@@ -37,10 +37,10 @@ export class DocumentationSideNavigationComponent implements OnInit {
             if(data && data.Documentation){
               this.currentId = data.Documentation.id;
             }
+            else {
+              this.currentId = null;
+            }
           });
-        }
-        if(this.activatedRoute.children.length && this.activatedRoute.children[0].snapshot.data.LandingPage){
-          this.currentId = null;
         }
       }
     });
