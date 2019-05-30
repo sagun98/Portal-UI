@@ -92,6 +92,7 @@ export class AppComponent implements OnInit {
           setTimeout(t => {
             if (error.response.status === 401 && error.response.url.indexOf("api/user") != -1 ) {
               this.userService.staticLogout();
+              this.loadingInterceptorService.closeOpenRequest();
             }
 
             // Usually a CORS failure associated with a stale pearsonssosession token
