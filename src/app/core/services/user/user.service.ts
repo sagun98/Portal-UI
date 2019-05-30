@@ -60,6 +60,13 @@ export class UserService {
     return this._user.roles.filter(role => {return role.name === "ADMIN"}).length > 0;
   }
 
+  public hasRole (_role: string) : boolean {
+    if(! this._user || ! this._user.roles)
+      return false;
+
+    return this._user.roles.filter(role => {return role.name === _role}).length > 0;
+  }
+
   public set authToken(authToken: string) {
     localStorage.setItem('pearson.devportal.authToken', authToken);
   }

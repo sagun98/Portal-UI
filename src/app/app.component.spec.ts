@@ -5,7 +5,7 @@ import { DevPortalCoreModule } from './core/core.module';
 import { LoadingInterceptorModule } from './core/loading-interceptor/loading-interceptor.module';
 import { HttpClientModule, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ClarityModule } from '@clr/angular';
-import { TestBed, async, ComponentFixture, tick, fakeAsync } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, tick, fakeAsync, discardPeriodicTasks } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
@@ -74,6 +74,8 @@ describe('AppComponent', () => {
 
     tick();
     
+    discardPeriodicTasks();
+
     expect(component).toBeTruthy();
   }));
 
@@ -89,6 +91,9 @@ describe('AppComponent', () => {
     tick();
 
     expect(component).toBeTruthy();
+
+    discardPeriodicTasks();
+
   }));
 
   it('should run #ngOnInit()$onUnAuthenticatedNavigationAttempt', fakeAsync(() => {
@@ -104,6 +109,9 @@ describe('AppComponent', () => {
     tick();
 
     expect(component).toBeTruthy();
+
+    discardPeriodicTasks();
+
   }));
 
   it('should run #ngOnInit()$doUserLogin', fakeAsync(() => {
@@ -116,6 +124,8 @@ describe('AppComponent', () => {
     tick();
     
     expect(component).toBeTruthy();
+
+    discardPeriodicTasks();
   }));
 
 });
