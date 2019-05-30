@@ -90,13 +90,13 @@ export class AppComponent implements OnInit {
       this.httpErrorsServices.$onError.subscribe( (errors: HttpErrorMessage[]) => {
         errors.forEach( (error: HttpErrorMessage) => {
           setTimeout(t => {
-            if (error.response.status === 401 && error.response.url.indexOf("api/user") != -1 ) {
+            if (error.response.status === 401 && (error.response.status === 401 && this.isAuthenticationEndpoint(error.response.url) ) ) {
               this.userService.staticLogout();
               this.loadingInterceptorService.closeOpenRequest();
             }
 
             // Usually a CORS failure associated with a stale pearsonssosession token
-            else if (error.response.status === 0 || (error.response.status === 401 && error.response.url.indexOf("api/user") === -1 )) {
+            else if (error.response.status === 0 || (error.response.status === 401 && ! this.isAuthenticationEndpoint(error.response.url) )) {
               this.userService.staticLogout();
               this.toastrService.error('Oops... It looks like your session timed out.  Please log back in to continue.');
               this.showLogin = false;
@@ -114,6 +114,13 @@ export class AppComponent implements OnInit {
       });
 
     });
+  }
+
+  private isAuthenticationEndpoint (url: string) :boolean {
+    if(! url)
+      return false;
+
+    return  /(api\/user|authenticate)/.test(url);
   }
 
 }
