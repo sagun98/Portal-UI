@@ -22,10 +22,16 @@
         ul.nav-list {
             padding: 0rem 0 0 0.5rem;
 
-            li a.nav-link{
+            li {
+                &.add-document{
+                    padding: .25rem 0 0 1.4rem;
+                }
+                
+                a.nav-link{
                 padding: .16667rem 0 .16667rem 1.5rem;
                 display: inline-block;
                 line-height: 0.9rem;
+                }
             }
         }
     }

@@ -2,13 +2,15 @@
 <div>
 <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
 <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
+  
+  <ng-container *ngIf="documentationArea.children.length || documentationArea.documents.length">
 
   <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="state[documentationArea.id]"/>
 
   <label [for]="'n' + documentationArea.id" (dblclick)="emitDoubleClick(documentationArea.id)" (click)="updateState(documentationArea)">
     {{ documentationArea.name }}
 
-    <button class="btn btn-sm btn-link pull-right" (click)="emitAddDocument(documentationArea.id, $event)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']" [title]="'Add ' + documentationArea.name + ' Document' ">
+    <button *ngIf="(!documentationArea.documents || ! documentationArea.documents.length)" class="btn btn-sm btn-link pull-right" (click)="emitAddDocument(documentationArea.id, $event)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']" [title]="'Add ' + documentationArea.name + ' Document' ">
       Add <clr-icon shape="plus-circle"></clr-icon>
     </button>
   </label>
@@ -29,6 +31,12 @@
           </clr-tooltip>
         </a>
       </li>
+
+      <li class="add-document">
+        <button class="btn btn-sm btn-primary-outlined" (click)="emitAddDocument(documentationArea.id, $event)" [hasPermission]="['ADMIN', 'DOCUMENTATION_CREATE']">
+          <clr-icon shape="plus-circle"></clr-icon> {{ documentationArea.name }} Document
+        </button>
+      </li>
   </ul>
 
   <ul class="nav-list areas" *ngIf="documentationArea.children && documentationArea.children.length">
@@ -45,5 +53,7 @@
       </documentation-area>
     </li>
   </ul>
+
+</ng-container>
 </section>
 </div>

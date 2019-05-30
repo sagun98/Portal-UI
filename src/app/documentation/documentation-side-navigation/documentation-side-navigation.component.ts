@@ -16,7 +16,7 @@ export class DocumentationSideNavigationComponent implements OnInit {
   @Input() documentationAreas: DocumentationArea[];
   @Input() currentId: string;
   @Input() currentSlug: string;
-  @Input() defaultAllowedDepth: number = 2;
+  @Input() defaultAllowedDepth: number = 3;
 
   @Output() blogClick: EventEmitter<BlogPost> = new EventEmitter<BlogPost>();
   public collapsdeState = {};
