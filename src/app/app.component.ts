@@ -7,6 +7,8 @@ import { HttpErrorMessage } from './core/interfaces/http-error.interface';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorsService } from './core/services/http-errors/http-errors.service';
 import { ToastrService } from 'ngx-toastr';
+import { debounce } from 'rxjs/operators';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
         // this.router.navigate([`/home`]);
       });
 
-      this.userService.$onUnAuthenticatedNavigationAttempt.subscribe( (failedNav : FailedNavigation) => {
+      this.userService.$onUnAuthenticatedNavigationAttempt.pipe(debounce(() => timer(100))).subscribe( (failedNav : FailedNavigation) => {
 
         if(! failedNav)
           return;
