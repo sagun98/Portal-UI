@@ -59,10 +59,11 @@ export class LoggedInGuard implements CanActivate, CanActivateChild {
     else{
       observer.next( loggedIn );
       observer.complete();
-      // this.userService.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
-      //   type : FAILED_NAVIGATION_TYPE.NAVIGATION,
-      //   attemptedUrl : state.url
-      // });
+      
+      this.userService.$onUnAuthenticatedNavigationAttempt.next(<FailedNavigation> {
+        type : FAILED_NAVIGATION_TYPE.NAVIGATION,
+        attemptedUrl : state.url
+      });
     }
   }
 }

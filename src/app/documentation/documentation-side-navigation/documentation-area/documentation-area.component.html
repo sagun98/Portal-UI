@@ -3,7 +3,7 @@
 <!-- <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> -->
 <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" >
   
-  <ng-container *ngIf="documentationArea.children.length || documentationArea.documents.length">
+  <!-- <ng-container *ngIf="documentationArea.children.length || documentationArea.documents.length"> -->
 
   <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="state[documentationArea.id]"/>
 
@@ -54,6 +54,6 @@
     </li>
   </ul>
 
-</ng-container>
+<!-- </ng-container> -->
 </section>
 </div>
