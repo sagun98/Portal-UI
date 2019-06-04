@@ -1,7 +1,7 @@
 import { Documentation } from '../../core/interfaces/documentation.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { EntityComponent } from '../../core/classes/EntityComponent';
 import { PermissionsService } from '../../core/services/permissions/permissions.service';
 import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
@@ -28,11 +28,9 @@ export class ViewDocumentComponent extends EntityComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation;
       this.documentationArea = data.DocumentationArea || this.documentationArea;
-
-      // setTimeout(t => {
-      //   document['removeAllListeners']('focus');
-      //   window['removeAllListeners']('message');
-      // }, 1000);
+      setTimeout(t => {
+        window['removeAllListeners']('click');    
+      }, 1000);
     });
   }
 
