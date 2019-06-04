@@ -1,6 +1,6 @@
 import { DocumentationService } from '../documentation.service';
 import { UserService } from '../../core/services/user/user.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { BlogPost } from '../interfaces/blog-post.interface';
@@ -18,6 +18,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
   @Input() landingPage: BlogPost;
   
   public documentationLandingPageArea: DocumentationArea;
+  public safeContent: SafeHtml;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -40,6 +41,7 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
 
       this.documentationLandingPageArea = documentationArea;
       this.landingPage = landingPage || this.landingPage;
+      this.safeContent = this.domSanitizer.bypassSecurityTrustHtml(this.landingPage.content);
 
       setTimeout(t => {
         document['removeAllListeners']('focus');
@@ -48,9 +50,4 @@ export class DocumentationLandingPageComponent extends UserPrivilegesComponentHe
       }, 1000);
     });
   }
-
-  public get safeBlogPost () {
-    return  this.domSanitizer.bypassSecurityTrustHtml( this.landingPage.content );
-  }
-
 }

@@ -4,7 +4,7 @@ import { ApigeeKeyStrategy } from '../../../core/enums/apigee-key-strategy.enum'
 import { UserService } from '../../../core/services/user/user.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SwaggerUIBundle, SwaggerUIStandalonePreset } from '../../../../assets/javascript/swagger-ui-dist';
 import { EntityComponent } from '../../../core/classes/EntityComponent';
 import { Privilege } from '../../../core/interfaces/permissible.interface';
@@ -35,6 +35,9 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
   public announcementCid: number;
   public bypassCORS: boolean = true;
 
+  public safeOverview: SafeHtml;
+  public safeGettingStarted: SafeHtml;
+
   constructor(
     private activatedRoute : ActivatedRoute,
     private router: Router,
@@ -54,6 +57,9 @@ export class ViewApiComponent extends EntityComponent implements OnInit {
       this.setSwaggerUI();
       this.following = this.userService.isFollowingEntity(this.api.followers);
       this.isEntityAdmin = this.permissionService.isEntityAdmin(this.api);
+
+      this.safeOverview = this.domSanitizer.bypassSecurityTrustHtml(this.api.overview);
+      this.safeGettingStarted = this.domSanitizer.bypassSecurityTrustHtml(this.api.gettingStarted);
     
       if(this.isEntityAdmin){
         this.announcementCid = this.api.cid;
