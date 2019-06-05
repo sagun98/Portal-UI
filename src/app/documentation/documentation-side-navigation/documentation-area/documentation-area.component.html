@@ -1,6 +1,7 @@
 <div cdkDropList (cdkDropListDropped)="dropArea($event, documentationAreas)">
 
-  <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag>
+
+  <section class="nav-group collapsible" *ngFor="let documentationArea of documentationAreas; let index = index;" cdkDrag> 
 
   <input [id]="'n' + documentationArea.id" type="checkbox" [checked]="state[documentationArea.id]"/>
 
@@ -13,10 +14,8 @@
   </label>
 
   <ul class="nav-list documents" cdkDropList (cdkDropListDropped)="dropDocument($event, documentationArea)" *ngIf="documentationArea.documents && documentationArea.documents.length">
-  <!-- <ul class="nav-list documents"  *ngIf="documentationArea.documents && documentationArea.documents.length"> -->
 
     <li *ngFor="let document of documentationArea.documents" cdkDrag>
-    <!-- <li *ngFor="let document of documentationArea.documents">  -->
         <a class="nav-link" routerlinkactive="active" [ngClass]="{'active' : document.id === currentId }" [routerLink]="'area/' + document.slug">
           {{document.name}}
       
@@ -50,5 +49,6 @@
       </documentation-area>
     </li>
   </ul>
+  
 </section>
 </div>

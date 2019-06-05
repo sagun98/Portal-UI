@@ -35,7 +35,7 @@ export class DocumentationAreaComponent implements OnInit {
 
     this.documentationAreas.forEach(documentationArea => {
       documentationArea.documents.sort(this.sortDocumentationAreas)
-    })
+    });
   }
 
   public updateState(documentationArea: DocumentationArea) {
@@ -96,7 +96,7 @@ export class DocumentationAreaComponent implements OnInit {
     this.addDocumentClick.emit(id);
   }
 
-  private sortDocumentationAreas (da1: DocumentationArea, da2: DocumentationArea) : number {
+  private sortDocumentationAreas (da1: DocumentationArea, da2: DocumentationArea) /*: number */{
     let p1 = da1.position;
       let p2 = da2.position;
 

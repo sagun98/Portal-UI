@@ -19,7 +19,9 @@ export class DocumentationSideNavigationComponent implements OnInit {
   @Input() defaultAllowedDepth: number = 3;
 
   @Output() blogClick: EventEmitter<BlogPost> = new EventEmitter<BlogPost>();
+  
   public collapsdeState = {};
+  public sideNavigationDocumentationAreas: DocumentationArea[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,6 +31,12 @@ export class DocumentationSideNavigationComponent implements OnInit {
 
   ngOnInit() {
     this.setInitialState(this.documentationAreas);
+
+    this.sideNavigationDocumentationAreas = this.documentationAreas.filter(documentationArea => {
+      return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
+    });
+
+    console.log(this.sideNavigationDocumentationAreas);
 
     this.router.events.subscribe( (event:NavigationEnd) => {
       if( this.router['lastSuccessfulId'] === this.router['navigationId'] ){
@@ -97,10 +105,9 @@ export class DocumentationSideNavigationComponent implements OnInit {
   public goToBlog(blog) {
     this.blogClick.emit(blog);
   }
-
-  public get sideNavigationDocumentationAreas () {
-    return this.documentationAreas.filter(documentationArea => {
-      return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
-    });
-  }
+  // public get sideNavigationDocumentationAreas () {
+  //   return this.documentationAreas.filter(documentationArea => {
+  //     return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
+  //   });
+  // }
 }

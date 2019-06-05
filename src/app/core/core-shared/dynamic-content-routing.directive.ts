@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Directive, ElementRef, Input } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
@@ -28,11 +28,15 @@ export class DynamicContentRoutingDirective {
         if( href.indexOf(portalBase) != -1 || href.indexOf(environment.forumBase) != -1){
           href = href.replace(portalBase, '').replace(environment.forumBase, '');
 
-          if(href.indexOf('#') === -1){
-            this.router.navigate([href]);
-            event.preventDefault();
-            event.stopPropagation();
-          }
+
+          let navigationExtras: NavigationExtras = {
+            fragment: (/\#/.test(href)) ? href.replace(/.*\#(.+)/, '$1') : ''
+          };
+          
+          href = href.replace(/(.*)(\#.+)/, "$1");
+          this.router.navigate([href], navigationExtras);
+          event.preventDefault();
+          event.stopPropagation();
           
           return;
         }
