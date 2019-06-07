@@ -41,7 +41,7 @@
 
     <hr/>
 
-    <div id="overview" class="api-documentation-content" dynamicContentRouting [innerHtml]="overviewSafe"></div>
+    <div id="overview" class="api-documentation-content" dynamicContentRouting [innerHtml]="safeOverview"></div>
   </ng-container>
 
   <ng-container *ngIf="gettingStartedSafe.changingThisBreaksApplicationSecurity && gettingStartedSafe.changingThisBreaksApplicationSecurity.length > 30">
@@ -49,7 +49,7 @@
 
     <hr/>
 
-    <div id="getting-started" class="api-documentation-content" dynamicContentRouting [innerHtml]="gettingStartedSafe"></div>
+    <div id="getting-started" class="api-documentation-content" dynamicContentRouting [innerHtml]="safeGettingStarted"></div>
   </ng-container>
 
   <h2 id="api-documentation">
