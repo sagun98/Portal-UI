@@ -54,6 +54,12 @@ export class DocumentationSideNavigationComponent implements OnInit {
     });
   }
 
+  ngOnChanges () {
+    this.sideNavigationDocumentationAreas = this.documentationAreas.filter(documentationArea => {
+      return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
+    });
+  }
+
   private setInitialState (documentationAreas: DocumentationArea[]) {
     let documentation: Documentation = this.traverseRouterChildrenForDocumentation(this.activatedRoute.snapshot);
 
