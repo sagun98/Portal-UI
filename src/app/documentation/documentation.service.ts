@@ -194,4 +194,8 @@ export class DocumentationService {
   public updateDocumentationPosition(documentationId: string, position: number) : Observable<boolean> {
     return <Observable<boolean>> this.http.patch(`${environment.restBase}/documentation/${documentationId}/position/${position}`, {});
   }
+
+  public reorderDocumentation() {
+    return this.http.post(`${environment.restBase}/documentation-area/setSortState`, {});
+  }
 }

@@ -36,8 +36,6 @@ export class DocumentationSideNavigationComponent implements OnInit {
       return documentationArea.name.toLowerCase() !== DOCUMENTATION_LANDING_PAGE_LABEL;
     });
 
-    console.log(this.sideNavigationDocumentationAreas);
-
     this.router.events.subscribe( (event:NavigationEnd) => {
       if( this.router['lastSuccessfulId'] === this.router['navigationId'] ){
         if(this.activatedRoute.children.length && this.activatedRoute.children[0].children.length){

@@ -140,8 +140,13 @@
           <ng-template [(clrIfActive)]="activeTabs.searchOptions">
             <clr-tab-content style="padding:20px 10px">
              
-              <h4>Search Options</h4>
-              <manage-search></manage-search>
+              <div class="bottom-spacer-20">
+                <h4>Search Options:</h4>
+                <manage-search></manage-search>
+              </div>
+
+              <h4>Documentation Options:</h4>
+              <admin-manage-documentation></admin-manage-documentation>
 
             </clr-tab-content>
           </ng-template>

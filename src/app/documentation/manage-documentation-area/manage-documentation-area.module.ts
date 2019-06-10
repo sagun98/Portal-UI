@@ -63,10 +63,10 @@ editRouteString.forEach(path => {
       }},
 
       {path : ":l0/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}},      
-
       {path : ":l0/:l1/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}},
-
-      {path : ":l0/:l1/:l2/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}}
+      {path : ":l0/:l1/:l2/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}},
+      {path : ":l0/:l1/:l2/:l3/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}},
+      {path : ":l0/:l1/:l2/:l3/:l4/:id", component : ViewDocumentComponent, resolve : {Documentation : DocumentationNewResolve, DocumentationArea : DocumentationAreaResolve}}
     ])
   ],
   
