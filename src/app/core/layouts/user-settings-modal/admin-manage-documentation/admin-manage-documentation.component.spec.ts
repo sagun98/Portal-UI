@@ -1,3 +1,5 @@
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminManageDocumentationComponent } from './admin-manage-documentation.component';
@@ -8,6 +10,10 @@ describe('AdminManageDocumentationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports : [
+        HttpClientModule,
+        ToastrModule.forRoot()
+      ],
       declarations: [ AdminManageDocumentationComponent ]
     })
     .compileComponents();
