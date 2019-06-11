@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
   ){}
 
   ngOnInit(){
+
     this.userService.$loggedIn.subscribe(loggedIn => {
       if(loggedIn && ! this.userService.staticUser){
         this.userService.user.subscribe(user => { });
@@ -36,7 +37,6 @@ export class AppComponent implements OnInit {
     });
 
     setTimeout(t => {
-
       // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
         if(message.data === "loaded")

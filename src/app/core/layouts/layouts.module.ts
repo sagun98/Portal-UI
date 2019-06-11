@@ -22,6 +22,7 @@ import { EmailComponent } from './email/email.component';
 import { EditorModule } from '../../../../node_modules/@tinymce/tinymce-angular';
 import { ManageSearchComponent } from './user-settings-modal/manage-search/manage-search.component';
 import { SharedModule } from '../../shared/shared.module';
+import { AdminManageDocumentationComponent } from './user-settings-modal/admin-manage-documentation/admin-manage-documentation.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { SharedModule } from '../../shared/shared.module';
     DevPortalFooterComponent,
     RoleCardComponent,
     EmailComponent,
-    ManageSearchComponent
+    ManageSearchComponent,
+    AdminManageDocumentationComponent
   ],
   exports : [
     SideNavigationComponent,

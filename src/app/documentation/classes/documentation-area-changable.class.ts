@@ -3,6 +3,7 @@ import { ViewChild } from '@angular/core';
 import { DocumentationArea } from "../../core/interfaces/documentation-area.interface";
 import { DocumentationAreaSelectorComponent } from "../shared/documentation-area-selector/documentation-area-selector.component";
 import { VerifyFormSavedComponent } from '../../core/classes/verify-form-saved';
+import { EntityComponent } from '../../core/classes/EntityComponent';
 
 export abstract class ChangableDocumentationArea extends VerifyFormSavedComponent {
 

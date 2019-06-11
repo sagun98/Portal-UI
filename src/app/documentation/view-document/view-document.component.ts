@@ -30,12 +30,11 @@ export class ViewDocumentComponent extends EntityComponent implements OnInit {
     this.activatedRoute.data.subscribe(data => {
       this.documentation = data.Documentation || this.documentation;
       this.documentationArea = data.DocumentationArea || this.documentationArea;
-
       this.safeContent = this.domSanitizer.bypassSecurityTrustHtml(this.documentation.content);
-      // setTimeout(t => {
-      //   document['removeAllListeners']('focus');
-      //   window['removeAllListeners']('message');
-      // }, 1000);
+
+      setTimeout(t => {
+        window['removeAllListeners']("click");
+      }, 1000);
     });
   }
 

@@ -186,4 +186,16 @@ export class DocumentationService {
   public setUserPrivileges (documentationAreaId: string, documentationId : string, privileges: UserPrivilegeClass[]) : Observable<Documentation> {
     return <Observable<Documentation>> this.http.put(`${environment.restBase}/documentation/${documentationId}/privileges`, privileges)
   }
+
+  public updateDocumentationAreaPosition(doucmentationAreaId: string, position: number) : Observable<boolean> {
+    return <Observable<boolean>> this.http.patch(`${environment.restBase}/documentation-area/${doucmentationAreaId}/position/${position}`, {});
+  }
+
+  public updateDocumentationPosition(documentationId: string, position: number) : Observable<boolean> {
+    return <Observable<boolean>> this.http.patch(`${environment.restBase}/documentation/${documentationId}/position/${position}`, {});
+  }
+
+  public reorderDocumentation() {
+    return this.http.post(`${environment.restBase}/documentation-area/setSortState`, {});
+  }
 }

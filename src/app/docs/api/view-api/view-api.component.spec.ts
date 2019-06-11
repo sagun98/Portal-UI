@@ -294,11 +294,6 @@ describe('ViewApiComponent', () => {
     href.click();
   });
 
-  it('should go to an anchor', () => {
-    let href: HTMLElement = document.querySelector("#getting-started a");
-    href.click();
-  });
-
   it('should render content when present', () => {
     let overviewContent: HTMLElement = document.getElementById("overview");
     let gettingStartedContent: HTMLElement = document.getElementById("getting-started");
