@@ -1,7 +1,7 @@
 import { UserService } from './../../../core/services/user/user.service';
 import { DocumentationService } from './../../documentation.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { DocumentationArea } from '../../../core/interfaces/documentation-area.interface';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
@@ -11,7 +11,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   templateUrl: './documentation-area.component.html',
   styleUrls: ['./documentation-area.component.scss']
 })
-export class DocumentationAreaComponent implements OnInit {
+export class DocumentationAreaComponent implements OnInit, OnChanges {
 
   @Input() documentationAreas: DocumentationArea[];
   @Input() defaultAllowedDepth: number = 2;
@@ -31,6 +31,14 @@ export class DocumentationAreaComponent implements OnInit {
   ngOnInit() {
     this.depth = (this.documentationAreas && this.documentationAreas.length) ? this.getDepth(this.documentationAreas[0]) : this.depth;
 
+    this.documentationAreas.sort(this.sortDocumentationAreas);
+
+    this.documentationAreas.forEach(documentationArea => {
+      documentationArea.documents.sort(this.sortDocumentationAreas)
+    });
+  }
+
+  ngOnChanges (changes) {
     this.documentationAreas.sort(this.sortDocumentationAreas);
 
     this.documentationAreas.forEach(documentationArea => {

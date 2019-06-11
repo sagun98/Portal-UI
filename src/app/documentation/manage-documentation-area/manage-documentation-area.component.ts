@@ -76,8 +76,6 @@ export class ManageDocumentationAreaComponent extends ChangableDocumentationArea
 
     let documentationArea = <DocumentationArea> this.form.getRawValue();
 
-    console.log("this.parentDocumentationArea.slug: ", this.parentDocumentationArea.slug);
-
     if (this.parentDocumentationArea.slug)
       documentationArea.parentSlug = this.parentDocumentationArea.slug;
 
