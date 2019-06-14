@@ -9,6 +9,7 @@ import { CoreSharedModule } from '../../core/core-shared/core-shared.module';
 import { UserService } from '../../core/services/user/user.service';
 import { MockUserService } from '../../core/layouts/side-navigation/side-navigation.component.spec';
 import { ActivatedRoute } from '@angular/router';
+import { CookieParserService } from 'src/app/core/services/cookie-parser/cookie-parser.service';
 
 describe('ProductPageComponent', () => {
   let component: ProductPageComponent;
@@ -29,7 +30,7 @@ describe('ProductPageComponent', () => {
             productData : []
           })
         }},
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
       ],
       declarations: [ 
         ProductPageComponent

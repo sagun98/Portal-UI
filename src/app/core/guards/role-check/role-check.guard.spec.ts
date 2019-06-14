@@ -1,3 +1,4 @@
+import { CookieParserService } from 'src/app/core/services/cookie-parser/cookie-parser.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TestBed, async, inject } from '@angular/core/testing';
@@ -43,7 +44,7 @@ describe('RoleCheckGuard', () => {
       ],
       providers: [
         HttpClient,
-        {provide : UserService, useClass : MockUserService, deps : [HttpClient]},
+        {provide : UserService, useClass : MockUserService , deps : [HttpClient, CookieParserService]},
         PermissionsService
       ]
     });

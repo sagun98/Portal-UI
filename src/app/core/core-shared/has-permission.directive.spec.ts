@@ -1,3 +1,4 @@
+import { CookieParserService } from './../services/cookie-parser/cookie-parser.service';
 import { mockUser } from '../layouts/side-navigation/side-navigation.component.spec';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -37,7 +38,7 @@ describe('HasPermissionDirective', () => {
       declarations: [HasPermissionDirective, DirectiveTestComponent],
       providers: [
         PermissionsService,
-        { provide: UserService, useClass: MockUserService, deps : [HttpClient]},
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient, CookieParserService]},
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(DirectiveTestComponent);

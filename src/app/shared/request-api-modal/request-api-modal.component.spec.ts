@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../core/services/cookie-parser/cookie-parser.service';
 import { ClarityModule } from '@clr/angular';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ describe('RequestApiModalComponent', () => {
         ClarityModule,
         ToastrModule.forRoot()
       ],
-      providers : [{ provide : UserService, useClass : MockUserService, deps : [HttpClient] }],
+      providers : [{ provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] }],
       declarations: [ RequestApiModalComponent ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })

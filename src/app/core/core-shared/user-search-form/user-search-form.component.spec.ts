@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../services/cookie-parser/cookie-parser.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -22,7 +23,7 @@ describe('UserSearchFormComponent', () => {
         UserSearchFormComponent
       ],
       providers: [
-        { provide: UserService, useClass: MockUserService, deps : [HttpClient] },
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient, CookieParserService] },
       ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

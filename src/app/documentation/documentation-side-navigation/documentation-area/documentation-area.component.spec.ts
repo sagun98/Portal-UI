@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../../core/services/cookie-parser/cookie-parser.service';
 import { of, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -28,8 +29,8 @@ class MockDocumentationService extends DocumentationService {
 }
 
 class MockUserService extends UserService {
-  constructor (private _http : HttpClient){
-    super(_http);
+  constructor ( private _http : HttpClient, private _cookieParser : CookieParserService ) {
+    super(_http, _cookieParser);
   }
 
   public adminOverride: boolean = true;
@@ -78,7 +79,7 @@ describe('DocumentationAreaComponent', () => {
         RouterTestingModule
       ],
       providers : [
-        {provide : UserService, useClass : MockUserService, deps : [HttpClient]},
+        {provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService]},
         {provide : DocumentationService, useClass: MockDocumentationService, deps : [HttpClient]}
       ],
       declarations: [ DocumentationAreaComponent ],

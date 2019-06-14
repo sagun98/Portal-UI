@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../../core/services/cookie-parser/cookie-parser.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PermissibleEntity } from '../../../core/interfaces/permissible.interface';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -73,7 +74,7 @@ describe('ManageApiComponent', () => {
       ],
       providers : [
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         HttpClient,
         ToastrService
       ],

@@ -16,6 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MockUserService } from './core/layouts/side-navigation/side-navigation.component.spec';
 import { Router } from '@angular/router';
 import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
+import { CookieParserService } from './core/services/cookie-parser/cookie-parser.service';
 
 class MockHttpErrorsService extends HttpErrorsService {
   constructor () {
@@ -45,7 +46,7 @@ describe('AppComponent', () => {
       ],
       providers : [
         HttpClient,
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         { provide : HttpErrorsService, useClass : MockHttpErrorsService, deps : [] },
         { provide: APP_BASE_HREF, useValue: '/'}
       ],

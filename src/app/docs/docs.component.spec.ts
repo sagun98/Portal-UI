@@ -14,6 +14,7 @@ import { UserService } from '../core/services/user/user.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Product } from '../core/interfaces/product.interface';
 import { API } from '../core/interfaces/api.interface';
+import { CookieParserService } from '../core/services/cookie-parser/cookie-parser.service';
 
 describe('DocsComponent', () => {
   let component: DocsComponent;
@@ -58,7 +59,7 @@ describe('DocsComponent', () => {
         
       ],
       providers : [
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         {
           provide : ActivatedRoute, useValue : {
             snapshot : {

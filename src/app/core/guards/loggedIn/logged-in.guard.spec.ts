@@ -4,6 +4,7 @@ import { TestBed, inject, tick, fakeAsync } from '@angular/core/testing';
 import { LoggedInGuard } from './logged-in.guard';
 import { MockUserService } from '../../layouts/side-navigation/side-navigation.component.spec';
 import { UserService } from '../../services/user/user.service';
+import { CookieParserService } from '../../services/cookie-parser/cookie-parser.service';
 
 describe('LoggedInGuard', () => {
 
@@ -16,7 +17,7 @@ describe('LoggedInGuard', () => {
         HttpClientModule
       ],
       providers: [
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         HttpClient,
         LoggedInGuard
       ]
