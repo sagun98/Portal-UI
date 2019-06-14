@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
     });
 
     setTimeout(t => {
-      
       // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
         if(message.data === "loaded")
@@ -125,5 +124,4 @@ export class AppComponent implements OnInit {
 
     return  /(api\/user|authenticate)/.test(url);
   }
-
 }
