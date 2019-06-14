@@ -9,6 +9,7 @@ import { HttpErrorsService } from './core/services/http-errors/http-errors.servi
 import { ToastrService } from 'ngx-toastr';
 import { debounce } from 'rxjs/operators';
 import { timer } from 'rxjs';
+import { MycloudService } from './core/services/mycloud/mycloud.service';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private loadingInterceptorService: LoadingInterceptorService,
     private permissionsService : PermissionsService,
+    private mycloudService : MycloudService,
     private router : Router
   ){}
 
@@ -35,6 +37,9 @@ export class AppComponent implements OnInit {
         this.userService.user.subscribe(user => { 
           console.log("HERE");
         });
+      }
+      else if(loggedIn == false && ! this.userService.staticUser && this.mycloudService.env != "LOCAL") {
+        window.location.href = this.mycloudService.myCloudLoginUrl;
       }
     });
 
