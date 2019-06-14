@@ -32,11 +32,14 @@ export class AppComponent implements OnInit {
 
     this.userService.$loggedIn.subscribe(loggedIn => {
       if(loggedIn && ! this.userService.staticUser){
-        this.userService.user.subscribe(user => { });
+        this.userService.user.subscribe(user => { 
+          console.log("HERE");
+        });
       }
     });
 
     setTimeout(t => {
+      
       // Communicate with the forum to handle navigation
       window.addEventListener("message", (message) => {
         if(message.data === "loaded")
