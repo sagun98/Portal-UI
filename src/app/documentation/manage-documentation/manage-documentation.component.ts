@@ -61,7 +61,10 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       else
         this.title = 'Add New ' + this.documentationArea.name + ' Document';
 
-      this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.id === this.documentationArea.id})[0];
+      if(this.documentation.parentSlug)
+        this.selectedDocumentationArea = this.documentationAreas.filter(_documentationArea => {return _documentationArea.slug === this.documentation.parentSlug})[0];
+      else
+        this.selectedDocumentationArea = this.documentationArea;
     });
 
     this.buildForm();
@@ -109,8 +112,16 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   public saveFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
     this.documentationService.setUserPrivileges (this.documentationArea.id, this.documentation.id, privileges).subscribe(documentation => {
       this.toastrService.success('API User Privileges successfully updated');
+      
+      if(this.documentation.parentSlug != documentation.parentSlug) {
+        // alert("This Document has been modified in another session.");
+        // console.log(this.documentationService.cache.documentationAreas);
+        documentation.version = this.documentation.version;
+      }
+
       this.documentation = documentation;
       this.form.get('version').setValue(documentation.version);
+
     });
   }
 
@@ -126,8 +137,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
     let documentation: Documentation = this.form.getRawValue();
 
-    if(this.documentationArea)
-      documentation.parentSlug = this.documentationArea.slug;
+    if(this.selectedDocumentationArea)
+      documentation.parentSlug = this.selectedDocumentationArea.slug;
 
     this.documentationService[this.saveMethod](this.documentationArea.id, documentation).subscribe(newDocumentation => {
       this.documentation = newDocumentation;
@@ -158,15 +169,15 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
 
   public changeParentDocumentationArea(documentationArea: DocumentationArea) : void {
 
-    if(documentationArea.id !== this.documentationArea.id) {
+    if(documentationArea.id !== this.selectedDocumentationArea.id) {
       let doChange:boolean = confirm(`Are you sure you want to change this documents Documentation Area to ${documentationArea.name}?`);
 
       if(doChange) {
-        this.documentationArea = documentationArea;
+        this.selectedDocumentationArea = documentationArea;
       }
       else {
         setTimeout(t => {
-          this.documentationArea = Object.assign({}, this.documentationArea);
+          this.selectedDocumentationArea = Object.assign({}, this.documentationArea);
         });
       }
     }
