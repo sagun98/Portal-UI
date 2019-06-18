@@ -84,8 +84,13 @@ export class AppComponent implements OnInit {
         if(type === FAILED_NAVIGATION_TYPE.NAVIGATION ) {
           this.router.navigate([`/`]).then(navigated => {
               alert('You need to be logged in to view this content.');
-              this.showLogin = false;
-              setTimeout(t => { this.showLogin = true; })
+
+              if(this.mycloudService.env === "LOCAL"){
+                this.showLogin = false;
+                setTimeout(t => { this.showLogin = true; })
+              } else {
+                window.location.href = this.mycloudService.myCloudLoginUrl
+              }
           });
         }
       });
