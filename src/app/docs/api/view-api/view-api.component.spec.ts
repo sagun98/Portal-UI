@@ -13,6 +13,7 @@ import { CoreSharedModule } from '../../../core/core-shared/core-shared.module';
 import { UserService } from '../../../core/services/user/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { CookieParserService } from 'src/app/core/services/cookie-parser/cookie-parser.service';
 
 describe('ViewApiComponent', () => {
   let component: ViewApiComponent;
@@ -257,7 +258,7 @@ describe('ViewApiComponent', () => {
         HttpClient,
         FormBuilder,
         ToastrService,
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient]},
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService]},
         {
           provide : ActivatedRoute, useValue : {
             data : of({

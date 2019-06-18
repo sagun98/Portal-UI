@@ -16,6 +16,7 @@ import { UserService } from '../../../core/services/user/user.service';
 import { MockUserService } from '../../../core/layouts/side-navigation/side-navigation.component.spec';
 import { Product } from '../../../core/interfaces/product.interface';
 import { API } from '../../../core/interfaces/api.interface';
+import { CookieParserService } from 'src/app/core/services/cookie-parser/cookie-parser.service';
 
 
 describe('NewProductComponent', () => {
@@ -61,7 +62,7 @@ describe('NewProductComponent', () => {
         ViewApiComponent
       ],
       providers : [
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         {
           provide : ActivatedRoute, useValue : {
             snapshot : {

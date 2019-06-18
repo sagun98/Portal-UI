@@ -3,7 +3,7 @@
   <documentation-area-selector
     *ngIf="documentationArea.name !== 'Documentation Landing Page'"
     [documentationAreas]="documentationAreas"
-    [documentationArea]="documentationArea"
+    [documentationArea]="selectedDocumentationArea"
     (onSelection)="changeParentDocumentationArea($event)"
   >
 

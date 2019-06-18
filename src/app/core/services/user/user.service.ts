@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { Subject, BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, map, share } from 'rxjs/operators';
 import { PortalUser } from '../../interfaces/fr-user.interface';
+import { CookieParserService } from '../cookie-parser/cookie-parser.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,13 @@ export class UserService {
   public _lastUser: BehaviorSubject<PortalUser> = new BehaviorSubject<PortalUser>(null);
 
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private cookieParser : CookieParserService
+  ) {
+    if(this.cookieParser.cookies.PearsonSSOSession) {
+      localStorage.setItem('pearson.devportal.authToken', this.cookieParser.cookies.PearsonSSOSession);
+    }
+  }
 
   public get authToken() {
     return localStorage.getItem('pearson.devportal.authToken') || '';

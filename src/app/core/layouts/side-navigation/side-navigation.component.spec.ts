@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../services/cookie-parser/cookie-parser.service';
 import { BehaviorSubject, of } from 'rxjs';
 import { PortalUser } from '../../interfaces/fr-user.interface';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -15,7 +16,6 @@ import { API } from '../../interfaces/api.interface';
 import { APIListChange } from '../../interfaces/api-list-change.interface';
 import { ProductListChange } from '../../interfaces/product-list-change.interface';
 
-
 class RouterStub {
   navigateByUrl = jasmine.createSpy('navigateByUrl');
 }
@@ -32,8 +32,8 @@ export const mockUser = new PortalUser({
 });
 
 export class MockUserService extends UserService {
-  constructor ( private _http : HttpClient ) {
-    super(_http);
+  constructor ( private _http : HttpClient, private _cookieParser : CookieParserService ) {
+    super(_http, _cookieParser);
 
     this._user = mockUser;
   }
@@ -102,7 +102,7 @@ describe('SideNavigationComponent', () => {
       ],
       providers : [
         HttpClient,
-        { provide : UserService , useClass : MockUserService, deps : [HttpClient] }
+        { provide : UserService , useClass : MockUserService, deps : [HttpClient, CookieParserService] }
       ],
       declarations: [ 
         SideNavigationComponent

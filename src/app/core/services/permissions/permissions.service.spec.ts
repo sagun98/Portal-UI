@@ -1,3 +1,4 @@
+import { CookieParserService } from './../cookie-parser/cookie-parser.service';
 import { UserService } from '../user/user.service';
 import { AdminTestUser, ApiDeveloperTestUser, ProductOwnerTestUser } from '../../layouts/user-settings-modal/role-card/role-card.component.spec';
 import { TestBed, inject } from '@angular/core/testing';
@@ -15,7 +16,7 @@ describe('PermissionsService', () => {
       ],
       providers: [
         HttpClient,
-        {provide : UserService, useClass : MockUserService, deps : [HttpClient]},
+        {provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService]},
         PermissionsService
       ]
     });

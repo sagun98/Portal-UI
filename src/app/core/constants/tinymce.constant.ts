@@ -37,7 +37,7 @@ export const TINYCMCE_CONFIG = {
     paste_data_images: true,
     file_browser_callback_types: 'image',
     convert_urls: true,
-    relative_urls : false,
+    relative_urls : true,
     remove_script_host : false,
     height: 350,
     images_upload_handler: function (blobInfo, success, failure) {

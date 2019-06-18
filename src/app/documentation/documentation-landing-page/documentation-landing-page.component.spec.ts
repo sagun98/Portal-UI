@@ -1,3 +1,4 @@
+import { CookieParserService } from './../../core/services/cookie-parser/cookie-parser.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -39,7 +40,7 @@ describe('DocumentationLandingPageComponent', () => {
         HttpClient,
         { provide: ActivatedRoute, useValue : activatedRouteValue },
         DomSanitizer,
-        { provide: UserService, useClass: MockUserService, deps : [HttpClient] }
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient, CookieParserService] }
       ],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();

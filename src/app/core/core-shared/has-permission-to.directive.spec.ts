@@ -1,3 +1,4 @@
+import { CookieParserService } from './../services/cookie-parser/cookie-parser.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
@@ -49,7 +50,7 @@ describe('HasPermissionToDirective', () => {
       declarations: [HasPermissionToDirective, DirectiveTestComponent],
       providers: [
         PermissionsService,
-        { provide: UserService, useClass: MockUserService, deps : [HttpClient]}
+        { provide: UserService, useClass: MockUserService, deps : [HttpClient, CookieParserService]}
       ]
     }).compileComponents();
     fixture = TestBed.createComponent(DirectiveTestComponent);

@@ -18,6 +18,7 @@ import { MockUserService } from '../../../core/layouts/side-navigation/side-navi
 import { API } from '../../../core/interfaces/api.interface';
 import { ApiService } from '../../../core/services/api-service/api.service';
 import { Product } from '../../../core/interfaces/product.interface';
+import { CookieParserService } from 'src/app/core/services/cookie-parser/cookie-parser.service';
 
 export const mockApi: API = {
   id : 'qwers12345',
@@ -82,7 +83,7 @@ describe('ViewProductComponent', () => {
       ],
       providers : [
         ToastrService,
-        { provide : UserService, useClass : MockUserService, deps : [HttpClient] },
+        { provide : UserService, useClass : MockUserService, deps : [HttpClient, CookieParserService] },
         { provide : ApiService, useClass : MockApiService, deps : [HttpClient] },
         {
           provide : ActivatedRoute, useValue : {
