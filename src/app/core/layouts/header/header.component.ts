@@ -11,6 +11,7 @@ import { SearchTypes } from './search-types.enum';
 import { Angulartics2GoogleGlobalSiteTagOverride } from '../../../shared/angulartics-2-google-global-site-tag-override.service';
 import { HttpErrorsService } from '../../services/http-errors/http-errors.service';
 import { SearchService } from '../../services/search-service/search.service';
+import { MycloudService } from '../../services/mycloud/mycloud.service';
 
 @Component({
   selector: 'dev-portal-header',
@@ -42,6 +43,7 @@ export class HeaderComponent implements OnInit {
     private searchService : SearchService,
     private toastrService : ToastrService,
     private httpErrorsServices : HttpErrorsService,
+    private mycloudService : MycloudService,
     private router : Router
   ) { }
 
@@ -53,8 +55,12 @@ export class HeaderComponent implements OnInit {
   }
 
   public showLoginModal() {
-    this.userService.$doUserLogin.next( false );
-    setTimeout(t => {this.userService.$doUserLogin.next( true  );})
+    if(this.mycloudService.env === 'LOCAL') {
+      this.userService.$doUserLogin.next( false );
+      setTimeout(t => {this.userService.$doUserLogin.next( true  );})
+    } else {
+      window.location.href = this.mycloudService.myCloudLoginUrl;
+    }
   }
 
   public activateSearch () {
