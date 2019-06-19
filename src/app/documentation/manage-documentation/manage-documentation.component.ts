@@ -94,9 +94,9 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
     this.form = this.formBuilder.group({
       id : [this.documentation.id],
       version : [this.documentation.version],
-      name : [this.documentation.name, [Validators.required, Validators.minLength(5)]],
+      name : [this.documentation.name, [Validators.required, Validators.minLength(4)]],
       slug : [this.documentation.slug, [Validators.required]],
-      description : [this.documentation.description, [Validators.required, Validators.minLength(5)]],
+      description : [this.documentation.description, [Validators.required, Validators.minLength(4)]],
       content : [this.documentation.content, [Validators.required]],
       published : [this.documentation.published || false],
       userPrivileges : [this.documentation.userPrivileges || null],
@@ -110,6 +110,15 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       if( this.form.get('slug').disabled && ! this.documentation.version)
         this.setSlugValue(name);
     });
+
+    this.setInitialContentValue();
+  }
+
+  private setInitialContentValue() {
+    let initialContentValue = this.form.get('content').value.trim();
+    if(initialContentValue === "<p></p>"){
+      this.form.get('content').setValue('');
+    }
   }
 
   public handleDelete () : void {
@@ -158,7 +167,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
     if(this.selectedDocumentationArea)
       documentation.parentSlug = this.selectedDocumentationArea.slug;
 
-    this.documentationService[this.saveMethod](this.documentationArea.id, documentation).subscribe(newDocumentation => {
+    this.documentationService[this.saveMethod](this.selectedDocumentationArea.id, documentation).subscribe(newDocumentation => {
       this.documentation = newDocumentation;
 
       this.documentation.userPrivileges = this.documentation.userPrivileges || null;
@@ -195,7 +204,7 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
       }
       else {
         setTimeout(t => {
-          this.selectedDocumentationArea = Object.assign({}, this.documentationArea);
+          this.selectedDocumentationArea = Object.assign({}, this.selectedDocumentationArea);
         });
       }
     }

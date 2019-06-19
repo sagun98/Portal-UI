@@ -103,12 +103,17 @@
         </label>
       </div>
 
-      <div class="bottom-spacer-30">
-        <label for="overview">Overview:</label>
-        <div for="overview">
-          <editor id="content" placeholder="Documentation Content" [initialValue]="documentation.conent" [init]="tinymceConfig" formControlName="content">
+      <div class="form-group bottom-spacer-30">
+        <label for="overview" class="requried">Content:</label>
+        <!-- <div for="content">
+          
+        </div> -->
+
+        <label for="content" [className]=" (form.get('content').invalid && (submitted || form.get('content').dirty)) ? errorClasses + ' textarea editor' : '' " style="flex-grow: 1;">
+          <editor id="content" placeholder="Documentation Content" [initialValue]="documentation.content" [init]="tinymceConfig" formControlName="content">
           </editor>
-        </div>
+          <span *ngIf="form.get('content').errors && form.get('content').errors.required && (submitted || form.get('content').dirty)" class="tooltip-content">This field cannot be empty!</span>
+        </label>
       </div>
     </section>
 

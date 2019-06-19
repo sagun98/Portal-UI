@@ -23,6 +23,7 @@ import 'tinymce/plugins/colorpicker';
 import 'tinymce/plugins/code';
 import 'tinymce/plugins/imagetools';
 import 'tinymce/plugins/image';
+import 'tinymce/plugins/autosave';
 import { environment } from '../../../environments/environment';
 
 export const TINYCMCE_CONFIG = {
@@ -30,8 +31,8 @@ export const TINYCMCE_CONFIG = {
         return localStorage.getItem('pearson.devportal.authToken') || '';
       },
     skin_url: '/assets/skins/lightgray',
-    plugins: 'colorpicker print preview image searchreplace autolink directionality link table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
-    toolbar1: 'insertfile undo redo | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | image',
+    plugins: 'autosave colorpicker print preview image searchreplace autolink directionality link table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    toolbar1: 'restoredraft insertfile undo redo | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | image',
     automatic_uploads: true,
     images_upload_credentials: true,
     paste_data_images: true,
@@ -39,6 +40,7 @@ export const TINYCMCE_CONFIG = {
     convert_urls: true,
     relative_urls : true,
     remove_script_host : false,
+    autosave_interval: "5s",
     height: 350,
     images_upload_handler: function (blobInfo, success, failure) {
         var xhr, formData;
