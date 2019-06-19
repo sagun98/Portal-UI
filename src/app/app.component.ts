@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
     this.userService.$loggedIn.subscribe(loggedIn => {
       if(loggedIn && ! this.userService.staticUser){
         this.userService.user.subscribe(user => { 
-          console.log("HERE");
         });
       }
       else if(loggedIn == false && ! this.userService.staticUser && this.mycloudService.env != "LOCAL") {
