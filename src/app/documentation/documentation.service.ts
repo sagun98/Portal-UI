@@ -1,3 +1,4 @@
+import { PositionChange } from './../core/interfaces/position-change.interface';
 import { Documentation } from '../core/interfaces/documentation.interface';
 import { DocumentationArea } from '../core/interfaces/documentation-area.interface';
 import { Observable } from 'rxjs/Observable';
@@ -18,6 +19,7 @@ import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../core/constants/documentatio
 export class DocumentationService {
 
   public documentationLandingPageArea: DocumentationArea;
+  public $positionChange: Subject<PositionChange> = new Subject<PositionChange>();
 
   public $documentationLandingPageArea: BehaviorSubject<DocumentationArea> = new BehaviorSubject<DocumentationArea>({
     description : '',
@@ -192,7 +194,14 @@ export class DocumentationService {
   }
 
   public updateDocumentationPosition(documentationId: string, position: number) : Observable<boolean> {
-    return <Observable<boolean>> this.http.patch(`${environment.restBase}/documentation/${documentationId}/position/${position}`, {});
+    return <Observable<boolean>> this.http.patch(`${environment.restBase}/documentation/${documentationId}/position/${position}`, {}).pipe(tap(
+      response => {
+        this.$positionChange.next({
+          id : documentationId,
+          position : position
+        })
+      }
+    ));
   }
 
   public reorderDocumentation() {

@@ -1,10 +1,10 @@
 import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../../core/constants/documentation.constants';
-import { Observable, of } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DocumentationService } from '../documentation.service';
 import { DocumentationArea } from '../../core/interfaces/documentation-area.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Documentation, DefaultDocumentation } from '../../core/interfaces/documentation.interface';
 import { EntityComponent } from '../../core/classes/EntityComponent';
 import { PermissionsService } from '../../core/services/permissions/permissions.service';
@@ -12,13 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 import { UserPrivilegeClass } from '../../core/classes/user-privilege';
 import { PortalUser } from '../../core/interfaces/fr-user.interface';
 import { TINYCMCE_CONFIG } from '../../core/constants/tinymce.constant';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-documentation',
   templateUrl: './manage-documentation.component.html',
   styleUrls: ['./manage-documentation.component.scss']
 })
-export class ManageDocumentationComponent extends EntityComponent implements OnInit {
+export class ManageDocumentationComponent extends EntityComponent implements OnInit, OnDestroy {
 
   @Input() documentation: Documentation;
   @Input() documentationArea: DocumentationArea;
@@ -30,7 +31,8 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
   public saveMethod: string = 'createDocumentation';
   public documentationAreas: DocumentationArea[] = [];
   public selectedDocumentationArea: DocumentationArea;
-
+  private unsubscribe: Subject<void> = new Subject();
+  
   constructor(
     private activatedRoute : ActivatedRoute,
     private formBuilder : FormBuilder,
@@ -42,7 +44,23 @@ export class ManageDocumentationComponent extends EntityComponent implements OnI
     super();
   }
 
+  ngOnDestroy () {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
+
   ngOnInit() {
+    this.documentationService.$positionChange.subscribe(change => {
+      if(change.id === this.documentation.id){
+        this.documentationService.findDocumentationById(this.documentation.id)
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe(document => {
+          this.toastrService.info('Document position updated.', '', {timeOut : 1500});
+          this.form.get('version').setValue(document.version);
+        })
+      }
+    });
+
     this.documentationService.cache.$documentationAreas.subscribe(documentationAreas => {
       documentationAreas = documentationAreas.filter(documentationarea => {return documentationarea.name !== 'Documentation Landing Page'});
       const clone = JSON.parse(JSON.stringify(documentationAreas));
