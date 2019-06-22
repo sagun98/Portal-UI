@@ -11,6 +11,7 @@ import { PortalUser } from '../../../../core/interfaces/fr-user.interface';
 })
 export class EntityPermissionsModalComponent implements OnInit {
 
+  @Input() title: string = 'Manage User Privileges';
   @Input() opened : boolean = false;
   @Input() entity : PermissibleEntity;
   @Input() userPrivileges : UserPrivilegeClass[] = [];
@@ -25,6 +26,9 @@ export class EntityPermissionsModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.userPrivileges = this.userPrivileges || [];
+
     if (this.entity.published){
       this.canCollaborate = false;
 

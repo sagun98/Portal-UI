@@ -13,16 +13,10 @@
     </a>
   </h3>
 
-  <entity-permissions-modal
-    *ngIf="managePrivilegesModalOpened"
-    [userPrivileges]="userPrivileges" 
-    [opened]="managePrivilegesModalOpened"
-    [validateNewUser]="validateUserRoles"
-    (onSave)="saveApiFineGrainedPrivileges($event)"
-    [entity]="product"
-    >
+  <entity-permissions-modal *ngIf="managePrivilegesModalOpened" [userPrivileges]="userPrivileges" [opened]="managePrivilegesModalOpened" [validateNewUser]="validateUserRoles" (onSave)="saveFineGrainedPrivileges($event)" [entity]="product"></entity-permissions-modal>
 
-  </entity-permissions-modal>
+  <entity-permissions-modal *ngIf="manageAPIPrivilegesModalOpened" title="Manage API User Privileges" [canCollaborate]="true" [userPrivileges]="product.apiUserPrivileges" [opened]="manageAPIPrivilegesModalOpened" [validateNewUser]="validateAPIUserRoles" (onSave)="saveAPIFGPs($event)" [entity]="product"></entity-permissions-modal>
+
 
   <form class="has-fixed-footer" [formGroup]="form" (ngSubmit)="saveProduct()">
 
@@ -121,6 +115,17 @@
           >
           </ng-select>
           <!-- <span *ngIf="form.get('apis').errors && form.get('apis').errors.required && (submitted || form.get('apis').dirty)" class="tooltip-content">This field cannot be empty!</span> -->
+        </label>
+
+        <label style="margin:15px 50px 0px 5px;" [hasPermissionTo]="[entityPermissions.ADMIN]" [entity]="product">
+          <a *ngIf="product.id" class="ml20" (click)="openAPIUserPrivilegeModal()" >
+            <clr-tooltip>
+                <clr-icon clrTooltipTrigger shape="users" size="30"></clr-icon>
+                <clr-tooltip-content clrPosition="left" clrSize="sm" *clrIfOpen>
+                    <span>Manage API User Privileges</span>
+                </clr-tooltip-content>
+            </clr-tooltip>
+          </a>
         </label>
       </div>
     </section>

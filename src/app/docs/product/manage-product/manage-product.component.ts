@@ -33,6 +33,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   public submitted: boolean = false;
   public showOverview: boolean = false;
   public saveMethod: string = 'addProduct';
+  public manageAPIPrivilegesModalOpened: boolean = false;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -141,6 +142,28 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
 
   public validateUserRoles = (user : PortalUser) => {
     return (user.roleMap.ADMIN || user.roleMap["PRODUCT_OWNER"]);
+  }
+
+  public validateAPIUserRoles = (user : PortalUser) => {
+    debugger;
+    return (user.roleMap.ADMIN || user.roleMap["API_DEVELOPER"]);
+  }
+
+  public saveFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
+    this.productService.updateFineGrainedPrivileges(this.product.id, privileges).subscribe( (product : Product) => {
+      this.toastrService.success('API User Privileges successfully updated');
+      this.product = product;
+      this.form.get('version').setValue(product.version);
+    });
+  }
+
+  public saveAPIFGPs (privileges : UserPrivilegeClass[]) {
+    alert("Saving!");
+  }
+
+  public openAPIUserPrivilegeModal () {
+    this.manageAPIPrivilegesModalOpened = false;
+    setTimeout(t => { this.manageAPIPrivilegesModalOpened = true;});
   }
 
   public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {

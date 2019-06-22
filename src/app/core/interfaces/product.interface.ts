@@ -1,4 +1,4 @@
-import { PermissibleEntity } from "./permissible.interface";
+import { PermissibleEntity, Privilege } from "./permissible.interface";
 import { API } from "./api.interface";
 import { ApiManagementTool } from "./api-management-tool.interface";
 
@@ -11,5 +11,6 @@ export interface Product extends PermissibleEntity{
     description : string,
     overview? : string,
     apis : API[],
-    apiManagementTool? : ApiManagementTool
+    apiManagementTool? : ApiManagementTool,
+    apiUserPrivileges : Privilege[]
 }
