@@ -26,7 +26,6 @@ export class EntityPermissionsModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.userPrivileges = this.userPrivileges || [];
 
     if (this.entity.published){

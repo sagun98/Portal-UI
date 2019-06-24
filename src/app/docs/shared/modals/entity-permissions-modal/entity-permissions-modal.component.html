@@ -37,11 +37,6 @@
       </thead>
       <tbody>
         <tr *ngFor="let userPrivilege of userPrivileges;let index = index;">
-          <!-- <td><a class="pull-left" (click)="removeUserPrivileges(userPrivilege)"><clr-icon shape="trash" size="20"></clr-icon></a> {{ userPrivilege.username }}</td>
-          <td><input type="checkbox" name="modify" [(ngModel)]="userPrivilege.privilegeMap.MODIFY" (change)="handlePrivilegeChange('MODIFY', userPrivilege) " [disabled]="userPrivilege.collaborateOnly"/></td>
-          <td><input type="checkbox" name="admin" [(ngModel)]="userPrivilege.privilegeMap.ADMIN" (change)="handlePrivilegeChange('ADMIN', userPrivilege)" [disabled]="userPrivilege.collaborateOnly"/></td>
-          <td *ngIf="canCollaborate && ! entity.published"> <input type="checkbox" name="collaborator" [(ngModel)]="userPrivilege.privilegeMap.COLLABORATOR" (change)="handlePrivilegeChange('COLLABORATOR', userPrivilege)"/></td> -->
-
           <td><a class="pull-left" (click)="removeUserPrivileges(userPrivilege)"><clr-icon shape="trash" size="20"></clr-icon></a>{{ userPrivilege.username }}</td>
           <td *ngIf="canCollaborate && ! entity.published"><input type="radio" [name]=" 'privilege-' + index" [(ngModel)]="userPrivilege.uniquePrivilege" value="COLLABORATOR" (change)="onPermissionSelect(userPrivilege)"/></td>
           <td><input type="radio" [name]=" 'privilege-' + index" [(ngModel)]="userPrivilege.uniquePrivilege" [disabled]="userPrivilege.collaborateOnly" value="MODIFY" (change)="onPermissionSelect(userPrivilege)"/></td>

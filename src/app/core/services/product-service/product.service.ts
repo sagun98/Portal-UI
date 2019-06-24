@@ -74,6 +74,14 @@ export class ProductService {
     );
   }
 
+  public getAPIPrivileges (id) : Observable<UserPrivilegeClass[]> {
+    return <Observable<UserPrivilegeClass[]>> this.http.get(`${environment.restBase}/products/${id}/apiPrivileges`).pipe(
+      map( (privileges : Privilege[]) => {
+        return privileges.map(p => { return  new UserPrivilegeClass(p); })
+      })
+    );
+  }
+
   public updateProduct ( product : Product ) {
     return this.http.put(`${environment.restBase}/products/${product.id}`, product).pipe(tap( (updatedProduct : Product) => {
       this._product_cache_ = updatedProduct;
@@ -87,6 +95,10 @@ export class ProductService {
 
   public updateFineGrainedPrivileges (id: string, privileges : UserPrivilegeClass[]) {
     return this.http.put(`${environment.restBase}/products/${id}/privileges`, privileges);
+  }
+
+  public updateAPIUserPrivileges (id: string, privileges : UserPrivilegeClass[]) : Observable<Product> {
+    return  <Observable<Product>> this.http.put(`${environment.restBase}/products/${id}/apiPrivileges`, privileges);
   }
 
   public getProduct ( productId : string, getCache? : boolean ) {

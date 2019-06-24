@@ -34,6 +34,7 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   public showOverview: boolean = false;
   public saveMethod: string = 'addProduct';
   public manageAPIPrivilegesModalOpened: boolean = false;
+  public APIUserPrivileges: UserPrivilegeClass[] = [];
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -158,19 +159,20 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   }
 
   public saveAPIFGPs (privileges : UserPrivilegeClass[]) {
-    alert("Saving!");
+    console.log(privileges);
+    this.productService.updateAPIUserPrivileges(this.product.id, privileges).subscribe(product => {
+      this.toastrService.success('API User Privileges successfully updated');
+      this.product = product;
+      this.form.get('version').setValue(product.version);
+    })
   }
 
   public openAPIUserPrivilegeModal () {
     this.manageAPIPrivilegesModalOpened = false;
-    setTimeout(t => { this.manageAPIPrivilegesModalOpened = true;});
-  }
 
-  public saveApiFineGrainedPrivileges (privileges : UserPrivilegeClass[]) {
-    this.productService.updateFineGrainedPrivileges(this.product.id, privileges).subscribe( (product : Product) => {
-      this.toastrService.success('API User Privileges successfully updated');
-      this.product = product;
-      this.form.get('version').setValue(product.version);
+    this.productService.getAPIPrivileges(this.product.id).subscribe(APIUserPrivileges => {
+      this.APIUserPrivileges = APIUserPrivileges;
+      setTimeout(t => { this.manageAPIPrivilegesModalOpened = true;});
     });
   }
 
