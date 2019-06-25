@@ -26,6 +26,9 @@ export abstract class EntityComponent extends VerifyFormSavedComponent{
   }
 
   public disableFormBasedOnPrivileges (form: FormGroup, entity : PermissibleEntity) {
+    if(entity.productUserPrivileges && entity.productUserPrivileges.length)
+      entity.userPrivileges = entity.userPrivileges.concat(entity.productUserPrivileges);
+      
     if ( this.noPermission(entity) || this.getPermissionService().hasOnlyPermission(entity, "COLLABORATOR") ) {
       form.disable();
 

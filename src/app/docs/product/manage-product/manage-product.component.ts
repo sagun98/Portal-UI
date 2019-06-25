@@ -146,7 +146,6 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   }
 
   public validateAPIUserRoles = (user : PortalUser) => {
-    debugger;
     return (user.roleMap.ADMIN || user.roleMap["API_DEVELOPER"]);
   }
 
@@ -159,7 +158,6 @@ export class ManageProductComponent extends EntityComponent implements OnInit{
   }
 
   public saveAPIFGPs (privileges : UserPrivilegeClass[]) {
-    console.log(privileges);
     this.productService.updateAPIUserPrivileges(this.product.id, privileges).subscribe(product => {
       this.toastrService.success('API User Privileges successfully updated');
       this.product = product;

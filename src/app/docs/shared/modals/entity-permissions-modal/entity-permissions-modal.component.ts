@@ -73,10 +73,10 @@ export class EntityPermissionsModalComponent implements OnInit {
 
     if(this.validateNewUser(user)) {
 
-      let permissions = (this.canCollaborate) ? ["COLLABORATOR"] : ["MODIFY"];
+      let permissions = (this.userPrivileges.length === 0) ? ["ADMIN"] : (this.canCollaborate) ? ["COLLABORATOR"] : ["MODIFY"];
 
-      if(this.userPrivileges.length === 0)
-        permissions.push("ADMIN");
+      // if(this.userPrivileges.length === 0)
+      //   permissions.push("ADMIN");
 
       this.userPrivileges.push(new UserPrivilegeClass(<Privilege> {
         username : user.username,

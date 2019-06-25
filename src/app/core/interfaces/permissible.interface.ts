@@ -1,5 +1,7 @@
 export interface PermissibleEntity {
     userPrivileges : Privilege[],
+    apiUserPrivileges? : Privilege[],
+    productUserPrivileges? : Privilege[],
     [propName: string] : any;
 }
 

@@ -11,6 +11,5 @@ export interface Product extends PermissibleEntity{
     description : string,
     overview? : string,
     apis : API[],
-    apiManagementTool? : ApiManagementTool,
-    apiUserPrivileges? : Privilege[]
+    apiManagementTool? : ApiManagementTool
 }

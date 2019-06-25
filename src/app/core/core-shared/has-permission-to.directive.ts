@@ -22,6 +22,9 @@ export class HasPermissionToDirective implements OnChanges {
   }
 
   public ngOnChanges () {
+    if(this.entity.productUserPrivileges && this.entity.productUserPrivileges.length)
+      this.entity.userPrivileges = this.entity.userPrivileges.concat(this.entity.productUserPrivileges);
+
     // this is a new entity with no FGRs, Let coarse grain win
     if((! this.entity.userPrivileges && (! this.entity.version && this.entity.version != 0))  || ( (! this.entity.version && this.entity.version != 0) && this.entity.userPrivileges && ! this.entity.userPrivileges.length ))
       return;
