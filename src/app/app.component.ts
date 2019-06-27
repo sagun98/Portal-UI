@@ -96,6 +96,13 @@ export class AppComponent implements OnInit {
 
       this.userService.$doUserLogin.subscribe(doLogin => {
         this.showLogin = doLogin;
+
+        if(this.mycloudService.env === "LOCAL"){
+          this.showLogin = false;
+          setTimeout(t => { this.showLogin = doLogin; })
+        } else {
+          window.location.href = this.mycloudService.myCloudLoginUrl
+        }
       });
 
       this.httpErrorsServices.$onError.subscribe( (errors: HttpErrorMessage[]) => {
@@ -111,7 +118,15 @@ export class AppComponent implements OnInit {
               this.userService.staticLogout();
               this.toastrService.error('Oops... It looks like your session timed out.  Please log back in to continue.');
               this.showLogin = false;
-              setTimeout(t => { this.showLogin = true; })
+              setTimeout(t => { 
+                
+                if(this.mycloudService.env === "LOCAL"){
+                 this.showLogin = true;
+                } else {
+                  window.location.href = this.mycloudService.myCloudLoginUrl
+                }
+
+              })
               this.loadingInterceptorService.closeOpenRequest();
             }
 
