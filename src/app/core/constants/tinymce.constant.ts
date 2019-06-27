@@ -24,6 +24,8 @@ import 'tinymce/plugins/code';
 import 'tinymce/plugins/imagetools';
 import 'tinymce/plugins/image';
 import 'tinymce/plugins/autosave';
+import 'tinymce/plugins/advlist';
+
 import { environment } from '../../../environments/environment';
 
 export const TINYCMCE_CONFIG = {
@@ -31,7 +33,7 @@ export const TINYCMCE_CONFIG = {
         return localStorage.getItem('pearson.devportal.authToken') || '';
       },
     skin_url: '/assets/skins/lightgray',
-    plugins: 'autosave colorpicker print preview image searchreplace autolink directionality link table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
+    plugins: 'autosave advlist colorpicker print preview image searchreplace autolink directionality link table code charmap hr anchor insertdatetime lists textcolor wordcount contextmenu colorpicker textpattern help',
     toolbar1: 'restoredraft insertfile undo redo | formatselect | bold italic strikethrough forecolor backcolor  colorpicker | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | image',
     automatic_uploads: true,
     images_upload_credentials: true,

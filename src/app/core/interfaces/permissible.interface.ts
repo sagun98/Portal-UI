@@ -10,4 +10,5 @@ export interface Privilege {
     email: string,
     permissions : string[],
     [propName: string] : any;
+    productPrivilege?: boolean;
 }

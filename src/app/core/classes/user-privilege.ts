@@ -11,6 +11,8 @@ export class UserPrivilegeClass {
 
     public email: string = '';
 
+    public productPrivilege: boolean = false;
+
     public privilegeMap : any = {
         ADMIN : false,
         MODIFY : false
@@ -24,6 +26,7 @@ export class UserPrivilegeClass {
         this.permissions = userPrivilege.permissions || [];
         this.collaborateOnly = userPrivilege.collaborateOnly || this.collaborateOnly;
         this.email = userPrivilege.email;
+        this.productPrivilege = userPrivilege.productPrivilege;
         this.setUniquePrivilege();
     }
 

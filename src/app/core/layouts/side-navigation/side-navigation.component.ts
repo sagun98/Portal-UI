@@ -39,6 +39,10 @@ export class SideNavigationComponent implements OnInit {
 
   ngOnInit() {
 
+    this.apis = this.sortEntities(this.apis);
+
+    this.products = this.sortEntities(this.products);
+
     this.apiService.$onApiListChanged.subscribe( (apiListChange : APIListChange) => {
       // Add to the list
       if(apiListChange.action === CRUD.CREATE){
@@ -85,6 +89,18 @@ export class SideNavigationComponent implements OnInit {
         });
       }
     })
+  }
+
+  private sortEntities (entity) : any {
+    entity = entity.sort( (a1 : API, a2 : API) => {
+      if(a1.name.toLowerCase() > a2.name.toLowerCase())
+        return 1;
+      if(a1.name.toLowerCase() < a2.name.toLowerCase())
+        return -1;
+      return 0;
+    });
+
+    return entity;
   }
 
   public requestAPI() {

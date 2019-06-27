@@ -77,7 +77,10 @@ export class ProductService {
   public getAPIPrivileges (id) : Observable<UserPrivilegeClass[]> {
     return <Observable<UserPrivilegeClass[]>> this.http.get(`${environment.restBase}/products/${id}/apiPrivileges`).pipe(
       map( (privileges : Privilege[]) => {
-        return privileges.map(p => { return  new UserPrivilegeClass(p); })
+        return privileges.map(p => { 
+          p.productPrivilege = true; 
+          return  new UserPrivilegeClass(p); 
+        })
       })
     );
   }
