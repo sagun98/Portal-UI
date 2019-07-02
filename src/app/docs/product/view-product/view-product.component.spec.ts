@@ -9,7 +9,7 @@ import { ViewProductComponent } from './view-product.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -126,8 +126,14 @@ describe('ViewProductComponent', () => {
     expect(component.activeApi).toBe(null);
   });
 
-  it('should set an api after requesting one by id', () => {
+  fit('should set an api after requesting one by id', fakeAsync(() => {
     component.getApiDefinition(1234, true);
+
+    fixture.detectChanges();
+
+    expect(component.activeApi).toBeNull();
+    
+    tick(1000);
 
     fixture.detectChanges();
 
@@ -136,7 +142,7 @@ describe('ViewProductComponent', () => {
     expect(component.activeApi.id).toEqual(mockApi.id);
 
     expect(component.activeApi.name).toEqual(mockApi.name);
-  });
+  }));
 
   it('should not show warning if all APIs are not unpublshed', () => {
     let newApi = Object.assign({}, mockApi);
