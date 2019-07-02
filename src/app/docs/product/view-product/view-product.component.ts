@@ -81,7 +81,10 @@ export class ViewProductComponent extends EntityComponent {
     }
 
     this.apiService.getApi(api.id).subscribe((activeApi: API) => {
-      this.activeApi = activeApi;
+      this.activeApi = null;
+      setTimeout(t=> {
+        this.activeApi = activeApi;
+      }, 500);
     });
   }
 
