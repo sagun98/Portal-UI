@@ -3,7 +3,7 @@
   <api-version-selector *ngIf="api.apiDetails && api.apiDetails.length && api.apiDetails.length > 1" [api]="api" (onSelectionChange)="getApiByVersion($event)"></api-version-selector>
 
 
-  <a class="btn btn-sm edit-page-btn" routerLink="edit" [hasPermission]="[permissions.API.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="api">
+  <a class="btn btn-sm edit-page-btn" [routerLink]="'/docs/api/' + api.slug + '/edit'" [hasPermission]="[permissions.API.UPDATE]" [hasPermissionTo]="[entityPermissions.MODIFY, entityPermissions.ADMIN]" [entity]="api">
     <clr-icon shape="pencil" class="is-solid"></clr-icon> Edit API
   </a>
 

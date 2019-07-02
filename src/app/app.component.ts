@@ -31,13 +31,15 @@ export class AppComponent implements OnInit {
   ){}
 
   ngOnInit(){
-
     this.userService.$loggedIn.subscribe(loggedIn => {
       if(loggedIn && ! this.userService.staticUser){
         this.userService.user.subscribe(user => { 
+          
         });
       }
-      else if(loggedIn == false && ! this.userService.staticUser && this.mycloudService.env != "LOCAL") {
+      else if(loggedIn == false && ! this.userService.staticUser && this.mycloudService.env != "LOCAL" ) {
+        this.loadingInterceptorService.addOpenRequest(1);
+        this.loadingInterceptorService.$onLoadingTextChange.next("Redirecting to Pearson Login Screen");
         window.location.href = this.mycloudService.myCloudLoginUrl;
       }
     });

@@ -15,6 +15,8 @@ export class LoadingInterceptorService {
   public $onRequest:  Subject<any> = new Subject<any>();
   public $onResponse: Subject<any> = new Subject<any>();
   public $onAllRequestsClosed: Subject<any> = new Subject<any>();
+  public $onLoadingTextChange: Subject<string> = new Subject<string>();
+
   private options: LoadingOptions = {
     startTimeout : 500,
     closeTimeout : 500

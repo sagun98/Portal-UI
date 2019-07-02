@@ -8,6 +8,19 @@
         z-index: 1101;
     }
 
+    #loading-text {
+        position: absolute;
+        z-index: 1101;
+        color: #3c5e7f;
+        font-size: 40px;
+        top: calc(50% + 20px);
+        left: calc(50%);
+        background-color: #ddd;
+        padding:20px;
+        border-radius: 5px;
+        display:none;
+    }
+
     #loading-indicator {
         position: fixed;
         top: 0px;
