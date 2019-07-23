@@ -32,7 +32,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DocumentationSideNavigationComponent,
     DocumentationLandingPageComponent,
     ViewDocumentComponent,
-    DocumentationAreaComponent,
+    DocumentationAreaComponent
   ],
 
   exports : [

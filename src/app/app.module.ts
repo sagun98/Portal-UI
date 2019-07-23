@@ -14,32 +14,33 @@ import { ErrorInterceptorInterceptor } from './core/interceptors/errors.intercep
 import { AuthTokenInterceptorProivder } from './core/interceptors/auth.interceptor';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleGlobalSiteTagOverride } from './shared/angulartics-2-google-global-site-tag-override.service';
+import { ApigeeTargetServersComponent } from './apigee-target-servers/apigee-target-servers.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    CommonModule,
-    ClarityModule,
-    FormsModule,
-    ToastrModule.forRoot(),
-    DevPortalCoreModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride]),
-  ],
-  
-  providers : [
-    LoadingInterceptorProvider,
-    ErrorInterceptorInterceptor,
-    AuthTokenInterceptorProivder,
-    ToastrService
-  ],
-  
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      ApigeeTargetServersComponent
+   ],
+   imports: [
+      AppRoutingModule,
+      BrowserModule,
+      CommonModule,
+      ClarityModule,
+      FormsModule,
+      ToastrModule.forRoot(),
+      DevPortalCoreModule,
+      HttpClientModule,
+      BrowserAnimationsModule,
+      Angulartics2Module.forRoot([Angulartics2GoogleGlobalSiteTagOverride])
+   ],
+   providers: [
+      LoadingInterceptorProvider,
+      ErrorInterceptorInterceptor,
+      AuthTokenInterceptorProivder,
+      ToastrService
+   ],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }

@@ -1,0 +1,66 @@
+<div class="container">
+  <div>
+    <form>
+      <section class="form-block">
+        <label><h3>APIGEE Target Servers</h3></label>
+        <div class="form-group">
+          <label>APIGEE Organization</label>
+          <div class="radio-inline">
+            <input
+              type="radio"
+              name="organization"
+              id="pearson-nonprod"
+              (change)="onOrgChange('pearson-nonprod')"
+            />
+            <label for="pearson-nonprod">Pearson NonProd</label>
+          </div>
+          <div class="radio-inline">
+            <input
+              type="radio"
+              name="organization"
+              id="pearson-prod"
+              (change)="onOrgChange('pearson-prod')"
+            />
+            <label for="pearson-prod">Pearson Prod</label>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-block" *ngIf="apigeeEnvironments">
+        <div class="form-group" >
+          <label>API environments</label>
+          <div class="radio-inline" *ngFor="let env of apigeeEnvironments">
+            <input
+              name="apigeeEnvironments"
+              type="radio"
+              (change)="onItemChange(env)" 
+              id="{{ env }}"
+            />
+            <label for="{{ env }}"> {{ env }}</label>
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <input *ngIf="apigeeEnvironments" id="targetServer-search" [(ngModel)]="targetServerSearch" (input)="searchText()" placeholder="Search target servers" type="text" style="width:100%;" />
+
+    <table class="table table-compact" *ngIf="apigeeTargetServers.length > 0">
+      <thead>
+        <tr>
+          <th class="left">Name</th>
+          <th class="left">Host</th>
+          <th class="left">Port</th>
+          <th class="left">Enabled</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let targetServer of apigeeTargetServers">
+          <td class="left">{{ targetServer.name }}</td>
+          <td class="left">{{ targetServer.host }}</td>
+          <td class="left">{{ targetServer.port }}</td>
+          <td class="left"><clr-icon class="is-success" [hidden]="!targetServer.isEnabled" shape="check"></clr-icon><clr-icon class="is-error" [hidden]="targetServer.isEnabled" shape="times"></clr-icon></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
