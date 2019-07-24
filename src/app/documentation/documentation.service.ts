@@ -216,7 +216,7 @@ export class DocumentationService {
   }
 
   // APIGEE getEnvironments based on Org
-  public getApigeeEnvironments (org: string) : Observable<ApigeeTargetServers> {
-    return <Observable<ApigeeTargetServers>> this.http.get(`${environment.restBase}/apigee/${org}/environments`);
+  public getApigeeEnvironments (org: string) : Observable<string[]> {
+    return <Observable<string[]>> this.http.get(`${environment.restBase}/apigee/${org}/environments`);
   }
 }

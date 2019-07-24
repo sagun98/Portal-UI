@@ -1,8 +1,11 @@
 <div class="container">
+
+  <h3>APIGEE Target Servers</h3>
+
   <div>
     <form>
       <section class="form-block">
-        <label><h3>APIGEE Target Servers</h3></label>
+        <!-- <label><h3></h3></label> -->
         <div class="form-group">
           <label>APIGEE Organization</label>
           <div class="radio-inline">
@@ -26,7 +29,7 @@
         </div>
       </section>
 
-      <section class="form-block" *ngIf="apigeeEnvironments">
+      <section class="form-block bottom-spacer-20" *ngIf="apigeeEnvironments.length">
         <div class="form-group" >
           <label>API environments</label>
           <div class="radio-inline" *ngFor="let env of apigeeEnvironments">
@@ -34,15 +37,15 @@
               name="apigeeEnvironments"
               type="radio"
               (change)="onItemChange(env)" 
-              id="{{ env }}"
+              [id]="env"
             />
-            <label for="{{ env }}"> {{ env }}</label>
+            <label [for]="env"> {{ env }}</label>
           </div>
         </div>
       </section>
     </form>
 
-    <input *ngIf="apigeeEnvironments" id="targetServer-search" [(ngModel)]="targetServerSearch" (input)="searchText()" placeholder="Search target servers" type="text" style="width:100%;" />
+    <input *ngIf="environment.length" id="targetServer-search" [(ngModel)]="targetServerSearch" placeholder="Search target servers" type="text" style="width:100%;" />
 
     <table class="table table-compact" *ngIf="apigeeTargetServers.length > 0">
       <thead>
@@ -54,7 +57,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let targetServer of apigeeTargetServers">
+        <tr *ngFor="let targetServer of filteredTargetServerList">
           <td class="left">{{ targetServer.name }}</td>
           <td class="left">{{ targetServer.host }}</td>
           <td class="left">{{ targetServer.port }}</td>
