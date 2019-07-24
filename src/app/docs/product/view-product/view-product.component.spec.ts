@@ -126,7 +126,7 @@ describe('ViewProductComponent', () => {
     expect(component.activeApi).toBe(null);
   });
 
-  fit('should set an api after requesting one by id', fakeAsync(() => {
+  it('should set an api after requesting one by id', fakeAsync(() => {
     component.getApiDefinition(1234, true);
 
     fixture.detectChanges();
