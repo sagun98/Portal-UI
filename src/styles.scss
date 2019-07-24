@@ -43,6 +43,16 @@ form .form-block>label.error {
         top: auto !important;
     }
 
+    > div > div > .tooltip-content {
+        background-color:#c92100;
+        visibility: visible;
+        opacity: 1;
+        top: auto !important;
+        padding: .375rem .5rem;
+        border-radius: .125rem;
+        color:white;
+    }
+
     &.editor > .tooltip-content {
         background-color:#c92100;
         visibility: visible;

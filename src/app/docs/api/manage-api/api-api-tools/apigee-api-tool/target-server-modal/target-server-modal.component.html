@@ -1,0 +1,46 @@
+<clr-modal [(clrModalOpen)]="opened" [clrModalClosable]="false">
+  <h3 class="modal-title bottom-spacer-20">Add Target Server</h3>
+  <div class="modal-body" (ngSubmit)="handleSubmit()">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="name" class="required">Target Server Host:</label>
+        <label>
+          <input type="text" name="name" id="target-server-name" formControlName="host" placeholder="Enter Target Server Host"/>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="port" class="required">Target Server Port:</label>
+        <label>
+          <select name="port" id="target-server-port" formControlName="port">
+            <option [value]="null">Select A Port</option>
+            <option value="443">443</option>
+            <option value="80">80</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="required">Target Server Enabled?</label>
+        <label>
+          <!-- <div class="toggle-switch"> -->
+            <input type="checkbox" name="isEnabled" formControlName="isEnabled"/>
+            <!-- <label for="isEnabled"></label> -->
+          <!-- </div> -->
+        </label>
+      </div>
+
+      <input type="submit" style="display: none;"/>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-success-outline" [disabled]="form.invalid" (click)="handleSubmit()">
+      <clr-icon shape="success-standard" size="25"></clr-icon> Add Target Server
+    </button>
+
+    <button class="btn btn-danger-outline" (click)="handleCancel()">
+      <clr-icon shape="times" size="25"></clr-icon> Cancel
+    </button>
+  </div>
+</clr-modal>

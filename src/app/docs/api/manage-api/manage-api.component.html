@@ -156,10 +156,6 @@
           </div>
         </label>
       </div>
-      
-      
-      <api-api-tools [api]="api" [submitted]="submitted" [form]="form">
-      </api-api-tools>
 
       <div class="form-group">
         <label for="productName" class="required">Description</label>
@@ -169,6 +165,9 @@
             <span *ngIf="form.get('description').errors && form.get('description').errors.required && (submitted || form.get('description').dirty)" class="tooltip-content">This field cannot be empty!</span>
         </label>
       </div>
+
+      <api-api-tools [api]="api" [submitted]="submitted" [form]="form">
+      </api-api-tools>
 
       <div class="bottom-spacer-30">
         <label for="overview">Overview:</label>

@@ -1,4 +1,7 @@
 <form [formGroup]="form">
+
+  <hr style="margin-bottom: 20px"/>
+
   <div class="form-group">
     <label for="productName" class="required">Apigee Org</label>
     <label [className]=" ( form.get('org').invalid && ( submitted || form.get('org').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
@@ -8,14 +11,162 @@
     </label>
   </div>
 
-  <ng-container *ngIf="form.get('org').value !== 'none'">
+  <ng-container *ngIf="form.get('org').value !== 'none' && form.get('org').value !== ''">
+
     <div class="form-group">
-      <label for="productName" class="required">Apigee API</label>
+      <label for="productName" class="required">Existing Apigee Proxy</label>
+      <label>
+       <input type="checkbox" [(ngModel)]="isExistingProxy"  [ngModelOptions]="{standalone : true}" (change)="handleExistingProxyChange($event)"/>
+      </label>
+    </div>
+
+    <div class="form-group" *ngIf="isExistingProxy">
+      <label for="id" class="required">Apigee Proxy</label>
       <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
         <select name="id" formControlName="id">
           <option *ngFor="let api of apis;let index = index" [value]="index == 0 ? '' : api">{{ api }}</option>
         </select>
       </label>
     </div>
+
+    <div class="form-group" *ngIf="! isExistingProxy">
+      <label for="productName" class="required">Apigee Proxy</label>
+      <label [className]=" ( form.get('id').invalid && ( submitted ) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+          <input id="id" type="text" name="id" placeholder="Enter Proxy Name" formControlName="id" maxlength="30"/>
+          <span *ngIf="form.get('id').errors && form.get('id').errors.required && (submitted || form.get('id').dirty)" class="tooltip-content">This field cannot be empty!</span>
+          <span *ngIf="form.get('id').errors && form.get('id').errors.minlength && (submitted)" class="tooltip-content">This field needs to contain at least 5 characters!</span>
+          <span *ngIf="form.get('id').errors && form.get('id').errors.maxlength && (submitted || form.get('id').dirty)" class="tooltip-content">This field cannot exceed 30 characters!</span>
+      </label>
+    </div>
+
+    <!-- <div class="form-group" *ngIf="api.revision && isExistingProxy && form.get('id').value.length">
+      <label for="revision" class="required">Proxy Revision</label>
+      <label [className]=" ( form.get('revision').invalid && ( submitted || form.get('revision').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+        <select name="revision" formControlName="revision">
+          <option *ngFor="let revision of revision;let index = index" [value]="index == 0 ? '' : api">{{ revision }}</option>
+        </select>
+      </label>
+    </div> -->
+
+    <ng-container *ngIf="(! api.revision && ! isExistingProxy) && form.get('id').value.length">
+      <div class="form-group bottom-spacer-20">
+        <label for="targetServers" class="required">Target Servers</label>
+        <label>
+            <div formArrayName="targetServers" *ngFor="let targetServer of form.get('targetServers').controls; let i = index;">
+              <div [formGroupName]="i" class="inline-row bottom-spacer-10 target-servers-row">
+
+                <div class="inline-col">
+                  <clr-icon title="Target Server in use" shape="success-standard" size="30" class="is-success mr10 target-server-in-use" *ngIf="targetServer.readonly"></clr-icon>
+                  <clr-icon title="Target Server not in use" shape="minus-circle" size="30" class="mr10 target-server-not-in-use" *ngIf="! targetServer.readonly && targetServer.valid"></clr-icon>
+                  <input class="targetServerName" formControlName="name" placeholder="Enter Label">
+                  <div *ngIf="targetServer.controls.name.errors && targetServer.controls.name.errors.duplicate" class="error-text">Target Server with this label already exists</div>
+                  <div *ngIf="targetServer.controls.name.errors && targetServer.controls.name.errors.required && (targetServer.controls.name.dirty || form.root.submitted)" class="error-text">Label cannot be empty</div>
+                </div>
+
+                <div class="inline-col ml10 target-server-col" >
+                  <ng-select class="target-server-dropdown" placeholder="Select A Target Server" (dblclick)="createNewTargetServer(null, targetServer)" [items]="targetServers"  bindLabel="host" (add)="createNewTargetServer($event, targetServer)" [addTag]="true" formControlName="targetServer"></ng-select>
+                  <div *ngIf="targetServer.controls.targetServer.errors && targetServer.controls.targetServer.errors.duplicate" class="error-text">Target Server already exists</div>
+                  <div *ngIf="targetServer.controls.targetServer.errors && targetServer.controls.targetServer.errors.required && (targetServer.controls.targetServer.dirty || form.root.submitted)" class="error-text">Target Server cannot be empty</div>
+                </div>    
+  
+                <div class="inline-col ml10 target-server-path-col">
+                  <input formControlName="targetServerPath" placeholder="Enter Target Server Path">
+                  <div *ngIf="targetServer.controls.targetServerPath.errors && targetServer.controls.targetServerPath.errors.pattern" class="error-text">Path must being with a forward slash</div>
+                  <div *ngIf="targetServer.controls.targetServerPath.errors && targetServer.controls.targetServerPath.errors.minlength" class="error-text">Path must contain at least {{ targetServer.controls.targetServerPath.errors.minlength.requiredLength }} characters</div>
+                </div>
+
+                <div class="inline-col ml10">
+                  <button title="Remove Target Server" class="btn btn-sm btn-danger-outline" (click)="removeTargetServer(i)" *ngIf="(targetServersFormArray.controls.length > 1 && ! targetServer.readonly)"><clr-icon class="icon-btn" shape="trash" size="20"></clr-icon></button>
+                  <button title="Add Target Server" class="btn btn-sm btn-primary-outline ml10" (click)="addTargetServer()" *ngIf="targetServer.valid && i === (targetServersFormArray.controls.length - 1)"><clr-icon class="icon-btn" shape="plus"  size="20" id="add-targetserver"></clr-icon></button>
+                </div>      
+              
+              </div>            
+            </div>
+
+            <target-server-modal
+              *ngIf="newTargetServerModalOpened"
+              [(opened)]="newTargetServerModalOpened"
+              [targetServer]="newTargetServer"
+              (onSave)="addNewTargetServer($event)"
+              (onCancel)="removeNewTargetServer($event)"
+            >
+
+            </target-server-modal>
+
+          </label>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="(! api.revision && ! isExistingProxy) && form.get('id').value.length">
+      <div class="form-group">
+        <label for="basepaths" class="required">Proxy Endpoints</label>
+        <label>
+            <div formArrayName="basePaths" *ngFor="let basePath of form.get('basePaths').controls; let i = index;">
+              <div [formGroupName]="i" class="inline-row bottom-spacer-10">
+
+                <div class="inline-col">
+                  <clr-icon title="Proxy Endpint Configured" shape="success-standard" size="30" class="is-success mr10 target-server-in-use" *ngIf="basePath.valid"></clr-icon>
+                  <input class="pathname" formControlName="name" placeholder="Enter Endpoint Label">
+                  <div *ngIf="basePath.controls.name.errors && basePath.controls.name.errors.duplicate" class="error-text">Label Already Exists</div>
+                  <div *ngIf="basePath.controls.name.errors && basePath.controls.name.errors.required && (basePath.controls.name.dirty || form.root.submitted)" class="error-text">Name cannot be empty</div>
+                </div>
+
+                <div class="inline-col ml10">
+                  <input  formControlName="path" placeholder="Enter Path">
+                  <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.duplicate" class="error-text">Path Already Exists</div>
+                  <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.pattern" class="error-text">Path must being with a forward slash</div>
+                  <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.required && (basePath.controls.path.dirty || form.root.submitted)" class="error-text">Path cannot be empty</div>
+                </div>
+
+                <div class="inline-col ml10 target-server-col" >
+                  <ng-select class="target-server-dropdown" placeholder="Select A Target Server" [items]="targetServersFormArray.controls" [searchFn]="customSearchFn"  bindLabel="name" [addTag]="false" (clear)="disableSelectedTargetServer($event)" (change)="disableSelectedTargetServer($event)" formControlName="targetServer">
+                    <ng-template ng-label-tmp let-item="item">
+                        {{item?.controls?.name?.value}}
+                    </ng-template>
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="item.controls.targetServer.value">
+                        {{item?.controls?.targetServer?.value.host}} 
+                    </ng-template>
+                  </ng-select>
+                  <div *ngIf="basePath.controls.targetServer.errors && basePath.controls.targetServer.errors.required && (basePath.controls.targetServer.dirty || form.root.submitted)" class="error-text">Target Server cannot be empty</div>
+                </div>
+
+                <div class="inline-col ml10">
+                  <button title="Remove Endpoint" class="btn btn-sm btn-danger-outline" (click)="removeBasePath(i)" *ngIf="basePaths.controls.length > 1"><clr-icon shape="trash" size="20" ></clr-icon></button>
+                  <button title="View Endpoint Details" class="btn btn-sm btn-primary-outline ml10" (click)="basePath.showModal = true;" *ngIf="basePath.valid"><clr-icon  shape="info-circle" size="20" ></clr-icon></button>
+                  <button title="Add Endpoint" class="btn btn-sm btn-primary-outline ml10" (click)="addBasePath()" *ngIf="(i === (basePaths.controls.length - 1)) && basePaths.valid"><clr-icon shape="plus"  size="20" id="add-basepath"></clr-icon></button>
+
+                  <clr-modal [(clrModalOpen)]="basePath.showModal" [clrModalSize]="'lg'">
+                      <h3 class="modal-title bottom-spacer-20">Endpoint Details</h3>
+                      <div class="modal-body">
+                          <b>http<span *ngIf="defaultVirtualHost.port === 443">s</span>://{{ defaultVirtualHost.hostAliases }}{{ basePath.controls.path.value }} -> http<span *ngIf="basePath?.controls?.targetServer?.value?.controls?.targetServer?.value?.port === 443">s</span>://{{ basePath?.controls?.targetServer?.value?.controls?.targetServer?.value?.host }}{{ basePath?.controls?.targetServer?.value?.controls?.targetServerPath?.value }}</b>
+                      </div>
+                  </clr-modal>
+
+                </div>                
+              </div>            
+            </div>
+        </label>
+      </div>
+    </ng-container>
+    
+
+    <!-- <ng-container *ngIf="form.get('org').value !== 'none' && form.get('org').value !== ''">
+      <div class="form-group">
+        <label for="productName" class="required">Apigee Environment</label>
+        <label [className]=" ( form.get('environment').invalid && ( submitted || form.get('environment').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
+          <select name="environment" formControlName="environment">
+            <option *ngFor="let environment of environments;let index = index" [value]="index == 0 ? '' : environment.name">{{ environment.name }}</option>
+          </select>
+        </label>
+      </div>
+    </ng-container> -->
+
+    <button class="btn btn-primary" (click)="submitProxy()">
+      <clr-icon shape="plus"></clr-icon> Test
+    </button>
+
   </ng-container>
+
+  <hr style="margin-bottom: 20px"/>
+
 </form>

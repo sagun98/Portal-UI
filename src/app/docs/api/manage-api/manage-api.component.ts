@@ -305,6 +305,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
   private preSave () : Observable<any> {
     return new Observable(observer => {
       this.submitted = true;
+      this.form['submitted'] = true;
 
       const apiData = this.form.getRawValue();
         

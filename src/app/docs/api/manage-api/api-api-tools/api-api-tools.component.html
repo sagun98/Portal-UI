@@ -8,6 +8,6 @@
     </label>
   </div> 
 
-  <apigee-api-tool *ngIf="API_MANAGEMENT_TOOLS.APIGEE === API_MANAGEMENT_TOOLS[form.get('name').value]" [form]="form" [submitted]="submitted" [apigeeTool]="apiTool"></apigee-api-tool>
+  <apigee-api-tool *ngIf="API_MANAGEMENT_TOOLS.APIGEE === API_MANAGEMENT_TOOLS[form.get('name').value]" [form]="form" [submitted]="submitted" [apigeeTool]="apiTool" [api]="api"></apigee-api-tool>
 
 </form>

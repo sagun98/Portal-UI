@@ -1,0 +1,59 @@
+:host {
+  
+    .icon-btn {
+        cursor: pointer;
+    }
+
+    input[readonly] {
+        cursor: not-allowed;
+        background-color: #f0f0f0;
+    }
+
+    .form-group {
+        label {
+            input[type=text] {
+                min-width: 10rem;
+            }
+            .error-text {
+                color: red;
+                margin-left : 10px;
+            }
+        }
+
+        .inline-row {
+            .target-server-in-use {
+                position: absolute;
+                margin-left: -40px;
+            }
+
+            .target-server-not-in-use {
+                position: absolute;
+                margin-left: -40px;
+            }
+
+
+            .btn.btn-sm {
+                min-width: 1.5rem;
+                margin: 0rem;
+                min-height: 1.25rem;
+                padding: 0px;
+            }
+
+            .inline-col {
+                display: inline-block;
+                vertical-align: top;
+            }
+            .target-server-col {
+                width: 300px;
+                .target-server-dropdown {
+                    margin-top:-5px;
+                }
+            }
+            .target-server-path-col {
+                input{
+                    min-width: 7rem;
+                }
+            }
+        }
+    }
+}
