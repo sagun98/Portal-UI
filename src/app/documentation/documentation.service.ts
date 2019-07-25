@@ -12,6 +12,7 @@ import { Subject, BehaviorSubject } from 'rxjs';
 import { Privilege } from '../core/interfaces/permissible.interface';
 import { UserPrivilegeClass } from '../core/classes/user-privilege';
 import { DOCUMENTATION_LANDING_PAGE_LABEL } from '../core/constants/documentation.constants';
+import { ApigeeTargetServers } from '../core/interfaces/apigee-target-server.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -206,5 +207,16 @@ export class DocumentationService {
 
   public reorderDocumentation() {
     return this.http.post(`${environment.restBase}/documentation-area/setSortState`, {});
+  }
+
+
+  // APIGEE integration for getting all the target servers
+  public getApigeeTargetServers (org: string, env: string) : Observable<ApigeeTargetServers[]> {
+    return <Observable<ApigeeTargetServers[]>> this.http.get(`${environment.restBase}/apigee/${org}/environments/${env}/targetservers?detail=true`);
+  }
+
+  // APIGEE getEnvironments based on Org
+  public getApigeeEnvironments (org: string) : Observable<string[]> {
+    return <Observable<string[]>> this.http.get(`${environment.restBase}/apigee/${org}/environments`);
   }
 }

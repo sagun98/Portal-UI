@@ -2,7 +2,8 @@ import { ApiManagementTool } from './api-management-tool.interface';
 
 export interface ApigeeManagementTool extends ApiManagementTool {
     duration: number,
-    org: string
+    org: string,
+    env: string
 }
 
-export const DefaultApigeeManagementTool = <ApigeeManagementTool> {name : null, id : '', duration : -1, org : ''};
+export const DefaultApigeeManagementTool = <ApigeeManagementTool> {name : null, id : '', duration : -1, org : '', env: ''};

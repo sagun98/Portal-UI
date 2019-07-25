@@ -15,7 +15,6 @@ export const DocumentationRoutes: Routes = [
         ]
     }
 ]
-
 @NgModule({
     imports: [
         RouterModule.forChild(DocumentationRoutes)
