@@ -130,7 +130,7 @@ describe('ManageApiComponent', () => {
   it('should set submitted to true on save', () => {
     component.saveApi();
 
-    expect(component.submitted).toBeTruthy();
+    expect(component.form['submitted']).toBeTruthy();
   });
 
   it('should set the form to invalid', () => {

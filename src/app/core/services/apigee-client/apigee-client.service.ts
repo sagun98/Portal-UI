@@ -67,4 +67,26 @@ export class MockApigeeClientService extends ApigeeClientService {
   public getApigeeApis(org: String) : Observable<string[]> {
     return <Observable<string[]>> of(['Proxy 1', 'Proxy 2', 'Proxy 3']);
   }
+
+  public getTargetServers(org : string, _environment : string) : Observable<ApigeeTargetServer[]> {
+    return  <Observable<ApigeeTargetServer[]>> of([
+      {host : 'host1', enabled : true, name : 'name1', port : 443},
+      {host : 'host2', enabled : true, name : 'name2', port : 443},
+      {host : 'host3', enabled : true, name : 'name3', port : 443},
+      {host : 'host4', enabled : true, name : 'name4', port : 443},
+      {host : 'host5', enabled : false, name : 'name5', port : 80}
+    ]);
+  }
+
+  public getVirtualHots(org : string, _environment : string) : Observable<ApigeeVirtualHost[]> {
+    return  <Observable<ApigeeVirtualHost[]>> of([{
+      hostAliases : [],
+      interfaces : [],
+      listenOptions : [],
+      name : 'name',
+      port : 443,
+      properties : {},
+      sSLInfo : null
+    }]);
+  }
 }

@@ -345,7 +345,7 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       apiData.apiManagementTool = this.formatApigeeProxyData();
 
       let saveApigee = new Observable(saveApigeeObserver => {      
-        if(apiData.apiManagementTool.targetServers && apiData.apiManagementTool.targetServers.length && apiData.apiManagementTool.targetServers[0].targetServer) {
+        if(apiData.apiManagementTool && apiData.apiManagementTool.targetServers && apiData.apiManagementTool.targetServers.length && apiData.apiManagementTool.targetServers[0].targetServer) {
           this.loadingInterceptorService.$onLoadingTextChange.next("Creating APIGEE Proxy");
           this.apigeeClient.createProxy(apiData.apiManagementTool).subscribe(
             proxy => {

@@ -7,6 +7,8 @@ import { async, TestBed } from '@angular/core/testing';
 import {ApigeeApiToolComponent} from './apigee-api-tool.component';
 import {ApigeeClientService, MockApigeeClientService} from '../../../../../core/services/apigee-client/apigee-client.service';
 import { ApigeeApiTool } from '../../../../../core/interfaces/apigee-api-tool.interface';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       
 describe('ApigeeApiToolComponent', () => {
   let fixture;
@@ -17,6 +19,7 @@ describe('ApigeeApiToolComponent', () => {
       imports : [
         FormsModule,
         ReactiveFormsModule,
+        NgSelectModule,
         HttpClientModule
       ],
       declarations: [
@@ -25,7 +28,8 @@ describe('ApigeeApiToolComponent', () => {
       providers: [
         HttpClient,
         {provide: ApigeeClientService, useClass: MockApigeeClientService, deps : [HttpClient]},
-      ]
+      ],
+      schemas : [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
     fixture = TestBed.createComponent(ApigeeApiToolComponent);
     component = fixture.debugElement.componentInstance;
@@ -56,6 +60,6 @@ describe('ApigeeApiToolComponent', () => {
   }));
         
   it('should run #buildForm()', async(() => {
-    expect( Object.keys( component.form.controls ).length ).toEqual(3);
+    expect( Object.keys( component.form.controls ).length ).toEqual(6);
   }));        
 });
