@@ -2,40 +2,21 @@
 
   <hr style="margin-bottom: 20px"/>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="productName" class="required">Apigee Org</label>
     <label [className]=" ( form.get('org').invalid && ( submitted || form.get('org').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
       <select name="org" formControlName="org">
         <option *ngFor="let org of orgs;let index = index;" [value]="index == 0 ? '' : org">{{ org | uppercase }}</option>
       </select>
     </label>
-  </div>
+  </div> -->
 
   <ng-container *ngIf="form.get('org').value !== 'none' && form.get('org').value !== ''">
 
     <div class="form-group">
-      <label for="productName" class="required">Existing Apigee Proxy</label>
-      <label>
-       <input type="checkbox" [(ngModel)]="isExistingProxy"  [ngModelOptions]="{standalone : true}" (change)="handleExistingProxyChange($event)"/>
-      </label>
-    </div>
-
-    <div class="form-group" *ngIf="isExistingProxy">
       <label for="id" class="required">Apigee Proxy</label>
       <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
-        <select name="id" formControlName="id">
-          <option *ngFor="let api of apis;let index = index" [value]="index == 0 ? '' : api">{{ api }}</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="form-group" *ngIf="! isExistingProxy">
-      <label for="productName" class="required">Apigee Proxy</label>
-      <label [className]=" ( form.get('id').invalid && ( submitted ) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
-          <input id="id" type="text" name="id" placeholder="Enter Proxy Name" formControlName="id" maxlength="30"/>
-          <span *ngIf="form.get('id').errors && form.get('id').errors.required && (submitted || form.get('id').dirty)" class="tooltip-content">This field cannot be empty!</span>
-          <span *ngIf="form.get('id').errors && form.get('id').errors.minlength && (submitted)" class="tooltip-content">This field needs to contain at least 5 characters!</span>
-          <span *ngIf="form.get('id').errors && form.get('id').errors.maxlength && (submitted || form.get('id').dirty)" class="tooltip-content">This field cannot exceed 30 characters!</span>
+        <ng-select id="id" placeholder="Select A Proxy" [items]="apis" [addTag]="true" formControlName="id"></ng-select>
       </label>
     </div>
 
@@ -48,7 +29,7 @@
       </label>
     </div> -->
 
-    <ng-container *ngIf="(! api.revision && ! isExistingProxy) && form.get('id').value.length">
+    <ng-container *ngIf="! isExistingProxy && form.get('id').value">
       <div class="form-group bottom-spacer-20">
         <label for="targetServers" class="required">Target Servers</label>
         <label>
@@ -97,7 +78,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="(! api.revision && ! isExistingProxy) && form.get('id').value.length">
+    <ng-container *ngIf="! isExistingProxy && form.get('id').value">
       <div class="form-group">
         <label for="basepaths" class="required">Proxy Endpoints</label>
         <label>
@@ -160,10 +141,6 @@
         </label>
       </div>
     </ng-container> -->
-
-    <button class="btn btn-primary" (click)="submitProxy()">
-      <clr-icon shape="plus"></clr-icon> Test
-    </button>
 
   </ng-container>
 

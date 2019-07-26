@@ -2,7 +2,7 @@
   <span class="spinner spinner-lg" [@fadeInOut]="activeRequestClass">
   </span>
 
-  <div [@fadeInOut]="activeRequestClass" id="loading-text">{{ loadingMessage }}</div>
+  <div [@fadeInOut]="activeRequestClass" *ngIf="loadingMessage && loadingMessage.length" id="loading-text">{{ loadingMessage }}</div>
 
   <div id="loading-indicator" [@fadeInOut]="activeRequestClass">
     

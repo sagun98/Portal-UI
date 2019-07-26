@@ -1,13 +1,14 @@
 <form [formGroup]="form">
   <div class="form-group">
-    <label for="productName" class="required">API Management Platform</label>
-    <label [className]=" ( form.get('name').invalid && ( submitted || form.get('name').dirty) ) ? errorClasses + ' tooltip-bottom-right' : '' ">
-      <select name="name" formControlName="name">
-        <option *ngFor="let option of apiManagementTools" [value]="option.value">{{ option.label }}</option>
-      </select>
+    <label for="api-management-platform" class="required">API Management Platform</label>
+    <label>
+      <div class="toggle-switch">
+        <input type="checkbox" id="api-management-platform" formControlName="name">
+        <label for="api-management-platform"></label>
+      </div>
     </label>
   </div> 
 
-  <apigee-api-tool *ngIf="API_MANAGEMENT_TOOLS.APIGEE === API_MANAGEMENT_TOOLS[form.get('name').value]" [form]="form" [submitted]="submitted" [apigeeTool]="apiTool" [api]="api"></apigee-api-tool>
+  <apigee-api-tool *ngIf="form.controls.name.value" [form]="form" [submitted]="submitted" [apigeeTool]="apiTool" [api]="api"></apigee-api-tool>
 
 </form>

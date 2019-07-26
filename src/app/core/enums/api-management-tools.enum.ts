@@ -1,5 +1,5 @@
 export enum API_MANAGEMENT_TOOLS {
-    APIGEE  = 'Apigee',
+    APIGEE  = 'APIGEE',
     // AWSGATEWAY = 'AWSGATEWAY',
     // KONG = 'KONG'
 }

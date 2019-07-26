@@ -6,4 +6,4 @@ export interface ApigeeApiTool extends ApiManagementTool {
    revision: number;
 }
 
-export const DefaultApigeeApiTool = <ApigeeApiTool> {name : null, id : '', environment : '', org : ''};
+export const DefaultApigeeApiTool = <ApigeeApiTool> {name : null, id : null, environment : '', org : ''};

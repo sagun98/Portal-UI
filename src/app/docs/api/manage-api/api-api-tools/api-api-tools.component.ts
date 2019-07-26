@@ -48,11 +48,21 @@ export class ApiApiToolsComponent implements OnInit {
 
   private handleNameChange () : void {
     this.form.get('name').valueChanges.subscribe(name => {
-      if( isNull( name ) || name == 'null')
+      if( isNull( name ) || ! name ) {
         this.parentForm.removeControl('apiManagementTool');
+        this.form.get('name').setValue(null, {
+          selfOnly : true,
+          emitEvent : false
+        });
+      }
       
-      else
+      else {
         this.parentForm.addControl('apiManagementTool', this.form);
+        this.form.controls.name.setValue(API_MANAGEMENT_TOOLS.APIGEE, {
+          selfOnly : true,
+          emitEvent : false
+        });
+      }
     });
   }
 

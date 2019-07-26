@@ -1,3 +1,5 @@
+import { LoadingInterceptorService } from './../../../core/loading-interceptor/loading-interceptor.service';
+import { ApigeeClientService } from './../../../core/services/apigee-client/apigee-client.service';
 import { APIDetail } from './../../../core/interfaces/api-detail.interface';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +21,7 @@ import { SideNavigationService } from '../../../core/layouts/side-navigation/sid
 import { environment } from '../../../../environments/environment';
 import { ApiService } from '../../../core/services/api-service/api.service';
 import { API } from '../../../core/interfaces/api.interface';
+import { DevPortalProxy } from 'src/app/core/interfaces/dev-portal-proxy.interface';
 
 // TODO: possibly export this and move to another file
 enum SWAGGER_UPLOAD_OPTION {
@@ -60,7 +63,9 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     private toastrService: ToastrService,
     protected permissionService: PermissionsService,
     protected sideNavigationService: SideNavigationService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private loadingInterceptorService: LoadingInterceptorService,
+    private apigeeClient : ApigeeClientService
   ) {
     super();
   }
@@ -177,6 +182,10 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
   public saveApi () {
     this.preSave().subscribe(apiData => {
+
+      if(! apiData)
+        return;
+
       this.manageApiService.getSwaggerVersion(apiData.file, apiData.swaggerUrl).subscribe(version => {
         if (version === 2){
           this.showSwaggerVersion2Message = true;
@@ -302,6 +311,24 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
     return this.permissionService;
   }
 
+  private formatApigeeProxyData () : DevPortalProxy {
+    if(! this.form.controls.apiManagementTool)
+      return null;
+    let proxyFormGroup: FormGroup = this.form.controls.apiManagementTool as FormGroup;
+    let proxyObject: DevPortalProxy = proxyFormGroup.getRawValue();
+    let basePaths = Object.assign({}, proxyFormGroup.controls.basePaths);
+
+    proxyObject.basePaths = basePaths.value.map(fc => { 
+      return {
+        name : fc.name,
+        path : fc.path,
+        targetServer : (fc.targetServer) ? fc.targetServer.value : ''
+      };
+    });
+
+    return proxyObject as DevPortalProxy;
+  }
+
   private preSave () : Observable<any> {
     return new Observable(observer => {
       this.submitted = true;
@@ -312,27 +339,54 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
       if(this.form.invalid) {
         if(! this.sideNavOpen)
           this.openAPIEditor();
-
-        // observer.error({});
         return;
       }
 
-      if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
-        this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
-        // observer.error({});
-        return;
-      }
+      apiData.apiManagementTool = this.formatApigeeProxyData();
 
-      apiData.tags = this.getServerFormattedTags( apiData.tags );
+      let saveApigee = new Observable(saveApigeeObserver => {      
+        if(apiData.apiManagementTool.targetServers && apiData.apiManagementTool.targetServers.length && apiData.apiManagementTool.targetServers[0].targetServer) {
+          this.loadingInterceptorService.$onLoadingTextChange.next("Creating APIGEE Proxy");
+          this.apigeeClient.createProxy(apiData.apiManagementTool).subscribe(
+            proxy => {
+              this.toastrService.success('APIGEE Proxy has been successfully created');
 
-      ['overview', 'gettingStarted', 'reference'].forEach(id => {
-        apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+              this.loadingInterceptorService.$onLoadingTextChange.next(null);
+
+              setTimeout(t => {saveApigeeObserver.next(true);}, 1000);
+            },
+            error => {
+              this.toastrService.error('Unable to create APIGEE Proxy');
+              this.loadingInterceptorService.$onLoadingTextChange.next(null);
+              setTimeout(t => {saveApigeeObserver.next(false);}, 1000);
+            }
+          );
+        } else {
+          saveApigeeObserver.next(true); 
+        }
       });
 
-      if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
-        delete apiData.file;
-    
-      observer.next(apiData);
+      saveApigee.subscribe(success => {
+
+        if(! success)
+          observer.next(false)
+
+        if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
+          this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
+          return;
+        }
+
+        apiData.tags = this.getServerFormattedTags( apiData.tags );
+
+        ['overview', 'gettingStarted', 'reference'].forEach(id => {
+          apiData[id] = window['tinymce'].get(id).contentDocument.body.innerHTML;
+        });
+
+        if(apiData.swaggerOption === this.swaggerUploadOptions.URL)
+          delete apiData.file;
+      
+        observer.next(apiData);
+      });
     });
   }
 

@@ -53,9 +53,9 @@
 
   <h2 id="api-documentation">
     API Documentation
-    <clr-tooltip *ngIf="api.apiManagementTool">
+    <clr-tooltip *ngIf="api.apiManagementTool" id="api-key">
         <a><clr-icon clrTooltipTrigger shape="key" size="30" class="ml10" (click)="openApiKeyModal()"></clr-icon></a>
-        <clr-tooltip-content clrPosition="right" clrSize="sm" *clrIfOpen>
+        <clr-tooltip-content clrPosition="left" clrSize="sm" *clrIfOpen>
             <span>Get API Key</span>
         </clr-tooltip-content>
     </clr-tooltip>

@@ -29,7 +29,7 @@ export class ApigeeApiToolComponent implements OnInit {
   public environments : ApigeeEnvironment[];
   public orgs = ['none', ...APIGEE_ORGS];
   public revisions: number[] = [];
-  public isExistingProxy: boolean = false;
+  public isExistingProxy: boolean = true;
   public basePaths: FormArray;
   public targetServersFormArray: FormArray;
   public configuredTargetServers: any[];
@@ -49,7 +49,7 @@ export class ApigeeApiToolComponent implements OnInit {
   
   ngOnInit() {
     this.apigeeTool = (this.apigeeTool.id) ? this.apigeeTool : DefaultApigeeApiTool;
-    this.isExistingProxy = (this.apigeeTool.id.length) ? true : false;
+    // this.isExistingProxy = (this.apigeeTool.id) ? true : false;
 
     if(this.apigeeTool.org.length)
       this.getApis(this.apigeeTool.org);
@@ -60,6 +60,8 @@ export class ApigeeApiToolComponent implements OnInit {
 
     this.handleProxySelection();
 
+    this.handleExistingProxyChange ();
+
     setTimeout(t => {
       this.form.get('org').setValue(APIGEE_ORGS[0]);
     },0);
@@ -69,8 +71,8 @@ export class ApigeeApiToolComponent implements OnInit {
   private buildForm () : void {
     this.form = <FormGroup> this.parentForm;
     this.form.addControl('org', new FormControl(this.apigeeTool.org, [Validators.required]));
-    this.form.addControl('environment', new FormControl('dev   ', [Validators.required]));
-    this.form.addControl('id', new FormControl(this.apigeeTool.id, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]));
+    this.form.addControl('environment', new FormControl('dev', [Validators.required]));
+    this.form.addControl('id', new FormControl(this.apigeeTool.id, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]));
     // this.form.addControl('revision', new FormControl(this.apigeeTool.revision, [Validators.required]));
     this.form.addControl('basePaths', new FormArray([]));
     this.form.addControl('targetServers', new FormArray([]));
@@ -215,10 +217,12 @@ export class ApigeeApiToolComponent implements OnInit {
       //this.form.get('environment').enable();
       //this.form.removeControl('basePaths');
       this.form.controls.basePaths.disable();
+      this.form.controls.targetServers.disable();
     } else {
       // this.form.addControl('basePaths', new FormArray([]));
       // this.addBasePath();
       this.form.controls.basePaths.enable();
+      this.form.controls.targetServers.enable();
     }
   }
 
@@ -319,10 +323,17 @@ export class ApigeeApiToolComponent implements OnInit {
 
   private handleProxySelection () : void{
     this.form.get('id').valueChanges.pipe(debounce(() => timer(this.debounceTimeout))).subscribe(proxy => {
+      if(! proxy)
+        return;
+
       proxy = proxy.replace(/\s/gi, "-");
       proxy = proxy.replace(/[^A-Za-z0-9\-\_]/gi, "");
 
-      this.form.get('id').setValue(proxy, {onlySelf : true, emitEvent : false});
+      this.isExistingProxy = (this.apis.includes(proxy)) ? true : false;
+
+      setTimeout(t => { this.form.get('id').setValue(proxy, {onlySelf : true, emitEvent : false}); }, 0);
+
+      this.handleExistingProxyChange ();
     })
   }
 
@@ -381,13 +392,7 @@ export class ApigeeApiToolComponent implements OnInit {
   private getApis (org: string) : void {
     this.apigeeClient.getApigeeApis(org).subscribe(
       apis => {
-        this.apis = ['Select an API', ...apis];
-
-        if(! this.apigeeTool.id)
-          this.form.get('id').setValue('', {
-            onlySelf: true, 
-            emitEvent : false
-          });
+        this.apis = apis;
       },
       error => {
         this.apis = [];
