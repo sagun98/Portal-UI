@@ -14,7 +14,16 @@
   <ng-container *ngIf="form.get('org').value !== 'none' && form.get('org').value !== ''">
 
     <div class="form-group">
-      <label for="id" class="required">Apigee Proxy</label>
+      <label for="id" class="required">Apigee Proxy
+
+        <clr-tooltip>
+          <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
+          <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+            <span>Select an existing APIGEE Proxy to associate this API with, or create a new one by entering a new APIGEE Proxy name.</span>
+          </clr-tooltip-content>
+        </clr-tooltip>
+
+      </label>
       <label [className]=" ( form.get('id').invalid && ( submitted || form.get('id').dirty) ) ? errorClasses + ' tooltip-bottom-right select' : '' ">
         <ng-select id="id" placeholder="Select A Proxy" [items]="apis" [addTag]="true" formControlName="id"></ng-select>
       </label>
@@ -31,7 +40,16 @@
 
     <ng-container *ngIf="! isExistingProxy && form.get('id').value">
       <div class="form-group bottom-spacer-20">
-        <label for="targetServers" class="required">Target Servers</label>
+        <label for="targetServers" class="required">Target Servers
+
+          <clr-tooltip>
+            <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
+            <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+              <span>Provide information regarding the backend endpoint that APIGEE Proxy will route requests to.</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+
+        </label>
         <label>
             <div formArrayName="targetServers" *ngFor="let targetServer of form.get('targetServers').controls; let i = index;">
               <div [formGroupName]="i" class="inline-row bottom-spacer-10 target-servers-row">
@@ -40,18 +58,42 @@
                   <clr-icon title="Target Server in use" shape="success-standard" size="30" class="is-success mr10 target-server-in-use" *ngIf="targetServer.readonly"></clr-icon>
                   <clr-icon title="Target Server not in use" shape="minus-circle" size="30" class="mr10 target-server-not-in-use" *ngIf="! targetServer.readonly && targetServer.valid"></clr-icon>
                   <input class="targetServerName" formControlName="name" placeholder="Enter Label">
+
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Provide a label to describe this Target Server: Example: "glp" or "identity".</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="targetServer.controls.name.errors && targetServer.controls.name.errors.duplicate" class="error-text">Target Server with this label already exists</div>
                   <div *ngIf="targetServer.controls.name.errors && targetServer.controls.name.errors.required && (targetServer.controls.name.dirty || form.root.submitted)" class="error-text">Label cannot be empty</div>
                 </div>
 
                 <div class="inline-col ml10 target-server-col" >
                   <ng-select class="target-server-dropdown" placeholder="Select A Target Server" (dblclick)="createNewTargetServer(null, targetServer)" [items]="targetServers"  bindLabel="host" (add)="createNewTargetServer($event, targetServer)" [addTag]="true" formControlName="targetServer"></ng-select>
+                  
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Select an existing Target Server, or enter a new one: Example: "dev.identity.pearson.com"</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="targetServer.controls.targetServer.errors && targetServer.controls.targetServer.errors.duplicate" class="error-text">Target Server already exists</div>
                   <div *ngIf="targetServer.controls.targetServer.errors && targetServer.controls.targetServer.errors.required && (targetServer.controls.targetServer.dirty || form.root.submitted)" class="error-text">Target Server cannot be empty</div>
                 </div>    
   
                 <div class="inline-col ml10 target-server-path-col">
                   <input formControlName="targetServerPath" placeholder="Enter Target Server Path">
+
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Enter a path the will be appened to the Target Server endpoint for routing requests: Example: "/v1", "/api"</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="targetServer.controls.targetServerPath.errors && targetServer.controls.targetServerPath.errors.pattern" class="error-text">Path must being with a forward slash</div>
                   <div *ngIf="targetServer.controls.targetServerPath.errors && targetServer.controls.targetServerPath.errors.minlength" class="error-text">Path must contain at least {{ targetServer.controls.targetServerPath.errors.minlength.requiredLength }} characters</div>
                 </div>
@@ -80,7 +122,16 @@
 
     <ng-container *ngIf="! isExistingProxy && form.get('id').value">
       <div class="form-group">
-        <label for="basepaths" class="required">Proxy Endpoints</label>
+        <label for="basepaths" class="required">Proxy Endpoints
+
+          <clr-tooltip>
+            <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-10px;"></clr-icon>
+            <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+              <span>Provide details about the APIGEE Proxy Endpoint(s) that will receive and proxy your API's requests.</span>
+            </clr-tooltip-content>
+          </clr-tooltip>
+
+        </label>
         <label>
             <div formArrayName="basePaths" *ngFor="let basePath of form.get('basePaths').controls; let i = index;">
               <div [formGroupName]="i" class="inline-row bottom-spacer-10">
@@ -88,12 +139,28 @@
                 <div class="inline-col">
                   <clr-icon title="Proxy Endpint Configured" shape="success-standard" size="30" class="is-success mr10 target-server-in-use" *ngIf="basePath.valid"></clr-icon>
                   <input class="pathname" formControlName="name" placeholder="Enter Endpoint Label">
+
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Provide a label to describe this Target Server: Example: "glp" or "identity".</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="basePath.controls.name.errors && basePath.controls.name.errors.duplicate" class="error-text">Label Already Exists</div>
                   <div *ngIf="basePath.controls.name.errors && basePath.controls.name.errors.required && (basePath.controls.name.dirty || form.root.submitted)" class="error-text">Name cannot be empty</div>
                 </div>
 
                 <div class="inline-col ml10">
                   <input  formControlName="path" placeholder="Enter Path">
+
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Enter a path that will be appened to the end of Virtual Host receiving your API's requests.  Paths can be multi-level: Example: "/glp" or "/identity/auth"</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.duplicate" class="error-text">Path Already Exists</div>
                   <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.pattern" class="error-text">Path must being with a forward slash</div>
                   <div *ngIf="basePath.controls.path.errors && basePath.controls.path.errors.required && (basePath.controls.path.dirty || form.root.submitted)" class="error-text">Path cannot be empty</div>
@@ -108,6 +175,14 @@
                         {{item?.controls?.targetServer?.value.host}} 
                     </ng-template>
                   </ng-select>
+
+                  <clr-tooltip>
+                    <clr-icon clrTooltipTrigger shape="info-circle" size="18" style="margin-top:-15px;"></clr-icon>
+                    <clr-tooltip-content clrPosition="top-right" clrSize="md" *clrIfOpen>
+                      <span>Select a Target Server that you have defined in the "Target Servers" section</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+
                   <div *ngIf="basePath.controls.targetServer.errors && basePath.controls.targetServer.errors.required && (basePath.controls.targetServer.dirty || form.root.submitted)" class="error-text">Target Server cannot be empty</div>
                 </div>
 
