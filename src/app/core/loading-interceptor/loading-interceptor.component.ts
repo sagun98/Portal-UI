@@ -34,6 +34,9 @@ export class LoadingInterceptorComponent implements OnInit {
 
           setTimeout(t=> {t
             let textElement = document.getElementById("loading-text");
+
+            if(! textElement)
+              return;
             
             textElement.style['display'] = 'inline-block';
             textElement.style['opacity'] = '0';

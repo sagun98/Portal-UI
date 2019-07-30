@@ -3,7 +3,7 @@ import { ApigeeTargetServer } from './../../../../../core/interfaces/apigee-targ
 import { API } from './../../../../../core/interfaces/api.interface';
 import { ApigeeEnvironment } from './../../../../../core/interfaces/apigee-environment.interface';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder, AbstractControl } from '@angular/forms';
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DefaultApigeeApiTool, ApigeeApiTool } from '../../../../../core/interfaces/apigee-api-tool.interface';
 import { ERROR_CLASSES } from '../../../../../core/constants/error-classes.constant';
 import { ApigeeClientService } from '../../../../../core/services/apigee-client/apigee-client.service';
@@ -82,14 +82,18 @@ export class ApigeeApiToolComponent implements OnInit {
   }
 
   public createProxyEndpoint(): FormGroup {
+    let proxyEndpointArray = this.form.controls.targetServers as FormArray;
+    let defaultValue = (! proxyEndpointArray.controls.length) ? 'default' : '';
+
     let group = this.formBuilder.group({
-      name : ['', [Validators.required]], 
+      name : [defaultValue, [Validators.required]], 
       path : ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^\//)]], 
       targetServer : [null, [Validators.required]],
     });
     
     group.controls.name.valueChanges.pipe(debounce(() => timer(this.debounceTimeout))).subscribe(name => {
       this.formatPathValue(group.controls.name, name);
+      this.scrubEnvironments(group.controls.name, name);
       this.preventDuplicates(this.form.controls.basePaths, group.controls.name, name);
     });
 
@@ -102,14 +106,18 @@ export class ApigeeApiToolComponent implements OnInit {
   }
 
   public createTargetServer(): FormGroup {
+    let targetServerArray = this.form.controls.targetServers as FormArray;
+    let defaultValue = (! targetServerArray.controls.length) ? 'default' : '';
+
     let group = this.formBuilder.group({
-      name : ['', [Validators.required]], 
+      name : [defaultValue, [Validators.required]], 
       targetServer : [null, [Validators.required]],
       targetServerPath : ['', [Validators.minLength(2), Validators.pattern(/^\//)]]
     });
     
     group.controls.name.valueChanges.pipe(debounce(() => timer(this.debounceTimeout))).subscribe(name => {
       this.formatPathValue(group.controls.name, name);
+      this.scrubEnvironments(group.controls.name, name);
       this.preventDuplicates(this.form.controls.targetServers, group.controls.name, name);
     });
 
@@ -164,6 +172,11 @@ export class ApigeeApiToolComponent implements OnInit {
   private formatPathValue (control: AbstractControl, path: string) : void {
     path = path.replace(/\s/gi, "-");
     path = path.replace(/[^\/A-Za-z0-9\-\_]/gi, "");
+    control.setValue(path, {onlySelf : true, emitEvent : false});
+  }
+
+  private scrubEnvironments (control: AbstractControl, path: string) : void {
+    path = path.replace(/\-(dev|test|tst|stg|stage|qa|prod|nft)/gi, "");
     control.setValue(path, {onlySelf : true, emitEvent : false});
   }
 

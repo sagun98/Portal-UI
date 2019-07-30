@@ -20,7 +20,7 @@
             width: calc(100% - 18px);
         }
 
-        label {
+        /deep/ label {
             input[type=text] {
                 min-width: 10rem;
             }

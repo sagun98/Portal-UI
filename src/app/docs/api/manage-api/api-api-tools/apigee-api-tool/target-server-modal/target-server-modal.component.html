@@ -6,6 +6,8 @@
         <label for="name" class="required">Target Server Host:</label>
         <label>
           <input type="text" name="name" id="target-server-name" formControlName="host" placeholder="Enter Target Server Host"/>
+          <div class="error-text" *ngIf="form.controls.host.errors && form.controls.host.errors.pattern">Must be a valid domain</div>
+          <div class="error-text" *ngIf="form.controls.host.errors && form.controls.host.errors.required">Target Server Host is required</div>
         </label>
       </div>
 
@@ -25,6 +27,16 @@
         <label>
           <!-- <div class="toggle-switch"> -->
             <input type="checkbox" name="isEnabled" formControlName="isEnabled"/>
+            <!-- <label for="isEnabled"></label> -->
+          <!-- </div> -->
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label class="required">SSL Enabled?</label>
+        <label>
+          <!-- <div class="toggle-switch"> -->
+            <input type="checkbox" name="ssl" formControlName="ssl" disabled="disabled"/>
             <!-- <label for="isEnabled"></label> -->
           <!-- </div> -->
         </label>

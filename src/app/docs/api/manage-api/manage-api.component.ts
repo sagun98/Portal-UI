@@ -356,7 +356,6 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
               setTimeout(t => {saveApigeeObserver.next(true);}, 1000);
             },
             error => {
-              this.toastrService.error('Unable to create APIGEE Proxy');
               this.loadingInterceptorService.$onLoadingTextChange.next(null);
               setTimeout(t => {saveApigeeObserver.next(false);}, 1000);
             }
@@ -368,8 +367,11 @@ export class ManageApiComponent extends EntityComponent implements OnInit {
 
       saveApigee.subscribe(success => {
 
-        if(! success)
+        if(! success) {
           observer.next(false)
+          observer.complete();
+          return;
+        }
 
         if (! apiData.file && ! apiData.swagger && !apiData.swaggerUrl ) {
           this.toastrService.error('Swagger file required.  Please upload a valid Swagger file, or provide a valid URL');
