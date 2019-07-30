@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ApigeeTargetServer as IApigeeTargetServer } from 'src/app/core/interfaces/apigee-targetserver.interface';
 import { ClrModal } from '@clr/angular';
+import { isNull } from 'util';
 
 @Component({
   selector: 'target-server-modal',
@@ -48,6 +49,7 @@ export class TargetServerModalComponent implements OnInit {
   }
 
   private buildForm () {
+    this.targetServer.isEnabled = (isNull(this.targetServer.isEnabled)) ? true : this.targetServer.isEnabled;
     this.form = this.formBuilder.group({
       host : [this.targetServer.host, [Validators.required, Validators.pattern(/^([A-Za-z0-9\-]+\.)+(com|net|org|gov|io)$/)]],
       port : [this.targetServer.port || 443, [Validators.required]],

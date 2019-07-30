@@ -16,6 +16,7 @@ export const appRoutes: Routes = [
   { path: 'apigeeTargetServers', component: ApigeeTargetServersComponent , pathMatch: 'full',canActivate : [LoggedInGuard]},
   { path: 'documentation', loadChildren: './documentation/documentation.module#DocumentationModule', canActivate : [LoggedInGuard] },
   { path: 'forum', loadChildren : './forum/forum.module#ForumModule', canActivate : [LoggedInGuard] },
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
